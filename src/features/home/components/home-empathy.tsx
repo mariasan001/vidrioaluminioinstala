@@ -11,30 +11,13 @@ import { empathyPillars } from "./home-empathy.data";
 
 export function HomeEmpathy() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const lastScrollY = useRef(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
   const visiblePillars = empathyPillars.slice(0, 3);
   const pillarIcons = [
     HiOutlineSparkles,
     HiOutlineChatBubbleLeftRight,
     HiOutlineShieldCheck,
   ] as const;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      setScrollDirection(currentY > lastScrollY.current ? "down" : "up");
-      lastScrollY.current = currentY;
-    };
-
-    lastScrollY.current = window.scrollY;
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -62,9 +45,7 @@ export function HomeEmpathy() {
   return (
     <section
       ref={sectionRef}
-      className={`${styles.section} ${isVisible ? styles.sectionVisible : ""} ${
-        scrollDirection === "up" ? styles.scrollUp : styles.scrollDown
-      }`}
+      className={`${styles.section} ${styles.scrollDown} ${isVisible ? styles.sectionVisible : ""}`}
       aria-labelledby="home-empathy-title"
     >
       <div className={styles.inner}>

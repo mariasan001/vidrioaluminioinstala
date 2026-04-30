@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import {
   HiArrowUpRight,
@@ -24,7 +26,11 @@ export function HomeServices() {
   } as const;
 
   return (
-    <section className={styles.section} id="servicios" aria-labelledby="home-services-title">
+    <section
+      className={styles.section}
+      id="servicios"
+      aria-labelledby="home-services-title"
+    >
       <div className={styles.header}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
@@ -76,36 +82,36 @@ export function HomeServices() {
         <div className={styles.bottomGrid}>
           {bottomServices.map((service) => (
             <article key={service.title} className={styles.bottomCard}>
-            <div className={styles.copy}>
-              <div className={styles.copyTop}>
-                <div className={styles.labelRow}>
-                  <span className={styles.label}>
-                    {(() => {
-                      const Icon = serviceIcons[service.title];
-                      return <Icon className={styles.labelIcon} aria-hidden="true" />;
-                    })()}
-                    <span>{service.title}</span>
-                  </span>
-                  <span className={styles.arrow} aria-hidden="true">
-                    <HiArrowUpRight />
-                  </span>
+              <div className={styles.copy}>
+                <div className={styles.copyTop}>
+                  <div className={styles.labelRow}>
+                    <span className={styles.label}>
+                      {(() => {
+                        const Icon = serviceIcons[service.title];
+                        return <Icon className={styles.labelIcon} aria-hidden="true" />;
+                      })()}
+                      <span>{service.title}</span>
+                    </span>
+                    <span className={styles.arrow} aria-hidden="true">
+                      <HiArrowUpRight />
+                    </span>
+                  </div>
+
+                  <p className={styles.cardDescription}>{service.description}</p>
                 </div>
-
-                <p className={styles.cardDescription}>{service.description}</p>
               </div>
-            </div>
 
-            <div className={styles.circleImageWrap}>
-              <Image
-                src={service.image}
-                alt={service.title}
-                fill
-                sizes="(max-width: 820px) 100vw, 33vw"
-                className={styles.image}
-                style={{ objectPosition: service.imagePosition }}
-              />
-            </div>
-          </article>
+              <div className={styles.circleImageWrap}>
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(max-width: 820px) 100vw, 33vw"
+                  className={styles.image}
+                  style={{ objectPosition: service.imagePosition }}
+                />
+              </div>
+            </article>
           ))}
         </div>
       </div>

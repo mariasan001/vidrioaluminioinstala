@@ -141,6 +141,10 @@
   color: var(--accent-contrast);
   font-size: 1.05rem;
   box-shadow: 0 10px 24px rgba(232, 255, 70, 0.18);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
 }
 
 .cardDescription {
@@ -198,11 +202,18 @@
 
 @media (hover: hover) and (pointer: fine) {
   .topCard:hover,
-  .topCard:hover,
   .bottomCard:hover {
     transform: translateY(-4px);
     border-color: rgba(232, 255, 70, 0.12);
     box-shadow: 0 20px 38px rgba(0, 0, 0, 0.18);
+  }
+
+  .topCard:hover .arrow,
+  .bottomCard:hover .arrow,
+  .topCard:focus-within .arrow,
+  .bottomCard:focus-within .arrow {
+    transform: scale(1.16);
+    box-shadow: 0 16px 30px rgba(232, 255, 70, 0.28);
   }
 }
 
@@ -305,5 +316,11 @@
   .circleImageWrap {
     width: clamp(140px, 44vw, 164px);
     height: clamp(140px, 44vw, 164px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow {
+    transition: none;
   }
 }

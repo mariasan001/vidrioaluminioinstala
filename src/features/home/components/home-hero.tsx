@@ -8,24 +8,7 @@ import { heroStats } from "./home-hero.data";
 
 export function HomeHero() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const lastScrollY = useRef(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      setScrollDirection(currentY > lastScrollY.current ? "down" : "up");
-      lastScrollY.current = currentY;
-    };
-
-    lastScrollY.current = window.scrollY;
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -54,9 +37,7 @@ export function HomeHero() {
     <>
       <section
         ref={sectionRef}
-        className={`${styles.hero} ${isVisible ? styles.heroVisible : ""} ${
-          scrollDirection === "up" ? styles.scrollUp : styles.scrollDown
-        }`}
+        className={`${styles.hero} ${styles.scrollDown} ${isVisible ? styles.heroVisible : ""}`}
         id="somos"
       >
         <Image
@@ -76,10 +57,8 @@ export function HomeHero() {
 
         <div className={styles.heroLead}>
           <h1 className={styles.title}>
-            <span className={styles.titleLine}>Haz que tu espacio se vea</span>
-            <span className={styles.titleLine}>
-              <span className={styles.accent}>como siempre lo imaginaste</span>
-            </span>
+            Haz que tu espacio
+            <span className={styles.accent}>se vea como siempre lo imaginaste</span>
           </h1>
 
           <div className={styles.content}>

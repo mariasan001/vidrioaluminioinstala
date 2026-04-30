@@ -24,21 +24,21 @@ export const services = [
     title: "pergolas",
     description:
       "estructuras que protegen, elevan la imagen del proyecto y conservan una estetica sobria.",
-    image: "/img/hero_img.png",
+    image: "/img/img_pergola.png",
     imagePosition: "center 28%",
   },
   {
     title: "puertas",
     description:
       "sistemas que combinan seguridad, apertura suave y una presencia moderna desde el acceso.",
-    image: "/img/hero_img.png",
+    image: "/img/img_bano.png",
     imagePosition: "24% center",
   },
   {
     title: "ventanas",
     description:
       "propuestas que mejoran luz, ventilacion y aislamiento sin perder elegancia visual.",
-    image: "/img/hero_img.png",
-    imagePosition: "88% center",
+    image: "/img/img_ventana.png",
+    imagePosition: "center center",
   },
 ] as const;
