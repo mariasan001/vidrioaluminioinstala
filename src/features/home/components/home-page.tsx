@@ -1,5 +1,7 @@
+import { HomeEmpathy } from "./home-empathy";
 import { HomeHero } from "./home-hero";
 import { HomeNav } from "./home-nav";
+import { HomeServices } from "./home-services";
 import styles from "../home-page.module.css";
 
 export function HomePage() {
@@ -8,6 +10,8 @@ export function HomePage() {
       <div className={styles.layout}>
         <HomeNav />
         <HomeHero />
+        <HomeEmpathy />
+        <HomeServices />
       </div>
     </main>
   );

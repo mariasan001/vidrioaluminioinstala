@@ -1,14 +1,64 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { FaLocationDot } from "react-icons/fa6";
 import styles from "./home-hero.module.css";
 import { heroStats } from "./home-hero.data";
 
 export function HomeHero() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const lastScrollY = useRef(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrollDirection(currentY > lastScrollY.current ? "down" : "up");
+      lastScrollY.current = currentY;
+    };
+
+    lastScrollY.current = window.scrollY;
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.28,
+      },
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
-      <section className={styles.hero} id="somos">
+      <section
+        ref={sectionRef}
+        className={`${styles.hero} ${isVisible ? styles.heroVisible : ""} ${
+          scrollDirection === "up" ? styles.scrollUp : styles.scrollDown
+        }`}
+        id="somos"
+      >
         <Image
           src="/img/hero_img.png"
           alt="Proyecto destacado de aluminio y vidrio"
@@ -64,7 +114,6 @@ export function HomeHero() {
       </section>
 
       <div className={styles.heroAnchors} aria-hidden="true">
-        <section id="servicios" />
         <section id="ofertas" />
         <section id="proyectos" />
         <section id="ubicacion" />

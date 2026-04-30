@@ -1,5 +1,9 @@
 .hero {
   position: relative;
+  --hero-lead-y: 24px;
+  --hero-text-y: 12px;
+  --hero-stats-y: 18px;
+  --hero-eye-y: 12px;
   margin-top: 22px;
   overflow: clip;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -11,6 +15,20 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
+.scrollUp {
+  --hero-lead-y: -24px;
+  --hero-text-y: -12px;
+  --hero-stats-y: -18px;
+  --hero-eye-y: -12px;
+}
+
+.scrollDown {
+  --hero-lead-y: 24px;
+  --hero-text-y: 12px;
+  --hero-stats-y: 18px;
+  --hero-eye-y: 12px;
+}
+
 .backgroundImage {
   position: absolute;
   inset: 0;
@@ -18,7 +36,6 @@
   opacity: 0;
   transform: scale(1.045);
   filter: blur(8px);
-  animation: heroImageReveal 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero::before {
@@ -46,7 +63,6 @@
     linear-gradient(180deg, rgba(8, 8, 8, 0.18), rgba(8, 8, 8, 0.06));
   opacity: 0;
   clip-path: inset(0 100% 0 0);
-  animation: heroShadeReveal 1500ms cubic-bezier(0.16, 1, 0.3, 1) 320ms forwards;
   pointer-events: none;
 }
 
@@ -61,7 +77,6 @@
   transform: translate(-50%, -42%);
   opacity: 0;
   filter: blur(10px);
-  animation: heroLeadReveal 900ms cubic-bezier(0.16, 1, 0.3, 1) 1220ms forwards;
 }
 
 .content {
@@ -88,9 +103,8 @@
   line-height: 1.45;
   letter-spacing: 0.04em;
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(var(--hero-eye-y));
   filter: blur(6px);
-  animation: heroTextReveal 760ms cubic-bezier(0.16, 1, 0.3, 1) 1040ms forwards;
 }
 
 .eyebrowIcon {
@@ -179,9 +193,36 @@
   gap: 18px;
   padding: 0 26px 18px;
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(var(--hero-stats-y));
   filter: blur(8px);
+}
+
+.heroVisible .backgroundImage {
+  animation: heroImageReveal 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.heroVisible .heroShade {
+  animation: heroShadeReveal 1500ms cubic-bezier(0.16, 1, 0.3, 1) 320ms forwards;
+}
+
+.heroVisible .eyebrow {
+  animation: heroTextReveal 760ms cubic-bezier(0.16, 1, 0.3, 1) 1040ms forwards;
+}
+
+.heroVisible .heroLead {
+  animation: heroLeadReveal 900ms cubic-bezier(0.16, 1, 0.3, 1) 1220ms forwards;
+}
+
+.heroVisible .stats {
   animation: heroStatsReveal 820ms cubic-bezier(0.16, 1, 0.3, 1) 1460ms forwards;
+}
+
+.hero:not(.heroVisible) .backgroundImage,
+.hero:not(.heroVisible) .heroShade,
+.hero:not(.heroVisible) .eyebrow,
+.hero:not(.heroVisible) .heroLead,
+.hero:not(.heroVisible) .stats {
+  animation: none;
 }
 
 .heroAnchors {
@@ -247,7 +288,7 @@
 @keyframes heroTextReveal {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(var(--hero-eye-y));
     filter: blur(6px);
   }
 
@@ -261,7 +302,7 @@
 @keyframes heroLeadReveal {
   from {
     opacity: 0;
-    transform: translate(-50%, calc(-42% + 24px));
+    transform: translate(-50%, calc(-42% + var(--hero-lead-y)));
     filter: blur(10px);
   }
 
@@ -275,7 +316,7 @@
 @keyframes heroStatsReveal {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(var(--hero-stats-y));
     filter: blur(8px);
   }
 
