@@ -2,42 +2,54 @@ export const services = [
   {
     title: "barandales",
     description:
-      "soluciones limpias y resistentes para interiores, terrazas, balcones y escaleras.",
+      "proteccion ligera y resistente para escaleras, balcones y terrazas con una lectura visual limpia.",
+    ctaLabel: "Explorar opciones de barandales",
+    href: "#cotizacion",
     image: "/img/hero_img.png",
     imagePosition: "left center",
   },
   {
     title: "canceles de bano",
     description:
-      "acabados modernos que aprovechan mejor el espacio y mantienen una lectura visual ligera.",
+      "soluciones a medida que ordenan el bano, aprovechan el espacio y elevan el acabado final.",
+    ctaLabel: "Explorar opciones de canceles de bano",
+    href: "#cotizacion",
     image: "/img/hero_img.png",
     imagePosition: "78% center",
   },
   {
     title: "fachadas",
     description:
-      "frentes de vidrio y aluminio pensados para dar presencia, iluminacion y durabilidad.",
+      "frentes de vidrio y aluminio pensados para ganar presencia, entrada de luz y durabilidad.",
+    ctaLabel: "Explorar opciones de fachadas",
+    href: "#cotizacion",
     image: "/img/hero_img.png",
     imagePosition: "62% center",
   },
   {
     title: "pergolas",
     description:
-      "estructuras que protegen, elevan la imagen del proyecto y conservan una estetica sobria.",
+      "estructuras que dan sombra, protegen el espacio exterior y conservan una estetica sobria.",
+    ctaLabel: "Explorar opciones de pergolas",
+    href: "#cotizacion",
     image: "/img/img_pergola.png",
     imagePosition: "center 28%",
   },
   {
     title: "puertas",
     description:
-      "sistemas que combinan seguridad, apertura suave y una presencia moderna desde el acceso.",
+      "accesos en aluminio y vidrio que combinan seguridad, apertura suave y presencia moderna.",
+    ctaLabel: "Explorar opciones de puertas",
+    href: "#cotizacion",
     image: "/img/img_bano.png",
     imagePosition: "24% center",
   },
   {
     title: "ventanas",
     description:
-      "propuestas que mejoran luz, ventilacion y aislamiento sin perder elegancia visual.",
+      "propuestas para mejorar luz, ventilacion y aislamiento sin perder elegancia visual.",
+    ctaLabel: "Explorar opciones de ventanas",
+    href: "#cotizacion",
     image: "/img/img_ventana.png",
     imagePosition: "center center",
   },

@@ -1,0 +1,375 @@
+.section {
+  --materials-offset: 22px;
+  margin-top: 54px;
+  padding: 28px 0 0;
+}
+
+.section[data-scroll-direction="up"] {
+  --materials-offset: -22px;
+}
+
+.section[data-scroll-direction="down"] {
+  --materials-offset: 22px;
+}
+
+.header {
+  display: grid;
+  gap: 22px;
+  margin-bottom: 34px;
+  opacity: 0;
+  transform: translateY(var(--materials-offset));
+  transition:
+    opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(245, 245, 241, 0.58);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.eyebrowDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px rgba(232, 255, 70, 0.14);
+}
+
+.heading {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.title {
+  max-width: min(880px, 100%);
+  margin: 0;
+  color: #f5f5f1;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.accent {
+  display: block;
+  margin-top: 4px;
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.68em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  max-width: 72ch;
+  margin: 0;
+  color: rgba(245, 245, 241, 0.68);
+  font-size: 0.96rem;
+  line-height: 1.72;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.diagram {
+  position: relative;
+  display: grid;
+  min-height: 560px;
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at center, rgba(232, 255, 70, 0.06), transparent 34%),
+    rgba(17, 17, 16, 0.72);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(var(--materials-offset));
+  transition:
+    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section[data-visible="true"] .header,
+.section[data-visible="true"] .diagram {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section[data-visible="true"] .diagram {
+  transition-delay: 180ms;
+}
+
+.imageStage {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: min(520px, 44vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.materialImageCard {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #111110;
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.24);
+}
+
+.materialImageCard::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.32));
+  content: "";
+  pointer-events: none;
+}
+
+.materialImagePrimary {
+  inset: 15% 12% 12% 15%;
+  border-radius: 34px;
+}
+
+.materialImageTop {
+  top: 2%;
+  right: 2%;
+  width: 36%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.materialImageBottom {
+  left: 0;
+  bottom: 0;
+  width: 42%;
+  aspect-ratio: 1.05;
+  border-radius: 28px;
+}
+
+.materialBadge {
+  position: absolute;
+  right: 9%;
+  bottom: 8%;
+  z-index: 3;
+  display: grid;
+  gap: 3px;
+  max-width: 190px;
+  padding: 13px 15px;
+  border-radius: 18px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: 0 18px 38px rgba(232, 255, 70, 0.16);
+}
+
+.materialBadge strong {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.materialBadge span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.32;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.pin {
+  position: absolute;
+  z-index: 2;
+  width: 13px;
+  height: 13px;
+  border: 2px solid #111110;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 7px rgba(232, 255, 70, 0.14);
+}
+
+.pinTop {
+  top: 24%;
+  left: 38%;
+}
+
+.pinRight {
+  top: 42%;
+  right: 18%;
+}
+
+.pinBottom {
+  left: 24%;
+  bottom: 28%;
+}
+
+.point {
+  position: absolute;
+  display: grid;
+  align-items: center;
+  width: min(330px, 24vw);
+}
+
+.point div {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: rgba(17, 17, 16, 0.88);
+}
+
+.point h3 {
+  margin: 0;
+  color: #f5f5f1;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.point p {
+  margin: 0;
+  color: rgba(245, 245, 241, 0.62);
+  font-size: 0.88rem;
+  line-height: 1.58;
+}
+
+.pointLine {
+  position: absolute;
+  top: 50%;
+  width: 108px;
+  height: 1px;
+  background: rgba(232, 255, 70, 0.34);
+}
+
+.pointLine::after {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.leftTop {
+  top: 74px;
+  left: 34px;
+}
+
+.leftBottom {
+  bottom: 74px;
+  left: 34px;
+}
+
+.rightTop {
+  top: 74px;
+  right: 34px;
+}
+
+.rightBottom {
+  right: 34px;
+  bottom: 74px;
+}
+
+.leftTop .pointLine,
+.leftBottom .pointLine {
+  left: 100%;
+}
+
+.leftTop .pointLine::after,
+.leftBottom .pointLine::after {
+  right: -2px;
+}
+
+.rightTop .pointLine,
+.rightBottom .pointLine {
+  right: 100%;
+}
+
+.rightTop .pointLine::after,
+.rightBottom .pointLine::after {
+  left: -2px;
+}
+
+@media (max-width: 980px) {
+  .diagram {
+    min-height: auto;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .imageStage {
+    position: relative;
+    inset: auto;
+    width: min(420px, 100%);
+    justify-self: center;
+    margin-bottom: 8px;
+    transform: none;
+  }
+
+  .point {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .pointLine {
+    display: none;
+  }
+}
+
+@media (max-width: 820px) {
+  .section {
+    margin-top: 40px;
+    padding-top: 18px;
+  }
+
+  .header {
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+
+  .title {
+    max-width: 13ch;
+    font-size: clamp(1.9rem, 8vw, 3rem);
+    line-height: 1;
+  }
+
+  .accent {
+    font-size: 0.74em;
+  }
+
+  .description {
+    max-width: 38ch;
+    font-size: 0.9rem;
+    line-height: 1.66;
+  }
+
+  .diagram {
+    border-radius: 28px;
+  }
+
+  .point div {
+    border-radius: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .diagram {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

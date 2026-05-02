@@ -1,12 +1,21 @@
 .section {
+  --services-offset: 18px;
   margin-top: 34px;
   padding: 26px 0 0;
 }
 
+.section[data-scroll-direction="up"] {
+  --services-offset: -18px;
+}
+
+.section[data-scroll-direction="down"] {
+  --services-offset: 18px;
+}
+
 .header {
   display: grid;
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: 22px;
+  margin-bottom: 42px;
 }
 
 .eyebrow {
@@ -18,6 +27,12 @@
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: lowercase;
+  opacity: 0;
+  transform: translateY(var(--services-offset));
+  transition:
+    opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0ms;
 }
 
 .eyebrowDot {
@@ -26,6 +41,71 @@
   border-radius: 999px;
   background: var(--accent);
   box-shadow: 0 0 0 5px rgba(232, 255, 70, 0.14);
+}
+
+.heading {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(var(--services-offset));
+  transition:
+    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0ms;
+}
+
+.section[data-visible="true"] .eyebrow,
+.section[data-visible="true"] .heading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section[data-visible="true"] .eyebrow {
+  transition-delay: 80ms;
+}
+
+.section[data-visible="true"] .heading {
+  transition-delay: 180ms;
+}
+
+.title {
+  max-width: min(980px, 100%);
+  margin: 0;
+  color: #f5f5f1;
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.titleLine {
+  display: block;
+}
+
+.accent {
+  display: block;
+  margin-top: 4px;
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.68em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+.description {
+  max-width: 82ch;
+  margin: 0;
+  color: rgba(245, 245, 241, 0.68);
+  font-size: 0.96rem;
+  line-height: 1.72;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .showcase {
@@ -64,10 +144,46 @@
     rgba(17, 17, 16, 0.78);
   overflow: clip;
   isolation: isolate;
+  opacity: 0;
+  transform: translateY(var(--services-offset));
   transition:
-    transform 220ms ease,
+    opacity 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color 220ms ease,
     box-shadow 220ms ease;
+  transition-delay: 0ms;
+  will-change: opacity, transform;
+}
+
+.section[data-visible="true"] .topCard,
+.section[data-visible="true"] .bottomCard {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+.section[data-visible="true"] .topCard:nth-child(1) {
+  transition-delay: 220ms;
+}
+
+.section[data-visible="true"] .topCard:nth-child(2) {
+  transition-delay: 290ms;
+}
+
+.section[data-visible="true"] .topCard:nth-child(3) {
+  transition-delay: 360ms;
+}
+
+.section[data-visible="true"] .bottomCard:nth-child(1) {
+  transition-delay: 430ms;
+}
+
+.section[data-visible="true"] .bottomCard:nth-child(2) {
+  transition-delay: 500ms;
+}
+
+.section[data-visible="true"] .bottomCard:nth-child(3) {
+  transition-delay: 570ms;
 }
 
 .topCard {
@@ -134,6 +250,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
   width: 42px;
   height: 42px;
   border-radius: 999px;
@@ -145,6 +262,11 @@
     transform 220ms ease,
     box-shadow 220ms ease,
     background-color 220ms ease;
+}
+
+.arrow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .cardDescription {
@@ -206,6 +328,7 @@
     transform: translateY(-4px);
     border-color: rgba(232, 255, 70, 0.12);
     box-shadow: 0 20px 38px rgba(0, 0, 0, 0.18);
+    transition-duration: 220ms;
   }
 
   .topCard:hover .arrow,
@@ -249,8 +372,33 @@
   }
 
   .header {
+    gap: 18px;
+    margin-bottom: 30px;
+  }
+
+  .heading {
     gap: 12px;
-    margin-bottom: 18px;
+  }
+
+  .title {
+    max-width: 13ch;
+    font-size: clamp(1.9rem, 8vw, 3rem);
+    line-height: 1;
+  }
+
+  .titleLine {
+    display: inline;
+  }
+
+  .accent {
+    margin-top: 4px;
+    font-size: 0.74em;
+  }
+
+  .description {
+    max-width: 30ch;
+    font-size: 0.9rem;
+    line-height: 1.66;
   }
 
   .showcase,
@@ -320,7 +468,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .eyebrow,
+  .heading,
+  .topCard,
+  .bottomCard,
   .arrow {
     transition: none;
+  }
+
+  .eyebrow,
+  .heading,
+  .topCard,
+  .bottomCard {
+    opacity: 1;
+    transform: none;
   }
 }

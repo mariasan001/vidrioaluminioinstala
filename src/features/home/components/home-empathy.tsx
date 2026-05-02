@@ -28,17 +28,25 @@ export function HomeEmpathy() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
       },
       {
         threshold: 0.22,
       },
     );
 
+    const revealOnRestore = () => {
+      setIsVisible(true);
+    };
+
     observer.observe(section);
+    window.addEventListener("pageshow", revealOnRestore);
 
     return () => {
       observer.disconnect();
+      window.removeEventListener("pageshow", revealOnRestore);
     };
   }, []);
 

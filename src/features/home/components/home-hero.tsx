@@ -19,17 +19,25 @@ export function HomeHero() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
       },
       {
         threshold: 0.28,
       },
     );
 
+    const revealOnRestore = () => {
+      setIsVisible(true);
+    };
+
     observer.observe(section);
+    window.addEventListener("pageshow", revealOnRestore);
 
     return () => {
       observer.disconnect();
+      window.removeEventListener("pageshow", revealOnRestore);
     };
   }, []);
 
@@ -94,9 +102,6 @@ export function HomeHero() {
 
       <div className={styles.heroAnchors} aria-hidden="true">
         <section id="ofertas" />
-        <section id="proyectos" />
-        <section id="ubicacion" />
-        <section id="cotizacion" />
       </div>
     </>
   );
