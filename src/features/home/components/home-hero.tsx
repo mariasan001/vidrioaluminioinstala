@@ -46,7 +46,7 @@ export function HomeHero() {
       <section
         ref={sectionRef}
         className={`${styles.hero} ${styles.scrollDown} ${isVisible ? styles.heroVisible : ""}`}
-        id="somos"
+        id="inicio"
       >
         <Image
           src="/img/hero_img.png"
@@ -99,10 +99,6 @@ export function HomeHero() {
           ))}
         </div>
       </section>
-
-      <div className={styles.heroAnchors} aria-hidden="true">
-        <section id="ofertas" />
-      </div>
     </>
   );
 }

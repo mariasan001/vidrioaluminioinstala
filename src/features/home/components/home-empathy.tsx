@@ -54,6 +54,7 @@ export function HomeEmpathy() {
     <section
       ref={sectionRef}
       className={`${styles.section} ${styles.scrollDown} ${isVisible ? styles.sectionVisible : ""}`}
+      id="somos"
       aria-labelledby="home-empathy-title"
     >
       <div className={styles.inner}>

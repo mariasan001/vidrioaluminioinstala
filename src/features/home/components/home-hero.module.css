@@ -4,7 +4,7 @@
   --hero-text-y: 12px;
   --hero-stats-y: 18px;
   --hero-eye-y: 12px;
-  margin-top: 22px;
+  margin-top: 6px;
   overflow: clip;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 40px;
@@ -383,7 +383,7 @@
 
 @media (max-width: 820px) {
   .hero {
-    margin-top: 18px;
+    margin-top: 4px;
     border-radius: 28px;
     min-height: 860px;
   }

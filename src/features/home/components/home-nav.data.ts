@@ -4,10 +4,11 @@ export type NavItem = {
 };
 
 export const desktopPrimaryLinks: NavItem[] = [
-  { href: "#servicios", label: "Servicios" },
-  { href: "#ofertas", label: "Ofertas" },
+  { href: "#inicio", label: "Inicio" },
   { href: "#somos", label: "Somos" },
+  { href: "#servicios", label: "Servicios" },
   { href: "#proyectos", label: "Proyectos" },
+  { href: "#calidad", label: "Calidad" },
 ];
 
 export const desktopSecondaryLinks: NavItem[] = [

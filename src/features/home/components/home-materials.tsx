@@ -14,6 +14,7 @@ export function HomeMaterials() {
       className={styles.section}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
+      id="calidad"
       aria-labelledby="home-materials-title"
     >
       <div className={styles.header}>

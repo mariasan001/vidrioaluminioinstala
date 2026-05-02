@@ -2,21 +2,35 @@
   min-height: 100svh;
   padding: 24px;
   position: relative;
+  overflow: hidden;
   background:
-    radial-gradient(circle at top left, rgba(232, 255, 70, 0.08), transparent 22%),
-    linear-gradient(180deg, #30302d 0%, #232321 100%);
+    linear-gradient(115deg, rgba(232, 255, 70, 0.055) 0%, transparent 26%),
+    linear-gradient(245deg, rgba(255, 255, 255, 0.045) 0%, transparent 34%),
+    linear-gradient(180deg, #30302d 0%, #292927 42%, #20201f 100%);
 }
 
 .page::before {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 72px 72px;
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-position: center top;
+  background-size: 74px 74px;
+  content: "";
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.18) 72%, transparent);
+  pointer-events: none;
+  opacity: 0.42;
+}
+
+.page::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.24), transparent 15%, transparent 85%, rgba(0, 0, 0, 0.24)),
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.12) 68%, rgba(0, 0, 0, 0.28) 100%);
   content: "";
   pointer-events: none;
-  opacity: 0.28;
 }
 
 .layout {
@@ -24,7 +38,7 @@
   z-index: 1;
   width: min(1440px, 100%);
   margin: 0 auto;
-  padding-top: 112px;
+  padding-top: 84px;
 }
 
 @media (max-width: 640px) {
@@ -33,6 +47,6 @@
   }
 
   .layout {
-    padding-top: 88px;
+    padding-top: 74px;
   }
 }

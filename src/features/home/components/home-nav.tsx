@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaFacebookF, FaLocationDot, FaPhoneVolume } from "react-icons/fa6";
 import { HiOutlineMinusSmall, HiOutlinePlusSmall } from "react-icons/hi2";
 import { useLockBodyScroll } from "../hooks/use-lock-body-scroll";
@@ -12,27 +12,82 @@ import {
   mobileLinks,
 } from "./home-nav.data";
 
-export function HomeNav() {
+type HomeNavProps = {
+  onQuoteOpen: () => void;
+};
+
+const scrollSpyTargets = [
+  { id: "inicio", href: "#inicio" },
+  { id: "somos", href: "#somos" },
+  { id: "servicios", href: "#servicios" },
+  { id: "proyectos", href: "#proyectos" },
+  { id: "calidad", href: "#calidad" },
+  { id: "ubicacion", href: "#ubicacion" },
+] as const;
+
+export function HomeNav({ onQuoteOpen }: HomeNavProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState("#servicios");
+  const [activeHref, setActiveHref] = useState("#inicio");
+  const scrollFrameRef = useRef<number | null>(null);
   useLockBodyScroll(isMobileMenuOpen);
 
   useEffect(() => {
-    const syncHash = () => {
-      setActiveHref(window.location.hash || "#servicios");
+    const updateActiveSection = () => {
+      const readingLine = window.scrollY + Math.min(window.innerHeight * 0.38, 340);
+      let nextActiveHref = "#inicio";
+
+      scrollSpyTargets.forEach((target) => {
+        const section = document.getElementById(target.id);
+
+        if (!section) {
+          return;
+        }
+
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+
+        if (sectionTop <= readingLine) {
+          nextActiveHref = target.href;
+        }
+      });
+
+      setActiveHref(nextActiveHref);
     };
 
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
+    const queueActiveSectionUpdate = () => {
+      if (scrollFrameRef.current !== null) {
+        return;
+      }
+
+      scrollFrameRef.current = window.requestAnimationFrame(() => {
+        scrollFrameRef.current = null;
+        updateActiveSection();
+      });
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", queueActiveSectionUpdate, { passive: true });
+    window.addEventListener("resize", queueActiveSectionUpdate);
+    window.addEventListener("hashchange", queueActiveSectionUpdate);
 
     return () => {
-      window.removeEventListener("hashchange", syncHash);
+      if (scrollFrameRef.current !== null) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
+      }
+
+      window.removeEventListener("scroll", queueActiveSectionUpdate);
+      window.removeEventListener("resize", queueActiveSectionUpdate);
+      window.removeEventListener("hashchange", queueActiveSectionUpdate);
     };
   }, []);
 
   const handleNavClick = (href: string) => {
     setActiveHref(href);
     setIsMobileMenuOpen(false);
+  };
+
+  const openQuoteForm = () => {
+    setIsMobileMenuOpen(false);
+    onQuoteOpen();
   };
 
   return (
@@ -52,7 +107,7 @@ export function HomeNav() {
           ))}
         </div>
 
-        <a className={styles.logoWrap} href="#" aria-label="Aluminio y Vidrio Instala">
+        <a className={styles.logoWrap} href="#inicio" aria-label="Aluminio y Vidrio Instala">
           <Image
             src="/img/logo.png"
             alt="Aluminio y Vidrio Instala"
@@ -85,7 +140,7 @@ export function HomeNav() {
 
           <a
             className={styles.socialLink}
-            href="https://www.facebook.com/"
+            href="https://www.facebook.com/VentanasdeAluminioOmega/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -93,17 +148,17 @@ export function HomeNav() {
             <FaFacebookF aria-hidden="true" />
           </a>
 
-          <a
+          <button
             className={styles.primaryAction}
-            href="#cotizacion"
-            onClick={() => handleNavClick("#cotizacion")}
+            type="button"
+            onClick={openQuoteForm}
           >
             Crear cotizacion
-          </a>
+          </button>
         </div>
 
         <div className={styles.mobileBar}>
-          <a className={styles.mobileLogo} href="#" aria-label="Aluminio y Vidrio Instala">
+          <a className={styles.mobileLogo} href="#inicio" aria-label="Aluminio y Vidrio Instala">
             <Image
               src="/img/logo.png"
               alt="Aluminio y Vidrio Instala"
@@ -137,7 +192,7 @@ export function HomeNav() {
       >
         <div className={styles.mobileMenuInner}>
           <div className={styles.mobileMenuHeader}>
-            <a href="#" className={styles.mobileBrand} aria-label="Aluminio y Vidrio Instala">
+            <a href="#inicio" className={styles.mobileBrand} aria-label="Aluminio y Vidrio Instala">
               <Image
                 src="/img/logo.png"
                 alt="Aluminio y Vidrio Instala"
@@ -166,7 +221,15 @@ export function HomeNav() {
                   activeHref === item.href ? styles.mobileMenuLinkActive : ""
                 }`}
                 aria-current={activeHref === item.href ? "page" : undefined}
-                onClick={() => handleNavClick(item.href)}
+                onClick={(event) => {
+                  if (item.href === "#cotizacion") {
+                    event.preventDefault();
+                    openQuoteForm();
+                    return;
+                  }
+
+                  handleNavClick(item.href);
+                }}
               >
                 {item.label}
               </a>
@@ -187,7 +250,7 @@ export function HomeNav() {
             <div className={styles.mobileSocials}>
               <a
                 className={styles.mobileSocialLink}
-                href="https://www.facebook.com/"
+                href="https://www.facebook.com/VentanasdeAluminioOmega/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"

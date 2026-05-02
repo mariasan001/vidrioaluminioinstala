@@ -22,8 +22,17 @@ const workTypeOptions = [
 const photoOptions = ["La enviare por WhatsApp", "No tengo foto todavia"] as const;
 const whatsappReturnStorageKey = "aluminio-vidrio-whatsapp-return";
 
-export function HomeFloatingQuote() {
-  const [isOpen, setIsOpen] = useState(false);
+type HomeFloatingQuoteProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onOpen: () => void;
+};
+
+export function HomeFloatingQuote({
+  isOpen,
+  onClose,
+  onOpen,
+}: HomeFloatingQuoteProps) {
   const [service, setService] = useState<string>("Ventanas");
   const [timing, setTiming] = useState<string>("Solo cotizo");
   const [workType, setWorkType] = useState<string>("Instalacion nueva");
@@ -38,13 +47,13 @@ export function HomeFloatingQuote() {
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setIsOpen(false);
+        onClose();
       }
     };
 
     const handlePageShow = (event: PageTransitionEvent) => {
       unlockPage();
-      setIsOpen(false);
+      onClose();
 
       if (event.persisted && sessionStorage.getItem(whatsappReturnStorageKey)) {
         sessionStorage.removeItem(whatsappReturnStorageKey);
@@ -62,7 +71,7 @@ export function HomeFloatingQuote() {
       window.removeEventListener("pagehide", unlockPage);
       window.removeEventListener("pageshow", handlePageShow);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -93,7 +102,7 @@ export function HomeFloatingQuote() {
     ].join("\n");
 
     document.body.style.overflow = "";
-    setIsOpen(false);
+    onClose();
     const whatsappUrl = `https://wa.me/527292324754?text=${encodeURIComponent(message)}`;
     const whatsappWindow = window.open(whatsappUrl, "_blank");
 
@@ -112,7 +121,7 @@ export function HomeFloatingQuote() {
         className={styles.button}
         type="button"
         aria-label="Generar cotizacion"
-        onClick={() => setIsOpen(true)}
+        onClick={onOpen}
       >
         <span className={styles.dot} aria-hidden="true" />
         <span>Generar cotizacion</span>
@@ -124,7 +133,7 @@ export function HomeFloatingQuote() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="quote-form-title"
-          onClick={() => setIsOpen(false)}
+          onClick={onClose}
         >
           <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
             <div className={styles.modalHeader}>
@@ -136,7 +145,7 @@ export function HomeFloatingQuote() {
                 type="button"
                 className={styles.closeButton}
                 aria-label="Cerrar formulario"
-                onClick={() => setIsOpen(false)}
+                onClick={onClose}
               >
                 <HiOutlineXMark aria-hidden="true" />
               </button>
