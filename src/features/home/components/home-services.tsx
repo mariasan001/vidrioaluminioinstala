@@ -21,9 +21,9 @@ export function HomeServices() {
   const bottomServices = services.slice(3, 6);
   const serviceIcons = {
     barandales: HiOutlineViewColumns,
-    "canceles de bano": FaShower,
+    "canceles de baño": FaShower,
     fachadas: HiOutlineBuildingOffice2,
-    pergolas: HiOutlineSun,
+    pérgolas: HiOutlineSun,
     puertas: FaDoorOpen,
     ventanas: HiOutlineWindow,
   } as const;
@@ -73,7 +73,7 @@ export function HomeServices() {
       <div className={styles.header}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>catalogo de soluciones</span>
+          <span>Catálogo de soluciones</span>
         </div>
 
         <div className={styles.heading}>
@@ -82,8 +82,8 @@ export function HomeServices() {
             <span className={styles.accent}>tu espacio en aluminio y vidrio</span>
           </h2>
           <p className={styles.description}>
-            Explora cada servicio y acercate a una solucion pensada para tu
-            proyecto: medidas claras, instalacion precisa y acabados que se
+            Explora cada servicio y acércate a una solución pensada para tu
+            proyecto: medidas claras, instalación precisa y acabados que se
             sienten limpios desde el primer vistazo.
           </p>
         </div>

@@ -20,7 +20,7 @@ export function HomeMaterials() {
       <div className={styles.header}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>soluciones pensadas para durar</span>
+          <span>Soluciones pensadas para durar</span>
         </div>
 
         <div className={styles.heading}>
@@ -30,7 +30,7 @@ export function HomeMaterials() {
           </h2>
           <p className={styles.description}>
             Cada trabajo se fabrica e instala segun el uso real del espacio:
-            acceso, luz, proteccion, privacidad y presencia visual. La meta es
+            acceso, luz, protección, privacidad y presencia visual. La meta es
             que se vea bien al entregarse y siga funcionando con el paso del
             tiempo.
           </p>
@@ -51,7 +51,7 @@ export function HomeMaterials() {
           <div className={`${styles.materialImageCard} ${styles.materialImageTop}`}>
             <Image
               src="/img/img_bano.png"
-              alt="Cancel de bano en vidrio"
+              alt="Cancel de baño en vidrio"
               fill
               sizes="(max-width: 820px) 38vw, 16vw"
               className={styles.image}
@@ -60,15 +60,15 @@ export function HomeMaterials() {
           <div className={`${styles.materialImageCard} ${styles.materialImageBottom}`}>
             <Image
               src="/img/img_pergola.png"
-              alt="Pergola de aluminio para exterior"
+              alt="Pérgola de aluminio para exterior"
               fill
               sizes="(max-width: 820px) 42vw, 18vw"
               className={styles.image}
             />
           </div>
           <div className={styles.materialBadge}>
-            <strong>base comun</strong>
-            <span>ventanas, puertas, canceles y exteriores</span>
+            <strong>Base común</strong>
+            <span>Ventanas, puertas, canceles y exteriores</span>
           </div>
           <span className={`${styles.pin} ${styles.pinTop}`} aria-hidden="true" />
           <span className={`${styles.pin} ${styles.pinRight}`} aria-hidden="true" />

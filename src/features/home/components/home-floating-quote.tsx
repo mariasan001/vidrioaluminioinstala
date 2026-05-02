@@ -7,19 +7,19 @@ import styles from "./home-floating-quote.module.css";
 const serviceOptions = [
   "Ventanas",
   "Puertas",
-  "Canceles de bano",
-  "Pergolas",
+  "Canceles de baño",
+  "Pérgolas",
   "Fachadas",
   "Barandales",
 ] as const;
 
-const timingOptions = ["Urgente", "Este mes", "Mas adelante", "Solo cotizo"] as const;
+const timingOptions = ["Urgente", "Este mes", "Más adelante", "Solo cotizo"] as const;
 const workTypeOptions = [
-  "Instalacion nueva",
-  "Reemplazo / remodelacion",
+  "Instalación nueva",
+  "Reemplazo / remodelación",
   "No estoy seguro",
 ] as const;
-const photoOptions = ["La enviare por WhatsApp", "No tengo foto todavia"] as const;
+const photoOptions = ["La enviaré por WhatsApp", "No tengo foto todavía"] as const;
 const whatsappReturnStorageKey = "aluminio-vidrio-whatsapp-return";
 
 type HomeFloatingQuoteProps = {
@@ -35,8 +35,8 @@ export function HomeFloatingQuote({
 }: HomeFloatingQuoteProps) {
   const [service, setService] = useState<string>("Ventanas");
   const [timing, setTiming] = useState<string>("Solo cotizo");
-  const [workType, setWorkType] = useState<string>("Instalacion nueva");
-  const [photoStatus, setPhotoStatus] = useState<string>("La enviare por WhatsApp");
+  const [workType, setWorkType] = useState<string>("Instalación nueva");
+  const [photoStatus, setPhotoStatus] = useState<string>("La enviaré por WhatsApp");
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -83,17 +83,17 @@ export function HomeFloatingQuote({
     const measurements = formData.get("measurements")?.toString() || "";
     const notes = formData.get("notes")?.toString() || "";
     const message = [
-      "*Nueva solicitud de cotizacion*",
+      "*Nueva solicitud de cotización*",
       "",
       "*Proyecto*",
       `Servicio: ${service}`,
       `Tipo de trabajo: ${workType}`,
-      `Para cuando: ${timing}`,
+      `Para cuándo: ${timing}`,
       `Foto del espacio: ${photoStatus}`,
       "",
       "*Cliente*",
       `Nombre: ${name || "No indicado"}`,
-      `Telefono: ${phone || "No indicado"}`,
+      `Teléfono: ${phone || "No indicado"}`,
       `Zona o colonia: ${zone || "No indicada"}`,
       "",
       "*Medidas y detalles*",
@@ -120,11 +120,11 @@ export function HomeFloatingQuote({
       <button
         className={styles.button}
         type="button"
-        aria-label="Generar cotizacion"
+        aria-label="Generar cotización"
         onClick={onOpen}
       >
         <span className={styles.dot} aria-hidden="true" />
-        <span>Generar cotizacion</span>
+        <span>Generar cotización</span>
       </button>
 
       {isOpen ? (
@@ -138,7 +138,7 @@ export function HomeFloatingQuote({
           <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
             <div className={styles.modalHeader}>
               <div>
-                <span>cotizacion clara</span>
+                <span>Cotización clara</span>
                 <h2 id="quote-form-title">Cuéntanos qué necesitas</h2>
               </div>
               <button
@@ -190,7 +190,7 @@ export function HomeFloatingQuote({
                   <input name="name" type="text" placeholder="Tu nombre" />
                 </label>
                 <label>
-                  Telefono
+                  Teléfono
                   <input name="phone" type="tel" placeholder="729 000 0000" />
                 </label>
                 <label>

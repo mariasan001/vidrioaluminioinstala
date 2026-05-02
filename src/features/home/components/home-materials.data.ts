@@ -2,19 +2,19 @@ export const materialPoints = [
   {
     title: "Ventanas y puertas",
     description:
-      "Soluciones a medida para mejorar luz, ventilacion, acceso y seguridad.",
+      "Soluciones a medida para mejorar luz, ventilación, acceso y seguridad.",
     position: "leftTop",
   },
   {
     title: "Canceles y divisiones",
     description:
-      "Vidrio instalado con medidas precisas para banos, interiores y espacios especiales.",
+      "Vidrio instalado con medidas precisas para baños, interiores y espacios especiales.",
     position: "rightTop",
   },
   {
-    title: "Pergolas y exteriores",
+    title: "Pérgolas y exteriores",
     description:
-      "Estructuras pensadas para sombra, proteccion y una presencia visual limpia.",
+      "Estructuras pensadas para sombra, protección y una presencia visual limpia.",
     position: "leftBottom",
   },
   {

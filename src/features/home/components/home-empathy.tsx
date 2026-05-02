@@ -60,7 +60,7 @@ export function HomeEmpathy() {
       <div className={styles.inner}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>pensado para conectar contigo</span>
+          <span>Pensado para conectar contigo</span>
         </div>
 
         <div className={styles.copy}>

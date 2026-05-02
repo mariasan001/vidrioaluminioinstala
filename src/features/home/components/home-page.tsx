@@ -20,7 +20,7 @@ export function HomePage() {
     <main className={styles.page}>
       <div className={styles.layout}>
         <HomeNav onQuoteOpen={openQuote} />
-        <HomeHero />
+        <HomeHero onQuoteOpen={openQuote} />
         <HomeEmpathy />
         <HomeServices />
         <HomeProjects />

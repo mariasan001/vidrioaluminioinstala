@@ -19,17 +19,17 @@ export function HomeContact() {
       <div className={styles.header}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>contacto directo</span>
+          <span>Contacto directo</span>
         </div>
 
         <div className={styles.heading}>
           <h2 id="home-contact-title" className={styles.title}>
-            Cuentanos que quieres instalar
+            Cuéntanos qué quieres instalar
             <span className={styles.accent}>y aterrizamos el siguiente paso</span>
           </h2>
           <p className={styles.description}>
-            Agenda una cotizacion para ventanas, puertas, canceles, pergolas,
-            fachadas o barandales. Te atendemos en nuestra ubicacion o por
+            Agenda una cotización para ventanas, puertas, canceles, pérgolas,
+            fachadas o barandales. Te atendemos en nuestra ubicación o por
             llamada directa.
           </p>
         </div>

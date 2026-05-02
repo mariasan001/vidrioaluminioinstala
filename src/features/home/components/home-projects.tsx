@@ -188,16 +188,16 @@ export function HomeProjects() {
       <div className={styles.header}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>trabajos que hablan por si solos</span>
+          <span>Trabajos que hablan por sí solos</span>
         </div>
 
         <div className={styles.heading}>
           <h2 id="home-projects-title" className={styles.title}>
             Proyectos que muestran
-            <span className={styles.accent}>como se transforma un espacio</span>
+            <span className={styles.accent}>cómo se transforma un espacio</span>
           </h2>
           <p className={styles.description}>
-            Una seleccion visual de instalaciones, detalles y resultados. Aqui
+            Una selección visual de instalaciones, detalles y resultados. Aquí
             cada imagen funciona como prueba: materiales correctos, trazos
             limpios y una entrega que se nota en el uso diario.
           </p>
@@ -243,7 +243,7 @@ export function HomeProjects() {
         <div
           ref={carouselRef}
           className={styles.reel}
-          aria-label="Galeria de trabajos destacados"
+          aria-label="Galería de trabajos destacados"
           onPointerDown={pauseAutoMovement}
           onScroll={handleCarouselScroll}
           onWheel={pauseAutoMovement}

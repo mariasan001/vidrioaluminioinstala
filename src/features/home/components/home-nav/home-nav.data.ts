@@ -13,7 +13,7 @@ export const desktopPrimaryLinks: NavItem[] = [
 ];
 
 export const desktopSecondaryLinks: NavItem[] = [
-  { href: "#ubicacion", label: "Ubicacion", sectionId: "ubicacion" },
+  { href: "#ubicacion", label: "Ubicación", sectionId: "ubicacion" },
 ];
 
 export const scrollSpyLinks = [
@@ -24,5 +24,5 @@ export const scrollSpyLinks = [
 export const mobileLinks: NavItem[] = [
   ...desktopPrimaryLinks,
   ...desktopSecondaryLinks,
-  { href: "#cotizacion", label: "Crear cotizacion" },
+  { href: "#cotizacion", label: "Crear cotización" },
 ];

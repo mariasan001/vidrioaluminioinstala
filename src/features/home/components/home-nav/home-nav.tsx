@@ -83,7 +83,7 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
         <div className={`${styles.navGroup} ${styles.navGroupRight}`}>
           <a className={styles.contactInline} href="tel:7293813723">
             <FaPhoneVolume className={styles.inlineIcon} aria-hidden="true" />
-            <span className={styles.contactLabel}>Llamanos:</span>
+            <span className={styles.contactLabel}>Llámanos:</span>
             <strong>729 381 3723</strong>
           </a>
 
@@ -115,7 +115,7 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
             type="button"
             onClick={openQuoteForm}
           >
-            Crear cotizacion
+            Crear cotización
           </button>
         </div>
 
@@ -215,8 +215,8 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
             </div>
 
             <div className={styles.mobileInfoBlock}>
-              <p>Ubicacion</p>
-              <p>Atencion residencial y comercial</p>
+              <p>Ubicación</p>
+              <p>Atención residencial y comercial</p>
             </div>
 
             <div className={styles.mobileSocials}>

@@ -4,20 +4,20 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Aluminio y Vidrio Instala",
   description:
-    "Fabricacion e instalacion de canceleria, ventanas, puertas y soluciones en aluminio y vidrio para hogares, negocios y proyectos residenciales.",
+    "Fabricación e instalación de cancelería, ventanas, puertas y soluciones en aluminio y vidrio para hogares, negocios y proyectos residenciales.",
   keywords: [
     "aluminio",
     "vidrio",
-    "canceleria",
+    "cancelería",
     "ventanas de aluminio",
     "puertas de aluminio",
     "fachadas de vidrio",
-    "instalacion",
+    "instalación",
   ],
   openGraph: {
     title: "Aluminio y Vidrio Instala",
     description:
-      "Diseno, fabricacion e instalacion de soluciones en aluminio y vidrio con acabados limpios y duraderos.",
+      "Diseño, fabricación e instalación de soluciones en aluminio y vidrio con acabados limpios y duraderos.",
     type: "website",
     locale: "es_MX",
   },

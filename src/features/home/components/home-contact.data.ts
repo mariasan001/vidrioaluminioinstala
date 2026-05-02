@@ -6,27 +6,27 @@ import {
 
 export const contactCards = [
   {
-    title: "Ubicacion",
+    title: "Ubicación",
     value: "Lago Winnipeg 101",
-    detail: "El Seminario Primera Secc, 50170 Toluca de Lerdo, Mex.",
+    detail: "El Seminario Primera Secc, 50170 Toluca de Lerdo, Méx.",
     href: "#ubicacion",
-    action: "Ver direccion",
+    action: "Ver dirección",
     Icon: HiOutlineMapPin,
   },
   {
-    title: "Llamanos",
+    title: "Llámanos",
     value: "729 381 3723",
-    detail: "Contacto directo para atencion y cotizaciones.",
+    detail: "Contacto directo para atención y cotizaciones.",
     href: "tel:7293813723",
     action: "Llamar ahora",
     Icon: HiOutlinePhone,
   },
   {
     title: "Horarios",
-    value: "Lunes a sabado",
-    detail: "8:00am - 6:00pm. Domingo: No abrimos.",
+    value: "Lunes a sábado",
+    detail: "8:00 a. m. - 6:00 p. m. Domingo: No abrimos.",
     href: "#ubicacion",
-    action: "Horario de atencion",
+    action: "Horario de atención",
     Icon: HiOutlineClock,
   },
 ] as const;

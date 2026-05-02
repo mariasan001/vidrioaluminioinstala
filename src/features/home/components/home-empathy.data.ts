@@ -1,14 +1,14 @@
 export const empathyPillars = [
   {
-    label: "cuidamos el detalle en cada instalacion",
-    eyebrow: "precision visible",
+    label: "Cuidamos el detalle en cada instalación",
+    eyebrow: "Precisión visible",
   },
   {
-    label: "te acompanamos con atencion cercana y clara",
-    eyebrow: "comunicacion directa",
+    label: "Te acompañamos con atención cercana y clara",
+    eyebrow: "Comunicación directa",
   },
   {
-    label: "buscamos acabados que se noten y duren",
-    eyebrow: "resultado que permanece",
+    label: "Buscamos acabados que se noten y duren",
+    eyebrow: "Resultado que permanece",
   },
 ] as const;
