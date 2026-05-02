@@ -77,7 +77,7 @@ export function HomeHero() {
             </p>
 
             <div className={styles.actions}>
-              <a className={styles.primaryAction} href="#cotizacion">
+              <a className={styles.primaryAction} href="#ubicacion">
                 Solicitar proyecto y cotizacion
               </a>
               <a className={styles.secondaryAction} href="#proyectos">

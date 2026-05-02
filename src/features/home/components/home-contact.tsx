@@ -13,7 +13,7 @@ export function HomeContact() {
       className={styles.section}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
-      id="cotizacion"
+      id="ubicacion"
       aria-labelledby="home-contact-title"
     >
       <div className={styles.header}>
@@ -35,7 +35,7 @@ export function HomeContact() {
         </div>
       </div>
 
-      <div className={styles.infoGrid} id="ubicacion">
+      <div className={styles.infoGrid}>
         {contactCards.map(({ Icon, ...card }) => (
           <a className={styles.infoCard} href={card.href} key={card.title}>
             <span className={styles.infoIcon} aria-hidden="true">

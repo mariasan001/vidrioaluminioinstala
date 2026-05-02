@@ -4,7 +4,7 @@ export const services = [
     description:
       "proteccion ligera y resistente para escaleras, balcones y terrazas con una lectura visual limpia.",
     ctaLabel: "Explorar opciones de barandales",
-    href: "#cotizacion",
+    href: "#ubicacion",
     image: "/img/hero_img.png",
     imagePosition: "left center",
   },
@@ -13,7 +13,7 @@ export const services = [
     description:
       "soluciones a medida que ordenan el bano, aprovechan el espacio y elevan el acabado final.",
     ctaLabel: "Explorar opciones de canceles de bano",
-    href: "#cotizacion",
+    href: "#ubicacion",
     image: "/img/hero_img.png",
     imagePosition: "78% center",
   },
@@ -22,7 +22,7 @@ export const services = [
     description:
       "frentes de vidrio y aluminio pensados para ganar presencia, entrada de luz y durabilidad.",
     ctaLabel: "Explorar opciones de fachadas",
-    href: "#cotizacion",
+    href: "#ubicacion",
     image: "/img/hero_img.png",
     imagePosition: "62% center",
   },
@@ -31,7 +31,7 @@ export const services = [
     description:
       "estructuras que dan sombra, protegen el espacio exterior y conservan una estetica sobria.",
     ctaLabel: "Explorar opciones de pergolas",
-    href: "#cotizacion",
+    href: "#ubicacion",
     image: "/img/img_pergola.png",
     imagePosition: "center 28%",
   },
@@ -40,7 +40,7 @@ export const services = [
     description:
       "accesos en aluminio y vidrio que combinan seguridad, apertura suave y presencia moderna.",
     ctaLabel: "Explorar opciones de puertas",
-    href: "#cotizacion",
+    href: "#ubicacion",
     image: "/img/img_bano.png",
     imagePosition: "24% center",
   },
@@ -49,7 +49,7 @@ export const services = [
     description:
       "propuestas para mejorar luz, ventilacion y aislamiento sin perder elegancia visual.",
     ctaLabel: "Explorar opciones de ventanas",
-    href: "#cotizacion",
+    href: "#ubicacion",
     image: "/img/img_ventana.png",
     imagePosition: "center center",
   },

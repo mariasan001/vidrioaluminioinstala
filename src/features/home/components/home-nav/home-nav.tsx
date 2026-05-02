@@ -1,87 +1,44 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFacebookF, FaLocationDot, FaPhoneVolume } from "react-icons/fa6";
 import { HiOutlineMinusSmall, HiOutlinePlusSmall } from "react-icons/hi2";
-import { useLockBodyScroll } from "../hooks/use-lock-body-scroll";
+import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
 import styles from "./home-nav.module.css";
 import {
   desktopPrimaryLinks,
   desktopSecondaryLinks,
   mobileLinks,
+  scrollSpyLinks,
 } from "./home-nav.data";
+import { useActiveSection } from "./use-active-section";
 
 type HomeNavProps = {
   onQuoteOpen: () => void;
 };
 
-const scrollSpyTargets = [
-  { id: "inicio", href: "#inicio" },
-  { id: "somos", href: "#somos" },
-  { id: "servicios", href: "#servicios" },
-  { id: "proyectos", href: "#proyectos" },
-  { id: "calidad", href: "#calidad" },
-  { id: "ubicacion", href: "#ubicacion" },
-] as const;
-
 export function HomeNav({ onQuoteOpen }: HomeNavProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState("#inicio");
-  const scrollFrameRef = useRef<number | null>(null);
+  const { activeHref, setActiveSection } = useActiveSection(scrollSpyLinks);
   useLockBodyScroll(isMobileMenuOpen);
 
   useEffect(() => {
-    const updateActiveSection = () => {
-      const readingLine = window.scrollY + Math.min(window.innerHeight * 0.38, 340);
-      let nextActiveHref = "#inicio";
-
-      scrollSpyTargets.forEach((target) => {
-        const section = document.getElementById(target.id);
-
-        if (!section) {
-          return;
-        }
-
-        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-
-        if (sectionTop <= readingLine) {
-          nextActiveHref = target.href;
-        }
-      });
-
-      setActiveHref(nextActiveHref);
-    };
-
-    const queueActiveSectionUpdate = () => {
-      if (scrollFrameRef.current !== null) {
-        return;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
       }
-
-      scrollFrameRef.current = window.requestAnimationFrame(() => {
-        scrollFrameRef.current = null;
-        updateActiveSection();
-      });
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", queueActiveSectionUpdate, { passive: true });
-    window.addEventListener("resize", queueActiveSectionUpdate);
-    window.addEventListener("hashchange", queueActiveSectionUpdate);
+    window.addEventListener("keydown", handleEscape);
 
     return () => {
-      if (scrollFrameRef.current !== null) {
-        window.cancelAnimationFrame(scrollFrameRef.current);
-      }
-
-      window.removeEventListener("scroll", queueActiveSectionUpdate);
-      window.removeEventListener("resize", queueActiveSectionUpdate);
-      window.removeEventListener("hashchange", queueActiveSectionUpdate);
+      window.removeEventListener("keydown", handleEscape);
     };
   }, []);
 
   const handleNavClick = (href: string) => {
-    setActiveHref(href);
+    setActiveSection(href);
     setIsMobileMenuOpen(false);
   };
 
@@ -107,7 +64,12 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
           ))}
         </div>
 
-        <a className={styles.logoWrap} href="#inicio" aria-label="Aluminio y Vidrio Instala">
+        <a
+          className={styles.logoWrap}
+          href="#inicio"
+          aria-label="Aluminio y Vidrio Instala"
+          onClick={() => handleNavClick("#inicio")}
+        >
           <Image
             src="/img/logo.png"
             alt="Aluminio y Vidrio Instala"
@@ -158,7 +120,12 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
         </div>
 
         <div className={styles.mobileBar}>
-          <a className={styles.mobileLogo} href="#inicio" aria-label="Aluminio y Vidrio Instala">
+          <a
+            className={styles.mobileLogo}
+            href="#inicio"
+            aria-label="Aluminio y Vidrio Instala"
+            onClick={() => handleNavClick("#inicio")}
+          >
             <Image
               src="/img/logo.png"
               alt="Aluminio y Vidrio Instala"
@@ -192,7 +159,12 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
       >
         <div className={styles.mobileMenuInner}>
           <div className={styles.mobileMenuHeader}>
-            <a href="#inicio" className={styles.mobileBrand} aria-label="Aluminio y Vidrio Instala">
+            <a
+              href="#inicio"
+              className={styles.mobileBrand}
+              aria-label="Aluminio y Vidrio Instala"
+              onClick={() => handleNavClick("#inicio")}
+            >
               <Image
                 src="/img/logo.png"
                 alt="Aluminio y Vidrio Instala"

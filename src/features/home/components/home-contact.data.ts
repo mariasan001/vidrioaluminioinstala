@@ -25,7 +25,7 @@ export const contactCards = [
     title: "Horarios",
     value: "Lunes a sabado",
     detail: "8:00am - 6:00pm. Domingo: No abrimos.",
-    href: "#cotizacion",
+    href: "#ubicacion",
     action: "Horario de atencion",
     Icon: HiOutlineClock,
   },
