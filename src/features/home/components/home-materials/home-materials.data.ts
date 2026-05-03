@@ -10,15 +10,15 @@ export const materialsContent = {
   },
   images: {
     primary: {
-      src: "/img/img_ventana.png",
+      src: "/img/img_ventana.webp",
       alt: "Ventanas de aluminio y vidrio",
     },
     top: {
-      src: "/img/img_bano.png",
+      src: "/img/img_bano.webp",
       alt: "Cancel de baño en vidrio",
     },
     bottom: {
-      src: "/img/img_pergola.png",
+      src: "/img/img_pergola.webp",
       alt: "Pérgola de aluminio para exterior",
     },
   },

@@ -1,7 +1,7 @@
 export const heroContent = {
   image: {
-    src: "/img/hero_img.png",
-    mobileSrc: "/img/hero_movil.png",
+    src: "/img/hero_img.webp",
+    mobileSrc: "/img/hero_movil.webp",
     alt: "Proyecto destacado de aluminio y vidrio",
   },
   eyebrow: "Instalación y fabricación a medida en Toluca y alrededores",

@@ -8,13 +8,13 @@ export const projectsContent = {
     {
       title: "Fachada residencial",
       category: "Resultado",
-      description: "Cancelaría negra, vidrio amplio y remates limpios",
+      description: "Cancelería negra, vidrio amplio y remates limpios",
       format: "video",
       testimonial:
         "Nos explicaron opciones, cuidaron medidas y dejaron una instalación limpia. El cambio se notó desde el primer día.",
       customer: "Cliente residencial",
       location: "Toluca y alrededores",
-      image: "/img/hero_img.png",
+      image: "/img/hero_img.webp",
       imagePosition: "center center",
     },
     {
@@ -26,7 +26,7 @@ export const projectsContent = {
         "La pérgola quedó firme, bien alineada y con un acabado que cambió toda la terraza.",
       customer: "Proyecto familiar",
       location: "Zona residencial",
-      image: "/img/img_pergola.png",
+      image: "/img/img_pergola.webp",
       imagePosition: "center 28%",
     },
     {
@@ -38,7 +38,7 @@ export const projectsContent = {
         "El cancel se siente ligero, abre suave y el baño se ve mucho más amplio y ordenado.",
       customer: "Remodelación de baño",
       location: "Instalación a medida",
-      image: "/img/img_bano.png",
+      image: "/img/img_bano.webp",
       imagePosition: "24% center",
     },
     {
@@ -50,7 +50,7 @@ export const projectsContent = {
         "Las ventanas dejaron entrar más luz y el espacio se siente más moderno sin perder calidez.",
       customer: "Proyecto residencial",
       location: "Ventanas a medida",
-      image: "/img/img_ventana.png",
+      image: "/img/img_ventana.webp",
       imagePosition: "center center",
     },
     {
@@ -62,7 +62,7 @@ export const projectsContent = {
         "Se notó el cuidado en los cortes, los ajustes y la forma de dejar todo listo para usarse.",
       customer: "Seguimiento de obra",
       location: "Proceso de instalación",
-      image: "/img/img_servios_3.png",
+      image: "/img/img_servios_3.webp",
       imagePosition: "center 42%",
     },
   ],
