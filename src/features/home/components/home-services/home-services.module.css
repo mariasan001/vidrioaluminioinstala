@@ -75,7 +75,7 @@
   margin: 0;
   color: #f5f5f1;
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  font-size: clamp(2.05rem, 4.2vw, 3.55rem);
   font-weight: 700;
   line-height: 0.98;
   letter-spacing: -0.04em;
@@ -428,7 +428,7 @@
 
   .title {
     max-width: 24ch;
-    font-size: clamp(1.86rem, 7vw, 2.8rem);
+    font-size: clamp(1.74rem, 6.4vw, 2.34rem);
     line-height: 1.08;
   }
 
@@ -581,7 +581,7 @@
 @media (max-width: 540px) {
   .title {
     max-width: 24ch;
-    font-size: clamp(1.72rem, 7.5vw, 2.22rem);
+    font-size: clamp(1.62rem, 6.8vw, 1.98rem);
   }
 
   .description {

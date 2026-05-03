@@ -61,7 +61,7 @@ export function ServiceCard({
             src={service.image}
             alt={service.title}
             fill
-            sizes="(max-width: 820px) 100vw, 33vw"
+            sizes="(max-width: 540px) 86vw, (max-width: 820px) 42vw, 190px"
             className={styles.image}
             style={{ objectPosition: service.imagePosition }}
           />

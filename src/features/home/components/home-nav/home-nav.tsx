@@ -71,7 +71,7 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
           onClick={() => handleNavClick("#inicio")}
         >
           <Image
-            src="/img/logo.webp"
+            src="/img/logo-nav.webp"
             alt="Aluminio y Vidrio Instala"
             width={188}
             height={62}
@@ -127,7 +127,7 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
             onClick={() => handleNavClick("#inicio")}
           >
             <Image
-              src="/img/logo.webp"
+              src="/img/logo-nav.webp"
               alt="Aluminio y Vidrio Instala"
               width={188}
               height={62}
@@ -166,7 +166,7 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
               onClick={() => handleNavClick("#inicio")}
             >
               <Image
-                src="/img/logo.webp"
+                src="/img/logo-nav.webp"
                 alt="Aluminio y Vidrio Instala"
                 width={188}
                 height={62}

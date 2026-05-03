@@ -54,7 +54,7 @@
   margin: 0;
   color: #f5f5f1;
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  font-size: clamp(2.05rem, 4.2vw, 3.5rem);
   font-weight: 700;
   line-height: 0.98;
   letter-spacing: -0.04em;
@@ -122,7 +122,9 @@
   position: absolute;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: #111110;
+  background-color: #1c1c19;
+  background-position: center;
+  background-size: cover;
   box-shadow: 0 24px 54px rgba(0, 0, 0, 0.24);
 }
 
@@ -137,6 +139,7 @@
 .materialImagePrimary {
   inset: 15% 12% 12% 15%;
   border-radius: 34px;
+  background-image: url("/img/img_ventana.webp");
 }
 
 .materialImageTop {
@@ -145,6 +148,7 @@
   width: 36%;
   aspect-ratio: 1;
   border-radius: 50%;
+  background-image: url("/img/img_bano.webp");
 }
 
 .materialImageBottom {
@@ -153,6 +157,7 @@
   width: 42%;
   aspect-ratio: 1.05;
   border-radius: 28px;
+  background-image: url("/img/img_pergola.webp");
 }
 
 .materialBadge {
@@ -342,7 +347,7 @@
 
   .title {
     max-width: 27ch;
-    font-size: clamp(1.72rem, 6.6vw, 2.55rem);
+    font-size: clamp(1.68rem, 6.2vw, 2.28rem);
     line-height: 1.12;
   }
 
@@ -459,7 +464,7 @@
 @media (max-width: 540px) {
   .title {
     max-width: 28ch;
-    font-size: clamp(1.62rem, 6.8vw, 2.06rem);
+    font-size: clamp(1.54rem, 6.4vw, 1.92rem);
   }
 
   .description {
