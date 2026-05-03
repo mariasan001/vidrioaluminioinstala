@@ -4,10 +4,15 @@ import { useEffect } from "react";
 
 export function useLockBodyScroll(isLocked: boolean) {
   useEffect(() => {
-    document.body.style.overflow = isLocked ? "hidden" : "";
+    if (!isLocked) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [isLocked]);
 }

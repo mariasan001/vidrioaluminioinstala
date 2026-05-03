@@ -16,8 +16,8 @@ export const servicesContent = {
         "Protección ligera y resistente para escaleras, balcones y terrazas con una lectura visual limpia.",
       ctaLabel: "Explorar opciones de barandales",
       href: "#ubicacion",
-      image: "/img/hero_img.png",
-      imagePosition: "left center",
+      image: "/img/img_barandal.png",
+      imagePosition: "center center",
     },
     {
       title: "canceles de baño",
@@ -25,8 +25,8 @@ export const servicesContent = {
         "Soluciones a medida que ordenan el baño, aprovechan el espacio y elevan el acabado final.",
       ctaLabel: "Explorar opciones de canceles de baño",
       href: "#ubicacion",
-      image: "/img/hero_img.png",
-      imagePosition: "78% center",
+      image: "/img/img_bano.png",
+      imagePosition: "center center",
     },
     {
       title: "fachadas",
@@ -34,8 +34,8 @@ export const servicesContent = {
         "Frentes de vidrio y aluminio pensados para ganar presencia, entrada de luz y durabilidad.",
       ctaLabel: "Explorar opciones de fachadas",
       href: "#ubicacion",
-      image: "/img/hero_img.png",
-      imagePosition: "62% center",
+      image: "/img/img_fachada.png",
+      imagePosition: "center center",
     },
     {
       title: "pérgolas",
@@ -52,8 +52,8 @@ export const servicesContent = {
         "Accesos en aluminio y vidrio que combinan seguridad, apertura suave y presencia moderna.",
       ctaLabel: "Explorar opciones de puertas",
       href: "#ubicacion",
-      image: "/img/img_bano.png",
-      imagePosition: "24% center",
+      image: "/img/img_puerta.png",
+      imagePosition: "center center",
     },
     {
       title: "ventanas",

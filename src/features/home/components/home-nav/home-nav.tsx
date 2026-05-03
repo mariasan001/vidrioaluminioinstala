@@ -141,7 +141,7 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
             className={styles.mobileMenuButton}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-nav-panel"
-            aria-label={isMobileMenuOpen ? "Cerrar menu" : "Abrir menu"}
+            aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setIsMobileMenuOpen((value) => !value)}
           >
             {isMobileMenuOpen ? (
@@ -177,7 +177,7 @@ export function HomeNav({ onQuoteOpen }: HomeNavProps) {
             <button
               type="button"
               className={styles.mobileMenuButton}
-              aria-label="Cerrar menu"
+              aria-label="Cerrar menú"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <HiOutlineMinusSmall aria-hidden="true" />

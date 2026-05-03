@@ -13,6 +13,8 @@ export function HomeServices() {
     isVisible,
     scrollDirection,
     sectionRef,
+    setServiceRef,
+    visibleServices,
   } = useServicesReveal();
   const topServices = servicesContent.items.slice(0, 3);
   const bottomServices = servicesContent.items.slice(3, 6);
@@ -49,8 +51,10 @@ export function HomeServices() {
             {topServices.map((service) => (
               <ServiceCard
                 key={service.title}
-                className={styles.topCard}
+                cardRef={setServiceRef(servicesContent.items.indexOf(service))}
+                className={`${styles.topCard} ${visibleServices[servicesContent.items.indexOf(service)] ? styles.mobileServiceVisible : ""}`}
                 service={service}
+                showMobileImage
               />
             ))}
           </div>
@@ -70,14 +74,19 @@ export function HomeServices() {
         </div>
 
         <div className={styles.bottomGrid}>
-          {bottomServices.map((service) => (
+          {bottomServices.map((service) => {
+            const serviceIndex = servicesContent.items.indexOf(service);
+
+            return (
             <ServiceCard
               key={service.title}
-              className={styles.bottomCard}
+              cardRef={setServiceRef(serviceIndex)}
+              className={`${styles.bottomCard} ${visibleServices[serviceIndex] ? styles.mobileServiceVisible : ""}`}
               service={service}
               showImage
             />
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

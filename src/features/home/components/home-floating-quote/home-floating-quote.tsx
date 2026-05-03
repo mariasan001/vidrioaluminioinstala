@@ -2,25 +2,13 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { HiOutlineXMark } from "react-icons/hi2";
+import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
 import styles from "./home-floating-quote.module.css";
-
-const serviceOptions = [
-  "Ventanas",
-  "Puertas",
-  "Canceles de baño",
-  "Pérgolas",
-  "Fachadas",
-  "Barandales",
-] as const;
-
-const timingOptions = ["Urgente", "Este mes", "Más adelante", "Solo cotizo"] as const;
-const workTypeOptions = [
-  "Instalación nueva",
-  "Reemplazo / remodelación",
-  "No estoy seguro",
-] as const;
-const photoOptions = ["La enviaré por WhatsApp", "No tengo foto todavía"] as const;
-const whatsappReturnStorageKey = "aluminio-vidrio-whatsapp-return";
+import {
+  quoteFormOptions,
+  whatsappPhoneNumber,
+  whatsappReturnStorageKey,
+} from "./home-floating-quote.data";
 
 type HomeFloatingQuoteProps = {
   isOpen: boolean;
@@ -37,14 +25,9 @@ export function HomeFloatingQuote({
   const [timing, setTiming] = useState<string>("Solo cotizo");
   const [workType, setWorkType] = useState<string>("Instalación nueva");
   const [photoStatus, setPhotoStatus] = useState<string>("La enviaré por WhatsApp");
+  useLockBodyScroll(isOpen);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-
-    const unlockPage = () => {
-      document.body.style.overflow = "";
-    };
-
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
@@ -52,7 +35,6 @@ export function HomeFloatingQuote({
     };
 
     const handlePageShow = (event: PageTransitionEvent) => {
-      unlockPage();
       onClose();
 
       if (event.persisted && sessionStorage.getItem(whatsappReturnStorageKey)) {
@@ -62,16 +44,13 @@ export function HomeFloatingQuote({
     };
 
     window.addEventListener("keydown", handleEscape);
-    window.addEventListener("pagehide", unlockPage);
     window.addEventListener("pageshow", handlePageShow);
 
     return () => {
-      unlockPage();
       window.removeEventListener("keydown", handleEscape);
-      window.removeEventListener("pagehide", unlockPage);
       window.removeEventListener("pageshow", handlePageShow);
     };
-  }, [isOpen, onClose]);
+  }, [onClose]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -101,9 +80,8 @@ export function HomeFloatingQuote({
       `Comentarios: ${notes || "Sin comentarios adicionales"}`,
     ].join("\n");
 
-    document.body.style.overflow = "";
     onClose();
-    const whatsappUrl = `https://wa.me/527292324754?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`;
     const whatsappWindow = window.open(whatsappUrl, "_blank");
 
     if (whatsappWindow) {
@@ -160,7 +138,7 @@ export function HomeFloatingQuote({
                     value={service}
                     onChange={(event) => setService(event.target.value)}
                   >
-                    {serviceOptions.map((option) => (
+                    {quoteFormOptions.services.map((option) => (
                       <option value={option} key={option}>
                         {option}
                       </option>
@@ -175,7 +153,7 @@ export function HomeFloatingQuote({
                     value={workType}
                     onChange={(event) => setWorkType(event.target.value)}
                   >
-                    {workTypeOptions.map((option) => (
+                    {quoteFormOptions.workTypes.map((option) => (
                       <option value={option} key={option}>
                         {option}
                       </option>
@@ -211,7 +189,7 @@ export function HomeFloatingQuote({
                     value={timing}
                     onChange={(event) => setTiming(event.target.value)}
                   >
-                    {timingOptions.map((option) => (
+                    {quoteFormOptions.timings.map((option) => (
                       <option value={option} key={option}>
                         {option}
                       </option>
@@ -226,7 +204,7 @@ export function HomeFloatingQuote({
                     value={photoStatus}
                     onChange={(event) => setPhotoStatus(event.target.value)}
                   >
-                    {photoOptions.map((option) => (
+                    {quoteFormOptions.photoStatuses.map((option) => (
                       <option value={option} key={option}>
                         {option}
                       </option>

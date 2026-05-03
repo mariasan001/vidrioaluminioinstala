@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 import {
   HiChevronLeft,
   HiChevronRight,
@@ -10,161 +9,34 @@ import {
   HiMiniPlay,
   HiOutlineSparkles,
 } from "react-icons/hi2";
-import { useSectionReveal } from "../hooks/use-section-reveal";
 import styles from "./home-projects.module.css";
-import { projectHighlights } from "./home-projects.data";
+import { projectsContent } from "./home-projects.data";
+import { useProjectViewer } from "./use-project-viewer";
+import { useProjectsCarousel } from "./use-projects-carousel";
+import { useProjectsReveal } from "./use-projects-reveal";
 
 export function HomeProjects() {
-  const carouselRef = useRef<HTMLDivElement | null>(null);
   const {
     isVisible,
     scrollDirection,
     sectionRef,
-  } = useSectionReveal();
-  const programmaticScrollRef = useRef(false);
-  const programmaticTimerRef = useRef<number | null>(null);
-  const scrollTimerRef = useRef<number | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const [isAutoPaused, setIsAutoPaused] = useState(false);
-  const expandedProject =
-    expandedIndex === null ? null : projectHighlights[expandedIndex];
-
-  const goToProject = (index: number, shouldPause = true) => {
-    if (shouldPause) {
-      setIsAutoPaused(true);
-    }
-
-    setActiveIndex((index + projectHighlights.length) % projectHighlights.length);
-  };
-
-  useEffect(() => {
-    if (isAutoPaused) {
-      return;
-    }
-
-    const timer = window.setInterval(() => {
-      setActiveIndex((index) => (index + 1) % projectHighlights.length);
-    }, 5200);
-
-    return () => {
-      window.clearInterval(timer);
-    };
-  }, [isAutoPaused]);
-
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    const activeCard = carousel?.querySelector<HTMLElement>(
-      `[data-project-index="${activeIndex}"]`,
-    );
-
-    if (!carousel || !activeCard) {
-      return;
-    }
-
-    programmaticScrollRef.current = true;
-
-    if (programmaticTimerRef.current !== null) {
-      window.clearTimeout(programmaticTimerRef.current);
-    }
-
-    carousel.scrollTo({
-      left: activeCard.offsetLeft - (carousel.clientWidth - activeCard.clientWidth) / 2,
-      behavior: "smooth",
-    });
-
-    programmaticTimerRef.current = window.setTimeout(() => {
-      programmaticScrollRef.current = false;
-    }, 520);
-  }, [activeIndex]);
-
-  useEffect(() => {
-    return () => {
-      if (scrollTimerRef.current !== null) {
-        window.clearTimeout(scrollTimerRef.current);
-      }
-
-      if (programmaticTimerRef.current !== null) {
-        window.clearTimeout(programmaticTimerRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = expandedProject ? "hidden" : "";
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setExpandedIndex(null);
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, [expandedProject]);
-
-  const syncActiveProjectFromScroll = () => {
-    const carousel = carouselRef.current;
-
-    if (!carousel) {
-      return;
-    }
-
-    const cards = Array.from(
-      carousel.querySelectorAll<HTMLElement>("[data-project-index]"),
-    );
-    const scrollTarget = carousel.scrollLeft + carousel.clientWidth / 2;
-    let nearestIndex = activeIndex;
-    let nearestDistance = Number.POSITIVE_INFINITY;
-
-    cards.forEach((card) => {
-      const index = Number(card.dataset.projectIndex);
-      const cardCenter = card.offsetLeft + card.clientWidth / 2;
-      const distance = Math.abs(cardCenter - scrollTarget);
-
-      if (distance < nearestDistance) {
-        nearestDistance = distance;
-        nearestIndex = index;
-      }
-    });
-
-    setActiveIndex(nearestIndex);
-  };
-
-  const handleCarouselScroll = () => {
-    if (programmaticScrollRef.current) {
-      return;
-    }
-
-    if (scrollTimerRef.current !== null) {
-      window.clearTimeout(scrollTimerRef.current);
-    }
-
-    scrollTimerRef.current = window.setTimeout(() => {
-      syncActiveProjectFromScroll();
-    }, 120);
-  };
-
-  const pauseAutoMovement = () => {
-    programmaticScrollRef.current = false;
-    setIsAutoPaused(true);
-  };
-
-  const handleProjectKeyDown = (
-    event: React.KeyboardEvent<HTMLElement>,
-    index: number,
-  ) => {
-    if (event.key !== "Enter" && event.key !== " ") {
-      return;
-    }
-
-    event.preventDefault();
-    goToProject(index);
-  };
+    isInView,
+    isReady,
+  } = useProjectsReveal();
+  const projects = projectsContent.items;
+  const {
+    activeIndex,
+    carouselRef,
+    goToProject,
+    handleCarouselScroll,
+    pauseAutoMovement,
+    setActiveIndex,
+  } = useProjectsCarousel({ projectCount: projects.length });
+  const {
+    closeProjectViewer,
+    expandedProject,
+    openProjectViewer: openViewer,
+  } = useProjectViewer({ projects });
 
   const openProjectViewer = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -173,13 +45,15 @@ export function HomeProjects() {
     event.stopPropagation();
     pauseAutoMovement();
     setActiveIndex(index);
-    setExpandedIndex(index);
+    openViewer(index);
   };
 
   return (
     <section
       ref={sectionRef}
       className={styles.section}
+      data-in-view={isInView}
+      data-ready={isReady}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
       id="proyectos"
@@ -188,19 +62,15 @@ export function HomeProjects() {
       <div className={styles.header}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>Trabajos que hablan por sí solos</span>
+          <span>{projectsContent.eyebrow}</span>
         </div>
 
         <div className={styles.heading}>
           <h2 id="home-projects-title" className={styles.title}>
-            Proyectos que muestran
-            <span className={styles.accent}>cómo se transforma un espacio</span>
+            {projectsContent.title}
+            <span className={styles.accent}>{projectsContent.accentTitle}</span>
           </h2>
-          <p className={styles.description}>
-            Una selección visual de instalaciones, detalles y resultados. Aquí
-            cada imagen funciona como prueba: materiales correctos, trazos
-            limpios y una entrega que se nota en el uso diario.
-          </p>
+          <p className={styles.description}>{projectsContent.description}</p>
         </div>
       </div>
 
@@ -216,7 +86,7 @@ export function HomeProjects() {
           </button>
 
           <div className={styles.carouselDots} aria-label="Seleccionar trabajo">
-            {projectHighlights.map((project, index) => (
+            {projects.map((project, index) => (
               <button
                 type="button"
                 key={project.title}
@@ -248,19 +118,13 @@ export function HomeProjects() {
           onScroll={handleCarouselScroll}
           onWheel={pauseAutoMovement}
         >
-          {projectHighlights.map((project, index) => (
+          {projects.map((project, index) => (
             <article
               className={`${styles.projectCard} ${
                 activeIndex === index ? styles.projectCardActive : ""
               }`}
               key={project.title}
               data-project-index={index}
-              role="button"
-              tabIndex={0}
-              aria-label={`Seleccionar ${project.title}`}
-              aria-current={activeIndex === index ? "true" : undefined}
-              onClick={() => goToProject(index)}
-              onKeyDown={(event) => handleProjectKeyDown(event, index)}
             >
               <Image
                 src={project.image}
@@ -312,7 +176,7 @@ export function HomeProjects() {
           role="dialog"
           aria-modal="true"
           aria-label={`Imagen completa de ${expandedProject.title}`}
-          onClick={() => setExpandedIndex(null)}
+          onClick={closeProjectViewer}
         >
           <div className={styles.viewerPanel} onClick={(event) => event.stopPropagation()}>
             <div className={styles.viewerTop}>
@@ -321,7 +185,7 @@ export function HomeProjects() {
                 type="button"
                 className={styles.viewerClose}
                 aria-label="Minimizar imagen"
-                onClick={() => setExpandedIndex(null)}
+                onClick={closeProjectViewer}
               >
                 <HiMiniArrowsPointingIn aria-hidden="true" />
               </button>
