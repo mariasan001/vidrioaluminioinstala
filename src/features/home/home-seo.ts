@@ -7,7 +7,7 @@ export const siteUrl = (
 export const businessInfo = {
   name: "Aluminio y Vidrio Instala",
   description:
-    "Fabricación e instalación de ventanas, puertas, canceles, fachadas, barandales y pérgolas en aluminio y vidrio para hogares y negocios en Toluca.",
+    "Diseño, suministro e instalación de ventanas, puertas, canceles, fachadas, barandales y pérgolas en aluminio y vidrio para hogares y negocios en Toluca.",
   phoneDisplay: "729 381 3723",
   phoneInternational: "+527293813723",
   address: {
@@ -32,7 +32,7 @@ export const businessInfo = {
 export const homeMetadata = {
   title: "Aluminio y Vidrio Instala | Ventanas y cancelería en Toluca",
   description:
-    "Fabricamos e instalamos ventanas, puertas, canceles, fachadas, barandales y pérgolas en aluminio y vidrio para hogares y negocios en Toluca.",
+    "Diseñamos, suministramos e instalamos ventanas, puertas, canceles, fachadas, barandales y pérgolas en aluminio y vidrio para hogares y negocios en Toluca.",
   image: "/img/og-home.jpg",
 } as const;
 

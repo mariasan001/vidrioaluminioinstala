@@ -16,6 +16,5 @@ export const quoteFormOptions = {
   photoStatuses: ["La enviaré por WhatsApp", "No tengo foto todavía"],
 } as const;
 
-export const whatsappPhoneNumber = "527292324754";
+export const whatsappPhoneNumber = "527293813723";
 export const whatsappReturnStorageKey = "aluminio-vidrio-whatsapp-return";
-

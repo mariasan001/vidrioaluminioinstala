@@ -3,7 +3,7 @@ export const materialsContent = {
   title: "Hecho para verse bien",
   accentTitle: "y durar en el uso diario",
   description:
-    "Cada trabajo se fabrica e instala según el uso real del espacio: acceso, luz, protección, privacidad y presencia visual. La meta es que se vea bien al entregarse y siga funcionando con el paso del tiempo.",
+    "Cada trabajo se diseña e instala según el uso real del espacio: acceso, luz, protección, privacidad y presencia visual. La meta es que se vea bien al entregarse y siga funcionando con el paso del tiempo.",
   badge: {
     title: "Base común",
     description: "Ventanas, puertas, canceles y exteriores",

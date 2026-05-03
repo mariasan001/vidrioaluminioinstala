@@ -5,7 +5,7 @@ import type { NavItem } from "./home-nav.data";
 
 const defaultHref = "#inicio";
 
-export function useActiveSection(links: NavItem[]) {
+export function useActiveSection(links: readonly NavItem[]) {
   const [activeHref, setActiveHref] = useState(defaultHref);
   const activeHrefRef = useRef(defaultHref);
   const scrollFrameRef = useRef<number | null>(null);

@@ -6,7 +6,7 @@ export const empathyContent = {
     "Sabemos que no solo buscas aluminio y vidrio. Buscas sentirte orgulloso de tu casa o negocio, invertir con confianza y ver un resultado que realmente refleje lo que imaginaste.",
   pillars: [
     {
-      label: "Entendemos qué necesitas, cómo usas tu espacio y qué resultado esperas antes de fabricar.",
+      label: "Entendemos qué necesitas, cómo usas tu espacio y qué resultado esperas antes de instalar.",
       eyebrow: "Te escuchamos primero",
     },
     {

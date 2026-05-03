@@ -2,10 +2,10 @@
 
 import type { Ref } from "react";
 import Image from "next/image";
-import { HiArrowUpRight } from "react-icons/hi2";
 import styles from "./home-services.module.css";
 import type { ServiceItem } from "./home-services.data";
 import { serviceIcons } from "./home-services.icons";
+import { ServiceTransitionLink } from "./service-transition-link";
 
 type ServiceCardProps = {
   cardRef?: Ref<HTMLElement>;
@@ -39,13 +39,11 @@ export function ServiceCard({
               <Icon className={styles.labelIcon} aria-hidden="true" />
               <span>{service.title}</span>
             </span>
-            <a
-              className={styles.arrow}
+            <ServiceTransitionLink
               href={service.href}
-              aria-label={service.ctaLabel}
-            >
-              <HiArrowUpRight aria-hidden="true" />
-            </a>
+              label={service.ctaLabel}
+              transition={service.title === "barandales"}
+            />
           </div>
 
           <p className={styles.cardDescription}>{service.description}</p>

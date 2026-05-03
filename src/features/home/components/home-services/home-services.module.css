@@ -309,6 +309,32 @@
   outline-offset: 3px;
 }
 
+.pageTransition {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  clip-path: circle(0 at calc(100% - 52px) calc(100% - 52px));
+  animation: servicePageWipe 620ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.pageTransitionMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 82px;
+  height: 82px;
+  border-radius: 999px;
+  background: var(--accent-contrast);
+  color: var(--accent);
+  font-size: 2rem;
+  opacity: 0;
+  transform: scale(0.84) rotate(-12deg);
+  animation: serviceMarkIn 420ms cubic-bezier(0.16, 1, 0.3, 1) 160ms forwards;
+}
+
 .cardDescription {
   max-width: 34ch;
   margin: 0;
@@ -637,5 +663,23 @@
   .bottomCard {
     opacity: 1;
     transform: none;
+  }
+
+  .pageTransition,
+  .pageTransitionMark {
+    animation: none;
+  }
+}
+
+@keyframes servicePageWipe {
+  to {
+    clip-path: circle(145% at calc(100% - 52px) calc(100% - 52px));
+  }
+}
+
+@keyframes serviceMarkIn {
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 }

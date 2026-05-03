@@ -14,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         absoluteUrl("/img/img_ventana.webp"),
       ],
     },
+    {
+      url: absoluteUrl("/servicios/barandales"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.86,
+      images: [absoluteUrl("/img/img_barandal.webp")],
+    },
   ];
 }
-

@@ -56,7 +56,7 @@ export const projectsContent = {
     {
       title: "Aluminio y vidrio",
       category: "Proceso",
-      description: "Fabricación, ajuste e instalación en sitio",
+      description: "Preparación, ajuste e instalación en sitio",
       format: "video",
       testimonial:
         "Se notó el cuidado en los cortes, los ajustes y la forma de dejar todo listo para usarse.",
