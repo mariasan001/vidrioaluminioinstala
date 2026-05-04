@@ -39,7 +39,11 @@ export function BarandalesUseCasesSection() {
 
       <div className={styles.detailGrid}>
         {barandalesPageContent.details.map((detail, index) => (
-          <article className={styles.detailCard} key={detail.title}>
+          <article
+            className={styles.detailCard}
+            key={detail.title}
+            data-card-index={index + 1}
+          >
             <div className={styles.detailMeta}>
               <span className={styles.detailIcon} aria-hidden="true">
                 {(() => {

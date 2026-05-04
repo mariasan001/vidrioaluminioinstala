@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import {
   HiOutlineArrowsUpDown,
@@ -24,6 +25,9 @@ const qualityIcons = {
 
 export function BarandalesQualitySection() {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
+  const [activePointIndex, setActivePointIndex] = useState(0);
+  const activePoint = barandalesPageContent.quality.points[activePointIndex]!;
+  const ActivePointIcon = qualityIcons[activePoint.icon];
 
   return (
     <section
@@ -58,6 +62,31 @@ export function BarandalesQualitySection() {
             sizes="(max-width: 900px) 86vw, 34vw"
             className={styles.qualityImage}
           />
+
+          <div className={styles.qualityMobileMap} aria-label="Puntos de calidad del barandal">
+            {barandalesPageContent.quality.points.map((point, index) => {
+              const MarkerIcon = qualityIcons[point.icon];
+
+              return (
+                <button
+                  key={point.title}
+                  type="button"
+                  className={styles.qualityMarker}
+                  data-active={activePointIndex === index}
+                  aria-label={point.title}
+                  aria-pressed={activePointIndex === index}
+                  onClick={() => setActivePointIndex(index)}
+                >
+                  <span className={styles.qualityMarkerIcon} aria-hidden="true">
+                    <MarkerIcon />
+                  </span>
+                  <span className={styles.qualityMarkerNumber} aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className={styles.qualityPoints}>
@@ -77,6 +106,19 @@ export function BarandalesQualitySection() {
             );
           })}
         </div>
+
+        <article className={styles.qualityMobilePanel}>
+          <div className={styles.qualityMobilePanelMeta}>
+            <span className={styles.qualityMobilePanelIcon} aria-hidden="true">
+              <ActivePointIcon />
+            </span>
+            <span className={styles.qualityMobilePanelNumber} aria-hidden="true">
+              {String(activePointIndex + 1).padStart(2, "0")}
+            </span>
+          </div>
+          <h3>{activePoint.title}</h3>
+          <p>{activePoint.description}</p>
+        </article>
       </div>
     </section>
   );
