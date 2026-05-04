@@ -1,7 +1,6 @@
 import type { NavItem } from "./home-nav.data";
 
 export type HomeNavProps = {
-  onQuoteOpen: () => void;
   activeHrefOverride?: string;
   defaultActiveHref?: string;
   logoHref?: string;

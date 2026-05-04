@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   publisher: "Aurean",
   keywords: [
     "aluminio y vidrio Toluca",
-    "cancelería en Toluca",
+    "canceler\u00eda en Toluca",
     "ventanas de aluminio",
-    "canceles de baño",
+    "canceles de ba\u00f1o",
     "puertas de aluminio y vidrio",
     "fachadas de vidrio",
     "barandales de vidrio",
-    "pérgolas de aluminio",
+    "p\u00e9rgolas de aluminio",
     "Aluminio y Vidrio Instala",
   ],
   alternates: {
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     description: homeMetadata.description,
     images: [homeMetadata.image],
   },
-  category: "servicios de construcción",
+  category: "servicios de construcci\u00f3n",
 };
 
 export default function RootLayout({

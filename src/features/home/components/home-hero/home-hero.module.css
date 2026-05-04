@@ -1,7 +1,6 @@
 .hero {
   position: relative;
   --hero-lead-y: 24px;
-  --hero-stats-y: 18px;
   --hero-eye-y: 12px;
   margin-top: 6px;
   overflow: clip;
@@ -35,6 +34,19 @@
   content: "";
 }
 
+.hero::after {
+  position: absolute;
+  inset: auto auto -18% -8%;
+  z-index: 1;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 255, 70, 0.16), transparent 68%);
+  content: "";
+  pointer-events: none;
+  filter: blur(18px);
+}
+
 .heroShade {
   position: absolute;
   inset: 0;
@@ -66,6 +78,23 @@
   transform: translate(-50%, -42%);
   opacity: 1;
   filter: none;
+}
+
+.contentPanel {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  width: min(860px, 100%);
+  padding: 26px 24px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+    rgba(11, 11, 10, 0.34);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .content {
@@ -132,7 +161,7 @@
   margin: 0;
   max-width: 68ch;
   color: rgba(245, 245, 241, 0.76);
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.72;
   text-align: center;
@@ -145,6 +174,27 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 14px;
+}
+
+.proofStrip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.proofStrip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(8, 8, 8, 0.28);
+  color: rgba(245, 245, 241, 0.76);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .primaryAction,
@@ -180,21 +230,6 @@
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
 }
 
-.stats {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  padding: 0 26px 18px;
-  opacity: 0;
-  transform: translateY(var(--hero-stats-y));
-  filter: blur(8px);
-}
-
 .heroVisible .backgroundImage {
   animation: heroImageReveal 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -211,23 +246,17 @@
   animation: heroLeadReveal 900ms cubic-bezier(0.16, 1, 0.3, 1) 1220ms forwards;
 }
 
-.heroVisible .stats {
-  animation: heroStatsReveal 820ms cubic-bezier(0.16, 1, 0.3, 1) 1460ms forwards;
-}
-
 .hero:not(.heroVisible) .backgroundImage,
 .hero:not(.heroVisible) .heroShade,
 .hero:not(.heroVisible) .eyebrow,
-.hero:not(.heroVisible) .heroLead,
-.hero:not(.heroVisible) .stats {
+.hero:not(.heroVisible) .heroLead {
   animation: none;
 }
 
 .heroReady .backgroundImage,
 .heroReady .heroShade,
 .heroReady .eyebrow,
-.heroReady .heroLead,
-.heroReady .stats {
+.heroReady .heroLead {
   animation: none;
 }
 
@@ -244,8 +273,7 @@
 }
 
 .heroReady .eyebrow,
-.heroReady .heroLead,
-.heroReady .stats {
+.heroReady .heroLead {
   filter: blur(0);
   transition:
     opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -261,8 +289,7 @@
   opacity: 1;
 }
 
-.heroReady.heroInView .eyebrow,
-.heroReady.heroInView .stats {
+.heroReady.heroInView .eyebrow {
   opacity: 1;
   transform: translateY(0);
 }
@@ -280,8 +307,7 @@
   opacity: 0.86;
 }
 
-.heroReady.heroOutView .eyebrow,
-.heroReady.heroOutView .stats {
+.heroReady.heroOutView .eyebrow {
   opacity: 0.5;
   transform: translateY(-10px);
   filter: blur(1px);
@@ -291,35 +317,6 @@
   opacity: 0.72;
   transform: translate(-50%, calc(-42% - 14px));
   filter: blur(1px);
-}
-
-.stat {
-  display: grid;
-  gap: 10px;
-}
-
-.statLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: rgba(245, 245, 241, 0.84);
-  font-size: 0.88rem;
-  font-weight: 600;
-}
-
-.statDot {
-  width: 8px;
-  height: 8px;
-  flex-shrink: 0;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 0 0 0 5px rgba(232, 255, 70, 0.12);
-}
-
-.statLine {
-  width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.14);
 }
 
 @keyframes heroImageReveal {
@@ -372,20 +369,6 @@
   }
 }
 
-@keyframes heroStatsReveal {
-  from {
-    opacity: 0;
-    transform: translateY(var(--hero-stats-y));
-    filter: blur(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
 @media (hover: hover) and (pointer: fine) {
   .primaryAction:hover,
   .secondaryAction:hover {
@@ -400,7 +383,6 @@
   .secondaryAction:hover {
     background: rgba(255, 255, 255, 0.08);
   }
-
 }
 
 @media (max-width: 1180px) {
@@ -434,12 +416,6 @@
     background:
       linear-gradient(180deg, rgba(6, 6, 6, 0.78), rgba(6, 6, 6, 0.48)),
       linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent);
-  }
-
-  .stats {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding: 0 30px 24px;
   }
 }
 
@@ -488,6 +464,15 @@
     letter-spacing: 0.02em;
   }
 
+  .contentPanel {
+    width: 100%;
+    padding: 22px 16px 18px;
+    border-radius: 26px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+      rgba(10, 10, 10, 0.26);
+  }
+
   .content {
     width: min(100%, 100%);
     gap: 16px;
@@ -534,6 +519,16 @@
     gap: 12px;
   }
 
+  .proofStrip {
+    gap: 8px;
+  }
+
+  .proofStrip span {
+    min-height: 32px;
+    padding: 0 12px;
+    font-size: 0.72rem;
+  }
+
   .primaryAction,
   .secondaryAction {
     width: 100%;
@@ -543,14 +538,6 @@
 
   .secondaryAction {
     background: rgba(10, 10, 10, 0.62);
-  }
-
-  .stats {
-    left: 18px;
-    right: 18px;
-    bottom: 18px;
-    gap: 12px;
-    padding: 0;
   }
 
   .heroVisible .heroShade {
@@ -564,22 +551,6 @@
 
   .heroVisible .heroLead {
     animation-delay: 1040ms;
-  }
-
-  .heroVisible .stats {
-    animation-delay: 1260ms;
-  }
-
-  .stat {
-    gap: 8px;
-  }
-
-  .statLabel {
-    font-size: 0.78rem;
-  }
-
-  .statLine {
-    background: rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -616,21 +587,16 @@
     width: 100%;
   }
 
+  .proofStrip span {
+    width: 100%;
+    justify-content: center;
+  }
+
   .primaryAction,
   .secondaryAction {
     min-height: 46px;
     padding: 0 16px;
     font-size: 0.82rem;
-  }
-
-  .stats {
-    left: 14px;
-    right: 14px;
-    bottom: 14px;
-  }
-
-  .statLabel {
-    font-size: 0.74rem;
   }
 }
 
@@ -638,8 +604,7 @@
   .backgroundImage,
   .heroShade,
   .heroLead,
-  .eyebrow,
-  .stats {
+  .eyebrow {
     animation: none;
     opacity: 1;
     transform: none;
@@ -654,8 +619,7 @@
   .heroOutView .backgroundImage,
   .heroOutView .heroShade,
   .heroOutView .eyebrow,
-  .heroOutView .heroLead,
-  .heroOutView .stats {
+  .heroOutView .heroLead {
     opacity: 1;
     transform: none;
     filter: none;

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { FaLocationDot } from "react-icons/fa6";
+import { ServiceHeroQuoteButton } from "./service-hero-quote-button";
 import styles from "./service-hero.module.css";
 
 export type ServiceHeroAction =
   | {
       label: string;
-      type: "button";
-      onClick: () => void;
+      type: "quote";
     }
   | {
       href: string;
@@ -77,15 +77,11 @@ export function ServiceHero({
 
           <div className={styles.actions}>
             {actions.map((action) =>
-              action.type === "button" ? (
-                <button
-                  className={styles.primaryAction}
+              action.type === "quote" ? (
+                <ServiceHeroQuoteButton
                   key={action.label}
-                  type="button"
-                  onClick={action.onClick}
-                >
-                  {action.label}
-                </button>
+                  label={action.label}
+                />
               ) : (
                 <a
                   className={styles.secondaryAction}
@@ -114,4 +110,3 @@ export function ServiceHero({
     </section>
   );
 }
-

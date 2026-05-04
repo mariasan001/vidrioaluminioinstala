@@ -1,6 +1,3 @@
-"use client";
-
-import { useCallback, useState } from "react";
 import { HomeEmpathy } from "./home-empathy";
 import { HomeContact } from "./home-contact";
 import { HomeFloatingQuote } from "./home-floating-quote";
@@ -12,25 +9,17 @@ import { HomeServices } from "./home-services";
 import styles from "../home-page.module.css";
 
 export function HomePage() {
-  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
-  const openQuote = useCallback(() => setIsQuoteOpen(true), []);
-  const closeQuote = useCallback(() => setIsQuoteOpen(false), []);
-
   return (
     <main className={styles.page}>
       <div className={styles.layout}>
-        <HomeNav onQuoteOpen={openQuote} />
-        <HomeHero onQuoteOpen={openQuote} />
+        <HomeNav />
+        <HomeHero />
         <HomeEmpathy />
         <HomeServices />
         <HomeProjects />
         <HomeMaterials />
         <HomeContact />
-        <HomeFloatingQuote
-          isOpen={isQuoteOpen}
-          onClose={closeQuote}
-          onOpen={openQuote}
-        />
+        <HomeFloatingQuote />
       </div>
     </main>
   );

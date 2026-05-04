@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { openQuoteDialog } from "../home-floating-quote/quote-dialog";
 import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
 import {
   desktopPrimaryLinks,
@@ -15,7 +16,6 @@ import type { HomeNavProps } from "./home-nav.types";
 import { useActiveSection } from "./use-active-section";
 
 export function HomeNav({
-  onQuoteOpen,
   activeHrefOverride,
   defaultActiveHref,
   logoHref = "#inicio",
@@ -53,7 +53,7 @@ export function HomeNav({
 
   const openQuoteForm = () => {
     setIsMobileMenuOpen(false);
-    onQuoteOpen();
+    openQuoteDialog();
   };
 
   return (

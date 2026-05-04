@@ -9,33 +9,32 @@ import {
   whatsappPhoneNumber,
   whatsappReturnStorageKey,
 } from "./home-floating-quote.data";
+import {
+  openQuoteDialog,
+  openQuoteDialogEventName,
+} from "./quote-dialog";
 
-type HomeFloatingQuoteProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  onOpen: () => void;
-};
-
-export function HomeFloatingQuote({
-  isOpen,
-  onClose,
-  onOpen,
-}: HomeFloatingQuoteProps) {
+export function HomeFloatingQuote() {
+  const [isOpen, setIsOpen] = useState(false);
   const [service, setService] = useState<string>("Ventanas");
   const [timing, setTiming] = useState<string>("Solo cotizo");
   const [workType, setWorkType] = useState<string>("Instalación nueva");
   const [photoStatus, setPhotoStatus] = useState<string>("La enviaré por WhatsApp");
   useLockBodyScroll(isOpen);
 
+  const closeQuoteDialog = () => {
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        onClose();
+        closeQuoteDialog();
       }
     };
 
     const handlePageShow = (event: PageTransitionEvent) => {
-      onClose();
+      closeQuoteDialog();
 
       if (event.persisted && sessionStorage.getItem(whatsappReturnStorageKey)) {
         sessionStorage.removeItem(whatsappReturnStorageKey);
@@ -43,14 +42,20 @@ export function HomeFloatingQuote({
       }
     };
 
+    const handleOpenQuoteDialog = () => {
+      setIsOpen(true);
+    };
+
     window.addEventListener("keydown", handleEscape);
     window.addEventListener("pageshow", handlePageShow);
+    window.addEventListener(openQuoteDialogEventName, handleOpenQuoteDialog);
 
     return () => {
       window.removeEventListener("keydown", handleEscape);
       window.removeEventListener("pageshow", handlePageShow);
+      window.removeEventListener(openQuoteDialogEventName, handleOpenQuoteDialog);
     };
-  }, [onClose]);
+  }, []);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -80,7 +85,7 @@ export function HomeFloatingQuote({
       `Comentarios: ${notes || "Sin comentarios adicionales"}`,
     ].join("\n");
 
-    onClose();
+    closeQuoteDialog();
     const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`;
     const whatsappWindow = window.open(whatsappUrl, "_blank");
 
@@ -99,7 +104,7 @@ export function HomeFloatingQuote({
         className={styles.button}
         type="button"
         aria-label="Generar cotización"
-        onClick={onOpen}
+        onClick={openQuoteDialog}
       >
         <span className={styles.dot} aria-hidden="true" />
         <span>Generar cotización</span>
@@ -111,7 +116,7 @@ export function HomeFloatingQuote({
           role="dialog"
           aria-modal="true"
           aria-labelledby="quote-form-title"
-          onClick={onClose}
+          onClick={closeQuoteDialog}
         >
           <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
             <div className={styles.modalHeader}>
@@ -123,7 +128,7 @@ export function HomeFloatingQuote({
                 type="button"
                 className={styles.closeButton}
                 aria-label="Cerrar formulario"
-                onClick={onClose}
+                onClick={closeQuoteDialog}
               >
                 <HiOutlineXMark aria-hidden="true" />
               </button>

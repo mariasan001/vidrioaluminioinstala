@@ -7,7 +7,7 @@ export const siteUrl = (
 export const businessInfo = {
   name: "Aluminio y Vidrio Instala",
   description:
-    "Diseño, suministro e instalación de ventanas, puertas, canceles, fachadas, barandales y pérgolas en aluminio y vidrio para hogares y negocios en Toluca.",
+    "Dise\u00f1o, suministro e instalaci\u00f3n de ventanas, puertas, canceles, fachadas, barandales y p\u00e9rgolas en aluminio y vidrio para hogares y negocios en Toluca.",
   phoneDisplay: "729 381 3723",
   phoneInternational: "+527293813723",
   address: {
@@ -15,24 +15,24 @@ export const businessInfo = {
     neighborhood: "El Seminario Primera Secc",
     postalCode: "50170",
     city: "Toluca de Lerdo",
-    region: "Estado de México",
+    region: "Estado de M\u00e9xico",
     country: "MX",
   },
   facebook: "https://www.facebook.com/VentanasdeAluminioOmega/",
   services: [
     "Ventanas de aluminio",
     "Puertas de aluminio y vidrio",
-    "Canceles de baño",
+    "Canceles de ba\u00f1o",
     "Fachadas de vidrio",
     "Barandales",
-    "Pérgolas",
+    "P\u00e9rgolas",
   ],
 } as const;
 
 export const homeMetadata = {
-  title: "Aluminio y Vidrio Instala | Ventanas y cancelería en Toluca",
+  title: "Aluminio y Vidrio Instala | Ventanas y canceler\u00eda en Toluca",
   description:
-    "Diseñamos, suministramos e instalamos ventanas, puertas, canceles, fachadas, barandales y pérgolas en aluminio y vidrio para hogares y negocios en Toluca.",
+    "Dise\u00f1amos, suministramos e instalamos ventanas, puertas, canceles, fachadas, barandales y p\u00e9rgolas en aluminio y vidrio para hogares y negocios en Toluca.",
   image: "/img/og-home.jpg",
 } as const;
 
@@ -66,7 +66,7 @@ export const localBusinessJsonLd = {
     },
     {
       "@type": "AdministrativeArea",
-      name: "Estado de México",
+      name: "Estado de M\u00e9xico",
     },
   ],
   openingHoursSpecification: [

@@ -47,7 +47,7 @@ export function HomeNavMobile({
           className={styles.mobileMenuButton}
           aria-expanded={isOpen}
           aria-controls="mobile-nav-panel"
-          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={isOpen ? "Cerrar men\u00fa" : "Abrir men\u00fa"}
           onClick={onToggle}
         >
           {isOpen ? (
@@ -82,7 +82,7 @@ export function HomeNavMobile({
             <button
               type="button"
               className={styles.mobileMenuButton}
-              aria-label="Cerrar menú"
+              aria-label="Cerrar men\u00fa"
               onClick={onClose}
             >
               <HiOutlineMinusSmall aria-hidden="true" />
@@ -97,7 +97,7 @@ export function HomeNavMobile({
                 className={`${styles.mobileMenuLink} ${
                   currentActiveHref === item.href ? styles.mobileMenuLinkActive : ""
                 }`}
-                aria-current={currentActiveHref === item.href ? "page" : undefined}
+                aria-current={currentActiveHref === item.href ? "location" : undefined}
                 onClick={(event) => {
                   if (item.href === "#cotizacion") {
                     event.preventDefault();
@@ -120,8 +120,8 @@ export function HomeNavMobile({
             </div>
 
             <div className={styles.mobileInfoBlock}>
-              <p>Ubicación</p>
-              <p>Atención residencial y comercial</p>
+              <p>Ubicaci\u00f3n</p>
+              <p>Atenci\u00f3n residencial y comercial</p>
             </div>
 
             <div className={styles.mobileSocials}>

@@ -2,15 +2,12 @@
 
 import Image from "next/image";
 import { FaLocationDot } from "react-icons/fa6";
+import { openQuoteDialog } from "../home-floating-quote/quote-dialog";
 import styles from "./home-hero.module.css";
 import { heroContent } from "./home-hero.data";
 import { useHeroReveal } from "./use-hero-reveal";
 
-type HomeHeroProps = {
-  onQuoteOpen: () => void;
-};
-
-export function HomeHero({ onQuoteOpen }: HomeHeroProps) {
+export function HomeHero() {
   const { hasRevealed, introDone, isInView, sectionRef } = useHeroReveal();
 
   return (
@@ -45,49 +42,45 @@ export function HomeHero({ onQuoteOpen }: HomeHeroProps) {
       </p>
 
       <div className={styles.heroLead}>
-        <h1 className={styles.title}>
-          {heroContent.title}
-          <span className={styles.accent}>{heroContent.accentTitle}</span>
-        </h1>
+        <div className={styles.contentPanel}>
+          <h1 className={styles.title}>
+            {heroContent.title}
+            <span className={styles.accent}>{heroContent.accentTitle}</span>
+          </h1>
 
-        <div className={styles.content}>
-          <p className={styles.description}>{heroContent.description}</p>
+          <div className={styles.content}>
+            <p className={styles.description}>{heroContent.description}</p>
 
-          <div className={styles.actions}>
-            {heroContent.actions.map((action) => (
-              action.action === "quote" ? (
-                <button
-                  className={styles.primaryAction}
-                  key={action.label}
-                  type="button"
-                  onClick={onQuoteOpen}
-                >
-                  {action.label}
-                </button>
-              ) : (
-                <a
-                  className={styles.secondaryAction}
-                  href={action.href}
-                  key={action.label}
-                >
-                  {action.label}
-                </a>
-              )
-            ))}
+            <div className={styles.actions}>
+              {heroContent.actions.map((action) => (
+                action.action === "quote" ? (
+                  <button
+                    className={styles.primaryAction}
+                    key={action.label}
+                    type="button"
+                    onClick={openQuoteDialog}
+                  >
+                    {action.label}
+                  </button>
+                ) : (
+                  <a
+                    className={styles.secondaryAction}
+                    href={action.href}
+                    key={action.label}
+                  >
+                    {action.label}
+                  </a>
+                )
+              ))}
+            </div>
+
+            <div className={styles.proofStrip} aria-label="Cobertura y especialidades">
+              {heroContent.stats.map((stat) => (
+                <span key={stat}>{stat}</span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className={styles.stats}>
-        {heroContent.stats.map((stat) => (
-          <div key={stat} className={styles.stat}>
-            <p className={styles.statLabel}>
-              <span className={styles.statDot} aria-hidden="true" />
-              <span>{stat}</span>
-            </p>
-            <span className={styles.statLine} />
-          </div>
-        ))}
       </div>
     </section>
   );

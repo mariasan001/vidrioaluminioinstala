@@ -5,7 +5,7 @@ import { barandalesPageContent } from "@/features/services/barandales/barandales
 export const metadata: Metadata = {
   title: "Barandales de aluminio y vidrio en Toluca",
   description:
-    "Diseño e instalación de barandales de aluminio y vidrio para escaleras, balcones y terrazas en Toluca y alrededores.",
+    "Dise\u00f1o e instalaci\u00f3n de barandales de aluminio y vidrio para escaleras, balcones y terrazas en Toluca y alrededores.",
   alternates: {
     canonical: "/servicios/barandales",
   },

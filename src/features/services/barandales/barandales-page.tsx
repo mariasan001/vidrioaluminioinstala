@@ -1,21 +1,17 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import { MdBalcony, MdDeck, MdStairs } from "react-icons/md";
 import {
   HiOutlineArrowsUpDown,
-  HiOutlineCubeTransparent,
   HiOutlineCheckBadge,
-  HiOutlineCog6Tooth,
-  HiOutlineRectangleGroup,
   HiOutlineShieldCheck,
   HiOutlineSparkles,
   HiOutlineSwatch,
   HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
+import { HomeContact } from "@/features/home/components/home-contact";
 import { HomeFloatingQuote } from "@/features/home/components/home-floating-quote";
 import { HomeNav } from "@/features/home/components/home-nav";
+import { HomeProjects } from "@/features/home/components/home-projects";
 import { ServiceHero } from "@/features/services/components/service-hero";
 import {
   barandalesMobileNavLinks,
@@ -24,6 +20,7 @@ import {
   barandalesScrollSpyLinks,
   barandalesSecondaryNavLinks,
 } from "./barandales-page.data";
+import { BarandalesTypesSection } from "./barandales-types-section";
 import styles from "./barandales-page.module.css";
 
 const detailIcons = {
@@ -41,38 +38,13 @@ const qualityIcons = {
   wrench: HiOutlineWrenchScrewdriver,
 } as const;
 
-const typeIcons = {
-  button: HiOutlineCog6Tooth,
-  curve: HiOutlineArrowsUpDown,
-  fence: HiOutlineRectangleGroup,
-  mesh: HiOutlineCubeTransparent,
-  post: HiOutlineWrenchScrewdriver,
-  profile: HiOutlineSwatch,
-  steel: HiOutlineSparkles,
-} as const;
-
-type BarandalTypeId = (typeof barandalesPageContent.types.items)[number]["id"];
-
 export function BarandalesPage() {
-  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
-  const [activeTypeId, setActiveTypeId] = useState<BarandalTypeId>(
-    barandalesPageContent.types.items[0].id,
-  );
-  const activeTypeIndex = barandalesPageContent.types.items.findIndex(
-    (item) => item.id === activeTypeId,
-  );
-  const activeType =
-    barandalesPageContent.types.items[activeTypeIndex] ??
-    barandalesPageContent.types.items[0];
-  const ActiveTypeIcon = typeIcons[activeType.icon];
-
   return (
     <main className={styles.page}>
       <HomeNav
         defaultActiveHref="/#servicios"
         logoHref="/"
         mobileMenuLinks={barandalesMobileNavLinks}
-        onQuoteOpen={() => setIsQuoteOpen(true)}
         primaryLinks={barandalesNavLinks}
         secondaryLinks={barandalesSecondaryNavLinks}
         scrollLinks={barandalesScrollSpyLinks}
@@ -82,12 +54,11 @@ export function BarandalesPage() {
         actions={[
           {
             label: barandalesPageContent.cta.label,
-            onClick: () => setIsQuoteOpen(true),
-            type: "button",
+            type: "quote",
           },
           {
-            href: "#proyectos",
-            label: "Ver opciones",
+            href: "#tipos",
+            label: "Ver sistemas",
             type: "link",
           },
         ]}
@@ -100,7 +71,7 @@ export function BarandalesPage() {
       />
 
       <section
-        id="proyectos"
+        id="aplicaciones"
         className={styles.useCasesSection}
         aria-labelledby="barandales-use-cases-title"
       >
@@ -110,11 +81,11 @@ export function BarandalesPage() {
             Usos principales
           </p>
           <h2 id="barandales-use-cases-title">
-            Dónde queda mejor un{" "}
+            D\u00f3nde queda mejor un{" "}
             <span className={styles.sectionAccent}>barandal</span>
           </h2>
           <p>
-            Pensamos cada solución según el recorrido, la altura, la vista y el
+            Pensamos cada soluci\u00f3n seg\u00fan el recorrido, la altura, la vista y el
             uso real del espacio.
           </p>
         </div>
@@ -191,97 +162,11 @@ export function BarandalesPage() {
         </div>
       </section>
 
-      <section
-        id="tipos"
-        className={styles.typesSection}
-        aria-labelledby="barandales-types-title"
-      >
-        <p className={styles.eyebrow}>
-          <span aria-hidden="true" />
-          {barandalesPageContent.types.eyebrow}
-        </p>
+      <BarandalesTypesSection />
 
-        <div className={styles.typesHeader}>
-          <h2 id="barandales-types-title">
-            {barandalesPageContent.types.title}
-            <span className={styles.sectionAccent}>
-              {barandalesPageContent.types.accentTitle}
-            </span>
-          </h2>
-          <p>{barandalesPageContent.types.description}</p>
-        </div>
-
-        <div className={styles.typePicker}>
-          <p>Elige un tipo</p>
-          <div className={styles.typeRail} aria-label="Tipos de barandal">
-            {barandalesPageContent.types.items.map((item) => (
-              <button
-                className={`${styles.typeRailButton} ${
-                  item.id === activeType.id ? styles.typeRailButtonActive : ""
-                }`}
-                key={item.id}
-                type="button"
-                onClick={() => setActiveTypeId(item.id)}
-              >
-                <span aria-hidden="true">
-                  0{barandalesPageContent.types.items.indexOf(item) + 1}
-                </span>
-                <span>{item.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <article className={styles.typePanel}>
-          <div className={styles.typeMedia}>
-            <Image
-              src={activeType.image.src}
-              alt={activeType.image.alt}
-              fill
-              sizes="(max-width: 900px) 100vw, 46vw"
-              className={styles.typeImage}
-            />
-          </div>
-
-          <div className={styles.typeContent}>
-            <div className={styles.typeIntro}>
-              <span className={styles.typeIntroIcon} aria-hidden="true">
-                <ActiveTypeIcon />
-              </span>
-              <div>
-                <h3>{activeType.title}</h3>
-                <p>{activeType.description}</p>
-              </div>
-            </div>
-
-            <div className={styles.typeChips} aria-label="Características principales">
-              {[...activeType.features, ...activeType.benefits]
-                .slice(0, 3)
-                .map((item) => (
-                <span key={item}>
-                  <HiOutlineCheckBadge aria-hidden="true" />
-                  {item}
-                </span>
-              ))}
-            </div>
-
-            <button
-              className={styles.typeCta}
-              type="button"
-              onClick={() => setIsQuoteOpen(true)}
-            >
-              Cotizar este tipo
-            </button>
-
-          </div>
-        </article>
-      </section>
-
-      <HomeFloatingQuote
-        isOpen={isQuoteOpen}
-        onClose={() => setIsQuoteOpen(false)}
-        onOpen={() => setIsQuoteOpen(true)}
-      />
+      <HomeProjects />
+      <HomeContact />
+      <HomeFloatingQuote />
     </main>
   );
 }

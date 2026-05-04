@@ -76,6 +76,13 @@ export function HomeProjects() {
 
       <div className={styles.carouselShell}>
         <div className={styles.carouselControls} aria-label="Controles de proyectos">
+          <div className={styles.carouselMeta}>
+            <span>Selección destacada</span>
+            <strong>
+              {String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+            </strong>
+          </div>
+
           <button
             type="button"
             className={styles.carouselButton}
@@ -147,6 +154,9 @@ export function HomeProjects() {
                 <span className={styles.projectType}>
                   <HiOutlineSparkles aria-hidden="true" />
                   {project.category}
+                </span>
+                <span className={styles.projectCount} aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
                 <button
                   type="button"

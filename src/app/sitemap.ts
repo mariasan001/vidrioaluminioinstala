@@ -5,7 +5,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: absoluteUrl(),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
       images: [
@@ -16,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/servicios/barandales"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.86,
       images: [absoluteUrl("/img/img_barandal.webp")],

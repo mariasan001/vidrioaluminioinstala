@@ -2,18 +2,18 @@ export const quoteFormOptions = {
   services: [
     "Ventanas",
     "Puertas",
-    "Canceles de baño",
-    "Pérgolas",
+    "Canceles de ba\u00f1o",
+    "P\u00e9rgolas",
     "Fachadas",
     "Barandales",
   ],
-  timings: ["Urgente", "Este mes", "Más adelante", "Solo cotizo"],
+  timings: ["Urgente", "Este mes", "M\u00e1s adelante", "Solo cotizo"],
   workTypes: [
-    "Instalación nueva",
-    "Reemplazo / remodelación",
+    "Instalaci\u00f3n nueva",
+    "Reemplazo / remodelaci\u00f3n",
     "No estoy seguro",
   ],
-  photoStatuses: ["La enviaré por WhatsApp", "No tengo foto todavía"],
+  photoStatuses: ["La enviar\u00e9 por WhatsApp", "No tengo foto todav\u00eda"],
 } as const;
 
 export const whatsappPhoneNumber = "527293813723";

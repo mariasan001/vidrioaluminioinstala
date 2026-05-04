@@ -39,7 +39,6 @@ export function HomeMaterials() {
               src={materialsContent.images.primary.src}
               alt={materialsContent.images.primary.alt}
               fill
-              loading="eager"
               sizes="(max-width: 820px) 72vw, 28vw"
               className={styles.image}
             />
@@ -49,7 +48,6 @@ export function HomeMaterials() {
               src={materialsContent.images.top.src}
               alt={materialsContent.images.top.alt}
               fill
-              loading="eager"
               sizes="(max-width: 820px) 38vw, 16vw"
               className={styles.image}
             />
@@ -59,7 +57,6 @@ export function HomeMaterials() {
               src={materialsContent.images.bottom.src}
               alt={materialsContent.images.bottom.alt}
               fill
-              loading="eager"
               sizes="(max-width: 820px) 42vw, 18vw"
               className={styles.image}
             />
