@@ -4,10 +4,10 @@ export const barandalesPageContent = {
   title: "Seguridad ligera",
   accentTitle: "sin cerrar la vista",
   description:
-    "Diseñamos e instalamos barandales para escaleras, balcones y terrazas con medidas claras, perfiles limpios y una presencia visual que acompaña el espacio.",
+    "Diseñamos e instalamos barandales de aluminio y vidrio para escaleras, balcones y terrazas con medidas precisas, perfiles limpios y una presencia visual que acompaña el espacio.",
   image: {
-    src: "/img/img_hero_barandales_web.png",
-    mobileSrc: "/img/img_hero_barandales_movil.png",
+    src: "/img/img_hero_barandales_web.webp",
+    mobileSrc: "/img/img_hero_barandales_movil.webp",
     alt: "Barandal de vidrio y aluminio instalado en terraza residencial",
   },
   details: [
@@ -37,7 +37,7 @@ export const barandalesPageContent = {
     description:
       "Cada barandal se define según el uso del espacio, el tipo de sujeción y el acabado que mejor acompaña el proyecto.",
     image: {
-      src: "/img/img_barandal_calidad1.png",
+      src: "/img/img_barandal_calidad1.webp",
       alt: "Detalle de barandal de vidrio y aluminio para terraza",
     },
     points: [
@@ -78,7 +78,7 @@ export const barandalesPageContent = {
     title: "Encuentra el sistema",
     accentTitle: "que mejor aterriza tu espacio",
     description:
-      "Explora cada solución como una mesa de decisión visual: qué tan abierta queda la vista, qué tanta estructura se percibe y qué tipo de proyecto la aprovecha mejor.",
+      "Explora cada sistema según la vista que quieres conservar, la estructura que necesita el proyecto y el uso real del espacio.",
     items: [
       {
         id: "botones",
@@ -86,7 +86,7 @@ export const barandalesPageContent = {
         title: "Barandal con botones",
         icon: "button",
         image: {
-          src: "/img/barandales/botones.png",
+          src: "/img/barandales/botones.webp",
           alt: "Barandal de vidrio con sujeciones tipo botón",
         },
         description:
@@ -109,7 +109,7 @@ export const barandalesPageContent = {
         title: "Barandal con miniposte",
         icon: "post",
         image: {
-          src: "/img/barandales/miniposte.png",
+          src: "/img/barandales/miniposte.webp",
           alt: "Barandal con cristal y minipostes metálicos",
         },
         description:
@@ -132,7 +132,7 @@ export const barandalesPageContent = {
         title: "Barandal con poste",
         icon: "post",
         image: {
-          src: "/img/barandales/poste.png",
+          src: "/img/barandales/poste.webp",
           alt: "Barandal exterior con cristal y estructura metálica",
         },
         description:
@@ -155,7 +155,7 @@ export const barandalesPageContent = {
         title: "Barandal de acero inoxidable",
         icon: "steel",
         image: {
-          src: "/img/barandales/acero.png",
+          src: "/img/barandales/acero.webp",
           alt: "Barandal de acero inoxidable para exterior",
         },
         description:
@@ -178,7 +178,7 @@ export const barandalesPageContent = {
         title: "Barandal curvo",
         icon: "curve",
         image: {
-          src: "/img/barandales/curvo.png",
+          src: "/img/barandales/curvo.webp",
           alt: "Barandal curvo con cristal para escalera",
         },
         description:
@@ -201,7 +201,7 @@ export const barandalesPageContent = {
         title: "Barandal servilletero",
         icon: "profile",
         image: {
-          src: "/img/barandales/servilletero.png",
+          src: "/img/barandales/servilletero.webp",
           alt: "Barandal con base tipo servilletero",
         },
         description:
@@ -224,7 +224,7 @@ export const barandalesPageContent = {
         title: "Barandal de herrería",
         icon: "fence",
         image: {
-          src: "/img/barandales/herreria.png",
+          src: "/img/barandales/herreria.webp",
           alt: "Barandal de herrería para escalera o terraza",
         },
         description:
@@ -247,7 +247,7 @@ export const barandalesPageContent = {
         title: "Barandal con celosía metálica",
         icon: "mesh",
         image: {
-          src: "/img/barandales/celocia.png",
+          src: "/img/barandales/celocia.webp",
           alt: "Barandal con celosía metálica decorativa",
         },
         description:

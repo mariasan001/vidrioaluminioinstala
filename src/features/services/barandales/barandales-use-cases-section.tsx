@@ -29,12 +29,11 @@ export function BarandalesUseCasesSection() {
           Usos principales
         </p>
         <h2 id="barandales-use-cases-title">
-          Dónde queda mejor un{" "}
-          <span className={styles.sectionAccent}>barandal</span>
+          Dónde queda mejor un <span className={styles.sectionAccent}>barandal</span>
         </h2>
         <p>
-          Pensamos cada solución según el recorrido, la altura, la vista y el
-          uso real del espacio.
+          Pensamos cada solución según el recorrido, la altura, la vista y el uso real
+          del espacio.
         </p>
       </div>
 

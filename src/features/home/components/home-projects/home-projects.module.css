@@ -157,9 +157,12 @@
   gap: 18px;
   overflow-x: auto;
   padding: 0 24px 6px;
+  overscroll-behavior-x: contain;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
 }
 
 .reel::-webkit-scrollbar {
@@ -176,6 +179,7 @@
   background: rgba(17, 17, 16, 0.78);
   isolation: isolate;
   opacity: 0.58;
+  cursor: pointer;
   scroll-snap-align: start;
   transform: scale(0.965);
   transition:
@@ -299,38 +303,16 @@
 .carouselControls {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 0 24px 16px;
-  position: relative;
-  z-index: 4;
-}
-
-.carouselMeta {
-  display: inline-flex;
-  align-items: center;
+  justify-content: center;
   gap: 12px;
-  min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  background: rgba(17, 17, 16, 0.9);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
-}
-
-.carouselMeta span {
-  color: rgba(245, 245, 241, 0.54);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.carouselMeta strong {
-  color: var(--accent);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+  width: fit-content;
+  max-width: calc(100% - 48px);
+  padding: 0 0 16px;
+  margin: 0;
+  position: relative;
+  left: 85%;
+  z-index: 4;
+  transform: translateX(-50%);
 }
 
 .carouselButton,
@@ -547,15 +529,10 @@
   }
 
   .carouselControls {
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 10px;
-    padding: 0 12px 18px;
-  }
-
-  .carouselMeta {
-    min-height: 40px;
-    padding: 0 12px;
+    max-width: calc(100% - 24px);
+    padding: 0 0 18px;
   }
 
   .projectCard {

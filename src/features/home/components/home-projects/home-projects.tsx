@@ -87,13 +87,6 @@ export function HomeProjects({
 
       <div className={styles.carouselShell}>
         <div className={styles.carouselControls} aria-label="Controles de proyectos">
-          <div className={styles.carouselMeta}>
-            <span>Selección destacada</span>
-            <strong>
-              {String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-            </strong>
-          </div>
-
           <button
             type="button"
             className={styles.carouselButton}
@@ -143,6 +136,10 @@ export function HomeProjects({
               }`}
               key={project.title}
               data-project-index={index}
+              onClick={() => {
+                pauseAutoMovement();
+                goToProject(index, false);
+              }}
             >
               <Image
                 src={project.image}

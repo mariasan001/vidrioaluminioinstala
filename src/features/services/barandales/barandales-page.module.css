@@ -64,13 +64,14 @@
 }
 
 .sectionHeader h2 {
-  max-width: 18ch;
+  max-width: min(920px, 100%);
   margin: 0;
   color: #f5f5f1;
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 3vw, 2.85rem);
-  line-height: 1.02;
-  letter-spacing: 0;
+  font-size: clamp(2.05rem, 4.2vw, 3.5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
@@ -93,8 +94,9 @@
 }
 
 .sectionHeader p:not(.eyebrow) {
-  max-width: 42ch;
-  font-size: 0.92rem;
+  max-width: 52ch;
+  font-size: 0.96rem;
+  line-height: 1.72;
 }
 
 .detailGrid {
@@ -181,12 +183,13 @@
 .detailCard h3 {
   margin: 0;
   color: #f5f5f1;
-  font-size: 1.06rem;
-  line-height: 1.15;
+  font-size: 1rem;
+  line-height: 1.18;
 }
 
 .detailCard p {
-  font-size: 0.88rem;
+  font-size: 0.96rem;
+  line-height: 1.68;
 }
 
 .qualitySection {
@@ -222,22 +225,23 @@
 }
 
 .qualityHeader h2 {
-  max-width: 18ch;
+  max-width: min(920px, 100%);
   margin: 0;
   color: #f5f5f1;
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 3vw, 2.85rem);
-  line-height: 1.02;
-  letter-spacing: 0;
+  font-size: clamp(2.05rem, 4.2vw, 3.5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
 .qualityHeader p:not(.eyebrow) {
-  max-width: 42ch;
+  max-width: 76ch;
   margin: 0;
   color: rgba(245, 245, 241, 0.72);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: 0.96rem;
+  line-height: 1.72;
   text-wrap: balance;
 }
 
@@ -352,14 +356,14 @@
 .qualityPoint h3 {
   margin: 0 0 6px;
   color: #f5f5f1;
-  font-size: 0.94rem;
+  font-size: 1rem;
 }
 
 .qualityPoint p {
   margin: 0;
   color: rgba(245, 245, 241, 0.68);
-  font-size: 0.84rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.58;
 }
 
 .qualitySection[data-visible="true"] .qualityHeader,
@@ -517,13 +521,14 @@
 }
 
 .typesHeader h2 {
-  max-width: 22ch;
+  max-width: min(920px, 100%);
   margin: 0;
   color: #f5f5f1;
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 3vw, 2.85rem);
-  line-height: 1.02;
-  letter-spacing: 0;
+  font-size: clamp(2.05rem, 4.2vw, 3.5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
@@ -531,8 +536,8 @@
   max-width: 58ch;
   margin: 0;
   color: rgba(245, 245, 241, 0.72);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: 0.96rem;
+  line-height: 1.72;
   text-wrap: balance;
 }
 
@@ -607,8 +612,8 @@
   margin: 0;
   color: #f5f5f1;
   font-family: var(--font-display);
-  font-size: clamp(1.62rem, 2.6vw, 2.35rem);
-  line-height: 1;
+  font-size: clamp(1.72rem, 2.8vw, 2.5rem);
+  line-height: 0.98;
   letter-spacing: 0;
 }
 
@@ -616,8 +621,8 @@
   max-width: 54ch;
   margin: 0;
   color: rgba(245, 245, 241, 0.72);
-  font-size: 0.92rem;
-  line-height: 1.62;
+  font-size: 0.96rem;
+  line-height: 1.72;
 }
 
 .typeMeta {
@@ -648,7 +653,7 @@
   margin: 0;
   color: #f5f5f1;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.96rem;
+  font-size: 1rem;
   font-style: italic;
   line-height: 1.46;
 }
@@ -747,13 +752,13 @@
 .typeRecommendation p {
   max-width: 54ch;
   color: rgba(245, 245, 241, 0.68);
-  font-size: 0.92rem;
-  line-height: 1.62;
+  font-size: 0.96rem;
+  line-height: 1.68;
 }
 
 .typeRecommendation strong {
   color: #f5f5f1;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 800;
 }
 
@@ -951,11 +956,15 @@
   }
 
   .qualityHeader h2 {
-    font-size: clamp(1.5rem, 6vw, 2rem);
+    max-width: 25ch;
+    font-size: clamp(1.68rem, 6.3vw, 2.28rem);
+    line-height: 1.1;
   }
 
   .qualityHeader p:not(.eyebrow) {
-    font-size: 0.88rem;
+    max-width: 58ch;
+    font-size: 0.9rem;
+    line-height: 1.78;
   }
 
   .qualityImageStage {
@@ -987,11 +996,15 @@
   }
 
   .typesHeader h2 {
-    font-size: clamp(1.5rem, 6vw, 2rem);
+    max-width: 25ch;
+    font-size: clamp(1.68rem, 6.3vw, 2.28rem);
+    line-height: 1.1;
   }
 
   .typesHeader p:not(.eyebrow) {
-    font-size: 0.88rem;
+    max-width: 58ch;
+    font-size: 0.9rem;
+    line-height: 1.78;
   }
 
   .processHeader {
@@ -1039,16 +1052,16 @@
   }
 
   .sectionHeader h2 {
-    max-width: 13.5ch;
+    max-width: 25ch;
     margin-bottom: 6px;
-    font-size: clamp(1.82rem, 7.6vw, 2.4rem);
-    line-height: 0.98;
+    font-size: clamp(1.68rem, 6.3vw, 2.28rem);
+    line-height: 1.1;
   }
 
   .sectionHeader p:not(.eyebrow) {
-    max-width: 36ch;
-    font-size: 0.82rem;
-    line-height: 1.52;
+    max-width: 58ch;
+    font-size: 0.9rem;
+    line-height: 1.78;
   }
 
   .detailCard h3 {
@@ -1063,9 +1076,9 @@
   .detailCard p {
     max-width: 26ch;
     color: rgba(245, 245, 241, 0.9);
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    line-height: 1.5;
+    line-height: 1.66;
   }
 }
 
@@ -1076,9 +1089,9 @@
   }
 
   .sectionHeader h2 {
-    max-width: 12.5ch;
+    max-width: 26ch;
     margin-bottom: 7px;
-    font-size: clamp(1.7rem, 8.6vw, 2.06rem);
+    font-size: clamp(1.56rem, 6.5vw, 1.94rem);
   }
 
   .sectionAccent {
@@ -1110,14 +1123,14 @@
   }
 
   .typesHeader h2 {
-    max-width: 12.5ch;
-    font-size: clamp(1.7rem, 8.6vw, 2.06rem);
+    max-width: 26ch;
+    font-size: clamp(1.56rem, 6.5vw, 1.94rem);
   }
 
   .typesHeader p:not(.eyebrow) {
-    max-width: 36ch;
-    font-size: 0.82rem;
-    line-height: 1.52;
+    max-width: 52ch;
+    font-size: 0.88rem;
+    line-height: 1.76;
   }
 
   .qualityHeader {
@@ -1125,14 +1138,14 @@
   }
 
   .qualityHeader h2 {
-    max-width: 12.5ch;
-    font-size: clamp(1.7rem, 8.6vw, 2.06rem);
+    max-width: 26ch;
+    font-size: clamp(1.56rem, 6.5vw, 1.94rem);
   }
 
   .qualityHeader p:not(.eyebrow) {
-    max-width: 36ch;
-    font-size: 0.82rem;
-    line-height: 1.52;
+    max-width: 52ch;
+    font-size: 0.88rem;
+    line-height: 1.76;
   }
 
   .processGrid {
