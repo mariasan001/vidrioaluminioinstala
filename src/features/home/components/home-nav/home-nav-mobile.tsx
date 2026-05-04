@@ -90,9 +90,9 @@ export function HomeNavMobile({
           </div>
 
           <div className={styles.mobileMenuLinks}>
-            {links.map((item) => (
+            {links.map((item, index) => (
               <a
-                key={getNavItemKey(item)}
+                key={getNavItemKey(item, index)}
                 href={item.href}
                 className={`${styles.mobileMenuLink} ${
                   currentActiveHref === item.href ? styles.mobileMenuLinkActive : ""
@@ -141,4 +141,3 @@ export function HomeNavMobile({
     </>
   );
 }
-

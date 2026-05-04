@@ -17,6 +17,7 @@ import { useActiveSection } from "./use-active-section";
 export function HomeNav({
   onQuoteOpen,
   activeHrefOverride,
+  defaultActiveHref,
   logoHref = "#inicio",
   mobileMenuLinks = mobileLinks,
   primaryLinks = desktopPrimaryLinks,
@@ -24,7 +25,10 @@ export function HomeNav({
   scrollLinks = scrollSpyLinks,
 }: HomeNavProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { activeHref, setActiveSection } = useActiveSection(scrollLinks);
+  const { activeHref, setActiveSection } = useActiveSection(
+    scrollLinks,
+    defaultActiveHref,
+  );
   useLockBodyScroll(isMobileMenuOpen);
   const currentActiveHref = activeHrefOverride ?? activeHref;
 

@@ -21,9 +21,9 @@ export function HomeNavDesktop({
   return (
     <>
       <div className={styles.navGroup}>
-        {primaryLinks.map((item) => (
+        {primaryLinks.map((item, index) => (
           <a
-            key={getNavItemKey(item)}
+            key={getNavItemKey(item, index)}
             className={`${styles.navLink} ${
               currentActiveHref === item.href ? styles.navLinkActive : ""
             }`}
@@ -59,9 +59,9 @@ export function HomeNavDesktop({
           <strong>729 381 3723</strong>
         </a>
 
-        {secondaryLinks.map((item) => (
+        {secondaryLinks.map((item, index) => (
           <a
-            key={getNavItemKey(item)}
+            key={getNavItemKey(item, index)}
             className={`${styles.navLink} ${
               currentActiveHref === item.href ? styles.navLinkActive : ""
             }`}
@@ -91,4 +91,3 @@ export function HomeNavDesktop({
     </>
   );
 }
-

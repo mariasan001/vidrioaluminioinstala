@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import type { NavItem } from "./home-nav.data";
 
-const defaultHref = "#inicio";
-
-export function useActiveSection(links: readonly NavItem[]) {
+export function useActiveSection(
+  links: readonly NavItem[],
+  defaultHref = "#inicio",
+) {
   const [activeHref, setActiveHref] = useState(defaultHref);
   const activeHrefRef = useRef(defaultHref);
   const scrollFrameRef = useRef<number | null>(null);
@@ -64,7 +65,7 @@ export function useActiveSection(links: readonly NavItem[]) {
       window.removeEventListener("resize", queueActiveSectionUpdate);
       window.removeEventListener("hashchange", queueActiveSectionUpdate);
     };
-  }, [links]);
+  }, [links, defaultHref]);
 
   const setActiveSection = (href: string) => {
     activeHrefRef.current = href;

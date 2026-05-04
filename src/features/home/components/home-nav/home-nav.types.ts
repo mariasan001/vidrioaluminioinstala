@@ -3,6 +3,7 @@ import type { NavItem } from "./home-nav.data";
 export type HomeNavProps = {
   onQuoteOpen: () => void;
   activeHrefOverride?: string;
+  defaultActiveHref?: string;
   logoHref?: string;
   mobileMenuLinks?: readonly NavItem[];
   primaryLinks?: readonly NavItem[];
@@ -16,4 +17,3 @@ export type NavRenderState = {
   onNavClick: (href: string) => void;
   onQuoteOpen: () => void;
 };
-
