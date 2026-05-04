@@ -10,12 +10,23 @@ import {
   HiOutlineSparkles,
 } from "react-icons/hi2";
 import styles from "./home-projects.module.css";
-import { projectsContent } from "./home-projects.data";
+import {
+  projectsContent,
+  type ProjectsSectionContent,
+} from "./home-projects.data";
 import { useProjectViewer } from "./use-project-viewer";
 import { useProjectsCarousel } from "./use-projects-carousel";
 import { useProjectsReveal } from "./use-projects-reveal";
 
-export function HomeProjects() {
+type HomeProjectsProps = {
+  content?: ProjectsSectionContent;
+  sectionId?: string;
+};
+
+export function HomeProjects({
+  content = projectsContent,
+  sectionId = "proyectos",
+}: HomeProjectsProps) {
   const {
     isVisible,
     scrollDirection,
@@ -23,7 +34,7 @@ export function HomeProjects() {
     isInView,
     isReady,
   } = useProjectsReveal();
-  const projects = projectsContent.items;
+  const projects = content.items;
   const {
     activeIndex,
     carouselRef,
@@ -56,21 +67,21 @@ export function HomeProjects() {
       data-ready={isReady}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
-      id="proyectos"
+      id={sectionId}
       aria-labelledby="home-projects-title"
     >
       <div className={styles.header}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>{projectsContent.eyebrow}</span>
+          <span>{content.eyebrow}</span>
         </div>
 
         <div className={styles.heading}>
           <h2 id="home-projects-title" className={styles.title}>
-            {projectsContent.title}
-            <span className={styles.accent}>{projectsContent.accentTitle}</span>
+            {content.title}
+            <span className={styles.accent}>{content.accentTitle}</span>
           </h2>
-          <p className={styles.description}>{projectsContent.description}</p>
+          <p className={styles.description}>{content.description}</p>
         </div>
       </div>
 

@@ -6,6 +6,8 @@ export function useSectionReveal(threshold = 0.16) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
+  const currentDirectionRef = useRef<"up" | "down">("down");
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -14,12 +16,20 @@ export function useSectionReveal(threshold = 0.16) {
       return;
     }
 
+    const updateScrollDirection = () => {
+      const nextScrollY = window.scrollY;
+      const direction =
+        nextScrollY > lastScrollYRef.current ? "down" : "up";
+
+      currentDirectionRef.current = direction;
+      setScrollDirection(direction);
+      lastScrollYRef.current = nextScrollY;
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setScrollDirection(entry.boundingClientRect.top < 0 ? "up" : "down");
-          setIsVisible(true);
-        }
+        setScrollDirection(currentDirectionRef.current);
+        setIsVisible(entry.isIntersecting);
       },
       {
         rootMargin: "-8% 0px -8% 0px",
@@ -31,11 +41,14 @@ export function useSectionReveal(threshold = 0.16) {
       setIsVisible(true);
     };
 
+    lastScrollYRef.current = window.scrollY;
     observer.observe(section);
+    window.addEventListener("scroll", updateScrollDirection, { passive: true });
     window.addEventListener("pageshow", revealOnRestore);
 
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", updateScrollDirection);
       window.removeEventListener("pageshow", revealOnRestore);
     };
   }, [threshold]);

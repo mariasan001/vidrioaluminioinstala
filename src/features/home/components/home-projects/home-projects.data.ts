@@ -1,4 +1,24 @@
-export const projectsContent = {
+export type ProjectHighlight = {
+  title: string;
+  category: string;
+  description: string;
+  format: "video" | "image";
+  testimonial: string;
+  customer: string;
+  location: string;
+  image: string;
+  imagePosition: string;
+};
+
+export type ProjectsSectionContent = {
+  eyebrow: string;
+  title: string;
+  accentTitle: string;
+  description: string;
+  items: readonly ProjectHighlight[];
+};
+
+export const projectsContent: ProjectsSectionContent = {
   eyebrow: "Trabajos que hablan por sí solos",
   title: "Proyectos que muestran",
   accentTitle: "cómo se transforma un espacio",
@@ -67,5 +87,3 @@ export const projectsContent = {
     },
   ],
 } as const;
-
-export type ProjectHighlight = (typeof projectsContent.items)[number];

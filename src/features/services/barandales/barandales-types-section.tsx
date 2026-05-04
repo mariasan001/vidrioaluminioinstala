@@ -13,6 +13,7 @@ import {
   HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
 import { openQuoteDialog } from "@/features/home/components/home-floating-quote/quote-dialog";
+import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
 import { barandalesPageContent } from "./barandales-page.data";
 import styles from "./barandales-page.module.css";
 
@@ -33,6 +34,7 @@ function renderRating(value: number) {
 }
 
 export function BarandalesTypesSection() {
+  const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
   const [activeTypeId, setActiveTypeId] = useState<BarandalTypeId>(
     barandalesPageContent.types.items[0].id,
   );
@@ -60,8 +62,11 @@ export function BarandalesTypesSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="tipos"
       className={styles.typesSection}
+      data-visible={isVisible}
+      data-scroll-direction={scrollDirection}
       aria-labelledby="barandales-types-title"
     >
       <p className={styles.eyebrow}>

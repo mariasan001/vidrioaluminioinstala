@@ -4,7 +4,7 @@ export const barandalesPageContent = {
   title: "Seguridad ligera",
   accentTitle: "sin cerrar la vista",
   description:
-    "Dise\u00f1amos e instalamos barandales para escaleras, balcones y terrazas con medidas claras, perfiles limpios y una presencia visual que acompa\u00f1a el espacio.",
+    "Diseñamos e instalamos barandales para escaleras, balcones y terrazas con medidas claras, perfiles limpios y una presencia visual que acompaña el espacio.",
   image: {
     src: "/img/img_hero_barandales_web.png",
     mobileSrc: "/img/img_hero_barandales_movil.png",
@@ -21,7 +21,7 @@ export const barandalesPageContent = {
       title: "Para balcones",
       icon: "balcony",
       description:
-        "Protecci\u00f3n perimetral que conserva luz, amplitud y una lectura limpia hacia el exterior.",
+        "Protección perimetral que conserva luz, amplitud y una lectura limpia hacia el exterior.",
     },
     {
       title: "Para terrazas",
@@ -35,7 +35,7 @@ export const barandalesPageContent = {
     title: "Materiales pensados",
     accentTitle: "para verse bien y durar",
     description:
-      "Cada barandal se define seg\u00fan el uso del espacio, el tipo de sujeci\u00f3n y el acabado que mejor acompa\u00f1e el proyecto.",
+      "Cada barandal se define según el uso del espacio, el tipo de sujeción y el acabado que mejor acompaña el proyecto.",
     image: {
       src: "/img/img_barandal_calidad1.png",
       alt: "Detalle de barandal de vidrio y aluminio para terraza",
@@ -44,12 +44,12 @@ export const barandalesPageContent = {
       {
         title: "Vista limpia",
         icon: "shield",
-        description: "Conserva luz, amplitud y conexi\u00f3n visual sin cerrar el espacio.",
+        description: "Conserva luz, amplitud y conexión visual sin cerrar el espacio.",
       },
       {
-        title: "Sujeci\u00f3n adecuada",
+        title: "Sujeción adecuada",
         icon: "height",
-        description: "Botones, postes, minipostes o perfiles seg\u00fan el proyecto.",
+        description: "Botones, postes, minipostes o perfiles según el proyecto.",
       },
       {
         title: "Acero inoxidable",
@@ -67,9 +67,9 @@ export const barandalesPageContent = {
         description: "Opciones en negro, satinado, cristal claro o esmerilado.",
       },
       {
-        title: "Instalaci\u00f3n alineada",
+        title: "Instalación alineada",
         icon: "check",
-        description: "Medidas claras, fijaci\u00f3n correcta y revisi\u00f3n final del resultado.",
+        description: "Medidas claras, fijación correcta y revisión final del resultado.",
       },
     ],
   },
@@ -78,7 +78,7 @@ export const barandalesPageContent = {
     title: "Encuentra el sistema",
     accentTitle: "que mejor aterriza tu espacio",
     description:
-      "Explora cada soluci\u00f3n como una mesa de decisi\u00f3n visual: qu\u00e9 tan abierta queda la vista, qu\u00e9 tanta estructura se percibe y qu\u00e9 tipo de proyecto la aprovecha mejor.",
+      "Explora cada solución como una mesa de decisión visual: qué tan abierta queda la vista, qué tanta estructura se percibe y qué tipo de proyecto la aprovecha mejor.",
     items: [
       {
         id: "botones",
@@ -87,16 +87,16 @@ export const barandalesPageContent = {
         icon: "button",
         image: {
           src: "/img/barandales/botones.png",
-          alt: "Barandal de vidrio con sujeciones tipo bot\u00f3n",
+          alt: "Barandal de vidrio con sujeciones tipo botón",
         },
         description:
-          "Una opci\u00f3n minimalista donde el cristal se sujeta con herrajes laterales tipo bot\u00f3n. Ayuda a mantener el espacio abierto, con una lectura visual limpia y elegante.",
-        features: ["Sin postes visibles", "Sujeci\u00f3n lateral discreta", "Ideal para escaleras modernas"],
-        benefits: ["M\u00e1s amplitud visual", "Aprovecha mejor la luz", "Dise\u00f1o sobrio y contempor\u00e1neo"],
-        useCase: "Proyecto contempor\u00e1neo con vista abierta",
+          "Una opción minimalista donde el cristal se sujeta con herrajes laterales tipo botón. Ayuda a mantener el espacio abierto, con una lectura visual limpia y elegante.",
+        features: ["Sin postes visibles", "Sujeción lateral discreta", "Ideal para escaleras modernas"],
+        benefits: ["Más amplitud visual", "Aprovecha mejor la luz", "Diseño sobrio y contemporáneo"],
+        useCase: "Proyecto contemporáneo con vista abierta",
         recommendation:
           "Ideal para terrazas, balcones y escaleras donde la vista merece quedarse libre.",
-        vibe: "Se siente limpio, ligero y muy arquitect\u00f3nico.",
+        vibe: "Se siente limpio, ligero y muy arquitectónico.",
         metrics: {
           openness: 5,
           structure: 2,
@@ -110,7 +110,7 @@ export const barandalesPageContent = {
         icon: "post",
         image: {
           src: "/img/barandales/miniposte.png",
-          alt: "Barandal con cristal y minipostes met\u00e1licos",
+          alt: "Barandal con cristal y minipostes metálicos",
         },
         description:
           "Sistema con cristal sujeto a minipostes. Funciona muy bien cuando se busca estabilidad, orden visual y una presencia ligera en balcones, terrazas o pasillos.",
@@ -118,8 +118,8 @@ export const barandalesPageContent = {
         benefits: ["Buena estabilidad", "No satura la vista", "Mantenimiento sencillo"],
         useCase: "Pasillos, balcones y terrazas de uso diario",
         recommendation:
-          "Buena opci\u00f3n para recorridos lineales con uso frecuente y presencia discreta.",
-        vibe: "Se ve ordenado, t\u00e9cnico y balanceado.",
+          "Buena opción para recorridos lineales con uso frecuente y presencia discreta.",
+        vibe: "Se ve ordenado, técnico y balanceado.",
         metrics: {
           openness: 4,
           structure: 3,
@@ -133,15 +133,15 @@ export const barandalesPageContent = {
         icon: "post",
         image: {
           src: "/img/barandales/poste.png",
-          alt: "Barandal exterior con cristal y estructura met\u00e1lica",
+          alt: "Barandal exterior con cristal y estructura metálica",
         },
         description:
-          "Combina cristal con postes para lograr una estructura firme y visualmente ordenada. Es una alternativa vers\u00e1til para recorridos, balcones y espacios exteriores.",
-        features: ["Postes visibles", "Sujeci\u00f3n firme", "Uso interior o exterior"],
-        benefits: ["Mayor sensaci\u00f3n de seguridad", "Buena resistencia", "Estilo adaptable"],
+          "Combina cristal con postes para lograr una estructura firme y visualmente ordenada. Es una alternativa versátil para recorridos, balcones y espacios exteriores.",
+        features: ["Postes visibles", "Sujeción firme", "Uso interior o exterior"],
+        benefits: ["Mayor sensación de seguridad", "Buena resistencia", "Estilo adaptable"],
         useCase: "Escaleras, balcones amplios y exteriores",
         recommendation:
-          "Conviene cuando se busca una lectura estructural m\u00e1s evidente sin perder transparencia.",
+          "Conviene cuando se busca una lectura estructural más evidente sin perder transparencia.",
         vibe: "Se percibe firme, claro y funcional.",
         metrics: {
           openness: 4,
@@ -159,12 +159,12 @@ export const barandalesPageContent = {
           alt: "Barandal de acero inoxidable para exterior",
         },
         description:
-          "Alternativa resistente y sobria para proyectos que buscan seguridad sin cristal. Su apariencia limpia lo vuelve \u00fatil en zonas de alto uso o espacios exteriores.",
-        features: ["Sin cristal", "Acero inoxidable", "Dise\u00f1o atemporal"],
-        benefits: ["Alta durabilidad", "Bajo mantenimiento", "Buena opci\u00f3n para alto tr\u00e1fico"],
-        useCase: "\u00c1reas exteriores y recorridos de alto tr\u00e1fico",
+          "Alternativa resistente y sobria para proyectos que buscan seguridad sin cristal. Su apariencia limpia lo vuelve útil en zonas de alto uso o espacios exteriores.",
+        features: ["Sin cristal", "Acero inoxidable", "Diseño atemporal"],
+        benefits: ["Alta durabilidad", "Bajo mantenimiento", "Buena opción para alto tráfico"],
+        useCase: "Áreas exteriores y recorridos de alto tráfico",
         recommendation:
-          "Funciona mejor cuando el mantenimiento simple y la resistencia pesan m\u00e1s que la apertura visual.",
+          "Funciona mejor cuando el mantenimiento simple y la resistencia pesan más que la apertura visual.",
         vibe: "Se siente sobrio, durable y directo.",
         metrics: {
           openness: 2,
@@ -182,12 +182,12 @@ export const barandalesPageContent = {
           alt: "Barandal curvo con cristal para escalera",
         },
         description:
-          "Soluci\u00f3n pensada para escaleras o recorridos con l\u00edneas curvas. Acompa\u00f1a la arquitectura del espacio y crea una presencia m\u00e1s fluida y especial.",
+          "Solución pensada para escaleras o recorridos con líneas curvas. Acompaña la arquitectura del espacio y crea una presencia más fluida y especial.",
         features: ["Adaptado a curvas", "Cristal con recorrido fluido", "Presencia sofisticada"],
-        benefits: ["Continuidad visual", "Resultado m\u00e1s personalizado", "Mayor impacto est\u00e9tico"],
-        useCase: "Escaleras escult\u00f3ricas y proyectos singulares",
+        benefits: ["Continuidad visual", "Resultado más personalizado", "Mayor impacto estético"],
+        useCase: "Escaleras escultóricas y proyectos singulares",
         recommendation:
-          "Es la mejor ruta cuando la arquitectura ya tiene curvas y merece una soluci\u00f3n a medida.",
+          "Es la mejor ruta cuando la arquitectura ya tiene curvas y merece una solución a medida.",
         vibe: "Se siente fluido, especial y hecho para ese lugar.",
         metrics: {
           openness: 5,
@@ -206,11 +206,11 @@ export const barandalesPageContent = {
         },
         description:
           "Sistema con base o perfil que sostiene el cristal de forma continua. Da una lectura moderna, firme y muy limpia cuando se busca evitar herrajes expuestos.",
-        features: ["Perfil continuo", "Fijaci\u00f3n discreta", "Acabado moderno"],
-        benefits: ["Soporte estable", "Menos torniller\u00eda visible", "Excelente limpieza visual"],
-        useCase: "Terrazas y balcones con lenguaje contempor\u00e1neo",
+        features: ["Perfil continuo", "Fijación discreta", "Acabado moderno"],
+        benefits: ["Soporte estable", "Menos tornillería visible", "Excelente limpieza visual"],
+        useCase: "Terrazas y balcones con lenguaje contemporáneo",
         recommendation:
-          "Muy recomendable cuando quieres una base continua y una imagen t\u00e9cnica m\u00e1s refinada.",
+          "Muy recomendable cuando quieres una base continua y una imagen técnica más refinada.",
         vibe: "Se ve preciso, elegante y muy limpio.",
         metrics: {
           openness: 5,
@@ -220,20 +220,20 @@ export const barandalesPageContent = {
       },
       {
         id: "herreria",
-        label: "Herrer\u00eda",
-        title: "Barandal de herrer\u00eda",
+        label: "Herrería",
+        title: "Barandal de herrería",
         icon: "fence",
         image: {
           src: "/img/barandales/herreria.png",
-          alt: "Barandal de herrer\u00eda para escalera o terraza",
+          alt: "Barandal de herrería para escalera o terraza",
         },
         description:
-          "Opci\u00f3n robusta y personalizable para quienes buscan estructura, car\u00e1cter y color a medida. Puede adaptarse a estilos cl\u00e1sicos, modernos o decorativos.",
-        features: ["Dise\u00f1o personalizable", "Estructura resistente", "Acabados a elecci\u00f3n"],
-        benefits: ["M\u00e1xima firmeza", "Gran versatilidad est\u00e9tica", "Buena vida \u00fatil"],
+          "Opción robusta y personalizable para quienes buscan estructura, carácter y color a medida. Puede adaptarse a estilos clásicos, modernos o decorativos.",
+        features: ["Diseño personalizable", "Estructura resistente", "Acabados a elección"],
+        benefits: ["Máxima firmeza", "Gran versatilidad estética", "Buena vida útil"],
         useCase: "Escaleras, terrazas y fachadas con personalidad",
         recommendation:
-          "Conviene cuando el proyecto pide car\u00e1cter, dibujo y una presencia m\u00e1s expresiva.",
+          "Conviene cuando el proyecto pide carácter, dibujo y una presencia más expresiva.",
         vibe: "Se siente firme, artesanal y con presencia.",
         metrics: {
           openness: 2,
@@ -243,21 +243,21 @@ export const barandalesPageContent = {
       },
       {
         id: "celosia",
-        label: "Celos\u00eda",
-        title: "Barandal con celos\u00eda met\u00e1lica",
+        label: "Celosía",
+        title: "Barandal con celosía metálica",
         icon: "mesh",
         image: {
           src: "/img/barandales/celocia.png",
-          alt: "Barandal con celos\u00eda met\u00e1lica decorativa",
+          alt: "Barandal con celosía metálica decorativa",
         },
         description:
-          "Propuesta decorativa y protectora con patrones met\u00e1licos. Aporta privacidad, personalidad y un lenguaje visual m\u00e1s arquitect\u00f3nico.",
-        features: ["Patrones personalizados", "Protecci\u00f3n visual", "Dise\u00f1o decorativo"],
-        benefits: ["M\u00e1s privacidad", "Identidad propia", "Buena presencia exterior"],
+          "Propuesta decorativa y protectora con patrones metálicos. Aporta privacidad, personalidad y un lenguaje visual más arquitectónico.",
+        features: ["Patrones personalizados", "Protección visual", "Diseño decorativo"],
+        benefits: ["Más privacidad", "Identidad propia", "Buena presencia exterior"],
         useCase: "Fachadas, balcones y exteriores con identidad propia",
         recommendation:
-          "La mejor alternativa cuando adem\u00e1s de proteger quieres filtrar visuales o dar m\u00e1s privacidad.",
-        vibe: "Se percibe arquitect\u00f3nico, gr\u00e1fico y protector.",
+          "La mejor alternativa cuando además de proteger quieres filtrar visuales o dar más privacidad.",
+        vibe: "Se percibe arquitectónico, gráfico y protector.",
         metrics: {
           openness: 2,
           structure: 4,
@@ -283,7 +283,7 @@ export const barandalesNavLinks = [
 ] as const;
 
 export const barandalesSecondaryNavLinks = [
-  { href: "#ubicacion", label: "Ubicaci\u00f3n", sectionId: "ubicacion" },
+  { href: "#ubicacion", label: "Ubicación", sectionId: "ubicacion" },
 ] as const;
 
 export const barandalesScrollSpyLinks = [
@@ -294,5 +294,5 @@ export const barandalesScrollSpyLinks = [
 export const barandalesMobileNavLinks = [
   ...barandalesNavLinks,
   ...barandalesSecondaryNavLinks,
-  { href: "#cotizacion", label: "Crear cotizaci\u00f3n" },
+  { href: "#cotizacion", label: "Crear cotización" },
 ] as const;

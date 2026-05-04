@@ -1,4 +1,27 @@
-export const contactContent = {
+export type ContactCard = {
+  title: string;
+  value: string;
+  detail: string;
+  action: string;
+  icon: "location" | "phone" | "clock";
+  href?: string;
+  featured?: boolean;
+};
+
+export type ContactSectionContent = {
+  eyebrow: string;
+  title: string;
+  accentTitle: string;
+  description: string;
+  footer: {
+    company: string;
+    rights: string;
+    credit: string;
+  };
+  cards: readonly ContactCard[];
+};
+
+export const contactContent: ContactSectionContent = {
   eyebrow: "Contacto directo",
   title: "Cuéntanos qué quieres instalar",
   accentTitle: "y aterrizamos el siguiente paso",
