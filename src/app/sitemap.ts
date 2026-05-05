@@ -19,5 +19,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.86,
       images: [absoluteUrl("/img/img_barandal.webp")],
     },
+    {
+      url: absoluteUrl("/servicios/canceles-de-bano"),
+      changeFrequency: "monthly",
+      priority: 0.86,
+      images: [absoluteUrl("/img/cancel_bano/hero_web.webp")],
+    },
+    {
+      url: absoluteUrl("/servicios/fachadas-de-cristal"),
+      changeFrequency: "monthly",
+      priority: 0.86,
+      images: [absoluteUrl("/img/fachadas/hero_web.webp")],
+    },
+    {
+      url: absoluteUrl("/servicios/pergolas"),
+      changeFrequency: "monthly",
+      priority: 0.86,
+      images: [absoluteUrl("/img/pergolas/hero_web.webp")],
+    },
+    {
+      url: absoluteUrl("/servicios/puertas"),
+      changeFrequency: "monthly",
+      priority: 0.86,
+      images: [absoluteUrl("/img/puertas/hero_web.webp")],
+    },
+    {
+      url: absoluteUrl("/servicios/ventanas"),
+      changeFrequency: "monthly",
+      priority: 0.86,
+      images: [absoluteUrl("/img/ventanas/hero_web.webp")],
+    },
   ];
 }

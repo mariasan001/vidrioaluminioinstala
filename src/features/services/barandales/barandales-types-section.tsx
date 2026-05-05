@@ -27,23 +27,59 @@ const typeIcons = {
   steel: HiOutlineSparkles,
 } as const;
 
-type BarandalTypeId = (typeof barandalesPageContent.types.items)[number]["id"];
+type TypesContent = {
+  types: {
+    eyebrow: string;
+    title: string;
+    accentTitle: string;
+    description: string;
+    items: readonly {
+      id: string;
+      label: string;
+      title: string;
+      icon: keyof typeof typeIcons;
+      image: {
+        src: string;
+        alt: string;
+      };
+      description: string;
+      features: readonly string[];
+      benefits: readonly string[];
+      useCase: string;
+      recommendation: string;
+      vibe: string;
+      metrics: {
+        openness: number;
+        structure: number;
+        privacy: number;
+      };
+    }[];
+  };
+};
+
+type BarandalesTypesSectionProps = {
+  content?: TypesContent;
+  railLabel?: string;
+};
 
 function renderRating(value: number) {
   return `${value}/5`;
 }
 
-export function BarandalesTypesSection() {
+export function BarandalesTypesSection({
+  content = barandalesPageContent,
+  railLabel = "Tipos de barandal",
+}: BarandalesTypesSectionProps = {}) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
-  const [activeTypeId, setActiveTypeId] = useState<BarandalTypeId>(
-    barandalesPageContent.types.items[0].id,
+  const [activeTypeId, setActiveTypeId] = useState(
+    content.types.items[0].id,
   );
-  const activeTypeIndex = barandalesPageContent.types.items.findIndex(
+  const activeTypeIndex = content.types.items.findIndex(
     (item) => item.id === activeTypeId,
   );
   const activeType =
-    barandalesPageContent.types.items[activeTypeIndex] ??
-    barandalesPageContent.types.items[0];
+    content.types.items[activeTypeIndex] ??
+    content.types.items[0];
   const ActiveTypeIcon = typeIcons[activeType.icon];
   const typeMetrics = [
     {
@@ -71,23 +107,23 @@ export function BarandalesTypesSection() {
     >
       <p className={styles.eyebrow}>
         <span aria-hidden="true" />
-        {barandalesPageContent.types.eyebrow}
+        {content.types.eyebrow}
       </p>
 
       <div className={styles.typesHeader}>
         <h2 id="barandales-types-title">
-          {barandalesPageContent.types.title}
+          {content.types.title}
           <span className={styles.sectionAccent}>
-            {barandalesPageContent.types.accentTitle}
+            {content.types.accentTitle}
           </span>
         </h2>
-        <p>{barandalesPageContent.types.description}</p>
+        <p>{content.types.description}</p>
       </div>
 
       <div className={styles.typePicker}>
         <p>Elige un tipo</p>
-        <div className={styles.typeRail} aria-label="Tipos de barandal">
-          {barandalesPageContent.types.items.map((item) => (
+        <div className={styles.typeRail} aria-label={railLabel}>
+          {content.types.items.map((item) => (
             <button
               className={`${styles.typeRailButton} ${
                 item.id === activeType.id ? styles.typeRailButtonActive : ""
@@ -97,7 +133,7 @@ export function BarandalesTypesSection() {
               onClick={() => setActiveTypeId(item.id)}
             >
               <span aria-hidden="true">
-                0{barandalesPageContent.types.items.indexOf(item) + 1}
+                0{content.types.items.indexOf(item) + 1}
               </span>
               <span>{item.label}</span>
             </button>

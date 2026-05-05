@@ -15,7 +15,32 @@ const detailIcons = {
   stairs: HiOutlineArrowsUpDown,
 } as const;
 
-export function BarandalesUseCasesSection() {
+type UseCasesContent = {
+  details: readonly {
+    title: string;
+    icon: keyof typeof detailIcons;
+    description: string;
+  }[];
+};
+
+type BarandalesUseCasesSectionProps = {
+  content?: UseCasesContent;
+  heading?: {
+    title: string;
+    accent: string;
+    description: string;
+  };
+};
+
+export function BarandalesUseCasesSection({
+  content = barandalesPageContent,
+  heading = {
+    title: "Dónde queda mejor un",
+    accent: "barandal",
+    description:
+      "Pensamos cada solución según el recorrido, la altura, la vista y el uso real del espacio.",
+  },
+}: BarandalesUseCasesSectionProps = {}) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
 
   return (
@@ -33,16 +58,13 @@ export function BarandalesUseCasesSection() {
           Usos principales
         </p>
         <h2 id="barandales-use-cases-title">
-          Dónde queda mejor un <span className={styles.sectionAccent}>barandal</span>
+          {heading.title} <span className={styles.sectionAccent}>{heading.accent}</span>
         </h2>
-        <p>
-          Pensamos cada solución según el recorrido, la altura, la vista y el uso real
-          del espacio.
-        </p>
+        <p>{heading.description}</p>
       </div>
 
       <div className={styles.detailGrid}>
-        {barandalesPageContent.details.map((detail, index) => (
+        {content.details.map((detail, index) => (
           <article
             className={styles.detailCard}
             key={detail.title}

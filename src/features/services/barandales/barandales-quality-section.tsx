@@ -23,10 +23,34 @@ const qualityIcons = {
   wrench: HiOutlineWrenchScrewdriver,
 } as const;
 
-export function BarandalesQualitySection() {
+type QualityContent = {
+  quality: {
+    eyebrow: string;
+    title: string;
+    accentTitle: string;
+    description: string;
+    image: {
+      src: string;
+      alt: string;
+    };
+    points: readonly {
+      title: string;
+      icon: keyof typeof qualityIcons;
+      description: string;
+    }[];
+  };
+};
+
+type BarandalesQualitySectionProps = {
+  content?: QualityContent;
+};
+
+export function BarandalesQualitySection({
+  content = barandalesPageContent,
+}: BarandalesQualitySectionProps = {}) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
   const [activePointIndex, setActivePointIndex] = useState(0);
-  const activePoint = barandalesPageContent.quality.points[activePointIndex]!;
+  const activePoint = content.quality.points[activePointIndex]!;
   const ActivePointIcon = qualityIcons[activePoint.icon];
 
   return (
@@ -40,31 +64,31 @@ export function BarandalesQualitySection() {
     >
       <p className={styles.eyebrow}>
         <span aria-hidden="true" />
-        {barandalesPageContent.quality.eyebrow}
+        {content.quality.eyebrow}
       </p>
 
       <div className={styles.qualityHeader}>
         <h2 id="barandales-quality-title">
-          {barandalesPageContent.quality.title}
+          {content.quality.title}
           <span className={styles.sectionAccent}>
-            {barandalesPageContent.quality.accentTitle}
+            {content.quality.accentTitle}
           </span>
         </h2>
-        <p>{barandalesPageContent.quality.description}</p>
+        <p>{content.quality.description}</p>
       </div>
 
       <div className={styles.qualityDiagram}>
         <div className={styles.qualityImageStage}>
           <Image
-            src={barandalesPageContent.quality.image.src}
-            alt={barandalesPageContent.quality.image.alt}
+            src={content.quality.image.src}
+            alt={content.quality.image.alt}
             fill
             sizes="(max-width: 900px) 86vw, 34vw"
             className={styles.qualityImage}
           />
 
           <div className={styles.qualityMobileMap} aria-label="Puntos de calidad del barandal">
-            {barandalesPageContent.quality.points.map((point, index) => {
+            {content.quality.points.map((point, index) => {
               const MarkerIcon = qualityIcons[point.icon];
 
               return (
@@ -90,7 +114,7 @@ export function BarandalesQualitySection() {
         </div>
 
         <div className={styles.qualityPoints}>
-          {barandalesPageContent.quality.points.map((point) => {
+          {content.quality.points.map((point) => {
             const Icon = qualityIcons[point.icon];
 
             return (
