@@ -44,8 +44,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: barandalesPageContent.image.src,
-        width: 1200,
-        height: 630,
+        width: 1717,
+        height: 916,
         alt: barandalesPageContent.image.alt,
       },
     ],

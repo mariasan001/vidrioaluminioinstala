@@ -1,16 +1,177 @@
 :root {
-  --background: #2f2f2c;
-  --foreground: #f5f5f1;
-  --surface: #1f1f1d;
-  --surface-strong: #0f0f0f;
-  --surface-soft: #383835;
-  --text-muted: #a7a7a2;
-  --accent: #e8ff46;
-  --accent-strong: #d8f437;
-  --accent-contrast: #101010;
-  --border-soft: rgba(232, 255, 70, 0.28);
+  --color-background: #2f2f2c;
+  --color-background-deep: #20201f;
+  --color-background-mid: #292927;
+  --color-background-soft: #30302d;
+  --color-text: #f5f5f1;
+  --color-text-soft: #f1f1ec;
+  --color-text-strong: #ffffff;
+  --color-text-muted: #a7a7a2;
+  --color-surface: #1f1f1d;
+  --color-surface-raised: #111111;
+  --color-surface-strong: #0f0f0f;
+  --color-surface-soft: #383835;
+  --color-surface-dark: #171716;
+  --color-surface-ink: #101010;
+  --color-surface-ink-soft: #141414;
+  --color-surface-black: #000000;
+  --color-surface-image: #0b0b0a;
+  --color-accent: #e8ff46;
+  --color-accent-strong: #d8f437;
+  --color-accent-contrast: #101010;
+
+  --background: var(--color-background);
+  --foreground: var(--color-text);
+  --surface: var(--color-surface);
+  --surface-strong: var(--color-surface-strong);
+  --surface-soft: var(--color-surface-soft);
+  --text-muted: var(--color-text-muted);
+  --accent: var(--color-accent);
+  --accent-strong: var(--color-accent-strong);
+  --accent-contrast: var(--color-accent-contrast);
+
+  --text-alpha-82: rgba(245, 245, 241, 0.82);
+  --text-alpha-76: rgba(245, 245, 241, 0.76);
+  --text-alpha-72: rgba(245, 245, 241, 0.72);
+  --text-alpha-68: rgba(245, 245, 241, 0.68);
+  --text-alpha-66: rgba(245, 245, 241, 0.66);
+  --text-alpha-64: rgba(245, 245, 241, 0.64);
+  --text-alpha-62: rgba(245, 245, 241, 0.62);
+  --text-alpha-58: rgba(245, 245, 241, 0.58);
+  --text-alpha-56: rgba(245, 245, 241, 0.56);
+  --text-alpha-50: rgba(245, 245, 241, 0.5);
+  --text-alpha-42: rgba(245, 245, 241, 0.42);
+
+  --white-alpha-10: rgba(255, 255, 255, 0.1);
+  --white-alpha-08: rgba(255, 255, 255, 0.08);
+  --white-alpha-07: rgba(255, 255, 255, 0.07);
+  --white-alpha-06: rgba(255, 255, 255, 0.06);
+  --white-alpha-04: rgba(255, 255, 255, 0.04);
+  --white-alpha-035: rgba(255, 255, 255, 0.035);
+  --white-alpha-03: rgba(255, 255, 255, 0.03);
+  --white-alpha-02: rgba(255, 255, 255, 0.02);
+  --white-alpha-018: rgba(255, 255, 255, 0.018);
+  --white-alpha-015: rgba(255, 255, 255, 0.015);
+
+  --black-alpha-72: rgba(0, 0, 0, 0.72);
+  --black-alpha-32: rgba(0, 0, 0, 0.32);
+  --black-alpha-28: rgba(0, 0, 0, 0.28);
+  --black-alpha-24: rgba(0, 0, 0, 0.24);
+  --black-alpha-18: rgba(0, 0, 0, 0.18);
+  --black-alpha-16: rgba(0, 0, 0, 0.16);
+  --black-alpha-12: rgba(0, 0, 0, 0.12);
+
+  --accent-alpha-34: rgba(232, 255, 70, 0.34);
+  --accent-alpha-32: rgba(232, 255, 70, 0.32);
+  --accent-alpha-28: rgba(232, 255, 70, 0.28);
+  --accent-alpha-26: rgba(232, 255, 70, 0.26);
+  --accent-alpha-24: rgba(232, 255, 70, 0.24);
+  --accent-alpha-22: rgba(232, 255, 70, 0.22);
+  --accent-alpha-18: rgba(232, 255, 70, 0.18);
+  --accent-alpha-16: rgba(232, 255, 70, 0.16);
+  --accent-alpha-14: rgba(232, 255, 70, 0.14);
+  --accent-alpha-12: rgba(232, 255, 70, 0.12);
+  --accent-alpha-10: rgba(232, 255, 70, 0.1);
+  --accent-alpha-08: rgba(232, 255, 70, 0.08);
+  --accent-alpha-06: rgba(232, 255, 70, 0.06);
+  --accent-alpha-055: rgba(232, 255, 70, 0.055);
+  --accent-alpha-05: rgba(232, 255, 70, 0.05);
+  --accent-alpha-04: rgba(232, 255, 70, 0.04);
+
+  --border-soft: var(--accent-alpha-28);
+  --border-glass: var(--white-alpha-08);
+  --border-glass-strong: var(--white-alpha-10);
+  --border-accent-soft: var(--accent-alpha-18);
+  --border-accent: var(--accent-alpha-28);
+
   --font-body: "Trebuchet MS", "Segoe UI", sans-serif;
   --font-display: Bahnschrift, "Arial Narrow", sans-serif;
+  --font-accent: Georgia, "Times New Roman", serif;
+
+  --text-xs: 0.72rem;
+  --text-sm: 0.76rem;
+  --text-md: 0.84rem;
+  --text-base: 0.92rem;
+  --text-body: 1rem;
+  --text-lg: 1.02rem;
+  --text-xl: 1.14rem;
+  --text-2xl: 1.6rem;
+  --text-display-sm: clamp(1.68rem, 6.3vw, 2.28rem);
+  --text-display-md: clamp(2.05rem, 4.2vw, 3.55rem);
+  --text-display-lg: clamp(2.7rem, 5vw, 4.35rem);
+  --text-display-xl: clamp(3rem, 12vw, 6.5rem);
+  --leading-tight: 0.98;
+  --leading-title: 1.04;
+  --leading-solid: 1;
+  --leading-copy: 1.72;
+  --leading-copy-loose: 1.78;
+  --tracking-tight: -0.04em;
+  --tracking-accent: -0.02em;
+  --tracking-label: 0.08em;
+  --tracking-wide: 0.12em;
+
+  --space-0: 0;
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-5: 10px;
+  --space-6: 12px;
+  --space-7: 14px;
+  --space-8: 16px;
+  --space-9: 18px;
+  --space-10: 20px;
+  --space-11: 22px;
+  --space-12: 24px;
+  --space-14: 28px;
+  --space-16: 32px;
+  --space-17: 34px;
+  --space-18: 36px;
+  --space-20: 40px;
+  --space-21: 42px;
+  --space-22: 44px;
+  --space-24: 48px;
+  --space-28: 56px;
+  --space-32: 64px;
+  --space-42: 84px;
+
+  --radius-xs: var(--space-4);
+  --radius-sm: var(--space-6);
+  --radius-md: var(--space-7);
+  --radius-lg: var(--space-8);
+  --radius-xl: var(--space-9);
+  --radius-2xl: var(--space-11);
+  --radius-3xl: var(--space-12);
+  --radius-4xl: var(--space-14);
+  --radius-5xl: var(--space-16);
+  --radius-6xl: var(--space-17);
+  --radius-hero: var(--space-20);
+  --radius-pill: 999px;
+
+  --shadow-accent-sm: 0 var(--space-4) var(--space-9) var(--accent-alpha-18);
+  --shadow-accent-md: 0 10px var(--space-12) var(--accent-alpha-18);
+  --shadow-accent-lg: 0 var(--space-7) var(--space-14) var(--accent-alpha-24);
+  --shadow-panel: 0 var(--space-14) 80px var(--black-alpha-28);
+  --shadow-panel-strong: 0 var(--space-14) 80px var(--black-alpha-32);
+  --shadow-card: 0 var(--space-8) 30px var(--black-alpha-12);
+  --shadow-card-strong: 0 var(--space-11) 42px var(--black-alpha-16);
+  --shadow-inset-light: inset 0 1px 0 var(--white-alpha-04);
+  --shadow-focus: 0 0 0 5px var(--accent-alpha-14);
+
+  --ease-standard: ease;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-medium: 520ms;
+  --duration-slow: 720ms;
+  --duration-slower: 820ms;
+  --transition-fast: var(--duration-fast) var(--ease-standard);
+  --transition-out: var(--duration-slow) var(--ease-out);
+
+  --layout-page-padding: var(--space-12);
+  --layout-page-padding-mobile: var(--space-6);
+  --layout-content-max: 1440px;
+  --nav-top: var(--space-12);
+  --section-gap: var(--space-18);
 }
 
 html {

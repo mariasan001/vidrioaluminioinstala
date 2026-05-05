@@ -46,7 +46,9 @@ export function HomeProjects({
   const {
     closeProjectViewer,
     expandedProject,
+    keepFocusInsideViewer,
     openProjectViewer: openViewer,
+    viewerRef,
   } = useProjectViewer({ projects });
 
   const openProjectViewer = (
@@ -196,7 +198,13 @@ export function HomeProjects({
           aria-label={`Imagen completa de ${expandedProject.title}`}
           onClick={closeProjectViewer}
         >
-          <div className={styles.viewerPanel} onClick={(event) => event.stopPropagation()}>
+          <div
+            ref={viewerRef}
+            className={styles.viewerPanel}
+            tabIndex={-1}
+            onClick={(event) => event.stopPropagation()}
+            onKeyDown={keepFocusInsideViewer}
+          >
             <div className={styles.viewerTop}>
               <span className={styles.viewerLabel}>{expandedProject.title}</span>
               <button

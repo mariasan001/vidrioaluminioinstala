@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { FaLocationDot } from "react-icons/fa6";
 import { openQuoteDialog } from "../home-floating-quote/quote-dialog";
 import styles from "./home-hero.module.css";
@@ -16,23 +15,16 @@ export function HomeHero() {
       className={`${styles.hero} ${hasRevealed ? styles.heroVisible : ""} ${introDone ? styles.heroReady : ""} ${isInView ? styles.heroInView : styles.heroOutView}`}
       id="inicio"
     >
-      <Image
-        src={heroContent.image.src}
-        alt={heroContent.image.alt}
-        fill
-        priority
-        className={`${styles.backgroundImage} ${styles.desktopImage}`}
-        sizes="100vw"
-      />
-
-      <Image
-        src={heroContent.image.mobileSrc}
-        alt={heroContent.image.alt}
-        fill
-        priority
-        className={`${styles.backgroundImage} ${styles.mobileImage}`}
-        sizes="100vw"
-      />
+      <picture>
+        <source media="(max-width: 720px)" srcSet={heroContent.image.mobileSrc} />
+        <img
+          src={heroContent.image.src}
+          alt={heroContent.image.alt}
+          className={styles.backgroundImage}
+          decoding="async"
+          fetchPriority="high"
+        />
+      </picture>
 
       <div className={styles.heroShade} />
 

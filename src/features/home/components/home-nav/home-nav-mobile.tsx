@@ -61,6 +61,8 @@ export function HomeNavMobile({
       <div
         id="mobile-nav-panel"
         className={`${styles.mobileMenu} ${isOpen ? styles.mobileMenuOpen : ""}`}
+        aria-hidden={!isOpen}
+        inert={!isOpen}
       >
         <div className={styles.mobileMenuInner}>
           <div className={styles.mobileMenuHeader}>

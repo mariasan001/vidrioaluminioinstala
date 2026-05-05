@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { FaLocationDot } from "react-icons/fa6";
 import { ServiceHeroQuoteButton } from "./service-hero-quote-button";
 import styles from "./service-hero.module.css";
@@ -41,23 +40,16 @@ export function ServiceHero({
 
   return (
     <section className={styles.hero}>
-      <Image
-        src={image.src}
-        alt={image.alt}
-        fill
-        priority
-        className={`${styles.backgroundImage} ${styles.desktopImage}`}
-        sizes="100vw"
-      />
-
-      <Image
-        src={mobileImageSrc}
-        alt={image.alt}
-        fill
-        priority
-        className={`${styles.backgroundImage} ${styles.mobileImage}`}
-        sizes="100vw"
-      />
+      <picture>
+        <source media="(max-width: 720px)" srcSet={mobileImageSrc} />
+        <img
+          src={image.src}
+          alt={image.alt}
+          className={styles.backgroundImage}
+          decoding="async"
+          fetchPriority="high"
+        />
+      </picture>
 
       <div className={styles.heroShade} />
 

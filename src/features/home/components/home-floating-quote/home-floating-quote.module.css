@@ -1,28 +1,28 @@
 .button {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  right: var(--space-12);
+  bottom: var(--space-12);
   z-index: 40;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 11px;
   min-height: 50px;
-  padding: 0 20px 0 16px;
-  border: 1px solid rgba(232, 255, 70, 0.26);
-  border-radius: 999px;
+  padding: 0 20px 0 var(--space-8);
+  border: 1px solid var(--accent-alpha-26);
+  border-radius: var(--radius-pill);
   background:
-    linear-gradient(135deg, rgba(232, 255, 70, 0.12), transparent 42%),
+    linear-gradient(135deg, var(--accent-alpha-12), transparent 42%),
     rgba(17, 17, 16, 0.96);
-  color: #f5f5f1;
+  color: var(--color-text);
   cursor: pointer;
-  font-size: 0.88rem;
+  font-size: var(--text-base);
   font-weight: 800;
   box-shadow:
-    0 18px 38px rgba(0, 0, 0, 0.26),
-    0 0 0 1px rgba(232, 255, 70, 0.08),
-    0 0 28px rgba(232, 255, 70, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    0 var(--space-9) 38px rgba(0, 0, 0, 0.26),
+    0 0 0 1px var(--accent-alpha-08),
+    0 0 var(--space-14) var(--accent-alpha-08),
+    inset 0 1px 0 var(--white-alpha-04);
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -37,36 +37,36 @@
   z-index: 90;
   display: grid;
   place-items: center;
-  padding: 22px;
+  padding: var(--space-11);
   background: rgba(6, 6, 6, 0.86);
 }
 
 .modal {
   display: grid;
-  gap: 18px;
+  gap: var(--space-9);
   width: min(760px, 100%);
   max-height: calc(100svh - 44px);
   overflow-y: auto;
-  padding: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--space-7);
+  border: 1px solid var(--white-alpha-08);
   border-radius: 26px;
   background: #111110;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 var(--space-14) 80px rgba(0, 0, 0, 0.42);
   scrollbar-width: thin;
-  scrollbar-color: rgba(232, 255, 70, 0.62) rgba(255, 255, 255, 0.06);
+  scrollbar-color: rgba(232, 255, 70, 0.62) var(--white-alpha-06);
 }
 
 .modal::-webkit-scrollbar {
-  width: 8px;
+  width: var(--space-4);
 }
 
 .modal::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 999px;
+  background: var(--white-alpha-06);
+  border-radius: var(--radius-pill);
 }
 
 .modal::-webkit-scrollbar-thumb {
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(232, 255, 70, 0.62);
 }
 
@@ -74,17 +74,17 @@
   display: flex;
   align-items: start;
   justify-content: space-between;
-  gap: 18px;
+  gap: var(--space-9);
 }
 
 .modalHeader div {
   display: grid;
-  gap: 12px;
+  gap: var(--space-6);
 }
 
 .modalHeader span {
   color: var(--accent);
-  font-size: 0.74rem;
+  font-size: var(--text-xs);
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -92,11 +92,11 @@
 
 .modalHeader h2 {
   margin: 0;
-  color: #f5f5f1;
+  color: var(--color-text);
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 3vw, 2.45rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
 }
 
 .closeButton {
@@ -107,7 +107,7 @@
   height: 42px;
   flex: 0 0 auto;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   color: var(--accent-contrast);
   cursor: pointer;
@@ -122,7 +122,7 @@
 .selectField,
 .notes,
 .inputGrid label {
-  color: rgba(245, 245, 241, 0.82);
+  color: var(--text-alpha-82);
   font-size: 0.86rem;
   font-weight: 800;
 }
@@ -143,27 +143,27 @@
 .selectField,
 .notes {
   display: grid;
-  gap: 8px;
+  gap: var(--space-4);
 }
 
 .inputGrid input,
 .selectField select,
 .notes textarea {
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  border: 1px solid var(--white-alpha-08);
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.045);
-  color: #f5f5f1;
+  color: var(--color-text);
   color-scheme: dark;
   font: inherit;
-  font-size: 0.92rem;
+  font-size: var(--text-base);
   outline: none;
 }
 
 .inputGrid input,
 .selectField select {
   min-height: 46px;
-  padding: 0 12px;
+  padding: 0 var(--space-6);
 }
 
 .selectField select {
@@ -173,8 +173,8 @@
     linear-gradient(45deg, transparent 50%, var(--accent) 50%),
     linear-gradient(135deg, var(--accent) 50%, transparent 50%);
   background-position:
-    calc(100% - 18px) 20px,
-    calc(100% - 12px) 20px;
+    calc(100% - var(--space-9)) 20px,
+    calc(100% - var(--space-6)) 20px;
   background-size:
     6px 6px,
     6px 6px;
@@ -184,12 +184,12 @@
 .selectField select option,
 .selectField select optgroup {
   background: #181816;
-  color: #f5f5f1;
+  color: var(--color-text);
 }
 
 .notes textarea {
   min-height: 92px;
-  padding: 12px;
+  padding: var(--space-6);
   resize: vertical;
 }
 
@@ -207,19 +207,19 @@
 .submitButton {
   min-height: 48px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   color: var(--accent-contrast);
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: var(--text-base);
   font-weight: 900;
 }
 
 .form::before {
   display: block;
   margin-bottom: -2px;
-  color: rgba(245, 245, 241, 0.56);
-  font-size: 0.82rem;
+  color: var(--text-alpha-56);
+  font-size: var(--text-md);
   font-weight: 700;
   line-height: 1.5;
   content: "Completa lo que tengas a la mano. Si no sabes medidas exactas, puedes dejarlo aproximado.";
@@ -235,11 +235,11 @@
   flex: 0 0 auto;
   width: 10px;
   height: 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   box-shadow:
-    0 0 0 6px rgba(232, 255, 70, 0.14),
-    0 0 20px rgba(232, 255, 70, 0.34);
+    0 0 0 6px var(--accent-alpha-14),
+    0 0 20px var(--accent-alpha-34);
 }
 
 .button:focus-visible {
@@ -254,27 +254,27 @@
     background: rgba(20, 20, 18, 0.98);
     color: var(--accent);
     box-shadow:
-      0 20px 40px rgba(0, 0, 0, 0.28),
-      0 0 0 1px rgba(232, 255, 70, 0.08);
+      0 20px var(--space-20) var(--black-alpha-28),
+      0 0 0 1px var(--accent-alpha-08);
   }
 }
 
 @media (max-width: 640px) {
   .button {
-    right: 14px;
-    bottom: 14px;
+    right: var(--space-7);
+    bottom: var(--space-7);
     width: auto;
     min-width: 156px;
     height: 50px;
     min-height: 50px;
-    padding: 0 16px 0 15px;
+    padding: 0 var(--space-8) 0 15px;
     gap: 10px;
     border-color: rgba(232, 255, 70, 0.38);
-    font-size: 0.82rem;
+    font-size: var(--text-md);
     box-shadow:
-      0 18px 36px rgba(0, 0, 0, 0.32),
-      0 0 0 1px rgba(232, 255, 70, 0.12),
-      0 0 30px rgba(232, 255, 70, 0.1);
+      0 var(--space-9) 36px var(--black-alpha-32),
+      0 0 0 1px var(--accent-alpha-12),
+      0 0 30px var(--accent-alpha-10);
   }
 
   .button span:not(.dot) {
@@ -293,8 +293,8 @@
 
   .modal {
     max-height: calc(100svh - 20px);
-    padding: 12px;
-    border-radius: 24px;
+    padding: var(--space-6);
+    border-radius: var(--radius-3xl);
   }
 
   .inputGrid,

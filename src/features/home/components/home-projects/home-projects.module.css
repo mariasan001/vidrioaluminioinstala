@@ -1,35 +1,35 @@
 .section {
-  --projects-offset: 22px;
+  --projects-offset: var(--space-11);
   margin-top: 46px;
-  padding: 28px 0 0;
+  padding: var(--space-14) 0 0;
   overflow: clip;
 }
 
 .section[data-scroll-direction="up"] {
-  --projects-offset: -22px;
+  --projects-offset: -var(--space-11);
 }
 
 .section[data-scroll-direction="down"] {
-  --projects-offset: 22px;
+  --projects-offset: var(--space-11);
 }
 
 .header {
   display: grid;
-  gap: 22px;
+  gap: var(--space-11);
   margin-bottom: 38px;
   opacity: 0;
   transform: translateY(var(--projects-offset));
   transition:
-    opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 720ms var(--ease-out),
+    transform 720ms var(--ease-out);
 }
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: rgba(245, 245, 241, 0.58);
-  font-size: 0.76rem;
+  gap: var(--space-4);
+  color: var(--text-alpha-58);
+  font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: lowercase;
@@ -38,27 +38,27 @@
 .eyebrowDot {
   width: 7px;
   height: 7px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
-  box-shadow: 0 0 0 5px rgba(232, 255, 70, 0.14);
+  box-shadow: 0 0 0 5px var(--accent-alpha-14);
 }
 
 .heading {
   display: grid;
   justify-items: center;
-  gap: 14px;
+  gap: var(--space-7);
   text-align: center;
 }
 
 .title {
   max-width: min(900px, 100%);
   margin: 0;
-  color: #f5f5f1;
+  color: var(--color-text);
   font-family: var(--font-display);
   font-size: clamp(2.05rem, 4.2vw, 3.5rem);
   font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
   text-wrap: balance;
 }
 
@@ -66,32 +66,32 @@
   display: block;
   margin-top: 4px;
   color: var(--accent);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-accent);
   font-size: 0.68em;
   font-style: italic;
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-accent);
 }
 
 .description {
   max-width: 80ch;
   margin: 0;
-  color: rgba(245, 245, 241, 0.68);
-  font-size: 0.96rem;
-  line-height: 1.72;
+  color: var(--text-alpha-68);
+  font-size: var(--text-body);
+  line-height: var(--leading-copy);
   text-align: center;
   text-wrap: balance;
 }
 
 .carouselShell {
   position: relative;
-  margin-inline: -24px;
+  margin-inline: -var(--space-12);
   overflow: hidden;
   opacity: 0;
   transform: translateY(var(--projects-offset));
   transition:
-    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 760ms var(--ease-out),
+    transform 760ms var(--ease-out);
 }
 
 .section[data-visible="true"] .header,
@@ -107,9 +107,9 @@
 .section[data-ready="true"] .header,
 .section[data-ready="true"] .carouselShell {
   transition:
-    opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 820ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 720ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 720ms var(--ease-out),
+    transform 820ms var(--ease-out),
+    filter 720ms var(--ease-out);
 }
 
 .section[data-ready="true"][data-in-view="true"] .header,
@@ -154,9 +154,9 @@
 
 .reel {
   display: flex;
-  gap: 18px;
+  gap: var(--space-9);
   overflow-x: auto;
-  padding: 0 24px 6px;
+  padding: 0 var(--space-12) 6px;
   overscroll-behavior-x: contain;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -174,7 +174,7 @@
   flex: 0 0 clamp(280px, 34vw, 490px);
   min-height: clamp(360px, 42vw, 520px);
   overflow: clip;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--white-alpha-08);
   border-radius: 30px;
   background: rgba(17, 17, 16, 0.78);
   isolation: isolate;
@@ -190,8 +190,8 @@
 }
 
 .projectCardActive {
-  border-color: rgba(232, 255, 70, 0.24);
-  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.24);
+  border-color: var(--accent-alpha-24);
+  box-shadow: 0 var(--space-12) 52px var(--black-alpha-24);
   opacity: 1;
   transform: scale(1);
 }
@@ -206,8 +206,8 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.72)),
-    linear-gradient(135deg, rgba(232, 255, 70, 0.12), transparent 42%);
+    linear-gradient(180deg, var(--black-alpha-18), var(--black-alpha-72)),
+    linear-gradient(135deg, var(--accent-alpha-12), transparent 42%);
 }
 
 .projectTop,
@@ -227,13 +227,13 @@
   width: clamp(68px, 7vw, 92px);
   height: clamp(68px, 7vw, 92px);
   border: 1px solid rgba(232, 255, 70, 0.36);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(16, 16, 16, 0.82);
   color: var(--accent);
   font-size: clamp(1.45rem, 2.8vw, 2rem);
   box-shadow:
-    0 20px 44px rgba(0, 0, 0, 0.32),
-    0 0 0 10px rgba(232, 255, 70, 0.08);
+    0 20px 44px var(--black-alpha-32),
+    0 0 0 10px var(--accent-alpha-08);
   transform: translate(-50%, -50%);
 }
 
@@ -244,20 +244,20 @@
 .projectTop {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 18px;
+  gap: var(--space-6);
+  padding: var(--space-9);
 }
 
 .projectType {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 34px;
-  padding: 0 14px;
-  border-radius: 999px;
+  gap: var(--space-4);
+  min-height: var(--space-17);
+  padding: 0 var(--space-7);
+  border-radius: var(--radius-pill);
   background: rgba(15, 15, 15, 0.86);
-  color: #f5f5f1;
-  font-size: 0.76rem;
+  color: var(--color-text);
+  font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -271,7 +271,7 @@
 .projectCount {
   margin-left: auto;
   color: rgba(245, 245, 241, 0.46);
-  font-size: 0.72rem;
+  font-size: var(--text-xs);
   font-weight: 900;
   letter-spacing: 0.14em;
 }
@@ -283,12 +283,12 @@
   width: 42px;
   height: 42px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   color: var(--accent-contrast);
   cursor: pointer;
-  font-size: 1.05rem;
-  box-shadow: 0 14px 30px rgba(232, 255, 70, 0.2);
+  font-size: var(--text-lg);
+  box-shadow: 0 var(--space-7) 30px rgba(232, 255, 70, 0.2);
   transition:
     transform 180ms ease,
     background-color 180ms ease,
@@ -304,10 +304,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: var(--space-6);
   width: fit-content;
   max-width: calc(100% - 48px);
-  padding: 0 0 16px;
+  padding: 0 0 var(--space-8);
   margin: 0;
   position: relative;
   left: 85%;
@@ -327,12 +327,12 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
+  border: 1px solid var(--white-alpha-08);
+  border-radius: var(--radius-pill);
   background: rgba(17, 17, 16, 0.9);
-  color: #f5f5f1;
+  color: var(--color-text);
   font-size: 1.15rem;
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 var(--space-6) 26px var(--black-alpha-18);
   transition:
     transform 180ms ease,
     background-color 180ms ease,
@@ -348,17 +348,17 @@
   gap: 4px;
   min-height: 44px;
   padding: 0 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
+  border: 1px solid var(--white-alpha-08);
+  border-radius: var(--radius-pill);
   background: rgba(17, 17, 16, 0.9);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 var(--space-6) 26px var(--black-alpha-18);
 }
 
 .carouselDot {
   position: relative;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
+  width: var(--space-14);
+  height: var(--space-14);
+  border-radius: var(--radius-pill);
   background: transparent;
   transition:
     width 220ms ease,
@@ -370,7 +370,7 @@
   inset: 50% auto auto 50%;
   width: 7px;
   height: 7px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(245, 245, 241, 0.28);
   content: "";
   transform: translate(-50%, -50%);
@@ -381,13 +381,13 @@
 }
 
 .carouselDotActive {
-  width: 34px;
+  width: var(--space-17);
 }
 
 .carouselDotActive::before {
-  width: 28px;
+  width: var(--space-14);
   background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(232, 255, 70, 0.1);
+  box-shadow: 0 0 0 4px var(--accent-alpha-10);
 }
 
 .carouselButton:focus-visible,
@@ -398,27 +398,27 @@
 
 .projectCopy {
   position: absolute;
-  left: 22px;
+  left: var(--space-11);
   right: auto;
-  bottom: 22px;
+  bottom: var(--space-11);
   display: grid;
   gap: 10px;
   width: min(360px, calc(100% - 44px));
-  padding: 14px 16px;
+  padding: var(--space-7) var(--space-8);
   border: 1px solid rgba(245, 245, 241, 0.12);
-  border-radius: 20px 20px 20px 8px;
+  border-radius: 20px 20px 20px var(--radius-xs);
   background: rgba(12, 12, 12, 0.74);
   box-shadow:
-    0 18px 38px rgba(0, 0, 0, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 var(--space-9) 38px var(--black-alpha-24),
+    inset 0 1px 0 var(--white-alpha-06);
 }
 
 .projectCopy::after {
   position: absolute;
   left: 0;
   bottom: -10px;
-  width: 18px;
-  height: 18px;
+  width: var(--space-9);
+  height: var(--space-9);
   background: rgba(12, 12, 12, 0.74);
   clip-path: polygon(0 0, 100% 0, 0 100%);
   content: "";
@@ -427,8 +427,8 @@
 .projectCopy p {
   max-width: 36ch;
   margin: 0;
-  color: #f5f5f1;
-  font-family: Georgia, "Times New Roman", serif;
+  color: var(--color-text);
+  font-family: var(--font-accent);
   font-size: clamp(0.86rem, 1vw, 0.96rem);
   font-style: italic;
   font-weight: 400;
@@ -440,27 +440,27 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-4);
 }
 
 .projectCopy strong {
   color: var(--accent);
   font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 
 .projectCopy span {
   position: relative;
-  color: rgba(245, 245, 241, 0.64);
+  color: var(--text-alpha-64);
   font-size: 0.7rem;
   font-weight: 700;
 }
 
 .projectCopy span::before {
   content: "/";
-  margin-right: 8px;
+  margin-right: var(--space-4);
   color: rgba(232, 255, 70, 0.58);
 }
 
@@ -470,28 +470,28 @@
     background: var(--accent);
     border-color: rgba(232, 255, 70, 0.62);
     color: var(--accent-contrast);
-    box-shadow: 0 14px 28px rgba(232, 255, 70, 0.18);
+    box-shadow: 0 var(--space-7) var(--space-14) var(--accent-alpha-18);
   }
 
   .carouselDot:hover {
-    background: rgba(245, 245, 241, 0.62);
+    background: var(--text-alpha-62);
   }
 
   .projectAction:hover {
     transform: translateY(-2px);
     background: var(--accent-strong);
-    box-shadow: 0 16px 32px rgba(232, 255, 70, 0.24);
+    box-shadow: 0 var(--space-8) var(--space-16) var(--accent-alpha-24);
   }
 }
 
 @media (max-width: 820px) {
   .section {
     margin-top: 42px;
-    padding-top: 24px;
+    padding-top: var(--space-12);
   }
 
   .header {
-    gap: 24px;
+    gap: var(--space-12);
     margin-bottom: 38px;
   }
 
@@ -508,26 +508,26 @@
 
   .description {
     max-width: 62ch;
-    font-size: 0.92rem;
-    line-height: 1.78;
+    font-size: var(--text-base);
+    line-height: var(--leading-copy-loose);
   }
 
   .carouselShell {
-    margin-inline: -12px;
+    margin-inline: -var(--space-6);
     display: grid;
     justify-items: center;
   }
 
   .carouselShell::before,
   .carouselShell::after {
-    width: 28px;
+    width: var(--space-14);
     top: 64px;
     opacity: 0.52;
   }
 
   .reel {
-    gap: 16px;
-    padding: 0 12px 8px;
+    gap: var(--space-8);
+    padding: 0 var(--space-6) var(--space-4);
   }
 
   .carouselControls {
@@ -536,7 +536,7 @@
     gap: 10px;
     width: auto;
     max-width: none;
-    padding: 0 0 18px;
+    padding: 0 0 var(--space-9);
     margin: 0 auto;
     transform: none;
   }
@@ -550,30 +550,30 @@
   }
 
   .projectCardActive {
-    border-color: rgba(232, 255, 70, 0.32);
-    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28);
+    border-color: var(--accent-alpha-32);
+    box-shadow: 0 20px 42px var(--black-alpha-28);
     opacity: 1;
     transform: scale(1);
   }
 
   .carouselButton {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
+    width: var(--space-20);
+    height: var(--space-20);
+    font-size: var(--text-body);
   }
 
   .carouselDots {
-    min-height: 40px;
-    padding: 0 12px;
+    min-height: var(--space-20);
+    padding: 0 var(--space-6);
   }
 
   .carouselDotActive {
-    width: 28px;
+    width: var(--space-14);
   }
 
   .projectType {
     min-height: 30px;
-    padding: 0 12px;
+    padding: 0 var(--space-6);
     font-size: 0.68rem;
   }
 
@@ -583,16 +583,16 @@
   }
 
   .projectCopy {
-    left: 18px;
-    bottom: 18px;
+    left: var(--space-9);
+    bottom: var(--space-9);
     width: min(320px, calc(100% - 36px));
-    gap: 8px;
-    padding: 12px 14px;
-    border-radius: 18px 18px 18px 8px;
+    gap: var(--space-4);
+    padding: var(--space-6) var(--space-7);
+    border-radius: var(--radius-xl) var(--radius-xl) var(--radius-xl) var(--radius-xs);
   }
 
   .projectCopy p {
-    font-size: 0.82rem;
+    font-size: var(--text-md);
     line-height: 1.42;
   }
 
@@ -610,7 +610,7 @@
 
   .description {
     max-width: 56ch;
-    font-size: 0.88rem;
+    font-size: var(--text-base);
     line-height: 1.76;
   }
 
@@ -620,9 +620,9 @@
   }
 
   .projectCopy {
-    left: 14px;
-    bottom: 14px;
-    width: min(304px, calc(100% - 28px));
+    left: var(--space-7);
+    bottom: var(--space-7);
+    width: min(304px, calc(100% - var(--space-14)));
   }
 
   .projectCopy p {
@@ -636,7 +636,7 @@
   z-index: 80;
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: var(--space-12);
   background: rgba(6, 6, 6, 0.88);
 }
 
@@ -644,32 +644,32 @@
   position: relative;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: 16px;
+  gap: var(--space-8);
   width: min(1180px, 100%);
   height: min(820px, calc(100svh - 48px));
-  padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--space-9);
+  border: 1px solid var(--white-alpha-08);
   border-radius: 30px;
   background: #111110;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 var(--space-14) 80px rgba(0, 0, 0, 0.42);
 }
 
 .viewerTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--space-8);
 }
 
 .viewerLabel {
   display: inline-flex;
   align-items: center;
-  min-height: 34px;
-  padding: 0 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(245, 245, 241, 0.82);
-  font-size: 0.78rem;
+  min-height: var(--space-17);
+  padding: 0 var(--space-7);
+  border-radius: var(--radius-pill);
+  background: var(--white-alpha-06);
+  color: var(--text-alpha-82);
+  font-size: var(--text-sm);
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -682,12 +682,12 @@
   width: 42px;
   height: 42px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   color: var(--accent-contrast);
   cursor: pointer;
   font-size: 1.08rem;
-  box-shadow: 0 14px 28px rgba(232, 255, 70, 0.18);
+  box-shadow: 0 var(--space-7) var(--space-14) var(--accent-alpha-18);
 }
 
 .viewerClose:focus-visible {
@@ -699,8 +699,8 @@
   position: relative;
   min-height: 0;
   overflow: hidden;
-  border-radius: 22px;
-  background: #0b0b0a;
+  border-radius: var(--radius-2xl);
+  background: var(--color-surface-image);
 }
 
 .viewerImage {
@@ -712,15 +712,15 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px 18px;
-  color: rgba(245, 245, 241, 0.72);
+  gap: var(--space-6) var(--space-9);
+  color: var(--text-alpha-72);
 }
 
 .viewerCopy p {
   max-width: 66ch;
   margin: 0;
-  color: #f5f5f1;
-  font-family: Georgia, "Times New Roman", serif;
+  color: var(--color-text);
+  font-family: var(--font-accent);
   font-size: 0.95rem;
   font-style: italic;
   line-height: 1.48;
@@ -728,25 +728,25 @@
 
 .viewerCopy span {
   color: rgba(232, 255, 70, 0.74);
-  font-size: 0.78rem;
+  font-size: var(--text-sm);
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 
 @media (max-width: 820px) {
   .viewerOverlay {
-    padding: 12px;
+    padding: var(--space-6);
   }
 
   .viewerPanel {
-    height: calc(100svh - 24px);
-    padding: 12px;
-    border-radius: 24px;
+    height: calc(100svh - var(--space-12));
+    padding: var(--space-6);
+    border-radius: var(--radius-3xl);
   }
 
   .viewerImageWrap {
-    border-radius: 18px;
+    border-radius: var(--radius-xl);
   }
 }
 

@@ -1,14 +1,18 @@
 "use client";
 
-import { MdBalcony, MdDeck, MdStairs } from "react-icons/md";
+import {
+  HiOutlineArrowsUpDown,
+  HiOutlineHomeModern,
+  HiOutlineSun,
+} from "react-icons/hi2";
 import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
 import { barandalesPageContent } from "./barandales-page.data";
 import styles from "./barandales-page.module.css";
 
 const detailIcons = {
-  balcony: MdBalcony,
-  deck: MdDeck,
-  stairs: MdStairs,
+  balcony: HiOutlineHomeModern,
+  deck: HiOutlineSun,
+  stairs: HiOutlineArrowsUpDown,
 } as const;
 
 export function BarandalesUseCasesSection() {

@@ -1,6 +1,12 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import {
+  FormEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
 import styles from "./home-floating-quote.module.css";
@@ -20,10 +26,22 @@ export function HomeFloatingQuote() {
   const [timing, setTiming] = useState<string>("Solo cotizo");
   const [workType, setWorkType] = useState<string>("Instalación nueva");
   const [photoStatus, setPhotoStatus] = useState<string>("La enviaré por WhatsApp");
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
   useLockBodyScroll(isOpen);
 
   const closeQuoteDialog = () => {
     setIsOpen(false);
+
+    window.requestAnimationFrame(() => {
+      previousFocusRef.current?.focus();
+      previousFocusRef.current = null;
+    });
+  };
+
+  const openDialog = () => {
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    setIsOpen(true);
   };
 
   useEffect(() => {
@@ -43,7 +61,7 @@ export function HomeFloatingQuote() {
     };
 
     const handleOpenQuoteDialog = () => {
-      setIsOpen(true);
+      openDialog();
     };
 
     window.addEventListener("keydown", handleEscape);
@@ -56,6 +74,52 @@ export function HomeFloatingQuote() {
       window.removeEventListener(openQuoteDialogEventName, handleOpenQuoteDialog);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    modalRef.current?.focus();
+  }, [isOpen]);
+
+  const keepFocusInsideDialog = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const modal = modalRef.current;
+
+    if (!modal) {
+      return;
+    }
+
+    const focusableElements = Array.from(
+      modal.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((element) => element.offsetParent !== null);
+
+    if (focusableElements.length === 0) {
+      event.preventDefault();
+      modal.focus();
+      return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+      return;
+    }
+
+    if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -118,7 +182,13 @@ export function HomeFloatingQuote() {
           aria-labelledby="quote-form-title"
           onClick={closeQuoteDialog}
         >
-          <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
+          <div
+            ref={modalRef}
+            className={styles.modal}
+            tabIndex={-1}
+            onClick={(event) => event.stopPropagation()}
+            onKeyDown={keepFocusInsideDialog}
+          >
             <div className={styles.modalHeader}>
               <div>
                 <span>Cotización clara</span>
