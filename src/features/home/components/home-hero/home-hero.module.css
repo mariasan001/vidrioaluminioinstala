@@ -31,7 +31,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.34);
+  background: var(--hero-scrim);
   content: "";
 }
 
@@ -39,17 +39,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(5, 5, 5, 0.88) 0%,
-      rgba(5, 5, 5, 0.82) 24%,
-      rgba(5, 5, 5, 0.62) 40%,
-      rgba(5, 5, 5, 0.32) 50%,
-      rgba(5, 5, 5, 0.12) 58%,
-      rgba(5, 5, 5, 0) 100%
-    ),
-    linear-gradient(180deg, rgba(8, 8, 8, 0.18), rgba(8, 8, 8, 0.06));
+  background: var(--hero-home-shade);
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   pointer-events: none;
@@ -113,7 +103,7 @@
   letter-spacing: -0.045em;
   text-align: center;
   text-wrap: balance;
-  text-shadow: 0 10px var(--space-14) rgba(0, 0, 0, 0.34);
+  text-shadow: var(--hero-title-shadow);
 }
 
 .accent {
@@ -136,7 +126,7 @@
   font-weight: 600;
   line-height: var(--leading-copy);
   text-align: center;
-  text-shadow: 0 6px var(--space-9) var(--black-alpha-24);
+  text-shadow: var(--hero-copy-shadow);
   text-wrap: balance;
 }
 
@@ -168,15 +158,15 @@
 }
 
 .primaryAction {
-  background: #f7f7f2;
-  color: var(--color-surface-raised);
+  background: var(--color-inverse-button-bg);
+  color: var(--color-inverse-button-text);
   box-shadow: 0 var(--space-9) 36px rgba(0, 0, 0, 0.2);
 }
 
 .secondaryAction {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(12, 12, 12, 0.56);
-  color: #f7f7f2;
+  border: 1px solid var(--white-alpha-10);
+  background: var(--color-control-glass);
+  color: var(--color-text);
   box-shadow: 0 var(--space-7) 30px var(--black-alpha-18);
 }
 
@@ -302,7 +292,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: rgba(245, 245, 241, 0.84);
+  color: var(--text-alpha-82);
   font-size: var(--text-base);
   font-weight: 600;
 }
@@ -319,7 +309,7 @@
 .statLine {
   width: 100%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--white-alpha-10);
 }
 
 @keyframes heroImageReveal {
@@ -434,9 +424,7 @@
   }
 
   .heroShade {
-    background:
-      linear-gradient(180deg, rgba(6, 6, 6, 0.78), rgba(6, 6, 6, 0.48)),
-      linear-gradient(135deg, var(--white-alpha-03), transparent);
+    background: var(--hero-home-shade-tablet);
   }
 
   .stats {
@@ -463,20 +451,11 @@
   }
 
   .hero::before {
-    background: rgba(0, 0, 0, 0.42);
+    background: var(--hero-scrim-strong);
   }
 
   .heroShade {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(5, 5, 5, 0.82) 0%,
-        rgba(5, 5, 5, 0.7) 22%,
-        rgba(5, 5, 5, 0.5) 44%,
-        rgba(5, 5, 5, 0.2) 66%,
-        rgba(5, 5, 5, 0.08) 82%,
-        rgba(5, 5, 5, 0) 100%
-      );
+    background: var(--hero-home-shade-mobile);
   }
 
   .eyebrow {
@@ -545,7 +524,7 @@
   }
 
   .secondaryAction {
-    background: rgba(10, 10, 10, 0.62);
+    background: var(--color-control-glass);
   }
 
   .stats {

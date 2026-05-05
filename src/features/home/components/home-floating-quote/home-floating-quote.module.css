@@ -13,7 +13,7 @@
   border-radius: var(--radius-pill);
   background:
     linear-gradient(135deg, var(--accent-alpha-12), transparent 42%),
-    rgba(17, 17, 16, 0.96);
+    var(--color-panel-glass-strong);
   color: var(--color-text);
   cursor: pointer;
   font-size: var(--text-base);
@@ -38,7 +38,7 @@
   display: grid;
   place-items: center;
   padding: var(--space-11);
-  background: rgba(6, 6, 6, 0.86);
+  background: var(--color-modal-backdrop);
 }
 
 .modal {
@@ -50,7 +50,7 @@
   padding: var(--space-7);
   border: 1px solid var(--white-alpha-08);
   border-radius: 26px;
-  background: #111110;
+  background: var(--color-panel-solid);
   box-shadow: 0 var(--space-14) 80px rgba(0, 0, 0, 0.42);
   scrollbar-width: thin;
   scrollbar-color: rgba(232, 255, 70, 0.62) var(--white-alpha-06);
@@ -152,7 +152,7 @@
   width: 100%;
   border: 1px solid var(--white-alpha-08);
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.045);
+  background: var(--color-field-surface);
   color: var(--color-text);
   color-scheme: dark;
   font: inherit;
@@ -183,7 +183,7 @@
 
 .selectField select option,
 .selectField select optgroup {
-  background: #181816;
+  background: var(--color-field-option);
   color: var(--color-text);
 }
 
@@ -251,7 +251,7 @@
   .button:hover {
     transform: translateY(-3px);
     border-color: rgba(232, 255, 70, 0.46);
-    background: rgba(20, 20, 18, 0.98);
+    background: var(--color-panel-solid);
     color: var(--accent);
     box-shadow:
       0 20px var(--space-20) var(--black-alpha-28),

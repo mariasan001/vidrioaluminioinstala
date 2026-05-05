@@ -3,10 +3,7 @@
   padding: var(--space-12);
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(115deg, var(--accent-alpha-055) 0%, transparent 26%),
-    linear-gradient(245deg, rgba(255, 255, 255, 0.045) 0%, transparent 34%),
-    linear-gradient(180deg, var(--color-background-soft) 0%, var(--color-background-mid) 42%, var(--color-background-deep) 100%);
+  background: var(--page-background);
 }
 
 .page::before {
@@ -20,7 +17,7 @@
   content: "";
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.82), var(--black-alpha-18) 72%, transparent);
   pointer-events: none;
-  opacity: 0.42;
+  opacity: var(--page-grid-opacity);
 }
 
 .page::after {
@@ -31,6 +28,7 @@
     linear-gradient(180deg, transparent 0%, var(--black-alpha-12) 68%, var(--black-alpha-28) 100%);
   content: "";
   pointer-events: none;
+  opacity: var(--page-vignette-opacity);
 }
 
 .layout {

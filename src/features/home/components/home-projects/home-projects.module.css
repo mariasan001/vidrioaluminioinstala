@@ -149,7 +149,7 @@
 
 .carouselShell::after {
   right: 0;
-  background: linear-gradient(270deg, #252522, transparent);
+  background: linear-gradient(270deg, var(--color-edge-fade), transparent);
 }
 
 .reel {
@@ -176,7 +176,7 @@
   overflow: clip;
   border: 1px solid var(--white-alpha-08);
   border-radius: 30px;
-  background: rgba(17, 17, 16, 0.78);
+  background: var(--color-panel-glass);
   isolation: isolate;
   opacity: 0.58;
   cursor: pointer;
@@ -228,7 +228,7 @@
   height: clamp(68px, 7vw, 92px);
   border: 1px solid rgba(232, 255, 70, 0.36);
   border-radius: var(--radius-pill);
-  background: rgba(16, 16, 16, 0.82);
+  background: var(--color-control-glass);
   color: var(--accent);
   font-size: clamp(1.45rem, 2.8vw, 2rem);
   box-shadow:
@@ -255,7 +255,7 @@
   min-height: var(--space-17);
   padding: 0 var(--space-7);
   border-radius: var(--radius-pill);
-  background: rgba(15, 15, 15, 0.86);
+  background: var(--color-control-glass);
   color: var(--color-text);
   font-size: var(--text-sm);
   font-weight: 700;
@@ -329,7 +329,7 @@
   height: 44px;
   border: 1px solid var(--white-alpha-08);
   border-radius: var(--radius-pill);
-  background: rgba(17, 17, 16, 0.9);
+  background: var(--color-panel-glass-strong);
   color: var(--color-text);
   font-size: 1.15rem;
   box-shadow: 0 var(--space-6) 26px var(--black-alpha-18);
@@ -350,7 +350,7 @@
   padding: 0 10px;
   border: 1px solid var(--white-alpha-08);
   border-radius: var(--radius-pill);
-  background: rgba(17, 17, 16, 0.9);
+  background: var(--color-panel-glass-strong);
   box-shadow: 0 var(--space-6) 26px var(--black-alpha-18);
 }
 
@@ -407,7 +407,7 @@
   padding: var(--space-7) var(--space-8);
   border: 1px solid rgba(245, 245, 241, 0.12);
   border-radius: 20px 20px 20px var(--radius-xs);
-  background: rgba(12, 12, 12, 0.74);
+  background: var(--color-control-glass);
   box-shadow:
     0 var(--space-9) 38px var(--black-alpha-24),
     inset 0 1px 0 var(--white-alpha-06);
@@ -419,7 +419,7 @@
   bottom: -10px;
   width: var(--space-9);
   height: var(--space-9);
-  background: rgba(12, 12, 12, 0.74);
+  background: var(--color-control-glass);
   clip-path: polygon(0 0, 100% 0, 0 100%);
   content: "";
 }
@@ -637,7 +637,7 @@
   display: grid;
   place-items: center;
   padding: var(--space-12);
-  background: rgba(6, 6, 6, 0.88);
+  background: var(--color-modal-backdrop);
 }
 
 .viewerPanel {
@@ -650,7 +650,7 @@
   padding: var(--space-9);
   border: 1px solid var(--white-alpha-08);
   border-radius: 30px;
-  background: #111110;
+  background: var(--color-panel-solid);
   box-shadow: 0 var(--space-14) 80px rgba(0, 0, 0, 0.42);
 }
 

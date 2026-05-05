@@ -1,4 +1,6 @@
 :root {
+  color-scheme: dark;
+
   --color-background: #2f2f2c;
   --color-background-deep: #20201f;
   --color-background-mid: #292927;
@@ -19,6 +21,82 @@
   --color-accent: #e8ff46;
   --color-accent-strong: #d8f437;
   --color-accent-contrast: #101010;
+  --color-home-gradient-start: var(--color-background-soft);
+  --color-home-gradient-mid: var(--color-background-mid);
+  --color-home-gradient-end: var(--color-background-deep);
+  --color-service-gradient-mid: #232320;
+  --color-service-gradient-end: #1a1a18;
+  --page-background:
+    linear-gradient(115deg, var(--accent-alpha-055) 0%, transparent 26%),
+    linear-gradient(245deg, rgba(255, 255, 255, 0.045) 0%, transparent 34%),
+    linear-gradient(180deg, var(--color-home-gradient-start) 0%, var(--color-home-gradient-mid) 42%, var(--color-home-gradient-end) 100%);
+  --page-grid-opacity: 0.42;
+  --page-vignette-opacity: 1;
+  --service-page-background:
+    radial-gradient(circle at 78% 8%, var(--accent-alpha-12), transparent 28%),
+    linear-gradient(180deg, var(--color-background) 0%, var(--color-service-gradient-mid) 48%, var(--color-service-gradient-end) 100%);
+  --color-nav-surface: rgba(16, 16, 16, 0.94);
+  --color-nav-text: #d8d8d2;
+  --color-nav-text-strong: #e6e6df;
+  --color-nav-mobile-text: #d0d0ca;
+  --color-panel-glass: rgba(17, 17, 16, 0.78);
+  --color-panel-glass-strong: rgba(17, 17, 16, 0.9);
+  --color-panel-solid: #111110;
+  --color-modal-backdrop: rgba(6, 6, 6, 0.88);
+  --color-control-glass: rgba(16, 16, 16, 0.82);
+  --color-field-surface: rgba(255, 255, 255, 0.045);
+  --color-field-option: #181816;
+  --color-edge-fade: #252522;
+  --color-inverse-button-bg: #f7f7f2;
+  --color-inverse-button-text: #111111;
+  --hero-scrim: rgba(0, 0, 0, 0.34);
+  --hero-scrim-strong: rgba(0, 0, 0, 0.42);
+  --hero-home-shade:
+    linear-gradient(
+      90deg,
+      rgba(5, 5, 5, 0.88) 0%,
+      rgba(5, 5, 5, 0.82) 24%,
+      rgba(5, 5, 5, 0.62) 40%,
+      rgba(5, 5, 5, 0.32) 50%,
+      rgba(5, 5, 5, 0.12) 58%,
+      rgba(5, 5, 5, 0) 100%
+    ),
+    linear-gradient(180deg, rgba(8, 8, 8, 0.18), rgba(8, 8, 8, 0.06));
+  --hero-home-shade-tablet:
+    linear-gradient(180deg, rgba(6, 6, 6, 0.78), rgba(6, 6, 6, 0.48)),
+    linear-gradient(135deg, var(--white-alpha-03), transparent);
+  --hero-home-shade-mobile:
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 5, 0.82) 0%,
+      rgba(5, 5, 5, 0.7) 22%,
+      rgba(5, 5, 5, 0.5) 44%,
+      rgba(5, 5, 5, 0.2) 66%,
+      rgba(5, 5, 5, 0.08) 82%,
+      rgba(5, 5, 5, 0) 100%
+    );
+  --hero-service-shade:
+    linear-gradient(
+      92deg,
+      rgba(5, 5, 5, 0.92) 0%,
+      rgba(5, 5, 5, 0.84) 20%,
+      rgba(5, 5, 5, 0.58) 40%,
+      rgba(5, 5, 5, 0.24) 58%,
+      rgba(5, 5, 5, 0.14) 70%,
+      rgba(5, 5, 5, 0.52) 100%
+    ),
+    linear-gradient(180deg, rgba(8, 8, 8, 0.1), rgba(8, 8, 8, 0.34));
+  --hero-service-shade-mobile:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.3) 0%, rgba(5, 5, 5, 0.56) 38%, rgba(5, 5, 5, 0.88) 100%),
+    linear-gradient(90deg, rgba(5, 5, 5, 0.32), rgba(5, 5, 5, 0.18));
+  --hero-panel-surface:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), var(--white-alpha-02)),
+    rgba(10, 10, 10, 0.28);
+  --hero-title-shadow: 0 10px var(--space-14) rgba(0, 0, 0, 0.34);
+  --hero-copy-shadow: 0 6px var(--space-9) var(--black-alpha-24);
+  --media-shade:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.42)),
+    linear-gradient(135deg, var(--accent-alpha-12), transparent 42%);
 
   --background: var(--color-background);
   --foreground: var(--color-text);

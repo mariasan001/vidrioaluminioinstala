@@ -17,7 +17,7 @@
   padding: clamp(var(--space-14), 7vw, 64px);
   border: 1px solid var(--white-alpha-10);
   border-radius: var(--radius-4xl);
-  background: rgba(20, 20, 19, 0.88);
+  background: var(--color-panel-glass-strong);
   box-shadow: 0 var(--space-14) 80px var(--black-alpha-32);
 }
 
@@ -71,7 +71,7 @@
 }
 
 .secondary {
-  border: 1px solid rgba(245, 245, 241, 0.16);
+  border: 1px solid var(--white-alpha-10);
   color: var(--color-text);
 }
 

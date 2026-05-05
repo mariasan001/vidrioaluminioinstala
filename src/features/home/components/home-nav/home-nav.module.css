@@ -15,7 +15,7 @@
   padding: 10px var(--space-8);
   border: 1px solid var(--white-alpha-08);
   border-radius: var(--radius-pill);
-  background: rgba(16, 16, 16, 0.94);
+  background: var(--color-nav-surface);
   box-shadow:
     0 var(--space-9) var(--space-20) var(--black-alpha-24),
     0 1px 0 var(--white-alpha-04) inset;
@@ -95,7 +95,7 @@
   gap: 6px;
   min-height: 38px;
   padding: 0 var(--space-6) 0 10px;
-  color: #d8d8d2;
+  color: var(--color-nav-text);
   white-space: nowrap;
   border-right: 1px solid var(--white-alpha-08);
 }
@@ -121,7 +121,7 @@
 }
 
 .contactInline strong {
-  color: #e6e6df;
+  color: var(--color-nav-text-strong);
   font-size: var(--text-base);
   font-weight: 500;
 }
@@ -431,7 +431,7 @@
   .mobileInfoBlock {
     display: grid;
     gap: 4px;
-    color: #d0d0ca;
+    color: var(--color-nav-mobile-text);
   }
 
   .mobileInfoBlock p:first-child {
