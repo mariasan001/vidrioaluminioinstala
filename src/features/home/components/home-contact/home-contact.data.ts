@@ -1,9 +1,11 @@
+import { whatsappDirectUrl } from "../home-floating-quote/home-floating-quote.data";
+
 export type ContactCard = {
   title: string;
   value: string;
   detail: string;
   action: string;
-  icon: "location" | "phone" | "clock";
+  icon: "location" | "phone" | "clock" | "whatsapp";
   href?: string;
   featured?: boolean;
 };
@@ -26,11 +28,11 @@ export const contactContent: ContactSectionContent = {
   title: "Cuéntanos qué quieres instalar",
   accentTitle: "y aterrizamos el siguiente paso",
   description:
-    "Agenda una cotización para ventanas, puertas, canceles, pérgolas, fachadas o barandales. Te atendemos en nuestra ubicación o por llamada directa.",
+    "Agenda una cotización para ventanas, puertas, canceles, pérgolas, fachadas o barandales. Te atendemos en nuestra ubicación, por llamada directa o por WhatsApp.",
   footer: {
     company: "Aluminio y Vidrio Instala",
     rights: "© 2026 · Todos los derechos reservados",
-    credit: "Desarrollado por Aurean",
+    credit: "Desarrollado por Aurenna",
   },
   cards: [
     {
@@ -48,6 +50,14 @@ export const contactContent: ContactSectionContent = {
       href: "tel:7293813723",
       action: "Llamar ahora",
       icon: "phone",
+    },
+    {
+      title: "WhatsApp",
+      value: "Respuesta directa",
+      detail: "Escríbenos para pedir información, resolver dudas o iniciar tu cotización.",
+      href: whatsappDirectUrl,
+      action: "Escribir por WhatsApp",
+      icon: "whatsapp",
       featured: true,
     },
     {

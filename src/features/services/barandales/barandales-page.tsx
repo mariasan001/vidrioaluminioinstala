@@ -23,6 +23,8 @@ export function BarandalesPage() {
         logoHref="/"
         mobileMenuLinks={barandalesMobileNavLinks}
         primaryLinks={barandalesNavLinks}
+        quoteService="Barandales"
+        quoteWhatsappHref={barandalesPageContent.cta.href}
         secondaryLinks={barandalesSecondaryNavLinks}
         scrollLinks={barandalesScrollSpyLinks}
       />
@@ -31,6 +33,8 @@ export function BarandalesPage() {
         actions={[
           {
             label: barandalesPageContent.cta.label,
+            service: "Barandales",
+            whatsappHref: barandalesPageContent.cta.href,
             type: "quote",
           },
           {
@@ -50,11 +54,17 @@ export function BarandalesPage() {
       <BarandalesUseCasesSection />
       <BarandalesQualitySection />
 
-      <BarandalesTypesSection />
+      <BarandalesTypesSection
+        quoteService="Barandales"
+        quoteWhatsappHref={barandalesPageContent.cta.href}
+      />
 
       <HomeProjects />
       <HomeContact />
-      <HomeFloatingQuote />
+      <HomeFloatingQuote
+        defaultService="Barandales"
+        whatsappHref={barandalesPageContent.cta.href}
+      />
     </main>
   );
 }

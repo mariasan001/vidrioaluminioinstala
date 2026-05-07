@@ -23,6 +23,8 @@ export function VentanasPage() {
         logoHref="/"
         mobileMenuLinks={ventanasMobileNavLinks}
         primaryLinks={ventanasNavLinks}
+        quoteService="Ventanas"
+        quoteWhatsappHref={ventanasPageContent.cta.href}
         secondaryLinks={ventanasSecondaryNavLinks}
         scrollLinks={ventanasScrollSpyLinks}
       />
@@ -31,6 +33,8 @@ export function VentanasPage() {
         actions={[
           {
             label: ventanasPageContent.cta.label,
+            service: "Ventanas",
+            whatsappHref: ventanasPageContent.cta.href,
             type: "quote",
           },
           {
@@ -58,11 +62,19 @@ export function VentanasPage() {
       />
       <BarandalesQualitySection content={ventanasPageContent} />
 
-      <BarandalesTypesSection content={ventanasPageContent} railLabel="Tipos de ventana" />
+      <BarandalesTypesSection
+        content={ventanasPageContent}
+        quoteService="Ventanas"
+        quoteWhatsappHref={ventanasPageContent.cta.href}
+        railLabel="Tipos de ventana"
+      />
 
       <HomeProjects />
       <HomeContact />
-      <HomeFloatingQuote />
+      <HomeFloatingQuote
+        defaultService="Ventanas"
+        whatsappHref={ventanasPageContent.cta.href}
+      />
     </main>
   );
 }

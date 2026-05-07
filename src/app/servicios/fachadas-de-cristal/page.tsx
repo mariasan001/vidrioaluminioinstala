@@ -3,10 +3,9 @@ import { absoluteUrl, businessInfo, stringifyJsonLd } from "@/features/home/home
 import { FachadasPage } from "@/features/services/fachadas/fachadas-page";
 import { fachadasPageContent } from "@/features/services/fachadas/fachadas-page.data";
 
-const serviceTitle =
-  "Fachadas de cristal en Toluca | Diseño e instalación a medida";
+const serviceTitle = "Fachadas de cristal en Toluca";
 const serviceDescription =
-  "Diseño e instalación de fachadas de cristal en Toluca. Soluciones a medida con vidrio templado, aluminio y una presencia moderna para proyectos residenciales y comerciales.";
+  "Diseño e instalación de fachadas de cristal en Toluca con vidrio templado y aluminio para proyectos residenciales y comerciales a medida.";
 
 export const metadata: Metadata = {
   title: serviceTitle,
@@ -62,12 +61,16 @@ export default function Page() {
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": absoluteUrl("/servicios/fachadas-de-cristal#servicio"),
     name: "Fachadas de cristal",
     serviceType: "Diseño e instalación de fachadas de cristal",
     description: serviceDescription,
+    inLanguage: "es-MX",
     url: absoluteUrl("/servicios/fachadas-de-cristal"),
+    mainEntityOfPage: absoluteUrl("/servicios/fachadas-de-cristal"),
     image: absoluteUrl(fachadasPageContent.image.src),
     provider: {
+      "@id": absoluteUrl("/#negocio"),
       "@type": "HomeAndConstructionBusiness",
       name: businessInfo.name,
       url: absoluteUrl(),

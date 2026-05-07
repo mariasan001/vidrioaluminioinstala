@@ -23,6 +23,8 @@ export function FachadasPage() {
         logoHref="/"
         mobileMenuLinks={fachadasMobileNavLinks}
         primaryLinks={fachadasNavLinks}
+        quoteService="Fachadas"
+        quoteWhatsappHref={fachadasPageContent.cta.href}
         secondaryLinks={fachadasSecondaryNavLinks}
         scrollLinks={fachadasScrollSpyLinks}
       />
@@ -31,6 +33,8 @@ export function FachadasPage() {
         actions={[
           {
             label: fachadasPageContent.cta.label,
+            service: "Fachadas",
+            whatsappHref: fachadasPageContent.cta.href,
             type: "quote",
           },
           {
@@ -58,11 +62,19 @@ export function FachadasPage() {
       />
       <BarandalesQualitySection content={fachadasPageContent} />
 
-      <BarandalesTypesSection content={fachadasPageContent} railLabel="Tipos de fachada" />
+      <BarandalesTypesSection
+        content={fachadasPageContent}
+        quoteService="Fachadas"
+        quoteWhatsappHref={fachadasPageContent.cta.href}
+        railLabel="Tipos de fachada"
+      />
 
       <HomeProjects />
       <HomeContact />
-      <HomeFloatingQuote />
+      <HomeFloatingQuote
+        defaultService="Fachadas"
+        whatsappHref={fachadasPageContent.cta.href}
+      />
     </main>
   );
 }

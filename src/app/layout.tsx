@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import {
+  GoogleTagManagerScript,
+  ServiceViewTracker,
+} from "@/features/analytics";
 import { absoluteUrl, homeMetadata, siteUrl } from "@/features/home/home-seo";
 import "./globals.css";
 
@@ -10,9 +14,9 @@ export const metadata: Metadata = {
   },
   description: homeMetadata.description,
   applicationName: "Aluminio y Vidrio Instala",
-  authors: [{ name: "Aurean" }],
-  creator: "Aurean",
-  publisher: "Aurean",
+  authors: [{ name: "Aurenna" }],
+  creator: "Aurenna",
+  publisher: "Aurenna",
   keywords: [
     "aluminio y vidrio Toluca",
     "canceler\u00eda en Toluca",
@@ -59,7 +63,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" data-scroll-behavior="smooth">
-      <body>{children}</body>
+      <body>
+        <GoogleTagManagerScript />
+        {children}
+        <ServiceViewTracker />
+      </body>
     </html>
   );
 }

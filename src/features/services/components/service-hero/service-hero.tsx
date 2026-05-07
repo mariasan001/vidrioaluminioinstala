@@ -5,6 +5,8 @@ import styles from "./service-hero.module.css";
 export type ServiceHeroAction =
   | {
       label: string;
+      service?: string;
+      whatsappHref?: string;
       type: "quote";
     }
   | {
@@ -76,6 +78,8 @@ export function ServiceHero({
                   <ServiceHeroQuoteButton
                     key={action.label}
                     label={action.label}
+                    service={action.service}
+                    whatsappHref={action.whatsappHref}
                   />
                 ) : (
                   <a

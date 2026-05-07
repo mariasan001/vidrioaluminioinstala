@@ -23,6 +23,8 @@ export function PuertasPage() {
         logoHref="/"
         mobileMenuLinks={puertasMobileNavLinks}
         primaryLinks={puertasNavLinks}
+        quoteService="Puertas"
+        quoteWhatsappHref={puertasPageContent.cta.href}
         secondaryLinks={puertasSecondaryNavLinks}
         scrollLinks={puertasScrollSpyLinks}
       />
@@ -31,6 +33,8 @@ export function PuertasPage() {
         actions={[
           {
             label: puertasPageContent.cta.label,
+            service: "Puertas",
+            whatsappHref: puertasPageContent.cta.href,
             type: "quote",
           },
           {
@@ -58,11 +62,19 @@ export function PuertasPage() {
       />
       <BarandalesQualitySection content={puertasPageContent} />
 
-      <BarandalesTypesSection content={puertasPageContent} railLabel="Tipos de puerta" />
+      <BarandalesTypesSection
+        content={puertasPageContent}
+        quoteService="Puertas"
+        quoteWhatsappHref={puertasPageContent.cta.href}
+        railLabel="Tipos de puerta"
+      />
 
       <HomeProjects />
       <HomeContact />
-      <HomeFloatingQuote />
+      <HomeFloatingQuote
+        defaultService="Puertas"
+        whatsappHref={puertasPageContent.cta.href}
+      />
     </main>
   );
 }

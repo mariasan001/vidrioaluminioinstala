@@ -23,6 +23,8 @@ export function PergolasPage() {
         logoHref="/"
         mobileMenuLinks={pergolasMobileNavLinks}
         primaryLinks={pergolasNavLinks}
+        quoteService="Pérgolas"
+        quoteWhatsappHref={pergolasPageContent.cta.href}
         secondaryLinks={pergolasSecondaryNavLinks}
         scrollLinks={pergolasScrollSpyLinks}
       />
@@ -31,6 +33,8 @@ export function PergolasPage() {
         actions={[
           {
             label: pergolasPageContent.cta.label,
+            service: "Pérgolas",
+            whatsappHref: pergolasPageContent.cta.href,
             type: "quote",
           },
           {
@@ -58,11 +62,19 @@ export function PergolasPage() {
       />
       <BarandalesQualitySection content={pergolasPageContent} />
 
-      <BarandalesTypesSection content={pergolasPageContent} railLabel="Tipos de pérgola" />
+      <BarandalesTypesSection
+        content={pergolasPageContent}
+        quoteService="Pérgolas"
+        quoteWhatsappHref={pergolasPageContent.cta.href}
+        railLabel="Tipos de pérgola"
+      />
 
       <HomeProjects />
       <HomeContact />
-      <HomeFloatingQuote />
+      <HomeFloatingQuote
+        defaultService="Pérgolas"
+        whatsappHref={pergolasPageContent.cta.href}
+      />
     </main>
   );
 }

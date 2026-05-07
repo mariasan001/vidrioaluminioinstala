@@ -3,10 +3,9 @@ import { absoluteUrl, businessInfo, stringifyJsonLd } from "@/features/home/home
 import { VentanasPage } from "@/features/services/ventanas/ventanas-page";
 import { ventanasPageContent } from "@/features/services/ventanas/ventanas-page.data";
 
-const serviceTitle =
-  "Ventanas de aluminio y cristal en Toluca | Diseño e instalación";
+const serviceTitle = "Ventanas de aluminio y cristal en Toluca";
 const serviceDescription =
-  "Diseño e instalación de ventanas de aluminio y cristal en Toluca. Soluciones a medida para mejorar luz natural, ventilación, aislamiento y confort interior.";
+  "Diseño e instalación de ventanas de aluminio y cristal en Toluca para mejorar luz natural, ventilación, aislamiento y confort interior.";
 
 export const metadata: Metadata = {
   title: serviceTitle,
@@ -63,12 +62,16 @@ export default function Page() {
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": absoluteUrl("/servicios/ventanas#servicio"),
     name: "Ventanas de aluminio y cristal",
     serviceType: "Diseño e instalación de ventanas",
     description: serviceDescription,
+    inLanguage: "es-MX",
     url: absoluteUrl("/servicios/ventanas"),
+    mainEntityOfPage: absoluteUrl("/servicios/ventanas"),
     image: absoluteUrl(ventanasPageContent.image.src),
     provider: {
+      "@id": absoluteUrl("/#negocio"),
       "@type": "HomeAndConstructionBusiness",
       name: businessInfo.name,
       url: absoluteUrl(),

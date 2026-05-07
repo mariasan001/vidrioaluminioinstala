@@ -21,6 +21,8 @@ export function HomeNav({
   logoHref = "#inicio",
   mobileMenuLinks = mobileLinks,
   primaryLinks = desktopPrimaryLinks,
+  quoteService,
+  quoteWhatsappHref,
   secondaryLinks = desktopSecondaryLinks,
   scrollLinks = scrollSpyLinks,
 }: HomeNavProps) {
@@ -53,7 +55,11 @@ export function HomeNav({
 
   const openQuoteForm = () => {
     setIsMobileMenuOpen(false);
-    openQuoteDialog();
+    openQuoteDialog({
+      origin: "navigation_quote_cta",
+      service: quoteService,
+      whatsappHref: quoteWhatsappHref,
+    });
   };
 
   return (

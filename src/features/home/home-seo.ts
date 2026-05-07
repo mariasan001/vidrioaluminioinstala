@@ -49,8 +49,18 @@ export const localBusinessJsonLd = {
   image: absoluteUrl(homeMetadata.image),
   logo: absoluteUrl("/img/logo.webp"),
   description: businessInfo.description,
+  inLanguage: "es-MX",
   telephone: businessInfo.phoneInternational,
   sameAs: [businessInfo.facebook],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      telephone: businessInfo.phoneInternational,
+      areaServed: "MX",
+      availableLanguage: ["es-MX"],
+    },
+  ],
   address: {
     "@type": "PostalAddress",
     streetAddress: businessInfo.address.street,
@@ -77,6 +87,7 @@ export const localBusinessJsonLd = {
       closes: "18:00",
     },
   ],
+  knowsAbout: businessInfo.services,
   makesOffer: businessInfo.services.map((service) => ({
     "@type": "Offer",
     itemOffered: {
@@ -84,6 +95,19 @@ export const localBusinessJsonLd = {
       name: service,
     },
   })),
+};
+
+export const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": absoluteUrl("/#website"),
+  url: absoluteUrl("/"),
+  name: businessInfo.name,
+  description: homeMetadata.description,
+  inLanguage: "es-MX",
+  publisher: {
+    "@id": absoluteUrl("/#negocio"),
+  },
 };
 
 export function stringifyJsonLd(data: unknown) {

@@ -3,10 +3,9 @@ import { absoluteUrl, businessInfo, stringifyJsonLd } from "@/features/home/home
 import { PergolasPage } from "@/features/services/pergolas/pergolas-page";
 import { pergolasPageContent } from "@/features/services/pergolas/pergolas-page.data";
 
-const serviceTitle =
-  "Pérgolas de aluminio y cristal en Toluca | Diseño e instalación";
+const serviceTitle = "Pérgolas de aluminio y cristal en Toluca";
 const serviceDescription =
-  "Diseño e instalación de pérgolas modernas, domos de cristal y techos de vidrio en Toluca. Soluciones a medida para exterior con sombra, luz y presencia arquitectónica.";
+  "Diseño e instalación de pérgolas, domos y techos de vidrio en Toluca con soluciones a medida para sombra, luz y presencia arquitectónica.";
 
 export const metadata: Metadata = {
   title: serviceTitle,
@@ -63,12 +62,16 @@ export default function Page() {
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": absoluteUrl("/servicios/pergolas#servicio"),
     name: "Pérgolas de aluminio y cristal",
     serviceType: "Diseño e instalación de pérgolas, domos y techos",
     description: serviceDescription,
+    inLanguage: "es-MX",
     url: absoluteUrl("/servicios/pergolas"),
+    mainEntityOfPage: absoluteUrl("/servicios/pergolas"),
     image: absoluteUrl(pergolasPageContent.image.src),
     provider: {
+      "@id": absoluteUrl("/#negocio"),
       "@type": "HomeAndConstructionBusiness",
       name: businessInfo.name,
       url: absoluteUrl(),

@@ -59,6 +59,8 @@ type TypesContent = {
 
 type BarandalesTypesSectionProps = {
   content?: TypesContent;
+  quoteService?: string;
+  quoteWhatsappHref?: string;
   railLabel?: string;
 };
 
@@ -68,6 +70,8 @@ function renderRating(value: number) {
 
 export function BarandalesTypesSection({
   content = barandalesPageContent,
+  quoteService = "Barandales",
+  quoteWhatsappHref = barandalesPageContent.cta.href,
   railLabel = "Tipos de barandal",
 }: BarandalesTypesSectionProps = {}) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
@@ -206,7 +210,13 @@ export function BarandalesTypesSection({
           <button
             className={styles.typeCta}
             type="button"
-            onClick={openQuoteDialog}
+            onClick={() =>
+              openQuoteDialog({
+                origin: "service_types_quote_cta",
+                service: quoteService,
+                whatsappHref: quoteWhatsappHref,
+              })
+            }
           >
             Quiero este para mi proyecto
           </button>

@@ -22,14 +22,6 @@
   animation: heroImageIn 1200ms var(--ease-out) both;
 }
 
-.desktopImage {
-  display: block;
-}
-
-.mobileImage {
-  display: none;
-}
-
 .hero::before {
   position: absolute;
   inset: 0;
@@ -347,14 +339,6 @@
     min-height: 760px;
     margin-top: var(--space-9);
     border-radius: 30px;
-  }
-
-  .desktopImage {
-    display: none;
-  }
-
-  .mobileImage {
-    display: block;
   }
 
   .backgroundImage {

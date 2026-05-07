@@ -6,6 +6,8 @@ export type HomeNavProps = {
   logoHref?: string;
   mobileMenuLinks?: readonly NavItem[];
   primaryLinks?: readonly NavItem[];
+  quoteService?: string;
+  quoteWhatsappHref?: string;
   secondaryLinks?: readonly NavItem[];
   scrollLinks?: readonly NavItem[];
 };

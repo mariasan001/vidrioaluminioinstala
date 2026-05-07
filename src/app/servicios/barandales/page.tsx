@@ -3,10 +3,9 @@ import { absoluteUrl, businessInfo, stringifyJsonLd } from "@/features/home/home
 import { BarandalesPage } from "@/features/services/barandales/barandales-page";
 import { barandalesPageContent } from "@/features/services/barandales/barandales-page.data";
 
-const serviceTitle =
-  "Barandales de aluminio y vidrio en Toluca | Escaleras, balcones y terrazas";
+const serviceTitle = "Barandales de aluminio y vidrio en Toluca";
 const serviceDescription =
-  "Diseño e instalación de barandales de aluminio y vidrio para escaleras, balcones y terrazas en Toluca. Soluciones a medida con cristal, herrajes y perfiles limpios para hogar y negocio.";
+  "Diseño e instalación de barandales de aluminio y vidrio en Toluca para escaleras, balcones y terrazas, con soluciones a medida para hogar y negocio.";
 
 export const metadata: Metadata = {
   title: serviceTitle,
@@ -63,12 +62,16 @@ export default function Page() {
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": absoluteUrl("/servicios/barandales#servicio"),
     name: "Barandales de aluminio y vidrio",
     serviceType: "Diseño e instalación de barandales",
     description: serviceDescription,
+    inLanguage: "es-MX",
     url: absoluteUrl("/servicios/barandales"),
+    mainEntityOfPage: absoluteUrl("/servicios/barandales"),
     image: absoluteUrl(barandalesPageContent.image.src),
     provider: {
+      "@id": absoluteUrl("/#negocio"),
       "@type": "HomeAndConstructionBusiness",
       name: businessInfo.name,
       url: absoluteUrl(),

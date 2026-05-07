@@ -3,10 +3,9 @@ import { absoluteUrl, businessInfo, stringifyJsonLd } from "@/features/home/home
 import { CancelesPage } from "@/features/services/canceles/canceles-page";
 import { cancelesPageContent } from "@/features/services/canceles/canceles-page.data";
 
-const serviceTitle =
-  "Canceles de baño en Toluca | Diseño e instalación a medida";
+const serviceTitle = "Canceles de baño en Toluca";
 const serviceDescription =
-  "Diseño e instalación de canceles de baño en Toluca. Soluciones completas de cancelería para baño con vidrio templado, perfiles limpios y proyectos a medida.";
+  "Diseño e instalación de canceles de baño en Toluca con vidrio templado, perfiles limpios y soluciones a medida para ordenar el espacio.";
 
 export const metadata: Metadata = {
   title: serviceTitle,
@@ -63,12 +62,16 @@ export default function Page() {
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": absoluteUrl("/servicios/canceles-de-bano#servicio"),
     name: "Canceles de baño",
     serviceType: "Diseño e instalación de canceles de baño",
     description: serviceDescription,
+    inLanguage: "es-MX",
     url: absoluteUrl("/servicios/canceles-de-bano"),
+    mainEntityOfPage: absoluteUrl("/servicios/canceles-de-bano"),
     image: absoluteUrl(cancelesPageContent.image.src),
     provider: {
+      "@id": absoluteUrl("/#negocio"),
       "@type": "HomeAndConstructionBusiness",
       name: businessInfo.name,
       url: absoluteUrl(),

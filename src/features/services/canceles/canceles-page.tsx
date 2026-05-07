@@ -2,10 +2,10 @@ import { HomeContact } from "@/features/home/components/home-contact";
 import { HomeFloatingQuote } from "@/features/home/components/home-floating-quote";
 import { HomeNav } from "@/features/home/components/home-nav";
 import { HomeProjects } from "@/features/home/components/home-projects";
-import { ServiceHero } from "@/features/services/components/service-hero";
 import { BarandalesQualitySection } from "@/features/services/barandales/barandales-quality-section";
 import { BarandalesTypesSection } from "@/features/services/barandales/barandales-types-section";
 import { BarandalesUseCasesSection } from "@/features/services/barandales/barandales-use-cases-section";
+import { ServiceHero } from "@/features/services/components/service-hero";
 import {
   cancelesMobileNavLinks,
   cancelesNavLinks,
@@ -23,6 +23,8 @@ export function CancelesPage() {
         logoHref="/"
         mobileMenuLinks={cancelesMobileNavLinks}
         primaryLinks={cancelesNavLinks}
+        quoteService="Canceles de baño"
+        quoteWhatsappHref={cancelesPageContent.cta.href}
         secondaryLinks={cancelesSecondaryNavLinks}
         scrollLinks={cancelesScrollSpyLinks}
       />
@@ -31,6 +33,8 @@ export function CancelesPage() {
         actions={[
           {
             label: cancelesPageContent.cta.label,
+            service: "Canceles de baño",
+            whatsappHref: cancelesPageContent.cta.href,
             type: "quote",
           },
           {
@@ -58,11 +62,19 @@ export function CancelesPage() {
       />
       <BarandalesQualitySection content={cancelesPageContent} />
 
-      <BarandalesTypesSection content={cancelesPageContent} railLabel="Tipos de cancel de baño" />
+      <BarandalesTypesSection
+        content={cancelesPageContent}
+        quoteService="Canceles de baño"
+        quoteWhatsappHref={cancelesPageContent.cta.href}
+        railLabel="Tipos de cancel de baño"
+      />
 
       <HomeProjects />
       <HomeContact />
-      <HomeFloatingQuote />
+      <HomeFloatingQuote
+        defaultService="Canceles de baño"
+        whatsappHref={cancelesPageContent.cta.href}
+      />
     </main>
   );
 }

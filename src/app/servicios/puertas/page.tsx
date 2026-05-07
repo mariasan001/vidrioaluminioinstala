@@ -3,10 +3,9 @@ import { absoluteUrl, businessInfo, stringifyJsonLd } from "@/features/home/home
 import { PuertasPage } from "@/features/services/puertas/puertas-page";
 import { puertasPageContent } from "@/features/services/puertas/puertas-page.data";
 
-const serviceTitle =
-  "Puertas de aluminio y cristal en Toluca | Diseño e instalación";
+const serviceTitle = "Puertas de aluminio y cristal en Toluca";
 const serviceDescription =
-  "Diseño e instalación de puertas de aluminio y cristal en Toluca. Soluciones a medida para accesos, interiores y exteriores con luz, seguridad y apertura cómoda.";
+  "Diseño e instalación de puertas de aluminio y cristal en Toluca para accesos, interiores y exteriores con soluciones a medida.";
 
 export const metadata: Metadata = {
   title: serviceTitle,
@@ -63,12 +62,16 @@ export default function Page() {
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": absoluteUrl("/servicios/puertas#servicio"),
     name: "Puertas de aluminio y cristal",
     serviceType: "Diseño e instalación de puertas",
     description: serviceDescription,
+    inLanguage: "es-MX",
     url: absoluteUrl("/servicios/puertas"),
+    mainEntityOfPage: absoluteUrl("/servicios/puertas"),
     image: absoluteUrl(puertasPageContent.image.src),
     provider: {
+      "@id": absoluteUrl("/#negocio"),
       "@type": "HomeAndConstructionBusiness",
       name: businessInfo.name,
       url: absoluteUrl(),

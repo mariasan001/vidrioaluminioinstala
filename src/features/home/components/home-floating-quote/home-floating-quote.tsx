@@ -3,14 +3,20 @@
 import {
   FormEvent,
   type KeyboardEvent as ReactKeyboardEvent,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
 import { HiOutlineXMark } from "react-icons/hi2";
+import {
+  trackQuoteSubmit,
+  trackWhatsappClick,
+} from "@/features/analytics";
 import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
 import styles from "./home-floating-quote.module.css";
 import {
+  extractWhatsappTextFromHref,
   quoteFormOptions,
   whatsappPhoneNumber,
   whatsappReturnStorageKey,
@@ -18,14 +24,29 @@ import {
 import {
   openQuoteDialog,
   openQuoteDialogEventName,
+  type QuoteDialogOptions,
 } from "./quote-dialog";
 
-export function HomeFloatingQuote() {
+type HomeFloatingQuoteProps = {
+  defaultService?: string;
+  whatsappHref?: string;
+};
+
+const fallbackService = "Ventanas";
+
+export function HomeFloatingQuote({
+  defaultService = fallbackService,
+  whatsappHref,
+}: HomeFloatingQuoteProps = {}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [service, setService] = useState<string>("Ventanas");
+  const [quoteOrigin, setQuoteOrigin] = useState<string>("floating_quote_button");
+  const [service, setService] = useState<string>(defaultService);
   const [timing, setTiming] = useState<string>("Solo cotizo");
   const [workType, setWorkType] = useState<string>("Instalación nueva");
   const [photoStatus, setPhotoStatus] = useState<string>("La enviaré por WhatsApp");
+  const [prefilledWhatsappText, setPrefilledWhatsappText] = useState<string>(
+    extractWhatsappTextFromHref(whatsappHref),
+  );
   const modalRef = useRef<HTMLDivElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   useLockBodyScroll(isOpen);
@@ -39,10 +60,18 @@ export function HomeFloatingQuote() {
     });
   };
 
-  const openDialog = () => {
-    previousFocusRef.current = document.activeElement as HTMLElement | null;
-    setIsOpen(true);
-  };
+  const openDialog = useCallback(
+    (options?: QuoteDialogOptions) => {
+      previousFocusRef.current = document.activeElement as HTMLElement | null;
+      setQuoteOrigin(options?.origin ?? "floating_quote_button");
+      setService(options?.service ?? defaultService);
+      setPrefilledWhatsappText(
+        extractWhatsappTextFromHref(options?.whatsappHref ?? whatsappHref),
+      );
+      setIsOpen(true);
+    },
+    [defaultService, whatsappHref],
+  );
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -60,8 +89,9 @@ export function HomeFloatingQuote() {
       }
     };
 
-    const handleOpenQuoteDialog = () => {
-      openDialog();
+    const handleOpenQuoteDialog = (event: Event) => {
+      const customEvent = event as CustomEvent<QuoteDialogOptions>;
+      openDialog(customEvent.detail);
     };
 
     window.addEventListener("keydown", handleEscape);
@@ -73,7 +103,7 @@ export function HomeFloatingQuote() {
       window.removeEventListener("pageshow", handlePageShow);
       window.removeEventListener(openQuoteDialogEventName, handleOpenQuoteDialog);
     };
-  }, []);
+  }, [openDialog]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -131,7 +161,7 @@ export function HomeFloatingQuote() {
     const measurements = formData.get("measurements")?.toString() || "";
     const notes = formData.get("notes")?.toString() || "";
     const message = [
-      "*Nueva solicitud de cotización*",
+      prefilledWhatsappText || "Hola, quiero solicitar una cotización.",
       "",
       "*Proyecto*",
       `Servicio: ${service}`,
@@ -149,8 +179,22 @@ export function HomeFloatingQuote() {
       `Comentarios: ${notes || "Sin comentarios adicionales"}`,
     ].join("\n");
 
+    trackQuoteSubmit({
+      origin: quoteOrigin,
+      photoStatus,
+      service,
+      timing,
+      workType,
+    });
+
     closeQuoteDialog();
     const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`;
+    trackWhatsappClick({
+      ctaType: "quote_submit",
+      href: whatsappUrl,
+      placement: "quote_modal",
+      service,
+    });
     const whatsappWindow = window.open(whatsappUrl, "_blank");
 
     if (whatsappWindow) {
@@ -168,7 +212,13 @@ export function HomeFloatingQuote() {
         className={styles.button}
         type="button"
         aria-label="Generar cotización"
-        onClick={openQuoteDialog}
+        onClick={() =>
+          openQuoteDialog({
+            origin: "floating_quote_button",
+            service: defaultService,
+            whatsappHref,
+          })
+        }
       >
         <span className={styles.dot} aria-hidden="true" />
         <span>Generar cotización</span>

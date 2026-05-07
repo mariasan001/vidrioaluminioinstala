@@ -2,6 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/servicios/canceles",
+        destination: "/servicios/canceles-de-bano",
+        permanent: true,
+      },
+      {
+        source: "/servicios/fachadas",
+        destination: "/servicios/fachadas-de-cristal",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

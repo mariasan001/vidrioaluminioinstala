@@ -49,7 +49,11 @@ export function HomeHero() {
                   className={styles.primaryAction}
                   key={action.label}
                   type="button"
-                  onClick={openQuoteDialog}
+                  onClick={() =>
+                    openQuoteDialog({
+                      origin: "home_hero_quote_cta",
+                    })
+                  }
                 >
                   {action.label}
                 </button>

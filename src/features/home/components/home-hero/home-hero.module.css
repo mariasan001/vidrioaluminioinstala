@@ -23,10 +23,6 @@
   filter: blur(var(--space-4));
 }
 
-.mobileImage {
-  display: none;
-}
-
 .hero::before {
   position: absolute;
   inset: 0;
@@ -439,15 +435,6 @@
     margin-top: 4px;
     border-radius: var(--radius-4xl);
     min-height: 860px;
-  }
-
-  .desktopImage {
-    display: none;
-  }
-
-  .mobileImage {
-    display: block;
-    object-position: center center;
   }
 
   .hero::before {
