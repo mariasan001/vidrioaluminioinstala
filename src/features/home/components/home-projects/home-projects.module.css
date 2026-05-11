@@ -211,34 +211,9 @@
 }
 
 .projectTop,
-.projectCopy,
-.playButton {
+.projectCopy {
   position: relative;
   z-index: 2;
-}
-
-.playButton {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: clamp(68px, 7vw, 92px);
-  height: clamp(68px, 7vw, 92px);
-  border: 1px solid rgba(232, 255, 70, 0.36);
-  border-radius: var(--radius-pill);
-  background: var(--color-control-glass);
-  color: var(--accent);
-  font-size: clamp(1.45rem, 2.8vw, 2rem);
-  box-shadow:
-    0 20px 44px var(--black-alpha-32),
-    0 0 0 10px var(--accent-alpha-08);
-  transform: translate(-50%, -50%);
-}
-
-.playButton svg {
-  margin-left: 4px;
 }
 
 .projectTop {
@@ -315,8 +290,7 @@
   transform: translateX(-50%);
 }
 
-.carouselButton,
-.carouselDot {
+.carouselButton {
   border: 0;
   cursor: pointer;
 }
@@ -341,57 +315,62 @@
     box-shadow 180ms ease;
 }
 
-.carouselDots {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  min-height: 44px;
-  padding: 0 10px;
+.carouselStatus {
+  display: grid;
+  gap: 8px;
+  min-width: min(320px, 46vw);
+  padding: 10px 14px;
   border: 1px solid var(--white-alpha-08);
-  border-radius: var(--radius-pill);
+  border-radius: 22px;
   background: var(--color-panel-glass-strong);
   box-shadow: 0 var(--space-6) 26px var(--black-alpha-18);
 }
 
-.carouselDot {
+.carouselProgressMeta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.carouselCount {
+  color: var(--color-text);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.carouselCountLabel {
+  color: var(--text-alpha-58);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.carouselProgress {
   position: relative;
-  width: var(--space-14);
-  height: var(--space-14);
+  height: 8px;
+  overflow: hidden;
   border-radius: var(--radius-pill);
-  background: transparent;
-  transition:
-    width 220ms ease,
-    box-shadow 220ms ease;
+  background: rgba(245, 245, 241, 0.1);
 }
 
-.carouselDot::before {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 7px;
-  height: 7px;
-  border-radius: var(--radius-pill);
-  background: rgba(245, 245, 241, 0.28);
-  content: "";
-  transform: translate(-50%, -50%);
-  transition:
-    width 220ms ease,
-    background-color 220ms ease,
-    box-shadow 220ms ease;
-}
-
-.carouselDotActive {
-  width: var(--space-17);
-}
-
-.carouselDotActive::before {
-  width: var(--space-14);
-  background: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-alpha-10);
+.carouselProgressFill {
+  display: block;
+  height: 100%;
+  min-width: 14px;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0.9));
+  box-shadow: 0 0 0 1px var(--accent-alpha-18);
+  transition: width 260ms ease;
 }
 
 .carouselButton:focus-visible,
-.carouselDot:focus-visible {
+.carouselStatus:focus-within {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -428,10 +407,10 @@
   max-width: 36ch;
   margin: 0;
   color: var(--color-text);
-  font-family: var(--font-accent);
+  font-family: var(--font-body);
   font-size: clamp(0.86rem, 1vw, 0.96rem);
-  font-style: italic;
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0;
 }
@@ -471,10 +450,6 @@
     border-color: rgba(232, 255, 70, 0.62);
     color: var(--accent-contrast);
     box-shadow: 0 var(--space-7) var(--space-14) var(--accent-alpha-18);
-  }
-
-  .carouselDot:hover {
-    background: var(--text-alpha-62);
   }
 
   .projectAction:hover {
@@ -534,11 +509,16 @@
     position: static;
     flex-wrap: nowrap;
     gap: 10px;
-    width: auto;
-    max-width: none;
+    width: min(100%, 520px);
+    max-width: 100%;
     padding: 0 0 var(--space-9);
     margin: 0 auto;
     transform: none;
+  }
+
+  .carouselStatus {
+    min-width: 0;
+    flex: 1 1 auto;
   }
 
   .projectCard {
@@ -562,13 +542,12 @@
     font-size: var(--text-body);
   }
 
-  .carouselDots {
-    min-height: var(--space-20);
-    padding: 0 var(--space-6);
+  .carouselCount {
+    font-size: 0.76rem;
   }
 
-  .carouselDotActive {
-    width: var(--space-14);
+  .carouselCountLabel {
+    font-size: 0.62rem;
   }
 
   .projectType {
@@ -603,6 +582,19 @@
 }
 
 @media (max-width: 540px) {
+  .carouselControls {
+    gap: 8px;
+  }
+
+  .carouselStatus {
+    gap: 7px;
+    padding: 9px 12px;
+  }
+
+  .carouselProgressMeta {
+    gap: var(--space-4);
+  }
+
   .title {
     max-width: 25ch;
     font-size: clamp(1.58rem, 6.5vw, 1.96rem);
@@ -720,9 +712,10 @@
   max-width: 66ch;
   margin: 0;
   color: var(--color-text);
-  font-family: var(--font-accent);
+  font-family: var(--font-body);
   font-size: 0.95rem;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 500;
   line-height: 1.48;
 }
 
@@ -763,7 +756,7 @@
   .projectCard,
   .projectAction,
   .carouselButton,
-  .carouselDot {
+  .carouselProgressFill {
     transition: none;
   }
 }

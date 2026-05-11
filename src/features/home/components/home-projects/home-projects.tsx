@@ -6,7 +6,6 @@ import {
   HiChevronRight,
   HiMiniArrowsPointingIn,
   HiMiniArrowsPointingOut,
-  HiMiniPlay,
   HiOutlineSparkles,
 } from "react-icons/hi2";
 import styles from "./home-projects.module.css";
@@ -50,6 +49,10 @@ export function HomeProjects({
     openProjectViewer: openViewer,
     viewerRef,
   } = useProjectViewer({ projects });
+  const progressPercentage =
+    projects.length > 1
+      ? (activeIndex / (projects.length - 1)) * 100
+      : 100;
 
   const openProjectViewer = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -98,19 +101,23 @@ export function HomeProjects({
             <HiChevronLeft aria-hidden="true" />
           </button>
 
-          <div className={styles.carouselDots} aria-label="Seleccionar trabajo">
-            {projects.map((project, index) => (
-              <button
-                type="button"
-                key={project.title}
-                className={`${styles.carouselDot} ${
-                  activeIndex === index ? styles.carouselDotActive : ""
-                }`}
-                aria-label={`Ver ${project.title}`}
-                aria-current={activeIndex === index ? "true" : undefined}
-                onClick={() => goToProject(index)}
+          <div className={styles.carouselStatus}>
+            <div className={styles.carouselProgressMeta} aria-live="polite">
+              <span className={styles.carouselCount}>
+                {activeIndex + 1} / {projects.length}
+              </span>
+              <span className={styles.carouselCountLabel}>Proyecto actual</span>
+            </div>
+
+            <div
+              className={styles.carouselProgress}
+              aria-hidden="true"
+            >
+              <span
+                className={styles.carouselProgressFill}
+                style={{ width: `${progressPercentage}%` }}
               />
-            ))}
+            </div>
           </div>
 
           <button
@@ -145,7 +152,7 @@ export function HomeProjects({
             >
               <Image
                 src={project.image}
-                alt={project.title}
+                alt={project.alt}
                 fill
                 sizes="(max-width: 820px) 82vw, 34vw"
                 className={styles.projectImage}
@@ -153,12 +160,6 @@ export function HomeProjects({
               />
 
               <div className={styles.projectShade} />
-
-              {project.format === "video" ? (
-                <span className={styles.playButton} aria-hidden="true">
-                  <HiMiniPlay />
-                </span>
-              ) : null}
 
               <div className={styles.projectTop}>
                 <span className={styles.projectType}>
@@ -179,10 +180,10 @@ export function HomeProjects({
               </div>
 
               <div className={styles.projectCopy}>
-                <p>&ldquo;{project.testimonial}&rdquo;</p>
+                <p>{project.description}</p>
                 <div>
-                  <strong>{project.customer}</strong>
-                  <span>{project.location}</span>
+                  <strong>{project.title}</strong>
+                  {project.location ? <span>{project.location}</span> : null}
                 </div>
               </div>
             </article>
@@ -220,7 +221,7 @@ export function HomeProjects({
             <div className={styles.viewerImageWrap}>
               <Image
                 src={expandedProject.image}
-                alt={expandedProject.title}
+                alt={expandedProject.alt}
                 fill
                 sizes="100vw"
                 className={styles.viewerImage}
@@ -229,9 +230,9 @@ export function HomeProjects({
             </div>
 
             <div className={styles.viewerCopy}>
-              <p>&ldquo;{expandedProject.testimonial}&rdquo;</p>
+              <p>{expandedProject.description}</p>
               <span>
-                {expandedProject.customer} / {expandedProject.location}
+                {expandedProject.location ?? expandedProject.title}
               </span>
             </div>
           </div>
