@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/robots.txt/route": "/robots.txt",
+  "/servicios/barandales/page": "/servicios/barandales",
+  "/servicios/canceles-de-bano/page": "/servicios/canceles-de-bano",
+  "/servicios/fachadas-de-cristal/page": "/servicios/fachadas-de-cristal",
+  "/servicios/pergolas/page": "/servicios/pergolas",
+  "/servicios/puertas/page": "/servicios/puertas",
+  "/servicios/ventanas/page": "/servicios/ventanas",
+  "/sitemap.xml/route": "/sitemap.xml"
+}

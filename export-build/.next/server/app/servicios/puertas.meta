@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/servicios/layout,_N_T_/servicios/puertas/layout,_N_T_/servicios/puertas/page,_N_T_/servicios/puertas"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/servicios/puertas/__PAGE__",
+    "/servicios/puertas",
+    "/servicios",
+    "/_index",
+    "/_head"
+  ]
+}

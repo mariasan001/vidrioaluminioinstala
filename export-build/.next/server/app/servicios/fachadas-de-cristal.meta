@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/servicios/layout,_N_T_/servicios/fachadas-de-cristal/layout,_N_T_/servicios/fachadas-de-cristal/page,_N_T_/servicios/fachadas-de-cristal"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/servicios/fachadas-de-cristal/__PAGE__",
+    "/servicios/fachadas-de-cristal",
+    "/servicios",
+    "/_index",
+    "/_head"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/servicios/barandales/page": "app/servicios/barandales/page.js",
+  "/servicios/canceles-de-bano/page": "app/servicios/canceles-de-bano/page.js",
+  "/servicios/fachadas-de-cristal/page": "app/servicios/fachadas-de-cristal/page.js",
+  "/servicios/pergolas/page": "app/servicios/pergolas/page.js",
+  "/servicios/puertas/page": "app/servicios/puertas/page.js",
+  "/servicios/ventanas/page": "app/servicios/ventanas/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js"
+}
