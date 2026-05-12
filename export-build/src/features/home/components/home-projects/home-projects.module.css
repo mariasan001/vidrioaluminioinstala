@@ -161,7 +161,7 @@
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  touch-action: pan-x;
+  touch-action: auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -180,7 +180,8 @@
   isolation: isolate;
   opacity: 0.58;
   cursor: pointer;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
   transform: scale(0.965);
   transition:
     opacity 360ms ease,
@@ -501,8 +502,15 @@
   }
 
   .reel {
-    gap: var(--space-8);
-    padding: 0 var(--space-6) var(--space-4);
+    --mobile-card-width: min(88vw, 360px);
+    gap: var(--space-5);
+    padding:
+      0
+      max(calc((100vw - var(--mobile-card-width)) / 2), var(--space-6))
+      var(--space-4);
+    scroll-padding-inline:
+      max(calc((100vw - var(--mobile-card-width)) / 2), var(--space-6));
+    overscroll-behavior-y: auto;
   }
 
   .carouselControls {
@@ -522,18 +530,18 @@
   }
 
   .projectCard {
-    flex-basis: min(82vw, 360px);
+    flex-basis: var(--mobile-card-width);
     min-height: 430px;
     border-radius: 26px;
-    opacity: 0.46;
-    transform: scale(0.955);
+    opacity: 0.72;
+    transform: none;
   }
 
   .projectCardActive {
     border-color: var(--accent-alpha-32);
     box-shadow: 0 20px 42px var(--black-alpha-28);
     opacity: 1;
-    transform: scale(1);
+    transform: none;
   }
 
   .carouselButton {
@@ -606,8 +614,12 @@
     line-height: 1.76;
   }
 
+  .reel {
+    --mobile-card-width: min(90vw, 332px);
+    gap: var(--space-4);
+  }
+
   .projectCard {
-    flex-basis: min(84vw, 340px);
     min-height: 410px;
   }
 
