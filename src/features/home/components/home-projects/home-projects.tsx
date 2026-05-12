@@ -104,7 +104,7 @@ export function HomeProjects({
           <div className={styles.carouselStatus}>
             <div className={styles.carouselProgressMeta} aria-live="polite">
               <span className={styles.carouselCount}>
-                {activeIndex + 1} / {projects.length}
+                {activeIndex + 1} de {projects.length}
               </span>
               <span className={styles.carouselCountLabel}>Proyecto actual</span>
             </div>

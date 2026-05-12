@@ -158,7 +158,7 @@ export const ventanasPageContent = {
       {
         id: "linea-nacional",
         label: "Nacional",
-        title: "Línea Nacional 2” y 3”",
+        title: "Línea Nacional 2\" y 3\"",
         icon: "mesh",
         image: {
           src: "/img/ventanas/linea_nacional.webp",

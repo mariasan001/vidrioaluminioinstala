@@ -290,15 +290,31 @@ export function HomeFloatingQuote({
               <div className={styles.inputGrid}>
                 <label>
                   Nombre
-                  <input name="name" type="text" placeholder="Tu nombre" />
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder="Tu nombre"
+                    autoComplete="name"
+                  />
                 </label>
                 <label>
                   Teléfono
-                  <input name="phone" type="tel" placeholder="729 000 0000" />
+                  <input
+                    name="phone"
+                    type="tel"
+                    placeholder="729 000 0000"
+                    autoComplete="tel"
+                    inputMode="tel"
+                  />
                 </label>
                 <label>
                   Zona o colonia
-                  <input name="zone" type="text" placeholder="Toluca, Metepec..." />
+                  <input
+                    name="zone"
+                    type="text"
+                    placeholder="Toluca, Metepec..."
+                    autoComplete="address-level2"
+                  />
                 </label>
                 <label>
                   Medidas aproximadas
@@ -343,6 +359,7 @@ export function HomeFloatingQuote({
                 <textarea
                   name="notes"
                   placeholder="Ejemplo: quiero cambiar una ventana, tengo foto del espacio, busco color negro..."
+                  autoComplete="off"
                   rows={4}
                 />
               </label>

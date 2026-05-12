@@ -86,7 +86,7 @@ export function HomeContact({
                   });
                 }
               }}
-              rel={isExternal ? "noreferrer" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
               target={isExternal ? "_blank" : undefined}
             >
               {cardContent}

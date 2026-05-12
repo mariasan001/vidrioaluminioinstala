@@ -117,7 +117,13 @@ export function HomeNavMobile({
 
           <div className={styles.mobileMenuFooter}>
             <div className={styles.mobileInfoBlock}>
-              <p>729 381 3723</p>
+              <a
+                className={styles.mobileInfoLink}
+                href="tel:7293813723"
+                aria-label="Llamar al 729 381 3723"
+              >
+                729 381 3723
+              </a>
               <p>Contacto directo</p>
             </div>
 

@@ -216,6 +216,7 @@
 .socialLink:focus-visible,
 .mobileMenuButton:focus-visible,
 .mobileMenuLink:focus-visible,
+.mobileInfoLink:focus-visible,
 .mobileSocialLink:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -432,6 +433,23 @@
     display: grid;
     gap: 4px;
     color: var(--color-nav-mobile-text);
+  }
+
+  .mobileInfoLink {
+    color: var(--color-text);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .mobileInfoLink:hover {
+    color: var(--accent);
+  }
+
+  .mobileInfoLink:active {
+    transform: scale(0.98);
   }
 
   .mobileInfoBlock p:first-child {
