@@ -1,4 +1,5 @@
 export const analyticsEventNames = {
+  clickPhone: "click_phone",
   clickWhatsapp: "click_whatsapp",
   openQuoteModal: "open_quote_modal",
   serviceView: "service_view",
@@ -32,6 +33,19 @@ export function pushAnalyticsEvent(payload: AnalyticsEventPayload) {
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(withPageContext(payload));
+}
+
+export function trackPhoneClick(payload: {
+  href?: string;
+  placement: string;
+  service?: string;
+}) {
+  pushAnalyticsEvent({
+    event: analyticsEventNames.clickPhone,
+    href: payload.href,
+    placement: payload.placement,
+    service_name: payload.service,
+  });
 }
 
 export function trackWhatsappClick(payload: {

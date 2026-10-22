@@ -1,6 +1,6 @@
 "use client";
 
-import { trackWhatsappClick } from "@/features/analytics";
+import { trackPhoneClick, trackWhatsappClick } from "@/features/analytics";
 import styles from "./home-contact.module.css";
 import {
   contactContent,
@@ -59,6 +59,7 @@ export function HomeContact({
           const isExternal = href?.startsWith("http") ?? false;
           const isFeatured = "featured" in card && card.featured;
           const isWhatsappLink = href?.includes("wa.me/") ?? false;
+          const isPhoneLink = href?.startsWith("tel:") ?? false;
           const cardContent = (
             <>
               <span className={styles.infoIcon} aria-hidden="true">
@@ -81,6 +82,13 @@ export function HomeContact({
                 if (isWhatsappLink) {
                   trackWhatsappClick({
                     ctaType: "direct_whatsapp_link",
+                    href,
+                    placement: "contact_section",
+                  });
+                }
+
+                if (isPhoneLink) {
+                  trackPhoneClick({
                     href,
                     placement: "contact_section",
                   });

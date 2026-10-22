@@ -9,10 +9,7 @@ import {
   useState,
 } from "react";
 import { HiOutlineXMark } from "react-icons/hi2";
-import {
-  trackQuoteSubmit,
-  trackWhatsappClick,
-} from "@/features/analytics";
+import { trackQuoteSubmit } from "@/features/analytics";
 import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
 import styles from "./home-floating-quote.module.css";
 import {
@@ -21,6 +18,7 @@ import {
   whatsappPhoneNumber,
   whatsappReturnStorageKey,
 } from "./home-floating-quote.data";
+import { isValidQuotePhone, quotePhoneErrorMessage } from "./quote-phone";
 import {
   openQuoteDialog,
   openQuoteDialogEventName,
@@ -29,13 +27,22 @@ import {
 
 type HomeFloatingQuoteProps = {
   defaultService?: string;
+  hideLauncher?: boolean;
+  hideLauncherOnMobile?: boolean;
   whatsappHref?: string;
 };
 
 const fallbackService = "Ventanas";
 
+function quoteField(form: HTMLFormElement, name: string) {
+  const field = form.elements.namedItem(name);
+  return field instanceof HTMLInputElement ? field : null;
+}
+
 export function HomeFloatingQuote({
   defaultService = fallbackService,
+  hideLauncher = false,
+  hideLauncherOnMobile = false,
   whatsappHref,
 }: HomeFloatingQuoteProps = {}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +56,9 @@ export function HomeFloatingQuote({
   );
   const modalRef = useRef<HTMLDivElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
+  const submittingRef = useRef(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
   useLockBodyScroll(isOpen);
 
   const closeQuoteDialog = () => {
@@ -68,6 +78,9 @@ export function HomeFloatingQuote({
       setPrefilledWhatsappText(
         extractWhatsappTextFromHref(options?.whatsappHref ?? whatsappHref),
       );
+      submittingRef.current = false;
+      setIsSubmitting(false);
+      setFormError("");
       setIsOpen(true);
     },
     [defaultService, whatsappHref],
@@ -154,12 +167,33 @@ export function HomeFloatingQuote({
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
-    const name = formData.get("name")?.toString() || "";
-    const phone = formData.get("phone")?.toString() || "";
-    const zone = formData.get("zone")?.toString() || "";
-    const measurements = formData.get("measurements")?.toString() || "";
-    const notes = formData.get("notes")?.toString() || "";
+    if (submittingRef.current) {
+      return;
+    }
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name")?.toString().trim() || "";
+    const phone = formData.get("phone")?.toString().trim() || "";
+    const zone = formData.get("zone")?.toString().trim() || "";
+    const measurements = formData.get("measurements")?.toString().trim() || "";
+    const notes = formData.get("notes")?.toString().trim() || "";
+    const nameInput = quoteField(form, "name");
+    const phoneInput = quoteField(form, "phone");
+    const phoneIsValid = isValidQuotePhone(phone);
+
+    nameInput?.setCustomValidity(name ? "" : "Escribe tu nombre.");
+    phoneInput?.setCustomValidity(phoneIsValid ? "" : quotePhoneErrorMessage);
+
+    if (!form.reportValidity()) {
+      setFormError(name ? quotePhoneErrorMessage : "Escribe tu nombre.");
+      return;
+    }
+
+    setFormError("");
+    submittingRef.current = true;
+    setIsSubmitting(true);
+
     const message = [
       prefilledWhatsappText || "Hola, quiero solicitar una cotización.",
       "",
@@ -170,8 +204,8 @@ export function HomeFloatingQuote({
       `Foto del espacio: ${photoStatus}`,
       "",
       "*Cliente*",
-      `Nombre: ${name || "No indicado"}`,
-      `Teléfono: ${phone || "No indicado"}`,
+      `Nombre: ${name}`,
+      `Teléfono: ${phone}`,
       `Zona o colonia: ${zone || "No indicada"}`,
       "",
       "*Medidas y detalles*",
@@ -189,12 +223,6 @@ export function HomeFloatingQuote({
 
     closeQuoteDialog();
     const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`;
-    trackWhatsappClick({
-      ctaType: "quote_submit",
-      href: whatsappUrl,
-      placement: "quote_modal",
-      service,
-    });
     const whatsappWindow = window.open(whatsappUrl, "_blank");
 
     if (whatsappWindow) {
@@ -208,10 +236,12 @@ export function HomeFloatingQuote({
 
   return (
     <>
+      {hideLauncher ? null : (
       <button
         className={styles.button}
         type="button"
         aria-label="Generar cotización"
+        data-hide-mobile={hideLauncherOnMobile ? "true" : undefined}
         onClick={() =>
           openQuoteDialog({
             origin: "floating_quote_button",
@@ -223,6 +253,7 @@ export function HomeFloatingQuote({
         <span className={styles.dot} aria-hidden="true" />
         <span>Generar cotización</span>
       </button>
+      )}
 
       {isOpen ? (
         <div
@@ -295,6 +326,10 @@ export function HomeFloatingQuote({
                     type="text"
                     placeholder="Tu nombre"
                     autoComplete="name"
+                    onInput={(event) => {
+                      event.currentTarget.setCustomValidity("");
+                      setFormError("");
+                    }}
                   />
                 </label>
                 <label>
@@ -305,6 +340,10 @@ export function HomeFloatingQuote({
                     placeholder="729 000 0000"
                     autoComplete="tel"
                     inputMode="tel"
+                    onInput={(event) => {
+                      event.currentTarget.setCustomValidity("");
+                      setFormError("");
+                    }}
                   />
                 </label>
                 <label>
@@ -354,6 +393,12 @@ export function HomeFloatingQuote({
                 </label>
               </div>
 
+              {formError ? (
+                <p className={styles.formError} role="alert">
+                  {formError}
+                </p>
+              ) : null}
+
               <label className={styles.notes}>
                 Cuéntanos un poco más
                 <textarea
@@ -364,7 +409,7 @@ export function HomeFloatingQuote({
                 />
               </label>
 
-              <button className={styles.submitButton} type="submit">
+              <button className={styles.submitButton} type="submit" disabled={isSubmitting}>
                 Enviar solicitud por WhatsApp
               </button>
             </form>

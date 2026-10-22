@@ -19,6 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ],
     },
     {
+      url: absoluteUrl("/barandales"),
+      lastModified: new Date("2026-10-08"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+      images: [absoluteUrl("/img/img_hero_barandales_web.webp")],
+    },
+    {
       url: absoluteUrl("/servicios/barandales"),
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",

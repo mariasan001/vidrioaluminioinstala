@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://aluminioyvidrioinstala.com
+Sitemap: https://aluminioyvidrioinstala.com/sitemap.xml

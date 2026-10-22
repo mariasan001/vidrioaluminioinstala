@@ -21,10 +21,12 @@ export function HomeNav({
   logoHref = "#inicio",
   mobileMenuLinks = mobileLinks,
   primaryLinks = desktopPrimaryLinks,
+  quoteLabel = "Crear cotización",
   quoteService,
   quoteWhatsappHref,
   secondaryLinks = desktopSecondaryLinks,
   scrollLinks = scrollSpyLinks,
+  wide = false,
 }: HomeNavProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { activeHref, setActiveSection } = useActiveSection(
@@ -63,7 +65,7 @@ export function HomeNav({
   };
 
   return (
-    <header className={styles.navShell}>
+    <header className={`${styles.navShell} ${wide ? styles.navShellWide : ""}`}>
       <nav className={styles.navbar} aria-label="Principal">
         <HomeNavDesktop
           currentActiveHref={currentActiveHref}
@@ -71,6 +73,7 @@ export function HomeNav({
           onNavClick={handleNavClick}
           onQuoteOpen={openQuoteForm}
           primaryLinks={primaryLinks}
+          quoteLabel={quoteLabel}
           secondaryLinks={secondaryLinks}
         />
 

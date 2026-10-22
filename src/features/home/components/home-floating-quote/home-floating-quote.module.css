@@ -204,6 +204,13 @@
   border-color: rgba(232, 255, 70, 0.42);
 }
 
+.formError {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
 .submitButton {
   min-height: 48px;
   border: 0;
@@ -223,6 +230,11 @@
   font-weight: 700;
   line-height: 1.5;
   content: "Completa lo que tengas a la mano. Si no sabes medidas exactas, puedes dejarlo aproximado.";
+}
+
+.submitButton:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 
 .closeButton:focus-visible,
@@ -256,6 +268,12 @@
     box-shadow:
       0 20px var(--space-20) var(--black-alpha-28),
       0 0 0 1px var(--accent-alpha-08);
+  }
+}
+
+@media (max-width: 760px) {
+  .button[data-hide-mobile="true"] {
+    display: none;
   }
 }
 

@@ -1,0 +1,17 @@
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteRule ^servicios/canceles/?$ /servicios/canceles-de-bano/ [R=301,L]
+  RewriteRule ^servicios/fachadas/?$ /servicios/fachadas-de-cristal/ [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-DNS-Prefetch-Control "on"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+</IfModule>

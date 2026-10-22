@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FaFacebookF } from "react-icons/fa6";
 import { HiOutlineMinusSmall, HiOutlinePlusSmall } from "react-icons/hi2";
+import { trackPhoneClick } from "@/features/analytics";
 import type { NavItem } from "./home-nav.data";
 import type { NavRenderState } from "./home-nav.types";
 import { getNavItemKey } from "./home-nav.utils";
@@ -121,6 +122,12 @@ export function HomeNavMobile({
                 className={styles.mobileInfoLink}
                 href="tel:7293813723"
                 aria-label="Llamar al 729 381 3723"
+                onClick={() =>
+                  trackPhoneClick({
+                    href: "tel:7293813723",
+                    placement: "navigation_mobile",
+                  })
+                }
               >
                 729 381 3723
               </a>

@@ -499,6 +499,12 @@
   }
 }
 
+@media (min-width: 921px) {
+  .navShellWide {
+    width: min(1680px, calc(100% - 96px));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .navbar,
   .navGroup,

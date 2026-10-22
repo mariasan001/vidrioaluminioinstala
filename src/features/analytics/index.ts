@@ -3,6 +3,7 @@ export { ServiceViewTracker } from "./service-view-tracker";
 export {
   analyticsEventNames,
   pushAnalyticsEvent,
+  trackPhoneClick,
   trackQuoteModalOpen,
   trackQuoteSubmit,
   trackServiceView,

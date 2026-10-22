@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { FaFacebookF, FaLocationDot, FaPhoneVolume } from "react-icons/fa6";
+import { trackPhoneClick } from "@/features/analytics";
 import type { NavItem } from "./home-nav.data";
 import type { NavRenderState } from "./home-nav.types";
 import { getNavItemKey } from "./home-nav.utils";
@@ -7,6 +8,7 @@ import styles from "./home-nav.module.css";
 
 type HomeNavDesktopProps = NavRenderState & {
   primaryLinks: readonly NavItem[];
+  quoteLabel: string;
   secondaryLinks: readonly NavItem[];
 };
 
@@ -16,6 +18,7 @@ export function HomeNavDesktop({
   onNavClick,
   onQuoteOpen,
   primaryLinks,
+  quoteLabel,
   secondaryLinks,
 }: HomeNavDesktopProps) {
   return (
@@ -53,7 +56,16 @@ export function HomeNavDesktop({
       </a>
 
       <div className={`${styles.navGroup} ${styles.navGroupRight}`}>
-        <a className={styles.contactInline} href="tel:7293813723">
+        <a
+          className={styles.contactInline}
+          href="tel:7293813723"
+          onClick={() =>
+            trackPhoneClick({
+              href: "tel:7293813723",
+              placement: "navigation",
+            })
+          }
+        >
           <FaPhoneVolume className={styles.inlineIcon} aria-hidden="true" />
           <span className={styles.contactLabel}>Llámanos:</span>
           <strong>729 381 3723</strong>
@@ -85,7 +97,7 @@ export function HomeNavDesktop({
         </a>
 
         <button className={styles.primaryAction} type="button" onClick={onQuoteOpen}>
-          Crear cotización
+          {quoteLabel}
         </button>
       </div>
     </>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { trackServiceView } from "./tracking";
 
 const servicePaths: Record<string, string> = {
+  "/barandales": "Barandales",
   "/servicios/barandales": "Barandales",
   "/servicios/canceles-de-bano": "Canceles de baño",
   "/servicios/fachadas-de-cristal": "Fachadas",
