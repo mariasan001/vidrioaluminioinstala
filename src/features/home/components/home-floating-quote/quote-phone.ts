@@ -1,20 +1,33 @@
-const mexicanCountryCode = "52";
+const internationalPrefix = "+52";
+const nationalCharacters = /^[\d\s()-]*$/;
+const nationalSeparators = /[\s()-]/g;
 
 export const quotePhoneErrorMessage =
   "Escribe un teléfono de 10 dígitos. Puedes usar espacios, guiones, paréntesis o el prefijo +52.";
 
 export function normalizeQuotePhone(value: string) {
-  const digits = value.replace(/\D/g, "");
+  const trimmed = value.trim();
+  let national = trimmed;
 
-  if (digits.length === 10) {
-    return digits;
+  if (trimmed.startsWith("+")) {
+    if (!trimmed.startsWith(internationalPrefix)) {
+      return null;
+    }
+
+    national = trimmed.slice(internationalPrefix.length);
   }
 
-  if (digits.length === mexicanCountryCode.length + 10 && digits.startsWith(mexicanCountryCode)) {
-    return digits.slice(mexicanCountryCode.length);
+  if (!nationalCharacters.test(national)) {
+    return null;
   }
 
-  return null;
+  const digits = national.replace(nationalSeparators, "");
+
+  if (!/^\d{10}$/.test(digits)) {
+    return null;
+  }
+
+  return digits;
 }
 
 export function isValidQuotePhone(value: string) {
