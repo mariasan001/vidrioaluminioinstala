@@ -10,14 +10,6 @@ const serviceDescription =
 export const metadata: Metadata = {
   title: serviceTitle,
   description: serviceDescription,
-  keywords: [
-    "fachadas de cristal en Toluca",
-    "fachadas de vidrio templado",
-    "fachadas de aluminio y cristal",
-    "instalación de fachadas de vidrio",
-    "fachadas de cristal para comercios",
-    "fachadas de cristal templado",
-  ],
   alternates: {
     canonical: "/servicios/fachadas-de-cristal",
   },

@@ -1,8 +1,25 @@
-const fallbackSiteUrl = "https://aluminioyvidrioinstala.com";
+const canonicalOrigin = "https://aluminioyvidrioinstala.mx";
 
-export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || fallbackSiteUrl
-).replace(/\/$/, "");
+function normalizeSiteUrl(raw: string) {
+  try {
+    const url = new URL(raw);
+    const host = url.hostname.replace(/^www\./i, "");
+
+    if (host === "aluminioyvidrioinstala.com" || host === "aluminioyvidrioinstala.mx") {
+      return canonicalOrigin;
+    }
+
+    url.hostname = host;
+    url.pathname = "";
+    url.search = "";
+    url.hash = "";
+    return url.origin;
+  } catch {
+    return canonicalOrigin;
+  }
+}
+
+export const siteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL || canonicalOrigin);
 
 export const businessInfo = {
   name: "Aluminio y Vidrio Instala",
@@ -63,7 +80,7 @@ export const localBusinessJsonLd = {
   ],
   address: {
     "@type": "PostalAddress",
-    streetAddress: businessInfo.address.street,
+    streetAddress: `${businessInfo.address.street}, ${businessInfo.address.neighborhood}`,
     addressLocality: businessInfo.address.city,
     addressRegion: businessInfo.address.region,
     postalCode: businessInfo.address.postalCode,
@@ -73,6 +90,10 @@ export const localBusinessJsonLd = {
     {
       "@type": "City",
       name: "Toluca de Lerdo",
+    },
+    {
+      "@type": "City",
+      name: "Metepec",
     },
     {
       "@type": "AdministrativeArea",

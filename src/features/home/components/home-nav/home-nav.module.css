@@ -93,7 +93,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 38px;
+  min-height: 44px;
   padding: 0 var(--space-6) 0 10px;
   color: var(--color-nav-text);
   white-space: nowrap;
@@ -130,7 +130,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: var(--space-20);
+  min-height: 44px;
   padding: 0 var(--space-9);
   border: 0;
   border-radius: var(--radius-pill);
@@ -215,6 +215,7 @@
 .primaryAction:focus-visible,
 .socialLink:focus-visible,
 .mobileMenuButton:focus-visible,
+.iconButton:focus-visible,
 .mobileMenuLink:focus-visible,
 .mobileInfoLink:focus-visible,
 .mobileSocialLink:focus-visible {
@@ -543,6 +544,158 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.mobileActionRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #111111;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.mobileMenuCtas {
+  display: grid;
+  gap: 8px;
+}
+
+.mobileCtaPrimary,
+.mobileCtaSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.mobileCtaPrimary {
+  background: var(--accent);
+  color: #111111;
+}
+
+.mobileCtaSecondary {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+
+@media (max-width: 1023px) {
+  .navShellCompact {
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: none;
+  }
+
+  .navShellCompact .navbar {
+    display: flex;
+    align-items: center;
+    max-height: 64px;
+    padding: 8px 12px;
+    border-radius: 0;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    background: rgba(17, 17, 17, 0.72);
+    backdrop-filter: blur(16px);
+    box-shadow: none;
+  }
+
+  .navShellCompact.navScrolled .navbar {
+    background: rgba(12, 12, 12, 0.94);
+  }
+
+  .navShellCompact .navGroup,
+  .navShellCompact .logoWrap {
+    display: none;
+  }
+
+  .navShellCompact .mobileBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .navShellCompact .mobileLogo,
+  .navShellCompact .mobileActionRow {
+    position: relative;
+    z-index: 3;
+  }
+
+  .navShellCompact .mobileLogoImage {
+    width: auto;
+    height: 40px;
+  }
+
+  .navShellCompact .mobileMenu {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: #111111;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .navShellCompact .navbar {
+    position: relative;
+    z-index: 2;
+  }
+
+  .navShellCompact .mobileMenuOpen {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .navShellCompact .mobileMenuInner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    max-height: 100svh;
+    overflow-y: auto;
+    padding: 76px 20px calc(20px + env(safe-area-inset-bottom));
+    background: #111111;
+    transform: none;
+    opacity: 1;
+  }
+
+  .navShellCompact .mobileMenuLinks {
+    display: grid;
+    align-content: start;
+    gap: 0;
+    padding: 8px 0 20px;
+  }
+
+  .navShellCompact .mobileMenuLink {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 48px;
+    color: #f5f5f1;
+    font-size: clamp(1.35rem, 5.2vw, 2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+
+  .navShellCompact .mobileMenuCtas {
+    margin-top: auto;
   }
 }
 

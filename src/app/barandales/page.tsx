@@ -1,69 +1,28 @@
-import type { Metadata } from "next";
-import { absoluteUrl, businessInfo, stringifyJsonLd } from "@/features/home/home-seo";
+import { absoluteUrl, localBusinessJsonLd, stringifyJsonLd } from "@/features/home/home-seo";
+import { buildServiceMetadata } from "@/features/conversion/service-seo";
 import { BarandalesLandingPage } from "@/features/landings/barandales/barandales-landing-page";
+import { barandalesConversionFaq } from "@/features/landings/barandales/barandales-conversion-page";
 import {
-  barandalesFaq,
   barandalesHero,
   barandalesSeo,
-  barandalesTypes,
 } from "@/features/landings/barandales/barandales-landing.data";
 
 const serviceTitle = barandalesSeo.title;
 const serviceDescription = barandalesSeo.description;
 const pagePath = "/barandales";
 
-export const metadata: Metadata = {
+export const metadata = buildServiceMetadata({
   title: serviceTitle,
   description: serviceDescription,
-  keywords: [
-    "barandales en Toluca",
-    "barandales de aluminio en Toluca",
-    "barandales de vidrio en Toluca",
-    "barandales de cristal en Toluca",
-    "barandales para escaleras",
-    "barandales para balcones",
-    "barandales para terrazas",
-    "barandales en Metepec",
-    "instalación de barandales",
-  ],
-  alternates: {
-    canonical: pagePath,
+  path: pagePath,
+  category: "barandales",
+  image: {
+    src: barandalesHero.image.src,
+    alt: barandalesHero.image.alt,
+    width: barandalesHero.image.width,
+    height: barandalesHero.image.height,
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-  openGraph: {
-    title: serviceTitle,
-    description: serviceDescription,
-    url: absoluteUrl(pagePath),
-    siteName: businessInfo.name,
-    type: "website",
-    locale: "es_MX",
-    images: [
-      {
-        url: barandalesHero.image.src,
-        width: barandalesHero.image.width,
-        height: barandalesHero.image.height,
-        alt: barandalesHero.image.alt,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: serviceTitle,
-    description: serviceDescription,
-    images: [barandalesHero.image.src],
-  },
-  category: "barandales y cancelería",
-};
+});
 
 export default function Page() {
   const serviceJsonLd = {
@@ -87,13 +46,12 @@ export default function Page() {
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Barandales según el espacio",
-      itemListElement: barandalesTypes.items.map((item) => ({
+      name: "Tipos de barandal",
+      itemListElement: ["Barandal con botones", "Barandal con miniposte", "Barandal con poste"].map((name) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: item.title,
-          description: item.description,
+          name,
         },
       })),
     },
@@ -102,14 +60,16 @@ export default function Page() {
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: barandalesFaq.items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
+    mainEntity: barandalesConversionFaq.items
+      .filter((item) => item.answer)
+      .map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
   };
 
   const breadcrumbJsonLd = {
@@ -133,6 +93,12 @@ export default function Page() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: stringifyJsonLd(localBusinessJsonLd),
+        }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

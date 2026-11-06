@@ -1,9 +1,11 @@
 export const analyticsEventNames = {
   clickPhone: "click_phone",
+  clickLlamada: "click_llamada",
   clickWhatsapp: "click_whatsapp",
   openQuoteModal: "open_quote_modal",
   serviceView: "service_view",
   submitQuote: "submit_quote",
+  envioFormulario: "envio_formulario",
 } as const;
 
 export type AnalyticsEventName =
@@ -74,6 +76,17 @@ export function trackQuoteModalOpen(payload: {
   });
 }
 
+export function trackFormSubmit(payload: {
+  servicio: string;
+  ubicacion: "hero" | "sticky" | "seccion" | "contacto" | "footer" | "tipos";
+}) {
+  pushAnalyticsEvent({
+    event: analyticsEventNames.envioFormulario,
+    servicio: payload.servicio,
+    ubicacion: payload.ubicacion,
+  });
+}
+
 export function trackQuoteSubmit(payload: {
   origin?: string;
   photoStatus: string;
@@ -81,8 +94,19 @@ export function trackQuoteSubmit(payload: {
   timing: string;
   workType: string;
 }) {
+  const normalized = payload.service.trim().toLowerCase();
+  const servicio = normalized.includes("cancel")
+    ? "canceles"
+    : normalized.includes("ventana")
+      ? "ventanas"
+      : normalized.includes("barandal")
+        ? "barandales"
+        : "";
+
   pushAnalyticsEvent({
-    event: analyticsEventNames.submitQuote,
+    event: analyticsEventNames.envioFormulario,
+    servicio,
+    ubicacion: "contacto",
     origin: payload.origin,
     photo_status: payload.photoStatus,
     service_name: payload.service,

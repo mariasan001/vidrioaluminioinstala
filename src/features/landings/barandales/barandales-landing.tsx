@@ -1,16 +1,15 @@
 import Image from "next/image";
-import { BarandalesPhoneLink, BarandalesQuoteButton, BarandalesWhatsappLink } from "./barandales-actions";
+import { ContactBar } from "@/features/conversion/contact-bar";
+import { ServiceGallery } from "@/features/conversion/service-gallery";
+import { ShortQuoteForm } from "@/features/conversion/short-quote-form";
+import { TrustBlock } from "@/features/conversion/trust-block";
+import { BarandalesPhoneLink, BarandalesWhatsappLink } from "./barandales-actions";
 import { BarandalesFaq } from "./barandales-faq";
-import { BarandalesQuoteForm } from "./barandales-form";
 import {
-  barandalesFacebook,
   barandalesFaq,
   barandalesFinalCta,
-  barandalesFooter,
   barandalesHero,
-  barandalesNav,
   barandalesPhoneDisplay,
-  barandalesQuoteLabel,
   barandalesTypes,
   barandalesWhatsapp,
   barandalesWork,
@@ -116,7 +115,7 @@ const workIcons = [WorkRailingIcon, WorkChatIcon, WorkLayersIcon];
 
 export function BarandalesLanding() {
   return (
-    <div>
+    <div data-servicio="barandales">
       <section className={styles.hero}>
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
@@ -129,14 +128,20 @@ export function BarandalesLanding() {
               <p className={styles.editorial}>{barandalesHero.accent}</p>
             </div>
             <p className={styles.heroLead}>{barandalesHero.description}</p>
-            <div className={styles.heroActions}>
-              <BarandalesQuoteButton className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}>
-                {barandalesQuoteLabel}
-              </BarandalesQuoteButton>
-              <a className={`${styles.btn} ${styles.btnGhost} ${styles.btnLarge}`} href="#tipos">
-                Ver opciones
-              </a>
-              <BarandalesPhoneLink className={`${styles.btn} ${styles.btnGhost} ${styles.btnLarge}`} label="Llámanos" />
+            <div className={styles.heroActions} data-ubicacion="hero">
+              <BarandalesWhatsappLink
+                className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}
+                href={barandalesWhatsapp.quote}
+                ubicacion="hero"
+              >
+                WhatsApp
+              </BarandalesWhatsappLink>
+              <BarandalesPhoneLink
+                className={`${styles.btn} ${styles.btnGhost} ${styles.btnLarge}`}
+                label="Llamar"
+                showNumber={false}
+                ubicacion="hero"
+              />
             </div>
             <p className={styles.heroNote}>
               <ChatIcon />
@@ -190,12 +195,12 @@ export function BarandalesLanding() {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                   </div>
-                  <BarandalesQuoteButton className={styles.typeLink}>
-                    <span>Consultar esta opción</span>
+                  <BarandalesWhatsappLink className={styles.typeLink} href={barandalesWhatsapp.quote} ubicacion="seccion">
+                    <span>Cotizar por WhatsApp</span>
                     <span className={styles.arrow}>
                       <ArrowIcon />
                     </span>
-                  </BarandalesQuoteButton>
+                  </BarandalesWhatsappLink>
                 </div>
               </article>
             ))}
@@ -206,9 +211,13 @@ export function BarandalesLanding() {
               <h3>{barandalesTypes.closeTitle}</h3>
               <p>{barandalesTypes.closeText}</p>
             </div>
-            <BarandalesQuoteButton className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}>
+            <BarandalesWhatsappLink
+              className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}
+              href={barandalesWhatsapp.quote}
+              ubicacion="seccion"
+            >
               {barandalesTypes.cta}
-            </BarandalesQuoteButton>
+            </BarandalesWhatsappLink>
           </div>
         </div>
       </section>
@@ -246,6 +255,8 @@ export function BarandalesLanding() {
         </div>
       </section>
 
+      <TrustBlock servicio="barandales" />
+
       <section className={styles.faq} id="preguntas">
         <div className={styles.wrap}>
           <div className={styles.splitHead}>
@@ -260,9 +271,8 @@ export function BarandalesLanding() {
               <p className={styles.faqLead}>{barandalesFaq.description}</p>
               <BarandalesWhatsappLink
                 className={`${styles.btn} ${styles.btnDark}`}
-                ctaType="faq_whatsapp"
                 href={barandalesWhatsapp.question}
-                placement="faq"
+                ubicacion="seccion"
               >
                 {barandalesFaq.cta}
               </BarandalesWhatsappLink>
@@ -272,7 +282,7 @@ export function BarandalesLanding() {
         </div>
       </section>
 
-      <section className={styles.final} id="cotizacion">
+      <section className={styles.final} id="contacto">
         <div className={styles.finalGrid}>
           <div className={styles.finalCopy}>
             <p className={styles.eyebrow}>
@@ -283,77 +293,31 @@ export function BarandalesLanding() {
             <p>{barandalesFinalCta.description}</p>
             <BarandalesWhatsappLink
               className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLarge}`}
-              ctaType="final_whatsapp"
               href={barandalesWhatsapp.quote}
-              placement="final_cta"
+              ubicacion="contacto"
             >
               {barandalesFinalCta.whatsappCta}
             </BarandalesWhatsappLink>
             <div className={styles.photoNote}>
               <p>{barandalesFinalCta.photoNote}</p>
-              <BarandalesPhoneLink className={styles.phoneLink} label="Llámanos" />
-              <BarandalesWhatsappLink
-                className={styles.phoneLink}
-                ctaType="photo_whatsapp"
-                href={barandalesWhatsapp.photo}
-                placement="final_photo"
-              >
+              <BarandalesPhoneLink className={styles.phoneLink} label="Llamar" showNumber={false} ubicacion="contacto" />
+              <BarandalesWhatsappLink className={styles.phoneLink} href={barandalesWhatsapp.photo} ubicacion="contacto">
                 WhatsApp: {barandalesPhoneDisplay}
               </BarandalesWhatsappLink>
             </div>
           </div>
-          <BarandalesQuoteForm />
+          <ShortQuoteForm servicio="barandales" />
         </div>
       </section>
 
-      <footer className={styles.footer} id="contacto">
-        <div className={styles.footerGrid}>
-          <div className={styles.footerBrand}>
-            <a className={styles.brand} href="/" aria-label="Aluminio y Vidrio Instala">
-              <Image
-                src="/img/logo-nav.webp"
-                alt=""
-                width={188}
-                height={62}
-                className={styles.logo}
-              />
-            </a>
-            <p>{barandalesFooter.zone}</p>
-          </div>
-          <div>
-            <p className={styles.footerLabel}>Secciones</p>
-            {barandalesNav.map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-          </div>
-          <div>
-            <p className={styles.footerLabel}>Contacto</p>
-            <BarandalesWhatsappLink
-              ctaType="footer_whatsapp"
-              href={barandalesWhatsapp.quote}
-              placement="footer"
-            >
-              WhatsApp: {barandalesPhoneDisplay}
-            </BarandalesWhatsappLink>
-            <BarandalesPhoneLink />
-            <a href={barandalesFacebook} target="_blank" rel="noopener noreferrer">
-              Facebook
-            </a>
-          </div>
-        </div>
-        <a className={styles.servicesLink} href={barandalesFooter.servicesHref}>
-          <span>{barandalesFooter.servicesPrompt}</span>
-          <span aria-hidden="true">→</span>
-        </a>
-        <div className={styles.footerBottom}>
-          <p>{barandalesFooter.copyright}</p>
-          <p>{barandalesFooter.privacy}</p>
-        </div>
-      </footer>
+      <ServiceGallery
+        servicio="barandales"
+        title="Barandales que ya instalamos"
+        description="Estos son trabajos de barandal. El resto de la obra está en proyectos."
+        match={(category) => category.startsWith("Barandales")}
+      />
 
-      <BarandalesQuoteButton className={styles.mobileQuote}>Cotiza proyecto</BarandalesQuoteButton>
+      <ContactBar servicio="barandales" whatsappHref={barandalesWhatsapp.quote} />
     </div>
   );
 }

@@ -82,6 +82,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   min-height: 44px;
   padding: 0 18px;
   border: 1px solid transparent;
@@ -412,8 +413,8 @@
 .typeLink {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: flex-start;
+  gap: 8px;
   width: 100%;
   margin-top: auto;
   padding: 18px 0 0;
@@ -431,6 +432,7 @@
 
 .arrow {
   display: grid;
+  margin-left: auto;
   flex-shrink: 0;
   place-items: center;
   width: 36px;
@@ -637,6 +639,9 @@
 }
 
 .phoneLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--color-accent);
   font-size: 15px;
   font-weight: 700;
@@ -790,6 +795,14 @@
   font-size: 22px;
 }
 
+.footerBottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--color-accent);
+}
+
 .footerBottom {
   display: flex;
   flex-wrap: wrap;
@@ -821,6 +834,67 @@
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding-bottom: 16px;
+  }
+
+  .hero {
+    position: relative;
+    padding: 88px 0 20px;
+  }
+
+  .heroGrid {
+    position: relative;
+  }
+
+  .heroCopy {
+    position: relative;
+    z-index: 1;
+  }
+
+  .editorial {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+    line-height: 1.12;
+  }
+
+  .heroLead {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .heroMedia {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .heroMedia::after {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.72);
+    content: "";
+  }
+
+  .heroImage {
+    height: 100%;
+    max-height: none;
+    aspect-ratio: auto;
+  }
+
+  .heroBadge {
+    display: none;
+  }
+
+  .footer {
+    padding-bottom: 28px;
+  }
 }
 
 @media (min-width: 900px) {

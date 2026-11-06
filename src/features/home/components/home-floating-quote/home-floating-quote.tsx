@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { HiOutlineXMark } from "react-icons/hi2";
+import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { trackQuoteSubmit } from "@/features/analytics";
 import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
 import styles from "./home-floating-quote.module.css";
@@ -410,6 +411,7 @@ export function HomeFloatingQuote({
               </label>
 
               <button className={styles.submitButton} type="submit" disabled={isSubmitting}>
+                <WhatsAppIcon />
                 Enviar solicitud por WhatsApp
               </button>
             </form>

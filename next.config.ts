@@ -4,6 +4,7 @@ const isStaticExport = process.env.STATIC_EXPORT === "true";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  devIndicators: false,
   distDir: isStaticExport ? ".next-static" : ".next",
   output: isStaticExport ? "export" : undefined,
   trailingSlash: isStaticExport,

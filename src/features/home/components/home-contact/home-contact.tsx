@@ -1,6 +1,5 @@
 "use client";
 
-import { trackPhoneClick, trackWhatsappClick } from "@/features/analytics";
 import styles from "./home-contact.module.css";
 import {
   contactContent,
@@ -36,6 +35,7 @@ export function HomeContact({
       data-scroll-direction={scrollDirection}
       id={sectionId}
       aria-labelledby="home-contact-title"
+      data-ubicacion="contacto"
     >
       <div className={styles.header}>
         <div className={styles.eyebrow}>
@@ -58,8 +58,6 @@ export function HomeContact({
           const href = "href" in card ? card.href : undefined;
           const isExternal = href?.startsWith("http") ?? false;
           const isFeatured = "featured" in card && card.featured;
-          const isWhatsappLink = href?.includes("wa.me/") ?? false;
-          const isPhoneLink = href?.startsWith("tel:") ?? false;
           const cardContent = (
             <>
               <span className={styles.infoIcon} aria-hidden="true">
@@ -78,22 +76,7 @@ export function HomeContact({
               data-featured={isFeatured ? "true" : undefined}
               href={href}
               key={card.title}
-              onClick={() => {
-                if (isWhatsappLink) {
-                  trackWhatsappClick({
-                    ctaType: "direct_whatsapp_link",
-                    href,
-                    placement: "contact_section",
-                  });
-                }
-
-                if (isPhoneLink) {
-                  trackPhoneClick({
-                    href,
-                    placement: "contact_section",
-                  });
-                }
-              }}
+              data-ubicacion="contacto"
               rel={isExternal ? "noopener noreferrer" : undefined}
               target={isExternal ? "_blank" : undefined}
             >
@@ -110,14 +93,6 @@ export function HomeContact({
           );
         })}
       </div>
-
-      <footer className={styles.footer}>
-        <div>
-          <strong>{content.footer.company}</strong>
-          <span>{content.footer.rights}</span>
-        </div>
-        <span className={styles.credit}>{content.footer.credit}</span>
-      </footer>
     </section>
   );
 }

@@ -12,79 +12,63 @@ export const ventanasPageContent = {
   },
   details: [
     {
-      title: "Para recámaras",
-      icon: "balcony",
-      description:
-        "Ventanas que ayudan a controlar luz, ventilación y privacidad en espacios de descanso.",
+      title: "Para tu recámara",
+      icon: "balcony" as const,
+      description: "Luz y ventilación para descansar, con la privacidad que el espacio pida.",
     },
     {
-      title: "Para salas",
-      icon: "deck",
-      description:
-        "Aberturas amplias que conectan el interior con la vista y hacen más ligero el ambiente.",
+      title: "Para la sala",
+      icon: "deck" as const,
+      description: "Una abertura amplia para que entre la luz y se vea hacia afuera.",
     },
     {
-      title: "Para áreas de trabajo",
-      icon: "stairs",
-      description:
-        "Soluciones que mejoran iluminación natural, ventilación y concentración durante el día.",
+      title: "Para trabajar",
+      icon: "stairs" as const,
+      description: "Más luz natural y aire durante el día.",
     },
   ],
   quality: {
-    eyebrow: "Calidad de la ventana",
-    title: "Materiales pensados",
-    accentTitle: "para luz y aislamiento",
-    description:
-      "Cada ventana se define según el claro, la orientación, la ventilación necesaria y el nivel de confort que requiere el espacio.",
+    eyebrow: "Calidad",
+    title: "Lo que no se ve en la foto",
+    accentTitle: "y sí se nota al usarlo",
+    description: "Buen ajuste y una instalación bien hecha.",
     image: {
       src: "/img/ventanas/calidad.webp",
       alt: "Detalle de ventana de aluminio y cristal con instalación precisa",
     },
     points: [
       {
-        title: "Iluminación natural",
-        icon: "shield",
-        description:
-          "Permite aprovechar mejor la entrada de luz sin hacer pesado el espacio.",
+        title: "Hecho a tu medida",
+        icon: "height" as const,
+        description: "Medimos el claro para que la ventana cierre bien, aunque el hueco no esté parejo.",
       },
       {
-        title: "Medición precisa",
-        icon: "height",
-        description:
-          "Consideramos claros, niveles y encuentros para que la ventana ajuste correctamente.",
+        title: "Luz y ventilación",
+        icon: "sparkles" as const,
+        description: "La apertura se define según la luz y el aire que necesita cada espacio.",
       },
       {
-        title: "Ventilación adecuada",
-        icon: "sparkles",
-        description:
-          "El sistema se define según la circulación de aire que necesita cada área.",
+        title: "Perfiles de aluminio",
+        icon: "wrench" as const,
+        description: "Línea española o nacional.",
+        pending: "PENDIENTE: diferencia real entre Serie 1400, 3500, 4600 y línea nacional",
       },
       {
-        title: "Aislamiento",
-        icon: "wrench",
-        description:
-          "Ayuda a mejorar el confort térmico y acústico según el tipo de ventana y cristal.",
-      },
-      {
-        title: "Acabados a elegir",
-        icon: "swatch",
-        description:
-          "Perfiles y tonos que se integran al estilo del proyecto sin saturar la vista.",
-      },
-      {
-        title: "Instalación profesional",
-        icon: "check",
-        description:
-          "Alineación, sellado y revisión final para entregar una solución funcional y bien integrada.",
+        title: "Instalación completa",
+        icon: "check" as const,
+        description: "Lo dejamos nivelado, sellado y listo para usarse.",
       },
     ],
   },
   types: {
-    eyebrow: "Tipos de ventanas",
-    title: "Encuentra el sistema",
-    accentTitle: "que mejor ventila tu espacio",
-    description:
-      "Cada línea responde a una necesidad distinta de apertura, aislamiento, luz y uso diario dentro del proyecto.",
+    eyebrow: "Tipos de ventana",
+    title: "¿Cuál va con tu espacio?",
+    accentTitle: "4 líneas de aluminio",
+    description: "Si no sabes cuál elegir, mándanos una foto del claro y te recomendamos.",
+    photoMessage:
+      "Hola, no sé qué ventana me conviene. Les mando una foto del claro para que me recomienden.",
+    titleId: "ventanas-types-title",
+    trackLabel: "Tipos de ventana",
     items: [
       {
         id: "serie-1400",
@@ -95,8 +79,11 @@ export const ventanasPageContent = {
           src: "/img/ventanas/serie_1400.webp",
           alt: "Ventana Línea Española Serie 1400 de aluminio y cristal",
         },
-        description:
-          "Sistema práctico para espacios que necesitan ventilación, entrada de luz y una lectura limpia en ventanas de uso cotidiano.",
+        ideal: "Línea española de aluminio, a la medida del claro.",
+        pendingNote: 'PENDIENTE: descripción real e "ideal si..." de la Serie 1400',
+        message:
+          "Hola, me interesa la Serie 1400 para mi recámara/sala/área de trabajo. El claro mide aprox. ___ de ancho por ___ de alto. ¿Me pueden dar precio?",
+        description: "Línea española de aluminio, a la medida del claro.",
         features: ["Apertura funcional", "Diseño sobrio", "Integración a medida"],
         benefits: ["Luz natural", "Ventilación cómoda", "Vista ligera"],
         useCase: "Recámaras, salas y espacios residenciales de uso diario",
@@ -118,8 +105,11 @@ export const ventanasPageContent = {
           src: "/img/ventanas/serie_3500.webp",
           alt: "Ventana Línea Española Serie 3500 para proyecto moderno",
         },
-        description:
-          "Línea pensada para claros más presentes, con una estructura que acompaña mejor la escala del espacio y conserva una vista limpia.",
+        ideal: "Línea española de aluminio, a la medida del claro.",
+        pendingNote: 'PENDIENTE: descripción real e "ideal si..." de la Serie 3500',
+        message:
+          "Hola, me interesa la Serie 3500 para mi recámara/sala/área de trabajo. El claro mide aprox. ___ de ancho por ___ de alto. ¿Me pueden dar precio?",
+        description: "Línea española de aluminio, a la medida del claro.",
         features: ["Mayor presencia", "Apertura estable", "Acabado moderno"],
         benefits: ["Más firmeza", "Buena entrada de luz", "Confort interior"],
         useCase: "Salas, áreas sociales y ventanas con claros medios",
@@ -141,8 +131,11 @@ export const ventanasPageContent = {
           src: "/img/ventanas/serie_4600.webp",
           alt: "Ventana Línea Española Serie 4600 para claro amplio",
         },
-        description:
-          "Sistema para proyectos que necesitan una ventana con mayor presencia, estabilidad y mejor comportamiento en claros amplios.",
+        ideal: "Línea española de aluminio, a la medida del claro.",
+        pendingNote: 'PENDIENTE: descripción real e "ideal si..." de la Serie 4600',
+        message:
+          "Hola, me interesa la Serie 4600 para mi recámara/sala/área de trabajo. El claro mide aprox. ___ de ancho por ___ de alto. ¿Me pueden dar precio?",
+        description: "Línea española de aluminio, a la medida del claro.",
         features: ["Claro amplio", "Estructura robusta", "Vista moderna"],
         benefits: ["Mayor estabilidad", "Mejor aislamiento", "Presencia arquitectónica"],
         useCase: "Ventanas amplias, fachadas residenciales y espacios principales",
@@ -164,8 +157,11 @@ export const ventanasPageContent = {
           src: "/img/ventanas/linea_nacional.webp",
           alt: "Ventana Línea Nacional de aluminio y cristal",
         },
-        description:
-          "Solución versátil para espacios que buscan una ventana clara, resistente y adaptable a distintas necesidades de ventilación.",
+        ideal: "Línea nacional de aluminio, en perfiles de 2 y 3 pulgadas.",
+        pendingNote: 'PENDIENTE: descripción real e "ideal si..." de la línea nacional',
+        message:
+          "Hola, me interesa la Línea Nacional para mi recámara/sala/área de trabajo. El claro mide aprox. ___ de ancho por ___ de alto. ¿Me pueden dar precio?",
+        description: "Línea nacional de aluminio, en perfiles de 2 y 3 pulgadas.",
         features: ["Sistema versátil", "Ajuste a medida", "Uso residencial"],
         benefits: ["Buena ventilación", "Instalación práctica", "Estilo adaptable"],
         useCase: "Ventanas residenciales, áreas de servicio y espacios de uso frecuente",
@@ -194,10 +190,11 @@ export const ventanasNavLinks = [
   { href: "#calidad", label: "Calidad", sectionId: "calidad" },
   { href: "#tipos", label: "Tipos", sectionId: "tipos" },
   { href: "#proyectos", label: "Proyectos", sectionId: "proyectos" },
+  { href: "#preguntas", label: "Preguntas", sectionId: "preguntas" },
 ] as const;
 
 export const ventanasSecondaryNavLinks = [
-  { href: "#ubicacion", label: "Ubicación", sectionId: "ubicacion" },
+  { href: "#contacto", label: "Contacto", sectionId: "contacto" },
 ] as const;
 
 export const ventanasScrollSpyLinks = [
@@ -208,5 +205,39 @@ export const ventanasScrollSpyLinks = [
 export const ventanasMobileNavLinks = [
   ...ventanasNavLinks,
   ...ventanasSecondaryNavLinks,
-  { href: "#cotizacion", label: "Crear cotización" },
+  { href: "#contacto", label: "Cotizar" },
 ] as const;
+
+export const ventanasFaq = {
+  eyebrow: "Preguntas frecuentes",
+  title: "Antes de cotizar",
+  accent: "tus ventanas",
+  description: "Si tu duda no está aquí, mándanos una foto por WhatsApp.",
+  items: [
+    {
+      question: "¿Cuánto cuesta instalar ventanas de aluminio?",
+      answer:
+        "El precio depende de las medidas, la línea de aluminio y el tipo de cristal. Mándanos fotos y medidas aproximadas por WhatsApp y te cotizamos sin costo.",
+    },
+    {
+      question: "¿Cuánto tarda la instalación?",
+      answer:
+        "El tiempo depende de la cantidad de ventanas y de que el claro ya esté listo. Al cotizar te decimos el plazo de fabricación e instalación.",
+    },
+    {
+      question: "¿Tienen que medir en mi casa?",
+      answer:
+        "Sí. Medimos en el domicilio para fabricar cada ventana a la medida. Puedes empezar con fotos y medidas aproximadas.",
+    },
+    {
+      question: "¿Llegan a mi zona?",
+      answer:
+        "Instalamos en Toluca, Metepec y alrededores. Dinos tu colonia para confirmar la visita.",
+    },
+    {
+      question: "¿Puedo enviar fotos del espacio?",
+      answer:
+        "Sí. Por WhatsApp puedes mandar fotos del claro y, si quieres, una referencia de la ventana que buscas.",
+    },
+  ],
+} as const;

@@ -12,6 +12,8 @@ import {
   HiOutlineSwatch,
   HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
+import { WhatsAppIcon } from "@/features/conversion/contact-icons";
+import { SectionHeading } from "@/features/conversion/section-heading";
 import { openQuoteDialog } from "@/features/home/components/home-floating-quote/quote-dialog";
 import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
 import { barandalesPageContent } from "./barandales-page.data";
@@ -59,10 +61,29 @@ type TypesContent = {
 
 type BarandalesTypesSectionProps = {
   content?: TypesContent;
+  ctaMode?: "dialog" | "whatsapp";
   quoteService?: string;
   quoteWhatsappHref?: string;
   railLabel?: string;
+  unifiedHeadings?: boolean;
+  ctaLabel?: string;
+  quoteMessageTemplate?: string;
+  quoteUbicacion?: "seccion" | "tipos";
 };
+
+function quoteHrefForType(href: string, title: string, message?: string) {
+  try {
+    const url = new URL(href);
+    const current = url.searchParams.get("text");
+    url.searchParams.set(
+      "text",
+      message ?? (current ? `${current} Opción: ${title}.` : `Hola, quiero cotizar: ${title}.`),
+    );
+    return url.toString().replace(/\+/g, "%20");
+  } catch {
+    return href;
+  }
+}
 
 function renderRating(value: number) {
   return `${value}/5`;
@@ -70,9 +91,14 @@ function renderRating(value: number) {
 
 export function BarandalesTypesSection({
   content = barandalesPageContent,
+  ctaMode = "dialog",
   quoteService = "Barandales",
   quoteWhatsappHref = barandalesPageContent.cta.href,
   railLabel = "Tipos de barandal",
+  unifiedHeadings = false,
+  ctaLabel = "Cotizar por WhatsApp",
+  quoteMessageTemplate,
+  quoteUbicacion = "seccion",
 }: BarandalesTypesSectionProps = {}) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
   const [activeTypeId, setActiveTypeId] = useState(
@@ -109,19 +135,30 @@ export function BarandalesTypesSection({
       data-scroll-direction={scrollDirection}
       aria-labelledby="barandales-types-title"
     >
-      <p className={styles.eyebrow}>
-        <span aria-hidden="true" />
-        {content.types.eyebrow}
-      </p>
+      {unifiedHeadings ? null : (
+        <p className={styles.eyebrow}>
+          <span aria-hidden="true" />
+          {content.types.eyebrow}
+        </p>
+      )}
 
       <div className={styles.typesHeader}>
-        <h2 id="barandales-types-title">
-          {content.types.title}
-          <span className={styles.sectionAccent}>
-            {content.types.accentTitle}
-          </span>
-        </h2>
-        <p>{content.types.description}</p>
+        {unifiedHeadings ? (
+          <SectionHeading
+            accent={content.types.accentTitle}
+            description={content.types.description}
+            title={content.types.title}
+            titleId="barandales-types-title"
+          />
+        ) : (
+          <>
+            <h2 id="barandales-types-title">
+              {content.types.title}
+              <span className={styles.sectionAccent}>{content.types.accentTitle}</span>
+            </h2>
+            <p>{content.types.description}</p>
+          </>
+        )}
       </div>
 
       <div className={styles.typePicker}>
@@ -207,19 +244,41 @@ export function BarandalesTypesSection({
             <strong>{activeType.vibe}</strong>
           </div>
 
-          <button
-            className={styles.typeCta}
-            type="button"
-            onClick={() =>
-              openQuoteDialog({
-                origin: "service_types_quote_cta",
-                service: quoteService,
-                whatsappHref: quoteWhatsappHref,
-              })
-            }
-          >
-            Quiero este para mi proyecto
-          </button>
+          {ctaMode === "whatsapp" ? (
+            <a
+              className={styles.typeCta}
+              href={
+                quoteMessageTemplate
+                  ? quoteHrefForType(
+                      quoteWhatsappHref,
+                      activeType.label,
+                      quoteMessageTemplate.split("{tipo}").join(activeType.label),
+                    )
+                  : quoteHrefForType(quoteWhatsappHref, activeType.title)
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              data-tipo={quoteMessageTemplate ? activeType.label : undefined}
+              data-ubicacion={quoteUbicacion}
+            >
+              <WhatsAppIcon />
+              {ctaLabel}
+            </a>
+          ) : (
+            <button
+              className={styles.typeCta}
+              type="button"
+              onClick={() =>
+                openQuoteDialog({
+                  origin: "service_types_quote_cta",
+                  service: quoteService,
+                  whatsappHref: quoteWhatsappHref,
+                })
+              }
+            >
+              Quiero este para mi proyecto
+            </button>
+          )}
         </div>
       </article>
     </section>

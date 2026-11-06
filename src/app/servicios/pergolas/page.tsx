@@ -10,15 +10,6 @@ const serviceDescription =
 export const metadata: Metadata = {
   title: serviceTitle,
   description: serviceDescription,
-  keywords: [
-    "pérgolas de aluminio y cristal en Toluca",
-    "pérgolas modernas",
-    "domos de cristal",
-    "techos de vidrio",
-    "estructuras para exterior",
-    "instalación de pérgolas",
-    "pérgolas para terrazas",
-  ],
   alternates: {
     canonical: "/servicios/pergolas",
   },

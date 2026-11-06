@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import {
+  ContactClickTracker,
   GoogleTagManagerScript,
   ServiceViewTracker,
 } from "@/features/analytics";
 import { absoluteUrl, homeMetadata, siteUrl } from "@/features/home/home-seo";
+import { SiteFooter } from "@/features/site/site-footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,17 +19,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Aurenna" }],
   creator: "Aurenna",
   publisher: "Aurenna",
-  keywords: [
-    "aluminio y vidrio Toluca",
-    "canceler\u00eda en Toluca",
-    "ventanas de aluminio",
-    "canceles de ba\u00f1o",
-    "puertas de aluminio y vidrio",
-    "fachadas de vidrio",
-    "barandales de vidrio",
-    "p\u00e9rgolas de aluminio",
-    "Aluminio y Vidrio Instala",
-  ],
   alternates: {
     canonical: "/",
   },
@@ -66,7 +57,9 @@ export default function RootLayout({
       <body>
         <GoogleTagManagerScript />
         {children}
+        <SiteFooter />
         <ServiceViewTracker />
+        <ContactClickTracker />
       </body>
     </html>
   );

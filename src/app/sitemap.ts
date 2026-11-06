@@ -19,11 +19,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ],
     },
     {
+      url: absoluteUrl("/aviso-de-privacidad"),
+      lastModified: new Date("2026-11-06"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
       url: absoluteUrl("/barandales"),
       lastModified: new Date("2026-10-08"),
       changeFrequency: "monthly",
       priority: 0.9,
-      images: [absoluteUrl("/img/img_hero_barandales_web.webp")],
+      images: [absoluteUrl("/img/img_hero_barandales_lcp.webp")],
     },
     {
       url: absoluteUrl("/servicios/barandales"),
@@ -37,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 0.86,
-      images: [absoluteUrl("/img/cancel_bano/hero_web.webp")],
+      images: [absoluteUrl("/img/cancel_bano/hero_web_lcp.webp")],
     },
     {
       url: absoluteUrl("/servicios/fachadas-de-cristal"),
@@ -65,7 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 0.86,
-      images: [absoluteUrl("/img/ventanas/hero_web.webp")],
+      images: [absoluteUrl("/img/ventanas/hero_web_lcp.webp")],
     },
   ];
 }

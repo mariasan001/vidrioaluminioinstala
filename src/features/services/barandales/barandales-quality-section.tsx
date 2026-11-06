@@ -10,6 +10,7 @@ import {
   HiOutlineSwatch,
   HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
+import { SectionHeading } from "@/features/conversion/section-heading";
 import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
 import { barandalesPageContent } from "./barandales-page.data";
 import styles from "./barandales-page.module.css";
@@ -37,112 +38,162 @@ type QualityContent = {
       title: string;
       icon: keyof typeof qualityIcons;
       description: string;
+      pending?: string;
     }[];
   };
 };
 
 type BarandalesQualitySectionProps = {
   content?: QualityContent;
+  layout?: "orbit" | "columns";
+  unifiedHeadings?: boolean;
 };
+
+function QualityPoint({
+  point,
+}: {
+  point: QualityContent["quality"]["points"][number];
+}) {
+  const Icon = qualityIcons[point.icon];
+
+  return (
+    <article className={styles.qualityPoint}>
+      <span className={styles.qualityIcon} aria-hidden="true">
+        <Icon />
+      </span>
+      <div>
+        <h3>{point.title}</h3>
+        {point.pending ? (
+          <span hidden dangerouslySetInnerHTML={{ __html: `<!-- ${point.pending} -->` }} />
+        ) : null}
+        {point.description ? <p>{point.description}</p> : null}
+      </div>
+    </article>
+  );
+}
 
 export function BarandalesQualitySection({
   content = barandalesPageContent,
+  layout = "orbit",
+  unifiedHeadings = false,
 }: BarandalesQualitySectionProps = {}) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
   const [activePointIndex, setActivePointIndex] = useState(0);
-  const activePoint = content.quality.points[activePointIndex]!;
-  const ActivePointIcon = qualityIcons[activePoint.icon];
+  const activePoint = content.quality.points[activePointIndex] ?? content.quality.points[0];
+  const ActivePointIcon = activePoint ? qualityIcons[activePoint.icon] : null;
+  const columns = layout === "columns";
+  const leftPoints = content.quality.points.slice(0, 2);
+  const rightPoints = content.quality.points.slice(2, 4);
 
   return (
     <section
       ref={sectionRef}
       id="calidad"
-      className={styles.qualitySection}
+      className={`${styles.qualitySection} ${columns ? styles.qualitySplit : ""}`}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
       aria-labelledby="barandales-quality-title"
     >
-      <p className={styles.eyebrow}>
-        <span aria-hidden="true" />
-        {content.quality.eyebrow}
-      </p>
+      {unifiedHeadings ? null : (
+        <p className={styles.eyebrow}>
+          <span aria-hidden="true" />
+          {content.quality.eyebrow}
+        </p>
+      )}
 
       <div className={styles.qualityHeader}>
-        <h2 id="barandales-quality-title">
-          {content.quality.title}
-          <span className={styles.sectionAccent}>
-            {content.quality.accentTitle}
-          </span>
-        </h2>
-        <p>{content.quality.description}</p>
+        {unifiedHeadings ? (
+          <SectionHeading
+            accent={content.quality.accentTitle}
+            description={content.quality.description}
+            title={content.quality.title}
+            titleId="barandales-quality-title"
+          />
+        ) : (
+          <>
+            <h2 id="barandales-quality-title">
+              {content.quality.title}
+              <span className={styles.sectionAccent}>{content.quality.accentTitle}</span>
+            </h2>
+            <p>{content.quality.description}</p>
+          </>
+        )}
       </div>
 
       <div className={styles.qualityDiagram}>
+        {columns ? (
+          <div className={styles.qualityColumn}>
+            {leftPoints.map((point) => (
+              <QualityPoint key={point.title} point={point} />
+            ))}
+          </div>
+        ) : null}
+
         <div className={styles.qualityImageStage}>
           <Image
             src={content.quality.image.src}
             alt={content.quality.image.alt}
             fill
-            sizes="(max-width: 900px) 86vw, 34vw"
+            sizes={columns ? "(max-width: 900px) 70vw, 460px" : "(max-width: 900px) 86vw, 34vw"}
             className={styles.qualityImage}
           />
 
-          <div className={styles.qualityMobileMap} aria-label="Puntos de calidad del barandal">
-            {content.quality.points.map((point, index) => {
-              const MarkerIcon = qualityIcons[point.icon];
+          {columns ? null : (
+            <div className={styles.qualityMobileMap} aria-label="Puntos de calidad del barandal">
+              {content.quality.points.map((point, index) => {
+                const MarkerIcon = qualityIcons[point.icon];
 
-              return (
-                <button
-                  key={point.title}
-                  type="button"
-                  className={styles.qualityMarker}
-                  data-active={activePointIndex === index}
-                  aria-label={point.title}
-                  aria-pressed={activePointIndex === index}
-                  onClick={() => setActivePointIndex(index)}
-                >
-                  <span className={styles.qualityMarkerIcon} aria-hidden="true">
-                    <MarkerIcon />
-                  </span>
-                  <span className={styles.qualityMarkerNumber} aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                return (
+                  <button
+                    key={point.title}
+                    type="button"
+                    className={styles.qualityMarker}
+                    data-active={activePointIndex === index}
+                    aria-label={point.title}
+                    aria-pressed={activePointIndex === index}
+                    onClick={() => setActivePointIndex(index)}
+                  >
+                    <span className={styles.qualityMarkerIcon} aria-hidden="true">
+                      <MarkerIcon />
+                    </span>
+                    <span className={styles.qualityMarkerNumber} aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
 
-        <div className={styles.qualityPoints}>
-          {content.quality.points.map((point) => {
-            const Icon = qualityIcons[point.icon];
-
-            return (
-              <article className={styles.qualityPoint} key={point.title}>
-                <span className={styles.qualityIcon} aria-hidden="true">
-                  <Icon />
-                </span>
-                <div>
-                  <h3>{point.title}</h3>
-                  <p>{point.description}</p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-
-        <article className={styles.qualityMobilePanel}>
-          <div className={styles.qualityMobilePanelMeta}>
-            <span className={styles.qualityMobilePanelIcon} aria-hidden="true">
-              <ActivePointIcon />
-            </span>
-            <span className={styles.qualityMobilePanelNumber} aria-hidden="true">
-              {String(activePointIndex + 1).padStart(2, "0")}
-            </span>
+        {columns ? (
+          <div className={styles.qualityColumn}>
+            {rightPoints.map((point) => (
+              <QualityPoint key={point.title} point={point} />
+            ))}
           </div>
-          <h3>{activePoint.title}</h3>
-          <p>{activePoint.description}</p>
-        </article>
+        ) : (
+          <div className={styles.qualityPoints}>
+            {content.quality.points.map((point) => (
+              <QualityPoint key={point.title} point={point} />
+            ))}
+          </div>
+        )}
+
+        {columns || !activePoint || !ActivePointIcon ? null : (
+          <article className={styles.qualityMobilePanel}>
+            <div className={styles.qualityMobilePanelMeta}>
+              <span className={styles.qualityMobilePanelIcon} aria-hidden="true">
+                <ActivePointIcon />
+              </span>
+              <span className={styles.qualityMobilePanelNumber} aria-hidden="true">
+                {String(activePointIndex + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <h3>{activePoint.title}</h3>
+            <p>{activePoint.description}</p>
+          </article>
+        )}
       </div>
     </section>
   );

@@ -5,14 +5,50 @@ import {
   HiOutlineHomeModern,
   HiOutlineSun,
 } from "react-icons/hi2";
+import { WhatsAppIcon } from "@/features/conversion/contact-icons";
+import { SectionHeading } from "@/features/conversion/section-heading";
 import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
 import { barandalesPageContent } from "./barandales-page.data";
 import styles from "./barandales-page.module.css";
+
+function ShowerIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M8 2.5v4" />
+      <path d="M4 6.5h16v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3z" />
+      <path d="M7 14.5v2.2" />
+      <path d="M12 15.2v3" />
+      <path d="M17 14.5v2.2" />
+    </svg>
+  );
+}
+
+function SlidingDoorIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="1.5" />
+      <path d="M7 12h10" />
+      <path d="M9.2 9.2 6.4 12l2.8 2.8" />
+      <path d="M14.8 9.2 17.6 12l-2.8 2.8" />
+    </svg>
+  );
+}
+
+function GemIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3.5 20 12 12 20.5 4 12 12 3.5z" />
+    </svg>
+  );
+}
 
 const detailIcons = {
   balcony: HiOutlineHomeModern,
   deck: HiOutlineSun,
   stairs: HiOutlineArrowsUpDown,
+  shower: ShowerIcon,
+  sliding: SlidingDoorIcon,
+  gem: GemIcon,
 } as const;
 
 type UseCasesContent = {
@@ -30,6 +66,8 @@ type BarandalesUseCasesSectionProps = {
     accent: string;
     description: string;
   };
+  whatsappHref?: string;
+  unifiedHeadings?: boolean;
 };
 
 export function BarandalesUseCasesSection({
@@ -40,6 +78,8 @@ export function BarandalesUseCasesSection({
     description:
       "Pensamos cada solución según el recorrido, la altura, la vista y el uso real del espacio.",
   },
+  whatsappHref,
+  unifiedHeadings = false,
 }: BarandalesUseCasesSectionProps = {}) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
 
@@ -47,20 +87,44 @@ export function BarandalesUseCasesSection({
     <section
       ref={sectionRef}
       id="aplicaciones"
-      className={styles.useCasesSection}
+      className={`${styles.useCasesSection} ${whatsappHref ? styles.useCasesPlain : ""}`}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
       aria-labelledby="barandales-use-cases-title"
     >
       <div className={styles.sectionHeader}>
-        <p className={styles.eyebrow}>
-          <span aria-hidden="true" />
-          Usos principales
-        </p>
-        <h2 id="barandales-use-cases-title">
-          {heading.title} <span className={styles.sectionAccent}>{heading.accent}</span>
-        </h2>
-        <p>{heading.description}</p>
+        {unifiedHeadings ? (
+          <SectionHeading
+            accent={heading.accent}
+            align="start"
+            description={heading.description}
+            title={heading.title}
+            titleId="barandales-use-cases-title"
+          />
+        ) : (
+          <>
+            <p className={styles.eyebrow}>
+              <span aria-hidden="true" />
+              Usos principales
+            </p>
+            <h2 id="barandales-use-cases-title">
+              {heading.title} <span className={styles.sectionAccent}>{heading.accent}</span>
+            </h2>
+            <p>{heading.description}</p>
+          </>
+        )}
+        {whatsappHref ? (
+          <a
+            className={styles.useCaseLink}
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-ubicacion="seccion"
+          >
+            <WhatsAppIcon />
+            Cotiza el tuyo por WhatsApp →
+          </a>
+        ) : null}
       </div>
 
       <div className={styles.detailGrid}>

@@ -16,6 +16,27 @@ export type ProjectsSectionContent = {
   items: readonly ProjectHighlight[];
 };
 
+export type ProjectPriority = "canceles" | "ventanas" | "barandales";
+
+const priorityPrefix: Record<ProjectPriority, string> = {
+  canceles: "Canceles",
+  ventanas: "Ventanas",
+  barandales: "Barandales",
+};
+
+export function orderProjectsByPriority(
+  items: readonly ProjectHighlight[],
+  prioridad?: ProjectPriority,
+) {
+  if (!prioridad) return items;
+
+  const prefix = priorityPrefix[prioridad];
+  return [
+    ...items.filter((item) => item.category.startsWith(prefix)),
+    ...items.filter((item) => !item.category.startsWith(prefix)),
+  ];
+}
+
 export const projectsContent: ProjectsSectionContent = {
   eyebrow: "Trabajos que hablan por sí solos",
   title: "Proyectos que muestran",

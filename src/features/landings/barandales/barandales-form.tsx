@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
+import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { trackQuoteSubmit } from "@/features/analytics";
 import { whatsappPhoneNumber } from "@/features/home/components/home-floating-quote/home-floating-quote.data";
 import {
@@ -168,6 +169,7 @@ export function BarandalesQuoteForm() {
         type="submit"
         disabled={isSubmitting}
       >
+        <WhatsAppIcon />
         {barandalesFinalCta.submit}
       </button>
       <p className={styles.privacy}>{barandalesFinalCta.privacy}</p>

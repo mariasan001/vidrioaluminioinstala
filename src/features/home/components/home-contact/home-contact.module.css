@@ -263,6 +263,13 @@
   font-size: var(--text-md);
 }
 
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent);
+}
+
 .footer div span::before {
   content: "/";
   margin-right: 10px;

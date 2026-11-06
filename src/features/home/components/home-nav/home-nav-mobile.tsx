@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { FaFacebookF } from "react-icons/fa6";
-import { HiOutlineMinusSmall, HiOutlinePlusSmall } from "react-icons/hi2";
-import { trackPhoneClick } from "@/features/analytics";
+import { HiOutlineBars3, HiOutlineMinusSmall, HiOutlinePlusSmall, HiOutlineXMark } from "react-icons/hi2";
+import { phoneHref } from "@/features/conversion/contact-info";
+import { PhoneIcon, WhatsAppIcon } from "@/features/conversion/contact-icons";
 import type { NavItem } from "./home-nav.data";
 import type { NavRenderState } from "./home-nav.types";
 import { getNavItemKey } from "./home-nav.utils";
@@ -12,6 +13,8 @@ type HomeNavMobileProps = NavRenderState & {
   links: readonly NavItem[];
   onClose: () => void;
   onToggle: () => void;
+  compact?: boolean;
+  whatsappHref?: string;
 };
 
 export function HomeNavMobile({
@@ -23,6 +26,8 @@ export function HomeNavMobile({
   onNavClick,
   onQuoteOpen,
   onToggle,
+  compact = false,
+  whatsappHref,
 }: HomeNavMobileProps) {
   return (
     <>
@@ -43,20 +48,43 @@ export function HomeNavMobile({
           />
         </a>
 
-        <button
-          type="button"
-          className={styles.mobileMenuButton}
-          aria-expanded={isOpen}
-          aria-controls="mobile-nav-panel"
-          aria-label={isOpen ? "Cerrar men\u00fa" : "Abrir men\u00fa"}
-          onClick={onToggle}
-        >
-          {isOpen ? (
-            <HiOutlineMinusSmall aria-hidden="true" />
-          ) : (
-            <HiOutlinePlusSmall aria-hidden="true" />
-          )}
-        </button>
+        {compact ? (
+          <div className={styles.mobileActionRow}>
+            <a
+              className={styles.iconButton}
+              href={phoneHref}
+              aria-label="Llamar al 729 381 3723"
+              data-ubicacion="seccion"
+            >
+              <PhoneIcon />
+            </a>
+            <button
+              type="button"
+              className={styles.iconButton}
+              aria-expanded={isOpen}
+              aria-controls="mobile-nav-panel"
+              aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+              onClick={onToggle}
+            >
+              {isOpen ? <HiOutlineXMark aria-hidden="true" /> : <HiOutlineBars3 aria-hidden="true" />}
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className={styles.mobileMenuButton}
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav-panel"
+            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+            onClick={onToggle}
+          >
+            {isOpen ? (
+              <HiOutlineMinusSmall aria-hidden="true" />
+            ) : (
+              <HiOutlinePlusSmall aria-hidden="true" />
+            )}
+          </button>
+        )}
       </div>
 
       <div
@@ -66,6 +94,7 @@ export function HomeNavMobile({
         inert={!isOpen}
       >
         <div className={styles.mobileMenuInner}>
+          {compact ? null : (
           <div className={styles.mobileMenuHeader}>
             <a
               href={logoHref}
@@ -91,6 +120,7 @@ export function HomeNavMobile({
               <HiOutlineMinusSmall aria-hidden="true" />
             </button>
           </div>
+          )}
 
           <div className={styles.mobileMenuLinks}>
             {links.map((item, index) => (
@@ -116,18 +146,39 @@ export function HomeNavMobile({
             ))}
           </div>
 
+          {compact ? (
+            <div className={styles.mobileMenuCtas}>
+              {whatsappHref ? (
+                <a
+                  className={styles.mobileCtaPrimary}
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-ubicacion="seccion"
+                  onClick={onClose}
+                >
+                  <WhatsAppIcon />
+                  WhatsApp
+                </a>
+              ) : null}
+              <a
+                className={styles.mobileCtaSecondary}
+                href={phoneHref}
+                data-ubicacion="seccion"
+                onClick={onClose}
+              >
+                <PhoneIcon />
+                Llamar
+              </a>
+            </div>
+          ) : (
           <div className={styles.mobileMenuFooter}>
             <div className={styles.mobileInfoBlock}>
               <a
                 className={styles.mobileInfoLink}
                 href="tel:7293813723"
                 aria-label="Llamar al 729 381 3723"
-                onClick={() =>
-                  trackPhoneClick({
-                    href: "tel:7293813723",
-                    placement: "navigation_mobile",
-                  })
-                }
+                data-ubicacion="seccion"
               >
                 729 381 3723
               </a>
@@ -151,6 +202,7 @@ export function HomeNavMobile({
               </a>
             </div>
           </div>
+          )}
         </div>
       </div>
     </>

@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Analítica (Hostinger). config.php se crea a mano y no se versiona.
+config.php
+analytics/private/config.php
+analytics/private/logs/*
+!analytics/private/logs/.gitkeep
+analytics/private/rate/

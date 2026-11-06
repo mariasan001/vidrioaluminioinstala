@@ -1,80 +1,67 @@
-import { HomeContact } from "@/features/home/components/home-contact";
-import { HomeFloatingQuote } from "@/features/home/components/home-floating-quote";
-import { HomeNav } from "@/features/home/components/home-nav";
-import { HomeProjects } from "@/features/home/components/home-projects";
-import { BarandalesQualitySection } from "@/features/services/barandales/barandales-quality-section";
-import { BarandalesTypesSection } from "@/features/services/barandales/barandales-types-section";
-import { BarandalesUseCasesSection } from "@/features/services/barandales/barandales-use-cases-section";
-import { ServiceHero } from "@/features/services/components/service-hero";
+import { ServiceConversionPage } from "@/features/conversion/service-conversion-page";
 import {
+  ventanasFaq,
   ventanasMobileNavLinks,
   ventanasNavLinks,
   ventanasPageContent,
   ventanasScrollSpyLinks,
   ventanasSecondaryNavLinks,
 } from "./ventanas-page.data";
-import styles from "@/features/services/barandales/barandales-page.module.css";
+
+const whatsappHref =
+  "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20ventanas%20de%20aluminio%20a%20la%20medida%20en%20Toluca.";
 
 export function VentanasPage() {
   return (
-    <main className={styles.page}>
-      <HomeNav
-        defaultActiveHref="/#servicios"
-        logoHref="/"
-        mobileMenuLinks={ventanasMobileNavLinks}
-        primaryLinks={ventanasNavLinks}
-        quoteService="Ventanas"
-        quoteWhatsappHref={ventanasPageContent.cta.href}
-        secondaryLinks={ventanasSecondaryNavLinks}
-        scrollLinks={ventanasScrollSpyLinks}
-      />
-
-      <ServiceHero
-        actions={[
-          {
-            label: ventanasPageContent.cta.label,
-            service: "Ventanas",
-            whatsappHref: ventanasPageContent.cta.href,
-            type: "quote",
-          },
-          {
-            href: "#tipos",
-            label: "Ver sistemas",
-            type: "link",
-          },
-        ]}
-        accentTitle={ventanasPageContent.accentTitle}
-        description={ventanasPageContent.description}
-        eyebrow={ventanasPageContent.eyebrow}
-        image={ventanasPageContent.image}
-        stats={ventanasPageContent.heroUseCases}
-        title={ventanasPageContent.title}
-      />
-
-      <BarandalesUseCasesSection
-        content={ventanasPageContent}
-        heading={{
-          title: "Dónde queda mejor una",
-          accent: "ventana a medida",
-          description:
-            "Pensamos cada solución según la luz, la ventilación, el aislamiento y el uso real del espacio.",
-        }}
-      />
-      <BarandalesQualitySection content={ventanasPageContent} />
-
-      <BarandalesTypesSection
-        content={ventanasPageContent}
-        quoteService="Ventanas"
-        quoteWhatsappHref={ventanasPageContent.cta.href}
-        railLabel="Tipos de ventana"
-      />
-
-      <HomeProjects />
-      <HomeContact />
-      <HomeFloatingQuote
-        defaultService="Ventanas"
-        whatsappHref={ventanasPageContent.cta.href}
-      />
-    </main>
+    <ServiceConversionPage
+      servicio="ventanas"
+      quoteService="Ventanas"
+      whatsappHref={whatsappHref}
+      compactNav
+      revealSticky
+      useCasesLink
+      qualityColumns
+      hero={{
+        eyebrow: "Ventanas a la medida",
+        title: "Ventanas de aluminio en Toluca y Metepec",
+        titleMain: "Ventanas de aluminio",
+        titleAccent: "en Toluca y Metepec",
+        description:
+          "De aluminio a la medida, para recámaras, salas y áreas de trabajo. Lo medimos en tu casa y lo dejamos instalado.",
+        fullScreen: true,
+        chips: ["Cotización sin costo", "Línea española o nacional", "Lun a sáb · 8:00–18:00"],
+        image: {
+          src: "/img/ventanas/hero_web_lcp.webp",
+          mobileSrc: "/img/ventanas/hero_movil_lcp.webp",
+          alt: "Ventana de aluminio y cristal instalada en una casa de Toluca",
+          width: 1400,
+          height: 933,
+        },
+      }}
+      content={ventanasPageContent}
+      useCasesHeading={{
+        title: "Instalamos la ventana",
+        accent: "según tu espacio",
+        description: "Recámara, sala o área de trabajo. Lo medimos en tu casa y la fabricamos a la medida.",
+      }}
+      faq={ventanasFaq}
+      contact={{
+        title: "Cotiza tus ventanas",
+        accent: "sin costo",
+        description: "Te respondemos de lunes a sábado, de 8:00 a 18:00.",
+        whatsappNote: "Mándanos medidas o una foto del claro",
+        callbackSubject: "unas ventanas de aluminio",
+      }}
+      gallery={{
+        title: "Trabajos",
+        accent: "que ya instalamos",
+        description: "Fotos reales de instalaciones en Toluca y Metepec.",
+        match: (category) => category.startsWith("Ventanas"),
+      }}
+      navLinks={ventanasNavLinks}
+      secondaryNavLinks={ventanasSecondaryNavLinks}
+      mobileNavLinks={ventanasMobileNavLinks}
+      scrollSpyLinks={ventanasScrollSpyLinks}
+    />
   );
 }

@@ -10,15 +10,6 @@ const serviceDescription =
 export const metadata: Metadata = {
   title: serviceTitle,
   description: serviceDescription,
-  keywords: [
-    "barandales de aluminio y vidrio en Toluca",
-    "barandales de vidrio en Toluca",
-    "barandales de aluminio en Toluca",
-    "barandales para escaleras",
-    "barandales para balcones",
-    "barandales para terrazas",
-    "instalación de barandales en Toluca",
-  ],
   alternates: {
     canonical: "/servicios/barandales",
   },

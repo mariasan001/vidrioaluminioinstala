@@ -5,6 +5,42 @@
   overflow: clip;
 }
 
+.sectionInService {
+  overflow: visible;
+}
+
+.moreProjects {
+  display: flex;
+  justify-content: center;
+  margin: 28px 0 0;
+}
+
+.moreProjects a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid rgba(232, 255, 70, 0.4);
+  border-radius: 999px;
+  color: #e8ff46;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.moreProjects a:focus-visible {
+  outline: 2px solid #e8ff46;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .moreProjects a:hover {
+    border-color: #e8ff46;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
 .section[data-scroll-direction="up"] {
   --projects-offset: -var(--space-11);
 }

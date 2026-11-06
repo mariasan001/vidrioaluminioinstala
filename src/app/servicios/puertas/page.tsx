@@ -10,15 +10,6 @@ const serviceDescription =
 export const metadata: Metadata = {
   title: serviceTitle,
   description: serviceDescription,
-  keywords: [
-    "puertas de aluminio y cristal en Toluca",
-    "puertas modernas",
-    "puertas de vidrio templado",
-    "instalación de puertas",
-    "puertas plegables de cristal",
-    "puertas de herrería",
-    "puertas de cristal",
-  ],
   alternates: {
     canonical: "/servicios/puertas",
   },

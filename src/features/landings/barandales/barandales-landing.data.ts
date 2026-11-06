@@ -30,23 +30,23 @@ export const barandalesNav = [
 ] as const;
 
 export const barandalesHero = {
-  eyebrow: "Barandales en Toluca y alrededores",
-  title: "Un barandal que transforma tu espacio.",
-  accent: "Diseño que se integra a tu hogar.",
+  eyebrow: "Instalación en Toluca y Metepec",
+  title: "Barandales en Toluca y Metepec",
+  accent: "Vidrio, metálicos y herrería.",
   description:
-    "Soluciones en barandales para escaleras, balcones y terrazas. Cuéntanos qué necesitas y solicita una cotización para tu proyecto.",
-  note: "Atención directa por WhatsApp",
+    "Instalamos barandales de vidrio, metálicos y de herrería a la medida. Cotización sin costo.",
+  note: "Lunes a sábado 8:00–18:00. Domingo cerrado.",
   image: {
-    src: "/img/img_hero_barandales_web.webp",
+    src: "/img/img_hero_barandales_lcp.webp",
     alt: "Barandal de vidrio y aluminio instalado en una terraza residencial",
-    width: 1717,
-    height: 916,
+    width: 1600,
+    height: 854,
   },
   portrait: {
-    src: "/img/img_hero_barandales_web.webp",
+    src: "/img/img_hero_barandales_lcp.webp",
     alt: "Barandal de vidrio y aluminio instalado en una terraza residencial",
-    width: 1717,
-    height: 916,
+    width: 1600,
+    height: 854,
     badge: "Terraza con barandal de vidrio",
   },
 } as const;
@@ -149,32 +149,27 @@ export const barandalesFaq = {
     {
       question: "¿Cuánto cuesta instalar un barandal?",
       answer:
-        "El precio depende del tipo de barandal, las dimensiones, los materiales, los acabados y las condiciones del espacio. Compártenos los detalles de tu proyecto para solicitar una cotización.",
+        "El precio depende del tipo de barandal, las medidas y el material: vidrio, metálico o herrería. Mándanos fotos por WhatsApp y te cotizamos sin costo.",
     },
     {
-      question: "¿Qué tipo de barandal me conviene?",
+      question: "¿Cuánto tarda la instalación?",
       answer:
-        "Depende de dónde se instalará, el diseño que buscas, el uso del espacio y los requisitos de seguridad aplicables. Podemos revisar contigo las opciones disponibles.",
+        "El tiempo depende del tipo de barandal y de que el espacio ya esté listo. Al cotizar te decimos el plazo de fabricación e instalación.",
     },
     {
-      question: "¿Puedo solicitar una cotización si todavía no tengo las medidas?",
+      question: "¿Tienen que medir en mi casa?",
       answer:
-        "Sí. Puedes iniciar compartiendo fotografías, la ubicación y una descripción de lo que necesitas. Te indicaremos qué información hace falta para cotizar.",
+        "Sí. Medimos en el domicilio para fabricar el barandal a la medida. Puedes empezar con fotos y medidas aproximadas.",
     },
     {
       question: "¿Trabajan en Toluca y sus alrededores?",
       answer:
-        "Atendemos solicitudes para proyectos en Toluca, Metepec y alrededores. Confirma tu colonia o municipio para verificar la cobertura y las condiciones del servicio.",
+        "Instalamos en Toluca, Metepec y alrededores. Dinos tu colonia para confirmar la visita.",
     },
     {
-      question: "¿Puedo enviar una fotografía del barandal que quiero?",
+      question: "¿Puedo enviar fotos del espacio?",
       answer:
-        "Sí. Puedes compartir una imagen de referencia por WhatsApp para explicar el estilo que buscas. La viabilidad dependerá de las características del proyecto.",
-    },
-    {
-      question: "¿También fabrican o instalan otros productos?",
-      answer:
-        "Aluminio y Vidrio Instala ofrece otras soluciones en vidrio, aluminio y herrería. Contáctanos para consultar la disponibilidad del producto que necesitas.",
+        "Sí. Por WhatsApp puedes mandar fotos de la escalera, el balcón o la terraza y una referencia del barandal que te gusta.",
     },
   ],
 } as const;
@@ -190,7 +185,7 @@ export const barandalesFinalCta = {
   formTitle: "Solicita tu cotización",
   formNote: "Te responderemos para revisar los detalles de tu proyecto.",
   submit: "Enviar solicitud de cotización",
-  privacy: "Al enviar aceptas el aviso de privacidad. Pendiente de confirmar: aún no hay un aviso publicado.",
+  privacy: "Al enviar aceptas el aviso de privacidad.",
 } as const;
 
 export const barandalesFooter = {
@@ -199,11 +194,11 @@ export const barandalesFooter = {
     "¿Buscas ventanas, canceles, herrería u otra solución en vidrio y aluminio? Consulta nuestros otros servicios",
   servicesHref: "/#servicios",
   copyright: "© Aluminio y Vidrio Instala",
-  privacy: "Aviso de privacidad por confirmar",
+  privacy: "Aviso de privacidad",
 } as const;
 
 export const barandalesSeo = {
-  title: "Barandales en Toluca para escaleras, balcones y terrazas",
+  title: "Barandales en Toluca y Metepec",
   description:
-    "Soluciones en barandales para escaleras, balcones y terrazas. Cuéntanos qué necesitas y solicita una cotización para tu proyecto.",
+    "Instalamos barandales de vidrio, metálicos y de herrería en Toluca y Metepec. Cotización sin costo por WhatsApp.",
 } as const;

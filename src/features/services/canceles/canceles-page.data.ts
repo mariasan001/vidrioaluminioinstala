@@ -12,30 +12,29 @@ export const cancelesPageContent = {
   },
   details: [
     {
-      title: "Para regaderas",
-      icon: "stairs",
+      title: "Para tu regadera",
+      icon: "shower" as const,
       description:
-        "Delimitan la zona húmeda con una presencia ligera y una apertura cómoda para el uso diario.",
+        "Adiós a la cortina. El agua se queda dentro y tu baño se ve más limpio y amplio.",
     },
     {
-      title: "Para baños compactos",
-      icon: "balcony",
+      title: "Para baños chicos",
+      icon: "sliding" as const,
       description:
-        "Sistemas corredizos o abatibles que ayudan a aprovechar mejor cada claro sin cargar la vista.",
+        "Puertas corredizas que no ocupan espacio al abrir. Ideal si tu baño es angosto.",
     },
     {
-      title: "Para baños principales",
-      icon: "deck",
+      title: "Para el baño principal",
+      icon: "gem" as const,
       description:
-        "Una solución a medida que acompaña acabados modernos y se integra al lenguaje del baño.",
+        "Cristal claro o esmerilado y el tipo de apertura que mejor quede con tus acabados.",
     },
   ],
   quality: {
-    eyebrow: "Calidad del cancel",
-    title: "Materiales pensados",
-    accentTitle: "para integrarse al baño",
-    description:
-      "Cada cancel se define según la distribución del baño, el tipo de apertura y el acabado que mejor acompaña el proyecto.",
+    eyebrow: "Cómo lo instalamos",
+    title: "Lo que no se ve en la foto",
+    accentTitle: "y sí se nota al usarlo",
+    description: "Seguridad, buen ajuste y una instalación bien hecha.",
     image: {
       src: "/img/cancel_bano/calidad.webp",
       alt: "Detalle de cancel de baño con cristal templado y perfiles limpios",
@@ -45,56 +44,47 @@ export const cancelesPageContent = {
         title: "Cristal templado",
         icon: "shield",
         description:
-          "Presencia clara, resistente y segura para acompañar la zona de regadera.",
+          "Si llegara a romperse, se hace pedacitos sin filo. Más seguro para tu familia.",
       },
       {
-        title: "Medición precisa",
+        title: "Hecho a tu medida",
         icon: "height",
         description:
-          "Consideramos claros, muros y desniveles para que el cancel se integre con precisión.",
+          "Aunque tus muros o tu piso no estén parejos, el cancel cierra bien y el agua no se sale.",
       },
       {
-        title: "Perfiles limpios",
+        title: "Perfiles discretos",
         icon: "sparkles",
-        description:
-          "Líneas sobrias que acompañan el acabado del baño sin robar protagonismo.",
+        description: "Líneas delgadas que no se roban la vista y se limpian fácil.",
       },
       {
-        title: "Apertura adecuada",
-        icon: "wrench",
-        description:
-          "Corredizo, abatible, curvo o en escuadra según la circulación del espacio.",
-      },
-      {
-        title: "Acabados a elegir",
-        icon: "swatch",
-        description:
-          "Cristal claro, esmerilado y perfiles que dialogan con el estilo del baño.",
-      },
-      {
-        title: "Instalación profesional",
+        title: "Instalación completa",
         icon: "check",
-        description:
-          "Nivelación, ajuste, sellado y revisión final para entregar un resultado listo para usarse.",
+        description: "Lo dejamos nivelado, sellado y listo para usarse.",
       },
     ],
   },
   types: {
-    eyebrow: "Tipos de canceles",
-    title: "Encuentra el sistema",
-    accentTitle: "que mejor acompaña tu baño",
+    eyebrow: "Tipos de cancel",
+    title: "¿Cuál va con tu baño?",
+    accentTitle: "6 tipos de cancel",
     description:
-      "Cada sistema responde a una forma distinta de uso, apertura y distribución para que el cancel se sienta natural dentro del espacio.",
+      "Si no sabes cuál elegir, mándanos una foto de tu regadera y te recomendamos.",
     items: [
       {
         id: "doble-corredizo",
-        label: "Doble corredizo",
-        title: "Cancel doble corredizo",
+        label: "Doble corredizo Río Bravo",
+        title: "Cancel doble corredizo Río Bravo",
         icon: "profile",
         image: {
           src: "/img/cancel_bano/doble_corredizo.webp",
-          alt: "Cancel de baño doble corredizo con cristal templado",
+          alt: "Cancel doble corredizo Río Bravo con marco de aluminio",
         },
+        ideal:
+          "Dos hojas corredizas con marco de aluminio. Ideal si tu baño es angosto: abre sin ocupar espacio.",
+        detail: "Cristal de 6 o 10 mm · recto o en escuadra",
+        message:
+          "Hola, me interesa el cancel doble corredizo Río Bravo. Mi regadera mide aprox. ___ (tienen 1.85×1.50, 1.85×1.80, 2.00×1.50 y 2.00×2.00 m). ¿Me pueden dar precio?",
         description:
           "Sistema corredizo para baños donde la apertura debe sentirse suave y práctica. Sus hojas se desplazan sobre el mismo frente para conservar circulación y ligereza visual.",
         features: ["Apertura corrediza", "Paso despejado", "Diseño funcional"],
@@ -118,6 +108,9 @@ export const cancelesPageContent = {
           src: "/img/cancel_bano/bacalar.webp",
           alt: "Cancel Bacalar para baño con cristal templado",
         },
+        ideal:
+          "Un cristal fijo y una puerta corrediza de 10 mm, con herrajes de acero inoxidable. Se puede hacer en escuadra.",
+        detail: "Herrajes satinado o negro · claro o esmerilado",
         description:
           "Propuesta de líneas sobrias para baños que necesitan una presencia firme y visualmente equilibrada. Se adapta a la medida del claro y al estilo del proyecto.",
         features: ["Perfiles definidos", "Ajuste a medida", "Presencia sobria"],
@@ -141,6 +134,8 @@ export const cancelesPageContent = {
           src: "/img/cancel_bano/cozumel.webp",
           alt: "Cancel Cozumel instalado en baño moderno",
         },
+        ideal: "Cristal fijo y puerta corrediza de 10 mm con herrajes de acero inoxidable.",
+        detail: "Herrajes satinado o negro · transparente o esmerilado",
         description:
           "Sistema pensado para una apariencia ligera y elegante. Acompaña baños claros, modernos y bien iluminados con una presencia discreta.",
         features: ["Imagen ligera", "Acabado elegante", "Integración a medida"],
@@ -164,6 +159,7 @@ export const cancelesPageContent = {
           src: "/img/cancel_bano/cielo.webp",
           alt: "Cancel Cielo para baño con presencia ligera",
         },
+        ideal: "Ideal si buscas un cancel ligero que no tape el baño.",
         description:
           "Alternativa de presencia ligera para baños que buscan continuidad visual. Se desarrolla a medida para conservar amplitud y proteger la zona de regadera.",
         features: ["Continuidad visual", "Presencia ligera", "Ajuste preciso"],
@@ -187,6 +183,7 @@ export const cancelesPageContent = {
           src: "/img/cancel_bano/curvo.webp",
           alt: "Cancel curvo de cristal para baño",
         },
+        ideal: "Ideal si tu regadera es curva.",
         description:
           "Solución para regaderas curvas o baños donde la geometría pide una respuesta más fluida. Acompaña la forma del área y hace que la circulación se sienta natural.",
         features: ["Diseño curvo", "Adaptado al espacio", "Trazo fluido"],
@@ -210,6 +207,7 @@ export const cancelesPageContent = {
           src: "/img/cancel_bano/escuadra.webp",
           alt: "Cancel de baño en escuadra con cristal templado",
         },
+        ideal: "Ideal si la regadera está en esquina.",
         description:
           "Proyecto a medida para regaderas en esquina. Cubre dos frentes con una lectura continua y ayuda a definir la zona de baño sin perder amplitud.",
         features: ["Configuración en esquina", "Dos frentes de protección", "Medidas precisas"],
@@ -240,10 +238,11 @@ export const cancelesNavLinks = [
   { href: "#calidad", label: "Calidad", sectionId: "calidad" },
   { href: "#tipos", label: "Tipos", sectionId: "tipos" },
   { href: "#proyectos", label: "Proyectos", sectionId: "proyectos" },
+  { href: "#preguntas", label: "Preguntas", sectionId: "preguntas" },
 ] as const;
 
 export const cancelesSecondaryNavLinks = [
-  { href: "#ubicacion", label: "Ubicación", sectionId: "ubicacion" },
+  { href: "#contacto", label: "Contacto", sectionId: "contacto" },
 ] as const;
 
 export const cancelesScrollSpyLinks = [
@@ -254,5 +253,44 @@ export const cancelesScrollSpyLinks = [
 export const cancelesMobileNavLinks = [
   ...cancelesNavLinks,
   ...cancelesSecondaryNavLinks,
-  { href: "#cotizacion", label: "Crear cotización" },
+  { href: "#contacto", label: "Cotizar" },
 ] as const;
+
+export const cancelesFaq = {
+  eyebrow: "Preguntas frecuentes",
+  title: "Antes de cotizar",
+  accent: "tu cancel",
+  description: "Si tu duda no está aquí, mándanos una foto por WhatsApp.",
+  items: [
+    {
+      question: "¿Qué diferencia hay entre cristal templado y vidrio normal?",
+      answer:
+        "El templado es varias veces más resistente a golpes y cambios de temperatura. Si llegara a romperse, se hace pedacitos sin filo en vez de picos cortantes. Por eso es el indicado para la regadera.",
+    },
+    {
+      question: "¿Me conviene corredizo o abatible?",
+      answer:
+        "Si tu baño es angosto o la puerta choca con el lavabo o el escusado, el corredizo es mejor porque no ocupa espacio al abrir. Si tienes espacio libre frente a la regadera, el abatible da una entrada más amplia.",
+    },
+    {
+      question: "¿Cristal claro o esmerilado?",
+      answer:
+        "El claro hace que el baño se vea más grande y luminoso. El esmerilado da más privacidad y disimula mejor las marcas de agua y el sarro.",
+    },
+    {
+      question: "¿Qué grosor de cristal usan?",
+      answer:
+        "Depende del modelo. El doble corredizo con marco de aluminio puede llevar cristal de 6 o 10 mm. Los modelos con puerta colgada de herrajes de acero inoxidable, como Bacalar y Cozumel, llevan 10 mm, porque necesitan más firmeza.",
+    },
+    {
+      question: "¿Hay que romper azulejo para instalarlo?",
+      answer:
+        "Depende de cómo esté tu baño. En la visita de medición revisamos muros y piso, y te decimos si hace falta algún ajuste antes de instalar.",
+    },
+    {
+      question: "¿Cómo lo limpio para que no se ponga opaco?",
+      answer:
+        "Después de bañarte, pasa un jalador de agua para que no se seque el sarro. Una vez a la semana, límpialo con agua y jabón neutro o vinagre diluido. Evita fibras metálicas y limpiadores abrasivos, porque rayan el cristal.",
+    },
+  ],
+} as const;

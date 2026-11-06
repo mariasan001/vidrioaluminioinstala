@@ -1,94 +1,46 @@
-"use client";
-
 import type { ReactNode } from "react";
-import { trackPhoneClick, trackWhatsappClick } from "@/features/analytics";
-import { openQuoteDialog } from "@/features/home/components/home-floating-quote/quote-dialog";
-import {
-  barandalesPhoneDisplay,
-  barandalesPhoneHref,
-  barandalesServiceName,
-  barandalesWhatsapp,
-} from "./barandales-landing.data";
+import type { Ubicacion } from "@/features/conversion/contact-info";
+import { PhoneIcon, WhatsAppIcon } from "@/features/conversion/contact-icons";
+import { barandalesPhoneDisplay, barandalesPhoneHref } from "./barandales-landing.data";
 
 type WhatsappLinkProps = {
   children: ReactNode;
   className?: string;
-  ctaType: string;
   href: string;
-  placement: string;
+  ubicacion: Ubicacion;
 };
 
-export function BarandalesWhatsappLink({
-  children,
-  className,
-  ctaType,
-  href,
-  placement,
-}: WhatsappLinkProps) {
+export function BarandalesWhatsappLink({ children, className, href, ubicacion }: WhatsappLinkProps) {
   return (
     <a
       className={className}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() =>
-        trackWhatsappClick({
-          ctaType,
-          href,
-          placement,
-          service: barandalesServiceName,
-        })
-      }
+      data-servicio="barandales"
+      data-ubicacion={ubicacion}
     >
+      <WhatsAppIcon />
       {children}
     </a>
-  );
-}
-
-export function BarandalesQuoteButton({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <button
-      className={className}
-      type="button"
-      onClick={() =>
-        openQuoteDialog({
-          origin: "landing_quote_cta",
-          service: barandalesServiceName,
-          whatsappHref: barandalesWhatsapp.quote,
-        })
-      }
-    >
-      {children}
-    </button>
   );
 }
 
 export function BarandalesPhoneLink({
   className,
   label = "Teléfono",
+  showNumber = true,
+  ubicacion,
 }: {
   className?: string;
   label?: string;
+  showNumber?: boolean;
+  ubicacion: Ubicacion;
 }) {
   return (
-    <a
-      className={className}
-      href={barandalesPhoneHref}
-      onClick={() =>
-        trackPhoneClick({
-          href: barandalesPhoneHref,
-          placement: "landing",
-          service: barandalesServiceName,
-        })
-      }
-    >
-      {label}: {barandalesPhoneDisplay}
+    <a className={className} href={barandalesPhoneHref} data-servicio="barandales" data-ubicacion={ubicacion}>
+      <PhoneIcon />
+      {showNumber ? `${label}: ${barandalesPhoneDisplay}` : label}
     </a>
   );
 }

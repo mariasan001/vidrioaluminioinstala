@@ -6,12 +6,14 @@ export type HomeNavProps = {
   logoHref?: string;
   mobileMenuLinks?: readonly NavItem[];
   primaryLinks?: readonly NavItem[];
+  quoteHref?: string;
   quoteLabel?: string;
   quoteService?: string;
   quoteWhatsappHref?: string;
   secondaryLinks?: readonly NavItem[];
   scrollLinks?: readonly NavItem[];
   wide?: boolean;
+  compact?: boolean;
 };
 
 export type NavRenderState = {
@@ -19,4 +21,5 @@ export type NavRenderState = {
   logoHref: string;
   onNavClick: (href: string) => void;
   onQuoteOpen: () => void;
+  quoteHref?: string;
 };

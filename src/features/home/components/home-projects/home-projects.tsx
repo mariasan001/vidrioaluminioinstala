@@ -10,7 +10,9 @@ import {
 } from "react-icons/hi2";
 import styles from "./home-projects.module.css";
 import {
+  orderProjectsByPriority,
   projectsContent,
+  type ProjectPriority,
   type ProjectsSectionContent,
 } from "./home-projects.data";
 import { useProjectViewer } from "./use-project-viewer";
@@ -20,11 +22,15 @@ import { useProjectsReveal } from "./use-projects-reveal";
 type HomeProjectsProps = {
   content?: ProjectsSectionContent;
   sectionId?: string;
+  prioridad?: ProjectPriority;
+  moreHref?: string;
 };
 
 export function HomeProjects({
   content = projectsContent,
   sectionId = "proyectos",
+  prioridad,
+  moreHref,
 }: HomeProjectsProps) {
   const {
     isVisible,
@@ -33,7 +39,7 @@ export function HomeProjects({
     isInView,
     isReady,
   } = useProjectsReveal();
-  const projects = content.items;
+  const projects = orderProjectsByPriority(content.items, prioridad);
   const {
     activeIndex,
     carouselRef,
@@ -67,7 +73,7 @@ export function HomeProjects({
   return (
     <section
       ref={sectionRef}
-      className={styles.section}
+      className={`${styles.section} ${prioridad ? styles.sectionInService : ""}`}
       data-in-view={isInView}
       data-ready={isReady}
       data-visible={isVisible}
@@ -76,10 +82,12 @@ export function HomeProjects({
       aria-labelledby="home-projects-title"
     >
       <div className={styles.header}>
-        <div className={styles.eyebrow}>
-          <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>{content.eyebrow}</span>
-        </div>
+        {content.eyebrow ? (
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowDot} aria-hidden="true" />
+            <span>{content.eyebrow}</span>
+          </div>
+        ) : null}
 
         <div className={styles.heading}>
           <h2 id="home-projects-title" className={styles.title}>
@@ -190,6 +198,12 @@ export function HomeProjects({
           ))}
         </div>
       </div>
+
+      {moreHref ? (
+        <p className={styles.moreProjects}>
+          <a href={moreHref}>Ver más proyectos</a>
+        </p>
+      ) : null}
 
       {expandedProject ? (
         <div
