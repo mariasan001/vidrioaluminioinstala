@@ -151,7 +151,7 @@
         const detail = document.createElement("p");
         detail.textContent = item.visitas + " visitas · " + item.clics + " clics · " + formatRate(item.tasa_contacto) + " contacto";
         const extra = document.createElement("p");
-        extra.textContent = item.clics_whatsapp + " WhatsApp · " + item.clics_llamada + " llamadas · " + item.formularios + " formularios";
+        extra.textContent = item.clics_whatsapp + " WhatsApp · " + item.clics_llamada + (item.clics_llamada === 1 ? " llamada · " : " llamadas · ") + item.formularios + (item.formularios === 1 ? " formulario" : " formularios");
         button.append(name, detail, extra);
         list.append(button);
       });
