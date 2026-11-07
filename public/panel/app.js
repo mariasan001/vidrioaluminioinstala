@@ -3,13 +3,13 @@
   const title = document.querySelector("#titulo");
   const ranges = document.querySelector("#rangos");
   const sources = document.querySelector("#fuentes");
-  const pageSelect = document.querySelector("#pagina");
   const custom = document.querySelector("#rango-fechas");
   const fromInput = document.querySelector("#desde");
   const toInput = document.querySelector("#hasta");
   const tabs = document.querySelectorAll(".tabs button");
+  const emptyText = "Aún no hay datos en este periodo";
 
-  if (!view || !title || !ranges || !sources || !pageSelect || !custom || !fromInput || !toInput) {
+  if (!view || !title || !ranges || !sources || !custom || !fromInput || !toInput) {
     return;
   }
 
@@ -35,18 +35,20 @@
     show();
   });
 
-  pageSelect.addEventListener("change", () => {
-    state.pagina = pageSelect.value;
-    state.p = 1;
-    saveState();
-    show();
-  });
-
   fromInput.addEventListener("change", onCustomDate);
   toInput.addEventListener("change", onCustomDate);
   window.addEventListener("hashchange", show);
 
   view.addEventListener("click", (event) => {
+    const pageButton = event.target.closest("[data-pagina]");
+    if (pageButton) {
+      state.pagina = pageButton.dataset.pagina || "";
+      saveState();
+      if (location.hash === "#embudo") show();
+      else location.hash = "#embudo";
+      return;
+    }
+
     const visit = event.target.closest("[data-visita]");
     if (visit) {
       location.hash = "#visita/" + visit.dataset.visita;
@@ -61,21 +63,19 @@
     }
   });
 
-  paintFilters();
-  document.querySelectorAll(".tabs button").forEach((tab) => {
+  tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const next = "#" + (tab.dataset.vista || "resumen");
-      if (location.hash === next) {
-        show();
-        return;
-      }
-      location.hash = next;
+      if (location.hash === next) show();
+      else location.hash = next;
     });
   });
+
+  paintFilters();
   show();
 
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/panel/sw.js", { scope: "/panel/" }).catch(() => {});
+    navigator.serviceWorker.register("/panel/sw.js", { scope: "/panel/" }).catch(function () {});
   }
 
   function onCustomDate() {
@@ -113,96 +113,118 @@
 
   function loadSummary() {
     return api("/api/stats/resumen.php").then((data) => {
-      fillPages(data.opciones);
-      const max = data.por_dia.reduce((top, day) => Math.max(top, day.visitas), 0);
-      const chart = document.createElement("div");
-      chart.className = "chart";
-      data.por_dia.forEach((day) => {
-        const column = document.createElement("div");
-        column.className = "bar-col";
-        const bar = document.createElement("div");
-        bar.className = "bar";
-        bar.style.height = (max > 0 ? Math.max(4, Math.round((day.visitas / max) * 100)) : 4) + "%";
-        bar.title = day.fecha + ": " + day.visitas;
-        const caption = document.createElement("span");
-        caption.textContent = day.fecha.slice(8);
-        column.append(bar, caption);
-        chart.append(column);
-      });
+      if (!data.visitas) {
+        view.replaceChildren(line(emptyText, "muted"));
+        return;
+      }
       const cards = document.createElement("div");
       cards.className = "stats";
       cards.append(
         card(data.visitas, "Visitas"),
         card(data.clics_whatsapp, "WhatsApp"),
         card(data.clics_llamada, "Llamadas"),
+        card(data.formularios, "Formularios"),
         card(formatRate(data.tasa_contacto), "Contacto")
       );
-      const note = line("Desde Google Ads: " + data.visitas_google_ads, "muted");
+      cards.lastElementChild.classList.add("rate");
       const heading = document.createElement("h2");
       heading.textContent = "Visitas por día";
-      view.replaceChildren(cards, note, heading, chart);
+      view.replaceChildren(cards, heading, drawChart(data.por_dia || []));
     });
   }
 
   function loadPages() {
     return api("/api/stats/paginas.php").then((data) => {
-      fillPages(data.opciones);
-      if (!data.paginas.length) {
-        view.replaceChildren(line("Sin datos en este periodo.", "muted"));
+      const pages = data.paginas || [];
+      if (!pages.length) {
+        view.replaceChildren(line(emptyText, "muted"));
         return;
       }
       const list = document.createElement("div");
-      data.paginas.forEach((item) => {
-        const block = document.createElement("article");
-        block.className = "block";
+      pages.forEach((item) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "card-btn";
+        button.dataset.pagina = item.pagina;
         const name = document.createElement("b");
-        name.textContent = item.pagina;
-        const rows = document.createElement("p");
-        rows.textContent = item.visitas + " visitas · " + item.clics_whatsapp + " WhatsApp · " + item.clics_llamada + " llamadas · " + formatRate(item.tasa_contacto) + " contacto";
-        block.append(name, rows);
-        list.append(block);
+        name.textContent = item.etiqueta || pageName(item.pagina);
+        const detail = document.createElement("p");
+        detail.textContent = item.visitas + " visitas · " + item.clics + " clics · " + formatRate(item.tasa_contacto) + " contacto";
+        const extra = document.createElement("p");
+        extra.textContent = item.clics_whatsapp + " WhatsApp · " + item.clics_llamada + " llamadas · " + item.formularios + " formularios";
+        button.append(name, detail, extra);
+        list.append(button);
       });
       view.replaceChildren(list);
     });
   }
 
   function loadFunnel() {
-    return api("/api/stats/embudo.php").then((data) => {
-      fillPages(data.opciones);
-      const base = data.pasos.length ? data.pasos[0].visitas : 0;
-      const list = document.createElement("div");
-      data.pasos.forEach((step) => {
-        const row = document.createElement("div");
-        row.className = "funnel-row";
-        const meta = document.createElement("div");
-        meta.className = "funnel-meta";
-        const name = document.createElement("span");
-        name.textContent = step.etiqueta;
-        const count = document.createElement("b");
-        count.textContent = String(step.visitas);
-        meta.append(name, count);
-        const track = document.createElement("div");
-        track.className = "funnel-track";
-        const fill = document.createElement("div");
-        fill.className = "funnel-fill";
-        fill.style.width = (base > 0 ? Math.max(2, Math.round((step.visitas / base) * 100)) : 0) + "%";
-        track.append(fill);
-        row.append(meta, track);
-        list.append(row);
+    return api("/api/stats/paginas.php").then((list) => {
+      const pages = list.paginas || [];
+      if (!pages.length) {
+        view.replaceChildren(line(emptyText, "muted"));
+        return;
+      }
+      if (!state.pagina) {
+        view.replaceChildren(pagePicker(pages), line("Elige una página para ver el embudo.", "muted"));
+        return;
+      }
+      return api("/api/stats/embudo.php").then((data) => {
+        const steps = data.pasos || [];
+        const hero = steps.find((step) => step.seccion === "hero");
+        const base = hero ? hero.visitas : 0;
+        if (!steps.length || base === 0 && steps.every((step) => step.visitas === 0)) {
+          view.replaceChildren(pagePicker(pages), line(emptyText, "muted"));
+          return;
+        }
+        const sections = steps.filter((step) => step.seccion !== "clic");
+        let dropAt = -1;
+        let dropSize = 0;
+        for (let index = 0; index < sections.length - 1; index += 1) {
+          const drop = sections[index].visitas - sections[index + 1].visitas;
+          if (drop > dropSize) {
+            dropSize = drop;
+            dropAt = index;
+          }
+        }
+        const wrap = document.createElement("div");
+        steps.forEach((step) => {
+          const row = document.createElement("div");
+          row.className = "funnel-row";
+          const sectionIndex = sections.indexOf(step);
+          if (dropSize > 0 && sectionIndex === dropAt) row.classList.add("sale");
+          const meta = document.createElement("div");
+          meta.className = "funnel-meta";
+          const name = document.createElement("span");
+          name.textContent = step.etiqueta + (sectionIndex === dropAt && dropSize > 0 ? " · aquí se va más gente" : "");
+          const count = document.createElement("b");
+          const percent = base > 0 ? Math.round((step.visitas / base) * 100) : 0;
+          count.textContent = step.visitas + " · " + percent + "%";
+          meta.append(name, count);
+          const track = document.createElement("div");
+          track.className = "funnel-track";
+          const fill = document.createElement("div");
+          fill.className = "funnel-fill";
+          fill.style.width = Math.min(100, Math.max(step.visitas > 0 ? 2 : 0, percent)) + "%";
+          track.append(fill);
+          row.append(meta, track);
+          wrap.append(row);
+        });
+        view.replaceChildren(pagePicker(pages), wrap);
       });
-      view.replaceChildren(list);
     });
   }
 
   function loadVisits() {
     return api("/api/stats/visitas.php", { p: String(state.p) }).then((data) => {
-      fillPages(data.opciones);
-      if (!data.visitas.length) {
-        view.replaceChildren(line("Sin visitas en este periodo.", "muted"));
+      const visits = data.visitas || [];
+      if (!visits.length) {
+        view.replaceChildren(line(emptyText, "muted"));
         return;
       }
       const list = document.createElement("div");
-      data.visitas.forEach((item) => {
+      visits.forEach((item) => {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "card-btn";
@@ -210,12 +232,10 @@
         const when = document.createElement("b");
         when.textContent = item.fecha;
         const detail = document.createElement("p");
-        const pages = item.paginas.length ? item.paginas.join(" · ") : "Sin página";
-        const section = item.seccion_etiqueta ? " · hasta " + item.seccion_etiqueta : "";
-        const click = item.clic ? " · hizo clic" : "";
-        detail.textContent = item.fuente_etiqueta + " · " + item.dispositivo_etiqueta + section + click;
+        detail.textContent = item.fuente_etiqueta + " · " + item.dispositivo_etiqueta + (item.clic ? " · hizo clic" : "");
         const path = document.createElement("p");
-        path.textContent = pages;
+        const section = item.seccion_etiqueta ? " · hasta " + item.seccion_etiqueta : "";
+        path.textContent = (item.entrada_etiqueta || pageName(item.entrada || "")) + section;
         button.append(when, detail, path);
         list.append(button);
       });
@@ -245,19 +265,20 @@
       });
       const summary = document.createElement("p");
       summary.className = "muted";
-      summary.textContent = data.visita.fecha + " · " + data.visita.fuente_etiqueta + " · " + data.visita.dispositivo_etiqueta + " · " + data.visita.pagina;
+      summary.textContent = data.visita.hora + " · " + data.visita.fuente_etiqueta + " · " + data.visita.dispositivo_etiqueta + " · " + (data.visita.pagina_etiqueta || pageName(data.visita.pagina));
       const list = document.createElement("ol");
       list.className = "tl";
-      data.eventos.forEach((event) => {
+      (data.eventos || []).forEach((event) => {
         const item = document.createElement("li");
         const name = document.createElement("b");
-        name.textContent = event.tipo_etiqueta + (event.seccion_etiqueta ? " · " + event.seccion_etiqueta : "");
-        const detail = document.createElement("p");
-        detail.textContent = event.fecha + " · " + event.pagina + (event.producto ? " · " + event.producto : "");
-        item.append(name, detail);
+        const parts = [event.hora, event.tipo_etiqueta, event.pagina_etiqueta || pageName(event.pagina)];
+        if (event.seccion_etiqueta) parts.push(event.seccion_etiqueta);
+        if (event.producto) parts.push(event.producto);
+        name.textContent = parts.filter(Boolean).join(" · ");
+        item.append(name);
         list.append(item);
       });
-      if (!data.eventos.length) list.append(line("Esta visita no tiene eventos.", "muted"));
+      if (!data.eventos || !data.eventos.length) list.append(line(emptyText, "muted"));
       view.replaceChildren(back, summary, list);
     });
   }
@@ -268,10 +289,8 @@
     params.set("desde", dates.desde);
     params.set("hasta", dates.hasta);
     params.set("fuente", state.fuente);
-    if (state.pagina) params.set("pagina", state.pagina);
-    if (extra) {
-      Object.keys(extra).forEach((key) => params.set(key, extra[key]));
-    }
+    if (path.indexOf("embudo.php") !== -1 && state.pagina) params.set("pagina", state.pagina);
+    if (extra) Object.keys(extra).forEach((key) => params.set(key, extra[key]));
     return fetch(path + "?" + params.toString(), {
       credentials: "same-origin",
       cache: "no-store",
@@ -288,21 +307,70 @@
     });
   }
 
-  function fillPages(options) {
-    const current = state.pagina;
-    pageSelect.replaceChildren();
-    const all = document.createElement("option");
-    all.value = "";
-    all.textContent = "Todas las páginas";
-    pageSelect.append(all);
-    (options || []).forEach((page) => {
+  function pagePicker(pages) {
+    const label = document.createElement("label");
+    label.textContent = "Página";
+    const select = document.createElement("select");
+    const blank = document.createElement("option");
+    blank.value = "";
+    blank.textContent = "Elige una página";
+    select.append(blank);
+    pages.forEach((item) => {
       const option = document.createElement("option");
-      option.value = page;
-      option.textContent = page;
-      pageSelect.append(option);
+      option.value = item.pagina;
+      option.textContent = item.etiqueta || pageName(item.pagina);
+      select.append(option);
     });
-    pageSelect.value = [...pageSelect.options].some((option) => option.value === current) ? current : "";
-    state.pagina = pageSelect.value;
+    if (state.pagina && ![...select.options].some((option) => option.value === state.pagina)) {
+      const option = document.createElement("option");
+      option.value = state.pagina;
+      option.textContent = pageName(state.pagina);
+      select.append(option);
+    }
+    select.value = state.pagina;
+    select.addEventListener("change", () => {
+      state.pagina = select.value;
+      saveState();
+      show();
+    });
+    label.append(select);
+    return label;
+  }
+
+  function drawChart(days) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const width = Math.max(280, days.length * 18);
+    svg.setAttribute("viewBox", "0 0 " + width + " 128");
+    svg.setAttribute("class", "chart-svg");
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", "Visitas por día");
+    const max = days.reduce((top, day) => Math.max(top, Number(day.visitas) || 0), 1);
+    days.forEach((day, index) => {
+      const visits = Number(day.visitas) || 0;
+      const height = Math.max(visits > 0 ? 4 : 1, Math.round((visits / max) * 90));
+      const rect = document.createElementNS(svg.namespaceURI, "rect");
+      rect.setAttribute("x", String(index * 18 + 4));
+      rect.setAttribute("y", String(98 - height));
+      rect.setAttribute("width", "10");
+      rect.setAttribute("height", String(height));
+      rect.setAttribute("rx", "2");
+      rect.setAttribute("fill", "#e8ff46");
+      const tip = document.createElementNS(svg.namespaceURI, "title");
+      tip.textContent = day.fecha + ": " + visits;
+      rect.append(tip);
+      svg.append(rect);
+      if (days.length <= 8 || index % 5 === 0 || index === days.length - 1) {
+        const text = document.createElementNS(svg.namespaceURI, "text");
+        text.setAttribute("x", String(index * 18 + 9));
+        text.setAttribute("y", "116");
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("fill", "#9a9a94");
+        text.setAttribute("font-size", "10");
+        text.textContent = String(day.fecha || "").slice(8);
+        svg.append(text);
+      }
+    });
+    return svg;
   }
 
   function paintFilters() {
@@ -335,6 +403,21 @@
 
   function labelFor(vista) {
     return { resumen: "Resumen", paginas: "Páginas", embudo: "Embudo", visitas: "Visitas" }[vista] || "Resumen";
+  }
+
+  function pageName(page) {
+    const path = page === "/" ? "/" : String(page || "").replace(/\/$/, "");
+    return {
+      "/": "Inicio",
+      "/servicios/canceles-de-bano": "Canceles",
+      "/servicios/ventanas": "Ventanas",
+      "/barandales": "Barandales",
+      "/servicios/barandales": "Barandales",
+      "/servicios/fachadas-de-cristal": "Fachadas",
+      "/servicios/puertas": "Puertas",
+      "/servicios/pergolas": "Pérgolas",
+      "/aviso-de-privacidad": "Aviso de privacidad",
+    }[path] || page || "Página";
   }
 
   function card(value, caption) {

@@ -196,6 +196,42 @@ function avi_panel_document(string $title, string $body, bool $wide = false, str
       font-size: 0.75rem;
     }
     .tabs button[aria-current="page"] { color: #e8ff46; }
+    .funnel-row.sale .funnel-fill { background: #e8ff46; }
+    .funnel-row .funnel-fill { background: rgba(232, 255, 70, 0.35); }
+    .funnel-row.sale span { color: #e8ff46; }
+    .chart-svg { display: block; width: 100%; height: 160px; }
+    .shell { display: block; }
+    .content { min-width: 0; }
+    @media (min-width: 960px) {
+      body.wide { padding: 0; }
+      main.wide { width: min(100%, 1080px); padding: 0; }
+      .shell {
+        display: grid;
+        grid-template-columns: 200px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+      .content { padding: 28px 28px 40px; }
+      .tabs {
+        position: sticky;
+        top: 0;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        height: 100vh;
+        border-top: 0;
+        border-right: 1px solid rgba(232, 255, 70, 0.28);
+        padding: 18px 0;
+      }
+      .tabs button {
+        min-height: 48px;
+        font-size: 1rem;
+        text-align: left;
+        padding: 0 20px;
+      }
+    }
     .stats {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -216,6 +252,7 @@ function avi_panel_document(string $title, string $body, bool $wide = false, str
       color: #e8ff46;
     }
     .stat span { color: #c8c8c2; font-size: 0.92rem; }
+    .stat.rate { grid-column: 1 / -1; }
     h2 {
       margin: 22px 0 8px;
       font-family: Bahnschrift, sans-serif;
@@ -298,46 +335,47 @@ function avi_render_home_page(): void
         avi_require_login();
         $csrf = htmlspecialchars(avi_csrf_token(), ENT_QUOTES, 'UTF-8');
         $head = <<<'HTML'
-  <link rel="manifest" href="/panel/manifest.webmanifest">
+  <link rel="manifest" href="/panel/manifest.json">
   <meta name="theme-color" content="#161614">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Panel">
+  <meta name="apple-mobile-web-app-title" content="Panel AVI">
   <link rel="apple-touch-icon" href="/panel/icon-192.png">
 HTML;
         $body = <<<HTML
-    <header class="top">
-      <h1 id="titulo">Resumen</h1>
-      <form class="logout" method="post" action="/api/logout.php">
-        <input type="hidden" name="csrf" value="{$csrf}">
-        <button class="secondary logout" type="submit">Salir</button>
-      </form>
-    </header>
-    <p class="hint">Agrégala a la pantalla de inicio para usarla como aplicación.</p>
-    <div class="chips" id="rangos">
-      <button type="button" data-rango="hoy">Hoy</button>
-      <button type="button" data-rango="7">7 días</button>
-      <button type="button" data-rango="30" aria-pressed="true">30 días</button>
-      <button type="button" data-rango="custom">Rango</button>
+    <div class="shell">
+      <nav class="tabs">
+        <button type="button" data-vista="resumen" aria-current="page">Resumen</button>
+        <button type="button" data-vista="paginas">Páginas</button>
+        <button type="button" data-vista="embudo">Embudo</button>
+        <button type="button" data-vista="visitas">Visitas</button>
+      </nav>
+      <div class="content">
+        <header class="top">
+          <h1 id="titulo">Resumen</h1>
+          <form class="logout" method="post" action="/api/logout.php">
+            <input type="hidden" name="csrf" value="{$csrf}">
+            <button class="secondary logout" type="submit">Salir</button>
+          </form>
+        </header>
+        <p class="hint">En el teléfono, agrégala a la pantalla de inicio.</p>
+        <div class="chips" id="rangos">
+          <button type="button" data-rango="hoy">Hoy</button>
+          <button type="button" data-rango="7">7 días</button>
+          <button type="button" data-rango="30" aria-pressed="true">30 días</button>
+          <button type="button" data-rango="custom">Rango</button>
+        </div>
+        <div class="dates" id="rango-fechas" hidden>
+          <input id="desde" type="date" aria-label="Desde">
+          <input id="hasta" type="date" aria-label="Hasta">
+        </div>
+        <div class="chips" id="fuentes">
+          <button type="button" data-fuente="todas" aria-pressed="true">Todas</button>
+          <button type="button" data-fuente="google_ads">Google Ads</button>
+        </div>
+        <div id="vista"><p class="muted">Cargando…</p></div>
+      </div>
     </div>
-    <div class="dates" id="rango-fechas" hidden>
-      <input id="desde" type="date" aria-label="Desde">
-      <input id="hasta" type="date" aria-label="Hasta">
-    </div>
-    <div class="chips" id="fuentes">
-      <button type="button" data-fuente="todas" aria-pressed="true">Todas</button>
-      <button type="button" data-fuente="google_ads">Google Ads</button>
-    </div>
-    <label>Página
-      <select id="pagina"><option value="">Todas las páginas</option></select>
-    </label>
-    <div id="vista"><p class="muted">Cargando…</p></div>
-    <nav class="tabs">
-      <button type="button" data-vista="resumen" aria-current="page">Resumen</button>
-      <button type="button" data-vista="paginas">Páginas</button>
-      <button type="button" data-vista="embudo">Embudo</button>
-      <button type="button" data-vista="visitas">Visitas</button>
-    </nav>
     <script src="/panel/app.js" defer></script>
 HTML;
         avi_panel_document('Panel', $body, true, $head);

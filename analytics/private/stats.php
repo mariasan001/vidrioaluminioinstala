@@ -29,6 +29,7 @@ function avi_stats_resumen(): void
             'visitas_google_ads' => avi_stats_count_visits($ads),
             'clics_whatsapp' => avi_stats_count_events($filters, 'click_whatsapp'),
             'clics_llamada' => avi_stats_count_events($filters, 'click_llamada'),
+            'formularios' => avi_stats_count_events($filters, 'envio_formulario'),
             'tasa_contacto' => avi_stats_rate($conClic, $visitas),
             'por_dia' => avi_stats_daily($filters),
         ]);
@@ -47,6 +48,8 @@ function avi_stats_paginas(): void
                 COUNT(DISTINCT CASE WHEN e.type = 'page_view' THEN e.visit_id END) AS visitas,
                 SUM(CASE WHEN e.type = 'click_whatsapp' THEN 1 ELSE 0 END) AS clics_whatsapp,
                 SUM(CASE WHEN e.type = 'click_llamada' THEN 1 ELSE 0 END) AS clics_llamada,
+                SUM(CASE WHEN e.type = 'envio_formulario' THEN 1 ELSE 0 END) AS formularios,
+                COUNT(DISTINCT CASE WHEN e.type = 'page_view' AND v.source = 'google_ads' THEN e.visit_id END) AS visitas_google_ads,
                 COUNT(DISTINCT CASE WHEN e.type IN ('click_whatsapp', 'click_llamada') THEN e.visit_id END) AS con_clic
             FROM events e
             INNER JOIN visits v ON v.id = e.visit_id
@@ -63,11 +66,18 @@ function avi_stats_paginas(): void
 
         foreach (is_array($rows) ? $rows : [] as $row) {
             $visitas = (int) ($row['visitas'] ?? 0);
+            $page = (string) ($row['pagina'] ?? '');
+            $whatsapp = (int) ($row['clics_whatsapp'] ?? 0);
+            $calls = (int) ($row['clics_llamada'] ?? 0);
             $paginas[] = [
-                'pagina' => (string) ($row['pagina'] ?? ''),
+                'pagina' => $page,
+                'etiqueta' => avi_stats_page_label($page),
                 'visitas' => $visitas,
-                'clics_whatsapp' => (int) ($row['clics_whatsapp'] ?? 0),
-                'clics_llamada' => (int) ($row['clics_llamada'] ?? 0),
+                'visitas_google_ads' => (int) ($row['visitas_google_ads'] ?? 0),
+                'clics_whatsapp' => $whatsapp,
+                'clics_llamada' => $calls,
+                'clics' => $whatsapp + $calls,
+                'formularios' => (int) ($row['formularios'] ?? 0),
                 'tasa_contacto' => avi_stats_rate((int) ($row['con_clic'] ?? 0), $visitas),
             ];
         }
@@ -83,11 +93,13 @@ function avi_stats_embudo(): void
 {
     try {
         $filters = avi_stats_guard();
-        $pasos = [[
-            'seccion' => 'visitas',
-            'etiqueta' => 'Entraron',
-            'visitas' => avi_stats_count_visits($filters),
-        ]];
+
+        if ($filters['pagina'] === '') {
+            avi_stats_ok($filters, ['pasos' => []]);
+            return;
+        }
+
+        $pasos = [];
 
         foreach (AVI_STATS_SECTIONS as $section => $label) {
             $pasos[] = [
@@ -99,10 +111,14 @@ function avi_stats_embudo(): void
 
         $pasos[] = [
             'seccion' => 'clic',
-            'etiqueta' => 'Hicieron clic',
+            'etiqueta' => 'Clic',
             'visitas' => avi_stats_count_contact_visits($filters),
         ];
-        avi_stats_ok($filters, ['pasos' => $pasos]);
+        avi_stats_ok($filters, [
+            'pagina' => $filters['pagina'],
+            'pagina_etiqueta' => avi_stats_page_label($filters['pagina']),
+            'pasos' => $pasos,
+        ]);
     } catch (Throwable $error) {
         avi_log('stats_embudo ' . $error->getMessage());
         avi_json(500);
@@ -118,10 +134,7 @@ function avi_stats_visitas(): void
         $offset = ($page - 1) * $limit;
         [$where, $params] = avi_stats_visit_sql($filters, true);
         $total = (int) avi_stats_run('SELECT COUNT(*) FROM visits v WHERE ' . $where, $params)->fetchColumn();
-        $sql = "SELECT v.id, v.started_at, v.source, v.device,
-                (SELECT GROUP_CONCAT(DISTINCT e.page SEPARATOR ' || ')
-                   FROM events e
-                  WHERE e.visit_id = v.id AND e.type = 'page_view') AS paginas,
+        $sql = "SELECT v.id, v.started_at, v.source, v.device, v.landing_page,
                 (SELECT e.section
                    FROM events e
                   WHERE e.visit_id = v.id
@@ -141,22 +154,20 @@ function avi_stats_visitas(): void
         $visitas = [];
 
         foreach (is_array($rows) ? $rows : [] as $row) {
-            $rawPages = $row['paginas'] ?? '';
-            $pages = array_values(array_filter(
-                explode(' || ', is_string($rawPages) ? $rawPages : ''),
-                static fn (string $page): bool => $page !== ''
-            ));
             $section = is_string($row['seccion'] ?? null) ? $row['seccion'] : '';
             $source = (string) ($row['source'] ?? '');
             $device = (string) ($row['device'] ?? '');
+            $landing = (string) ($row['landing_page'] ?? '');
             $visitas[] = [
                 'id' => (int) ($row['id'] ?? 0),
                 'fecha' => (string) ($row['started_at'] ?? ''),
+                'hora' => avi_stats_hour((string) ($row['started_at'] ?? '')),
                 'fuente' => $source,
                 'fuente_etiqueta' => avi_stats_source_label($source),
                 'dispositivo' => $device,
                 'dispositivo_etiqueta' => avi_stats_device_label($device),
-                'paginas' => $pages,
+                'entrada' => $landing,
+                'entrada_etiqueta' => avi_stats_page_label($landing),
                 'seccion' => $section,
                 'seccion_etiqueta' => $section === '' ? '' : avi_stats_section_label($section),
                 'clic' => (int) ($row['clic'] ?? 0) === 1,
@@ -216,14 +227,18 @@ function avi_stats_visita(): void
         foreach (is_array($events) ? $events : [] as $event) {
             $type = (string) ($event['type'] ?? '');
             $section = is_string($event['section'] ?? null) ? $event['section'] : '';
+            $page = (string) ($event['page'] ?? '');
+            $when = (string) ($event['created_at'] ?? '');
             $timeline[] = [
                 'tipo' => $type,
                 'tipo_etiqueta' => avi_stats_type_label($type),
-                'pagina' => (string) ($event['page'] ?? ''),
+                'pagina' => $page,
+                'pagina_etiqueta' => avi_stats_page_label($page),
                 'seccion' => $section,
                 'seccion_etiqueta' => $section === '' ? '' : avi_stats_section_label($section),
                 'producto' => avi_stats_product(is_string($event['meta'] ?? null) ? $event['meta'] : ''),
-                'fecha' => (string) ($event['created_at'] ?? ''),
+                'fecha' => $when,
+                'hora' => avi_stats_hour($when),
             ];
         }
 
@@ -238,6 +253,8 @@ function avi_stats_visita(): void
                 'dispositivo' => $device,
                 'dispositivo_etiqueta' => avi_stats_device_label($device),
                 'pagina' => (string) ($visit['landing_page'] ?? ''),
+                'pagina_etiqueta' => avi_stats_page_label((string) ($visit['landing_page'] ?? '')),
+                'hora' => avi_stats_hour((string) ($visit['started_at'] ?? '')),
             ],
             'eventos' => $timeline,
         ]);
@@ -569,6 +586,32 @@ function avi_stats_device_label(string $device): string
 function avi_stats_section_label(string $section): string
 {
     return AVI_STATS_SECTIONS[$section] ?? $section;
+}
+
+function avi_stats_page_label(string $page): string
+{
+    $path = $page === '/' ? '/' : rtrim($page, '/');
+
+    return [
+        '/' => 'Inicio',
+        '/servicios/canceles-de-bano' => 'Canceles',
+        '/servicios/ventanas' => 'Ventanas',
+        '/barandales' => 'Barandales',
+        '/servicios/barandales' => 'Barandales',
+        '/servicios/fachadas-de-cristal' => 'Fachadas',
+        '/servicios/puertas' => 'Puertas',
+        '/servicios/pergolas' => 'Pérgolas',
+        '/aviso-de-privacidad' => 'Aviso de privacidad',
+    ][$path] ?? $page;
+}
+
+function avi_stats_hour(string $value): string
+{
+    if (preg_match('/(\d{2}:\d{2})/', $value, $match) === 1) {
+        return $match[1];
+    }
+
+    return '';
 }
 
 function avi_stats_type_label(string $type): string

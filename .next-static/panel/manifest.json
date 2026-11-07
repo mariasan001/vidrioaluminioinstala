@@ -1,6 +1,7 @@
 {
-  "name": "Panel Instala",
-  "short_name": "Panel",
+  "id": "/panel/",
+  "name": "Panel AVI",
+  "short_name": "Panel AVI",
   "start_url": "/panel/",
   "scope": "/panel/",
   "display": "standalone",
