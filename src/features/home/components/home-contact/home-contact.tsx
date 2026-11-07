@@ -36,6 +36,7 @@ export function HomeContact({
       id={sectionId}
       aria-labelledby="home-contact-title"
       data-ubicacion="contacto"
+      data-section="contacto"
     >
       <div className={styles.header}>
         <div className={styles.eyebrow}>

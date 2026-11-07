@@ -1,0 +1,17 @@
+Options -Indexes
+
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set X-Content-Type-Options "nosniff"
+</IfModule>
+
+<IfModule mod_authz_core.c>
+  Require all denied
+  <FilesMatch "^(track|setup|login|logout)\.php$">
+    Require all granted
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_php.c>
+  php_flag display_errors Off
+</IfModule>

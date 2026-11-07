@@ -13,7 +13,7 @@ const googleProfileUrl = "";
 
 export function TrustBlock({ servicio, unifiedHeadings = false }: { servicio: Servicio; unifiedHeadings?: boolean }) {
   return (
-    <section className={styles.trust} id="confianza" aria-labelledby="confianza-title" data-servicio={servicio}>
+    <section className={styles.trust} id="confianza" aria-labelledby="confianza-title" data-servicio={servicio} data-section="confianza">
       {unifiedHeadings ? (
         <SectionHeading
           accent="en Toluca y Metepec"

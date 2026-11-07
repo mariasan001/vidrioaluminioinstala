@@ -16,6 +16,7 @@ return [
     'db_user' => 'CAMBIA_USUARIO',
     'db_pass' => 'CAMBIA_CONTRASENA',
     'ip_salt' => 'CAMBIA_SALT_64_CARACTERES_HEX',
+    'setup_token' => 'CAMBIA_SETUP_TOKEN',
     'allowed_domains' => [
         'aluminioyvidrioinstala.mx',
         'www.aluminioyvidrioinstala.mx',

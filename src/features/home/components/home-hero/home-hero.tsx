@@ -14,6 +14,7 @@ export function HomeHero() {
       ref={sectionRef}
       className={`${styles.hero} ${hasRevealed ? styles.heroVisible : ""} ${introDone ? styles.heroReady : ""} ${isInView ? styles.heroInView : styles.heroOutView}`}
       id="inicio"
+      data-section="hero"
     >
       <picture>
         <source media="(max-width: 720px)" srcSet={heroContent.image.mobileSrc} />

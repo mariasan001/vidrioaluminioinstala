@@ -7,6 +7,9 @@ if (PHP_SAPI !== 'cli' && realpath((string) ($_SERVER['SCRIPT_FILENAME'] ?? ''))
     exit;
 }
 
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+
 /**
  * @return array<string, mixed>
  */
@@ -123,4 +126,38 @@ function avi_fail(int $status, string $reason): never
 {
     avi_log($reason);
     avi_json($status);
+}
+
+function avi_password_hash(string $password): string|false
+{
+    if (defined('PASSWORD_ARGON2ID')) {
+        return password_hash($password, PASSWORD_ARGON2ID);
+    }
+
+    return password_hash($password, PASSWORD_BCRYPT);
+}
+
+function avi_unavailable(): never
+{
+    http_response_code(500);
+    header('Content-Type: text/html; charset=utf-8');
+    header('X-Robots-Tag: noindex, nofollow');
+    header('Cache-Control: no-store');
+    header('X-Content-Type-Options: nosniff');
+    header_remove('X-Powered-By');
+    echo '<!doctype html><html lang="es"><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>No disponible</title><p>No disponible</p></html>';
+    exit;
+}
+
+function avi_not_found(): never
+{
+    http_response_code(404);
+    header('Content-Type: text/html; charset=utf-8');
+    header('X-Robots-Tag: noindex, nofollow');
+    header('Cache-Control: no-store');
+    header('X-Content-Type-Options: nosniff');
+    header('Referrer-Policy: no-referrer');
+    header_remove('X-Powered-By');
+    echo '<!doctype html><html lang="es"><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>No encontrado</title><p>No encontrado</p></html>';
+    exit;
 }

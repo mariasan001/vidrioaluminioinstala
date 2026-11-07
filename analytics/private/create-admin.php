@@ -18,8 +18,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 12) {
     exit(1);
 }
 
-$algorithm = defined('PASSWORD_ARGON2ID') ? PASSWORD_ARGON2ID : PASSWORD_BCRYPT;
-$hash = password_hash($password, $algorithm);
+$hash = avi_password_hash($password);
 
 if ($hash === false) {
     fwrite(STDERR, "No se pudo generar el hash.\n");

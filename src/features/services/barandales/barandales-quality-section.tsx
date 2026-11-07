@@ -89,6 +89,7 @@ export function BarandalesQualitySection({
     <section
       ref={sectionRef}
       id="calidad"
+      data-section="ventajas"
       className={`${styles.qualitySection} ${columns ? styles.qualitySplit : ""}`}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}

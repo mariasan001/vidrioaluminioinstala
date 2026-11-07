@@ -398,6 +398,26 @@ function avi_meta(mixed $value): ?string
     return is_string($json) ? $json : null;
 }
 
+/**
+ * @param list<array{0:mixed,1:int}> $params
+ */
+function avi_execute(PDOStatement $statement, array $params): void
+{
+    $index = 1;
+
+    foreach ($params as [$value, $type]) {
+        if ($value === null) {
+            $statement->bindValue($index, null, PDO::PARAM_NULL);
+        } else {
+            $statement->bindValue($index, $value, $type);
+        }
+
+        $index++;
+    }
+
+    $statement->execute();
+}
+
 function avi_site_id(string $domain): ?int
 {
     $statement = avi_pdo()->prepare('SELECT id FROM sites WHERE dominio = ? LIMIT 1');
@@ -430,27 +450,23 @@ function avi_store(int $siteId, string $ipHash, array $event): void
             $touch = $pdo->prepare('UPDATE visits SET last_at = NOW() WHERE id = ? AND site_id = ?');
             $touch->execute([$visitId, $siteId]);
         } else {
-            if (!in_array($event['source'], AVI_SOURCES, true)) {
-                $pdo->rollBack();
-                avi_json(400);
-            }
-
+            $source = in_array($event['source'], AVI_SOURCES, true) ? $event['source'] : 'otro';
             $insertVisit = $pdo->prepare(
                 'INSERT INTO visits
                     (site_id, visitor_id, started_at, last_at, landing_page, source, utm_source, utm_medium, utm_campaign, gclid, device, ip_hash)
                  VALUES (?, ?, NOW(), NOW(), ?, ?, ?, ?, ?, ?, ?, ?)'
             );
-            $insertVisit->execute([
-                $siteId,
-                $event['visitor_id'],
-                $event['page'],
-                $event['source'],
-                $event['utm_source'],
-                $event['utm_medium'],
-                $event['utm_campaign'],
-                $event['gclid'],
-                $event['device'],
-                $ipHash,
+            avi_execute($insertVisit, [
+                [$siteId, PDO::PARAM_INT],
+                [$event['visitor_id'], PDO::PARAM_STR],
+                [$event['page'], PDO::PARAM_STR],
+                [$source, PDO::PARAM_STR],
+                [$event['utm_source'], PDO::PARAM_STR],
+                [$event['utm_medium'], PDO::PARAM_STR],
+                [$event['utm_campaign'], PDO::PARAM_STR],
+                [$event['gclid'], PDO::PARAM_INT],
+                [$event['device'], PDO::PARAM_STR],
+                [$ipHash, PDO::PARAM_STR],
             ]);
             $visitId = (int) $pdo->lastInsertId();
         }
@@ -459,13 +475,13 @@ function avi_store(int $siteId, string $ipHash, array $event): void
             'INSERT INTO events (site_id, visit_id, type, page, section, meta, created_at)
              VALUES (?, ?, ?, ?, ?, ?, NOW())'
         );
-        $insertEvent->execute([
-            $siteId,
-            $visitId,
-            $event['type'],
-            $event['page'],
-            $event['section'],
-            $event['meta'],
+        avi_execute($insertEvent, [
+            [$siteId, PDO::PARAM_INT],
+            [$visitId, PDO::PARAM_INT],
+            [$event['type'], PDO::PARAM_STR],
+            [$event['page'], PDO::PARAM_STR],
+            [$event['section'], PDO::PARAM_STR],
+            [$event['meta'], PDO::PARAM_STR],
         ]);
         $pdo->commit();
     } catch (Throwable $error) {

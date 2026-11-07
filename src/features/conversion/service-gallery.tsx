@@ -36,7 +36,7 @@ export function ServiceGallery({
   const projects = projectsContent.items.filter((item) => match(item.category)).slice(0, 6);
 
   return (
-    <section className={styles.gallery} id="proyectos" aria-labelledby="galeria-title" data-servicio={servicio}>
+    <section className={styles.gallery} id="proyectos" aria-labelledby="galeria-title" data-servicio={servicio} data-section="trabajos">
       {unifiedHeadings ? (
         <SectionHeading accent={accent} description={description} title={title} titleId="galeria-title" />
       ) : (

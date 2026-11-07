@@ -24,22 +24,27 @@ domains/aluminioyvidrioinstala.mx/
 3. En phpMyAdmin, con la base `u495120473_metricas` seleccionada, ejecuta `analytics/schema.sql`.
 4. Publica el sitio. El export incluye `api/track.php`. No subas `private/` dentro de `public_html`.
 
-## Usuario admin
+## Primer administrador, sin SSH
 
-No hay registro público. Desde SSH, en la carpeta `private`:
+En `config.php` define `setup_token` con una cadena propia de al menos 20 caracteres. El valor de ejemplo `CAMBIA_SETUP_TOKEN` no sirve.
 
-```bash
-php create-admin.php tu-correo@dominio.com 'una-contraseña-de-12-o-mas'
+Abre, en HTTPS:
+
+```
+https://aluminioyvidrioinstala.mx/panel/setup/
 ```
 
-El comando imprime el hash. Si no tienes SSH, pega ese hash en phpMyAdmin:
+El formulario pide el token de configuración, correo, contraseña (mínimo 12 caracteres) y confirmación. El token no va en la URL. Solo funciona si la tabla `users` está vacía. Si el token no coincide o ya hay un usuario, la respuesta es 404 y no crea nada. Al guardar, redirige a `/panel/login`.
 
-```sql
-INSERT INTO users (email, password_hash, role, created_at)
-VALUES ('tu-correo@dominio.com', 'EL_HASH', 'admin', NOW());
-```
+Borra setup_token de config.php una vez creado el usuario.
 
-El login del panel llega en una fase posterior. Este usuario queda listo para entonces.
+La contraseña se guarda con `password_hash` (ARGON2ID, o BCRYPT si el servidor no tiene Argon2). No hay usuario ni contraseña en el código ni en `schema.sql`.
+
+Si más adelante tienes SSH, `private/create-admin.php` sigue disponible como alternativa.
+
+## Entrar
+
+`/panel/login` pide correo y contraseña. La cookie de sesión es HttpOnly, Secure y SameSite=Strict, y dura 7 días. Tras 5 intentos fallidos de la misma IP o del mismo correo, el acceso queda bloqueado 15 minutos. Salir es un POST a `/api/logout.php`. Sin sesión, el resto de `/panel/` vuelve al login. `/panel/` muestra un “Hola” hasta que estén las estadísticas.
 
 ## Limpieza
 
@@ -55,7 +60,7 @@ php /home/USUARIO/domains/aluminioyvidrioinstala.mx/private/cleanup.php
 
 Solo acepta origen `https://aluminioyvidrioinstala.mx` (o `www`). Rechaza bots, cuerpos de más de 4 KB y más de 120 eventos por minuto por IP. La IP se guarda solo como SHA-256 con el salt. `gclid` se guarda como sí o no, nunca el valor.
 
-El primer evento de un visitante abre la visita y tiene que traer `source`. Los siguientes, dentro de 30 minutos y con el mismo `visitor_id`, se agregan a esa visita.
+El primer evento de un visitante abre la visita. Si no manda `source`, queda como `otro`; un valor fuera de la lista se rechaza. Los siguientes, dentro de 30 minutos y con el mismo `visitor_id`, se agregan a esa visita.
 
 ```bash
 curl -i -X POST "https://aluminioyvidrioinstala.mx/api/track.php" \
@@ -71,4 +76,4 @@ Una respuesta `{\"ok\":true}` crea una fila en `visits` y otra en `events`. Un o
 
 ## Qué sigue
 
-El script del sitio, el login, las estadísticas y el panel no están en esta fase.
+El script del sitio y las estadísticas del panel todavía no están. El login ya queda en `/panel/login`.

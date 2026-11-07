@@ -26,7 +26,7 @@ function PinIcon() {
 
 export function SiteFooter() {
   return (
-    <footer className={styles.footer} data-ubicacion="footer">
+    <footer className={styles.footer} data-ubicacion="footer" data-section="footer">
       <div className={styles.inner}>
         <div className={styles.brand}>
           <a href="/" aria-label="Aluminio y Vidrio Instala">

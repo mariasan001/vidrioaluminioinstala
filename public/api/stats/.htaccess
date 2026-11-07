@@ -1,0 +1,18 @@
+Options -Indexes
+
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Cache-Control "no-store"
+</IfModule>
+
+<IfModule mod_authz_core.c>
+  Require all denied
+  <FilesMatch "^(resumen|paginas|embudo|visitas|visita)\.php$">
+    Require all granted
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_php.c>
+  php_flag display_errors Off
+</IfModule>

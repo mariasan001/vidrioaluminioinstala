@@ -79,6 +79,7 @@ export function HomeProjects({
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
       id={sectionId}
+      data-section="trabajos"
       aria-labelledby="home-projects-title"
     >
       <div className={styles.header}>

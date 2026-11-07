@@ -64,6 +64,7 @@ export function ConversionHero({
       className={`${styles.hero} ${fullScreen ? styles.heroScreen : ""}`}
       data-servicio={servicio}
       data-ubicacion="hero"
+      data-section="hero"
     >
       <link
         rel="preload"

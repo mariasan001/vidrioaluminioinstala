@@ -56,6 +56,7 @@ export default function RootLayout({
     <html lang="es" data-scroll-behavior="smooth">
       <body>
         <GoogleTagManagerScript />
+        <script src="/js/avi-track.js" defer />
         {children}
         <SiteFooter />
         <ServiceViewTracker />

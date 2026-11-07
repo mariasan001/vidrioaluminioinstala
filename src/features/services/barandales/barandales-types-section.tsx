@@ -130,6 +130,7 @@ export function BarandalesTypesSection({
     <section
       ref={sectionRef}
       id="tipos"
+      data-section="tipos"
       className={styles.typesSection}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
@@ -258,7 +259,7 @@ export function BarandalesTypesSection({
               }
               target="_blank"
               rel="noopener noreferrer"
-              data-tipo={quoteMessageTemplate ? activeType.label : undefined}
+              data-tipo={activeType.label}
               data-ubicacion={quoteUbicacion}
             >
               <WhatsAppIcon />

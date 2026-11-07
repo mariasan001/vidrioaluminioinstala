@@ -48,7 +48,7 @@ export function ContactBar({ servicio, whatsappHref, revealOnScroll = false }: C
   }, [revealOnScroll]);
 
   return (
-    <div data-servicio={servicio}>
+    <div data-servicio={servicio} data-section="sticky">
       <div
         className={`${styles.bar} ${revealOnScroll ? styles.barReveal : ""} ${
           showBar ? styles.barShown : ""

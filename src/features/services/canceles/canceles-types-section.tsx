@@ -229,7 +229,7 @@ export function CancelesTypesSection({
   };
 
   return (
-      <section id="tipos" className={styles.section} aria-labelledby={titleId}>
+      <section id="tipos" className={styles.section} aria-labelledby={titleId} data-section="tipos">
       <SectionHeading
         accent={accent}
         description={description}

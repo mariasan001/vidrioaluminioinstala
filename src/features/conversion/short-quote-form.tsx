@@ -79,6 +79,14 @@ export function ShortQuoteForm({
       ubicacion: "contacto",
     });
 
+    if (variant === "callback") {
+      try {
+        document.dispatchEvent(new Event("avi-envio-formulario"));
+      } catch {
+        // El seguimiento no debe impedir el envío.
+      }
+    }
+
     const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     const whatsappWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 

@@ -51,7 +51,7 @@ export function ServiceContact({
   callbackSubject,
 }: ServiceContactProps) {
   return (
-    <section className={styles.contact} id="contacto" aria-labelledby="contacto-title" data-servicio={servicio} data-ubicacion="contacto">
+    <section className={styles.contact} id="contacto" aria-labelledby="contacto-title" data-servicio={servicio} data-ubicacion="contacto" data-section="contacto">
       {unifiedHeadings ? (
         <SectionHeading accent={accent} description={description} title={title} titleId="contacto-title" />
       ) : (

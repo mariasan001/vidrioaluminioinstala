@@ -33,6 +33,7 @@ export function ServiceFaq({
     <section
       className={`${styles.faq} ${unifiedHeadings ? styles.faqModern : ""}`}
       id="preguntas"
+      data-section="preguntas"
       aria-labelledby="faq-title"
       data-servicio={servicio}
     >

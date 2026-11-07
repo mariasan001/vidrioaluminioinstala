@@ -87,6 +87,7 @@ export function BarandalesUseCasesSection({
     <section
       ref={sectionRef}
       id="aplicaciones"
+      data-section="usos"
       className={`${styles.useCasesSection} ${whatsappHref ? styles.useCasesPlain : ""}`}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
