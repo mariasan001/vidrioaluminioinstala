@@ -125,6 +125,41 @@ function avi_stats_embudo(): void
     }
 }
 
+function avi_stats_referidos(): void
+{
+    try {
+        $filters = avi_stats_guard();
+        $filters['ads'] = false;
+        [$where, $params] = avi_stats_visit_sql($filters, false);
+        $sql = "SELECT COALESCE(NULLIF(v.utm_source, ''), 'Sin nombre') AS origen,
+                COUNT(DISTINCT v.id) AS visitas,
+                COUNT(DISTINCT CASE WHEN e.type IN ('click_whatsapp', 'click_llamada') THEN v.id END) AS con_clic
+            FROM visits v
+            LEFT JOIN events e ON e.visit_id = v.id AND e.site_id = v.site_id
+            WHERE {$where} AND v.source = 'referido'
+            GROUP BY COALESCE(NULLIF(v.utm_source, ''), 'Sin nombre')
+            ORDER BY visitas DESC
+            LIMIT 40";
+        $rows = avi_stats_run($sql, $params)->fetchAll();
+        $referidos = [];
+
+        foreach (is_array($rows) ? $rows : [] as $row) {
+            $visitas = (int) ($row['visitas'] ?? 0);
+            $referidos[] = [
+                'origen' => (string) ($row['origen'] ?? ''),
+                'visitas' => $visitas,
+                'con_clic' => (int) ($row['con_clic'] ?? 0),
+                'tasa_contacto' => avi_stats_rate((int) ($row['con_clic'] ?? 0), $visitas),
+            ];
+        }
+
+        avi_stats_ok($filters, ['referidos' => $referidos]);
+    } catch (Throwable $error) {
+        avi_log('stats_referidos ' . $error->getMessage());
+        avi_json(500);
+    }
+}
+
 function avi_stats_visitas(): void
 {
     try {
@@ -490,10 +525,26 @@ function avi_stats_daily(array $filters): array
         'SELECT DATE(v.started_at) AS dia, COUNT(*) AS total FROM visits v WHERE ' . $where . ' GROUP BY DATE(v.started_at)',
         $params
     )->fetchAll();
+    $hourRows = avi_stats_run(
+        "SELECT DATE(v.started_at) AS dia, DATE_FORMAT(v.started_at, '%H:00') AS hora, COUNT(*) AS total
+         FROM visits v WHERE {$where}
+         GROUP BY DATE(v.started_at), DATE_FORMAT(v.started_at, '%H:00')
+         ORDER BY dia, hora",
+        $params
+    )->fetchAll();
     $counts = [];
+    $hours = [];
 
     foreach (is_array($rows) ? $rows : [] as $row) {
         $counts[(string) ($row['dia'] ?? '')] = (int) ($row['total'] ?? 0);
+    }
+
+    foreach (is_array($hourRows) ? $hourRows : [] as $row) {
+        $day = (string) ($row['dia'] ?? '');
+        $hours[$day][] = [
+            'hora' => (string) ($row['hora'] ?? ''),
+            'visitas' => (int) ($row['total'] ?? 0),
+        ];
     }
 
     $cursor = new DateTimeImmutable($filters['desde']);
@@ -502,7 +553,11 @@ function avi_stats_daily(array $filters): array
 
     while ($cursor <= $end) {
         $key = $cursor->format('Y-m-d');
-        $days[] = ['fecha' => $key, 'visitas' => $counts[$key] ?? 0];
+        $days[] = [
+            'fecha' => $key,
+            'visitas' => $counts[$key] ?? 0,
+            'horas' => $hours[$key] ?? [],
+        ];
         $cursor = $cursor->modify('+1 day');
     }
 

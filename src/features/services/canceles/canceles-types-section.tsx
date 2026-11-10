@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import Image from "next/image";
 import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { SectionHeading } from "@/features/conversion/section-heading";
+import { productAction, useLiveProducts } from "@/features/catalog/use-live-products";
 import styles from "./canceles-types.module.css";
 
 type CancelType = {
@@ -15,6 +16,7 @@ type CancelType = {
   message?: string;
   pendingNote?: string;
   focus?: string;
+  cta?: string;
 };
 
 type CancelesTypesSectionProps = {
@@ -178,6 +180,18 @@ export function CancelesTypesSection({
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const live = useLiveProducts();
+  const shown: readonly CancelType[] = live && live.length
+    ? live.map((product): CancelType => ({
+        id: product.id,
+        label: product.titulo,
+        image: { src: product.imagen, alt: product.titulo },
+        ideal: product.descripcion,
+        detail: product.caracteristicas,
+        cta: productAction(product),
+      }))
+    : items;
+
   useEffect(() => {
     const track = trackRef.current;
 
@@ -211,7 +225,7 @@ export function CancelesTypesSection({
       track.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, [items.length]);
+  }, [shown.length]);
 
   const scrollToIndex = (index: number) => {
     const track = trackRef.current;
@@ -238,7 +252,7 @@ export function CancelesTypesSection({
       />
 
       <div className={styles.track} ref={trackRef} aria-label={trackLabel}>
-        {items.map((item) => (
+        {shown.map((item) => (
           <a
             className={styles.card}
             key={item.id}
@@ -257,13 +271,17 @@ export function CancelesTypesSection({
                 className={styles.photo}
                 style={{ "--focus": item.focus ?? photoFocus[item.id] ?? "center 40%" } as CSSProperties}
               >
-                <Image
-                  src={item.image.src}
-                  alt={item.image.alt}
-                  fill
-                  sizes="(max-width: 900px) 80vw, 340px"
-                  className={styles.photoImage}
-                />
+                {item.image.src.startsWith("data:") || item.image.src === "" ? (
+                  item.image.src ? <img src={item.image.src} alt={item.image.alt} className={styles.photoImage} /> : null
+                ) : (
+                  <Image
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    fill
+                    sizes="(max-width: 900px) 80vw, 340px"
+                    className={styles.photoImage}
+                  />
+                )}
               </span>
               <span className={styles.badge}>
                 {pendingOpening.has(item.id) ? (
@@ -286,7 +304,7 @@ export function CancelesTypesSection({
               {item.detail ? <p className={styles.detail}>{item.detail}</p> : null}
               <span className={styles.price}>
                 <WhatsAppIcon />
-                Preguntar precio →
+                {item.cta || "Preguntar precio →"}
               </span>
             </span>
           </a>
@@ -294,7 +312,7 @@ export function CancelesTypesSection({
       </div>
 
       <div className={styles.dots} role="group" aria-label="Posición del carrusel">
-        {items.map((item, index) => (
+        {shown.map((item, index) => (
           <button
             key={item.id}
             className={styles.dot}

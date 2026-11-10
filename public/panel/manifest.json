@@ -5,8 +5,9 @@
   "start_url": "/panel/",
   "scope": "/panel/",
   "display": "standalone",
-  "background_color": "#161614",
-  "theme_color": "#161614",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#0c0c0a",
+  "theme_color": "#0c0c0a",
   "lang": "es",
   "icons": [
     {

@@ -14,6 +14,8 @@ import {
 } from "react-icons/hi2";
 import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { SectionHeading } from "@/features/conversion/section-heading";
+import { LiveProductCards } from "@/features/catalog/live-product-cards";
+import { useLiveProducts } from "@/features/catalog/use-live-products";
 import { openQuoteDialog } from "@/features/home/components/home-floating-quote/quote-dialog";
 import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
 import { barandalesPageContent } from "./barandales-page.data";
@@ -100,6 +102,7 @@ export function BarandalesTypesSection({
   quoteMessageTemplate,
   quoteUbicacion = "seccion",
 }: BarandalesTypesSectionProps = {}) {
+  const live = useLiveProducts();
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
   const [activeTypeId, setActiveTypeId] = useState(
     content.types.items[0].id,
@@ -125,6 +128,15 @@ export function BarandalesTypesSection({
       value: activeType.metrics.privacy,
     },
   ];
+
+  if (live && live.length) {
+    return (
+      <section id="tipos" data-section="tipos" className={styles.typesSection} aria-labelledby="barandales-types-title">
+        <h2 id="barandales-types-title">{content.types.title}</h2>
+        <LiveProductCards products={live} />
+      </section>
+    );
+  }
 
   return (
     <section

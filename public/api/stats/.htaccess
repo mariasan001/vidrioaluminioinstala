@@ -8,7 +8,7 @@ Options -Indexes
 
 <IfModule mod_authz_core.c>
   Require all denied
-  <FilesMatch "^(resumen|paginas|embudo|visitas|visita)\.php$">
+  <FilesMatch "^(resumen|paginas|embudo|visitas|visita|referidos)\.php$">
     Require all granted
   </FilesMatch>
 </IfModule>

@@ -1,0 +1,30 @@
+.section { margin: 0; }
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 320px);
+  gap: 16px;
+  overflow-x: auto;
+  padding: 8px 0 20px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #161614;
+  color: #f4f3ea;
+  text-decoration: none;
+}
+.photo {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #2a2a26;
+}
+.body { display: grid; gap: 8px; padding: 16px 16px 18px; }
+.body h3 { margin: 0; font-family: Bahnschrift, sans-serif; font-size: 1.25rem; }
+.body p { margin: 0; color: #d7d7d0; font-size: 0.95rem; }
+.detail { color: #9a9a94; font-size: 0.82rem; }
+.action { color: #e8ff46; font-weight: 700; }

@@ -133,7 +133,7 @@ function avi_handle_login_post(): void
             avi_redirect('/panel/login?e=2');
         }
 
-        $statement = avi_pdo()->prepare('SELECT id, password_hash FROM users WHERE email = ? LIMIT 1');
+        $statement = avi_pdo()->prepare('SELECT id, password_hash, role FROM users WHERE email = ? LIMIT 1');
         $statement->execute([$email]);
         $user = $statement->fetch();
         $hash = is_array($user) && is_string($user['password_hash'] ?? null)
@@ -156,6 +156,7 @@ function avi_handle_login_post(): void
         unset($_SESSION['login_email']);
         $_SESSION['user_id'] = $userId;
         $_SESSION['email'] = $email;
+        $_SESSION['role'] = (($user['role'] ?? '') === 'dueno') ? 'dueno' : 'admin';
         avi_csrf_rotate();
         avi_log('login_ok');
         avi_redirect('/panel/');
