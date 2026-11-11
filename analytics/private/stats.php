@@ -39,6 +39,49 @@ function avi_stats_resumen(): void
     }
 }
 
+function avi_stats_clics(): void
+{
+    try {
+        $filters = avi_stats_guard();
+        [$where, $params] = avi_stats_visit_sql($filters, true);
+        $canal = strtolower(trim((string) ($_GET['canal'] ?? '')));
+        $type = $canal === 'llamada' ? 'click_llamada' : ($canal === 'whatsapp' ? 'click_whatsapp' : '');
+        $sql = "SELECT e.id, e.type, e.page, e.created_at
+                FROM events e
+                INNER JOIN visits v ON v.id = e.visit_id AND e.site_id = v.site_id
+                WHERE {$where} AND e.type IN ('click_whatsapp', 'click_llamada')";
+        if ($type !== '') {
+            $sql .= ' AND e.type = ?';
+            $params[] = [$type, PDO::PARAM_STR];
+        }
+        if ($filters['pagina'] !== '') {
+            $sql .= ' AND e.page = ?';
+            $params[] = [$filters['pagina'], PDO::PARAM_STR];
+        }
+        $sql .= ' ORDER BY e.created_at DESC, e.id DESC LIMIT 200';
+        $rows = avi_stats_run($sql, $params)->fetchAll();
+        $clics = [];
+        foreach (is_array($rows) ? $rows : [] as $row) {
+            $eventType = (string) ($row['type'] ?? '');
+            $when = (string) ($row['created_at'] ?? '');
+            $page = (string) ($row['page'] ?? '');
+            $clics[] = [
+                'id' => (string) ((int) ($row['id'] ?? 0)),
+                'canal' => $eventType === 'click_llamada' ? 'llamada' : 'whatsapp',
+                'pagina' => $page,
+                'pagina_etiqueta' => avi_stats_page_label($page),
+                'fecha' => substr($when, 0, 10),
+                'hora' => avi_stats_hour($when),
+                'cuando' => $when,
+            ];
+        }
+        avi_stats_ok($filters, ['clics' => $clics]);
+    } catch (Throwable $error) {
+        avi_log('stats_clics ' . $error->getMessage());
+        avi_json(500);
+    }
+}
+
 function avi_stats_paginas(): void
 {
     try {
