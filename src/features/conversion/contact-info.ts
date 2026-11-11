@@ -1,11 +1,11 @@
-export const phoneDisplay = "729 381 3723";
-export const phoneHref = "tel:7293813723";
-export const hoursLabel = "Lunes a sábado 8:00–18:00. Domingo cerrado.";
-export const coverageLabel = "Toluca, Metepec y alrededores.";
-export const addressLabel =
-  "Lago Winnipeg 101, El Seminario Primera Secc, 50170 Toluca de Lerdo, Méx.";
-export const mapsHref =
-  "https://www.google.com/maps/search/?api=1&query=Lago%20Winnipeg%20101%2C%20El%20Seminario%20Primera%20Secc%2C%2050170%20Toluca%20de%20Lerdo%2C%20Mex.";
+export {
+  phoneDisplay,
+  phoneHref,
+  hoursLabel,
+  coverageLabel,
+  addressLabel,
+  mapsHref,
+} from "@/content/site";
 
 export const servicios = ["canceles", "ventanas", "barandales"] as const;
 export type Servicio = (typeof servicios)[number];

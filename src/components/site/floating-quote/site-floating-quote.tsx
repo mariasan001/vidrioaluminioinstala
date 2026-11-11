@@ -11,14 +11,14 @@ import {
 import { HiOutlineXMark } from "react-icons/hi2";
 import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { trackQuoteSubmit } from "@/features/analytics";
-import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
-import styles from "./home-floating-quote.module.css";
+import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
+import styles from "./site-floating-quote.module.css";
 import {
   extractWhatsappTextFromHref,
   quoteFormOptions,
   whatsappPhoneNumber,
   whatsappReturnStorageKey,
-} from "./home-floating-quote.data";
+} from "./site-floating-quote.data";
 import { isValidQuotePhone, quotePhoneErrorMessage } from "./quote-phone";
 import {
   openQuoteDialog,
@@ -26,7 +26,7 @@ import {
   type QuoteDialogOptions,
 } from "./quote-dialog";
 
-type HomeFloatingQuoteProps = {
+type SiteFloatingQuoteProps = {
   defaultService?: string;
   hideLauncher?: boolean;
   hideLauncherOnMobile?: boolean;
@@ -40,12 +40,12 @@ function quoteField(form: HTMLFormElement, name: string) {
   return field instanceof HTMLInputElement ? field : null;
 }
 
-export function HomeFloatingQuote({
+export function SiteFloatingQuote({
   defaultService = fallbackService,
   hideLauncher = false,
   hideLauncherOnMobile = false,
   whatsappHref,
-}: HomeFloatingQuoteProps = {}) {
+}: SiteFloatingQuoteProps = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const [quoteOrigin, setQuoteOrigin] = useState<string>("floating_quote_button");
   const [service, setService] = useState<string>(defaultService);

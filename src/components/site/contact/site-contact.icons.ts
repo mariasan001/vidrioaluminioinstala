@@ -5,7 +5,7 @@ import {
 } from "react-icons/hi2";
 import { FaWhatsapp } from "react-icons/fa6";
 import type { IconType } from "react-icons";
-import type { ContactIconName } from "./home-contact.data";
+import type { ContactIconName } from "./site-contact.data";
 
 export const contactIcons = {
   clock: HiOutlineClock,

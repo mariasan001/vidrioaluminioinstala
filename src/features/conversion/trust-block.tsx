@@ -2,14 +2,12 @@ import { coverageLabel, type Servicio } from "./contact-info";
 import { SectionHeading } from "./section-heading";
 import styles from "./conversion.module.css";
 
-const pendingItems = [
-  { label: "Años de experiencia", value: "PENDIENTE: dato real" },
-  { label: "Garantía", value: "PENDIENTE: dato real" },
-  { label: "Reseñas", value: "PENDIENTE: dato real" },
+const trustItems = [
+  { label: "Experiencia", value: "8 años instalando aluminio y vidrio" },
+  { label: "Cotización", value: "Medición y cotización sin costo" },
+  { label: "Zonas atendidas", value: coverageLabel },
+  { label: "Opiniones", value: "4.3 ★ en Google (18 reseñas)" },
 ] as const;
-
-/** PENDIENTE: URL del perfil */
-const googleProfileUrl = "";
 
 export function TrustBlock({ servicio, unifiedHeadings = false }: { servicio: Servicio; unifiedHeadings?: boolean }) {
   return (
@@ -38,46 +36,26 @@ export function TrustBlock({ servicio, unifiedHeadings = false }: { servicio: Se
             <strong>
               4.3 <span className={styles.statStar}>★</span>
             </strong>
-            <p>
-              {googleProfileUrl ? (
-                <a href={googleProfileUrl} target="_blank" rel="noopener noreferrer">
-                  18 opiniones en Google
-                </a>
-              ) : (
-                "18 opiniones en Google"
-              )}
-              <span hidden dangerouslySetInnerHTML={{ __html: "<!-- PENDIENTE: URL del perfil -->" }} />
-            </p>
+            <p>18 opiniones en Google</p>
           </article>
           <article className={styles.statCard}>
             <strong className={styles.statPlace}>Toluca y Metepec</strong>
             <p>y alrededores</p>
           </article>
           <article className={styles.statCard}>
-            <span hidden dangerouslySetInnerHTML={{ __html: "<!-- PENDIENTE: garantía real del cliente -->" }} />
             <strong>Sin costo</strong>
             <p>medición y cotización</p>
           </article>
         </div>
       ) : (
-      <div className={styles.trustGrid}>
-        {pendingItems.slice(0, 2).map((item) => (
-          <article className={styles.trustCard} key={item.label}>
-            <span>{item.label}</span>
-            {/* PENDIENTE: dato real */}
-            <strong className={styles.pending}>{item.value}</strong>
-          </article>
-        ))}
-        <article className={styles.trustCard}>
-          <span>Zonas atendidas</span>
-          <strong>{coverageLabel}</strong>
-        </article>
-        <article className={styles.trustCard}>
-          <span>{pendingItems[2].label}</span>
-          {/* PENDIENTE: dato real */}
-          <strong className={styles.pending}>{pendingItems[2].value}</strong>
-        </article>
-      </div>
+        <div className={styles.trustGrid}>
+          {trustItems.map((item) => (
+            <article className={styles.trustCard} key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+            </article>
+          ))}
+        </div>
       )}
     </section>
   );

@@ -1,18 +1,19 @@
 import Image from "next/image";
 import { FaFacebookF, FaLocationDot, FaPhoneVolume } from "react-icons/fa6";
-import type { NavItem } from "./home-nav.data";
-import type { NavRenderState } from "./home-nav.types";
-import { getNavItemKey } from "./home-nav.utils";
-import styles from "./home-nav.module.css";
+import { phoneDisplay, phoneHref } from "@/content/site";
+import type { NavItem } from "./site-nav.data";
+import type { NavRenderState } from "./site-nav.types";
+import { getNavItemKey } from "./site-nav.utils";
+import styles from "./site-nav.module.css";
 
-type HomeNavDesktopProps = NavRenderState & {
+type SiteNavDesktopProps = NavRenderState & {
   primaryLinks: readonly NavItem[];
   quoteHref?: string;
   quoteLabel: string;
   secondaryLinks: readonly NavItem[];
 };
 
-export function HomeNavDesktop({
+export function SiteNavDesktop({
   currentActiveHref,
   logoHref,
   onNavClick,
@@ -21,7 +22,7 @@ export function HomeNavDesktop({
   quoteHref,
   quoteLabel,
   secondaryLinks,
-}: HomeNavDesktopProps) {
+}: SiteNavDesktopProps) {
   return (
     <>
       <div className={styles.navGroup}>
@@ -57,10 +58,10 @@ export function HomeNavDesktop({
       </a>
 
       <div className={`${styles.navGroup} ${styles.navGroupRight}`}>
-        <a className={styles.contactInline} href="tel:7293813723" data-ubicacion="seccion">
+        <a className={styles.contactInline} href={phoneHref} data-ubicacion="seccion">
           <FaPhoneVolume className={styles.inlineIcon} aria-hidden="true" />
           <span className={styles.contactLabel}>Llámanos:</span>
-          <strong>729 381 3723</strong>
+          <strong>{phoneDisplay}</strong>
         </a>
 
         {secondaryLinks.map((item, index) => (

@@ -1,4 +1,4 @@
-import { whatsappDirectUrl } from "../home-floating-quote/home-floating-quote.data";
+import { mapsHref, phoneDisplay, phoneHref, whatsappDirectUrl } from "@/content/site";
 
 export type ContactCard = {
   title: string;
@@ -39,15 +39,15 @@ export const contactContent: ContactSectionContent = {
       title: "Ubicación",
       value: "Lago Winnipeg 101",
       detail: "El Seminario Primera Secc, 50170 Toluca de Lerdo, Méx.",
-      href: "https://www.google.com/maps/search/?api=1&query=Lago%20Winnipeg%20101%2C%20El%20Seminario%20Primera%20Secc%2C%2050170%20Toluca%20de%20Lerdo%2C%20Mex.",
+      href: mapsHref,
       action: "Ver dirección",
       icon: "location",
     },
     {
       title: "Llámanos",
-      value: "729 381 3723",
+      value: phoneDisplay,
       detail: "Contacto directo para atención y cotizaciones.",
-      href: "tel:7293813723",
+      href: phoneHref,
       action: "Llamar ahora",
       icon: "phone",
     },

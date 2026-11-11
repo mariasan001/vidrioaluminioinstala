@@ -1,4 +1,4 @@
-import { projectsContent } from "@/features/home/components/home-projects/home-projects.data";
+import { projectsContent } from "@/components/site/projects/site-projects.data";
 import type { Servicio } from "./contact-info";
 import { SectionHeading } from "./section-heading";
 import styles from "./conversion.module.css";

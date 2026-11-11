@@ -1,22 +1,22 @@
 "use client";
 
-import styles from "./home-contact.module.css";
+import styles from "./site-contact.module.css";
 import {
   contactContent,
   type ContactSectionContent,
-} from "./home-contact.data";
-import { contactIcons } from "./home-contact.icons";
+} from "./site-contact.data";
+import { contactIcons } from "./site-contact.icons";
 import { useContactReveal } from "./use-contact-reveal";
 
-type HomeContactProps = {
+type SiteContactProps = {
   content?: ContactSectionContent;
   sectionId?: string;
 };
 
-export function HomeContact({
+export function SiteContact({
   content = contactContent,
   sectionId = "ubicacion",
-}: HomeContactProps) {
+}: SiteContactProps) {
   const {
     isInView,
     isReady,
@@ -34,7 +34,7 @@ export function HomeContact({
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
       id={sectionId}
-      aria-labelledby="home-contact-title"
+      aria-labelledby="site-contact-title"
       data-ubicacion="contacto"
       data-section="contacto"
     >
@@ -45,7 +45,7 @@ export function HomeContact({
         </div>
 
         <div className={styles.heading}>
-          <h2 id="home-contact-title" className={styles.title}>
+          <h2 id="site-contact-title" className={styles.title}>
             {content.title}
             <span className={styles.accent}>{content.accentTitle}</span>
           </h2>

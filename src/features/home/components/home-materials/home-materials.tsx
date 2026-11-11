@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useSectionReveal } from "../../hooks/use-section-reveal";
+import { useSectionReveal } from "@/hooks/use-section-reveal";
 import styles from "./home-materials.module.css";
 import { materialsContent } from "./home-materials.data";
 

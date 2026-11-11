@@ -37,34 +37,6 @@ export function pushAnalyticsEvent(payload: AnalyticsEventPayload) {
   window.dataLayer.push(withPageContext(payload));
 }
 
-export function trackPhoneClick(payload: {
-  href?: string;
-  placement: string;
-  service?: string;
-}) {
-  pushAnalyticsEvent({
-    event: analyticsEventNames.clickPhone,
-    href: payload.href,
-    placement: payload.placement,
-    service_name: payload.service,
-  });
-}
-
-export function trackWhatsappClick(payload: {
-  href?: string;
-  ctaType: string;
-  placement: string;
-  service?: string;
-}) {
-  pushAnalyticsEvent({
-    event: analyticsEventNames.clickWhatsapp,
-    cta_type: payload.ctaType,
-    href: payload.href,
-    placement: payload.placement,
-    service_name: payload.service,
-  });
-}
-
 export function trackQuoteModalOpen(payload: {
   origin?: string;
   service?: string;

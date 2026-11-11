@@ -1,3 +1,5 @@
+import { barandalesSharedTypes } from "@/content/services/barandales";
+
 export const barandalesPageContent = {
   slug: "barandales",
   eyebrow: "Barandales en aluminio y vidrio",
@@ -81,14 +83,11 @@ export const barandalesPageContent = {
       "Explora cada sistema según la vista que quieres conservar, la estructura que necesita el proyecto y el uso real del espacio.",
     items: [
       {
-        id: "botones",
+        id: barandalesSharedTypes.botones.id,
         label: "Botones",
-        title: "Barandal con botones",
+        title: barandalesSharedTypes.botones.title,
         icon: "button",
-        image: {
-          src: "/img/barandales/botones.webp",
-          alt: "Barandal de vidrio con sujeciones tipo botón",
-        },
+        image: barandalesSharedTypes.botones.image,
         description:
           "Una opción minimalista donde el cristal se sujeta con herrajes laterales tipo botón. Ayuda a mantener el espacio abierto, con una lectura visual limpia y elegante.",
         features: ["Sin postes visibles", "Sujeción lateral discreta", "Ideal para escaleras modernas"],
@@ -104,14 +103,11 @@ export const barandalesPageContent = {
         },
       },
       {
-        id: "miniposte",
+        id: barandalesSharedTypes.miniposte.id,
         label: "Miniposte",
-        title: "Barandal con miniposte",
+        title: barandalesSharedTypes.miniposte.title,
         icon: "post",
-        image: {
-          src: "/img/barandales/miniposte.webp",
-          alt: "Barandal con cristal y minipostes metálicos",
-        },
+        image: barandalesSharedTypes.miniposte.image,
         description:
           "Sistema con cristal sujeto a minipostes. Funciona muy bien cuando se busca estabilidad, orden visual y una presencia ligera en balcones, terrazas o pasillos.",
         features: ["Apoyo puntual", "Estructura ligera", "Acabado limpio"],
@@ -127,14 +123,11 @@ export const barandalesPageContent = {
         },
       },
       {
-        id: "poste",
+        id: barandalesSharedTypes.poste.id,
         label: "Poste",
-        title: "Barandal con poste",
+        title: barandalesSharedTypes.poste.title,
         icon: "post",
-        image: {
-          src: "/img/barandales/poste.webp",
-          alt: "Barandal exterior con cristal y estructura metálica",
-        },
+        image: barandalesSharedTypes.poste.image,
         description:
           "Combina cristal con postes para lograr una estructura firme y visualmente ordenada. Es una alternativa versátil para recorridos, balcones y espacios exteriores.",
         features: ["Postes visibles", "Sujeción firme", "Uso interior o exterior"],

@@ -1,6 +1,6 @@
-import type { NavItem } from "./home-nav.data";
+import type { NavItem } from "./site-nav.data";
 
-export type HomeNavProps = {
+export type SiteNavProps = {
   activeHrefOverride?: string;
   defaultActiveHref?: string;
   logoHref?: string;

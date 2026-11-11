@@ -151,8 +151,6 @@ const typeIcons: Record<string, () => ReactNode> = {
   poste: PosteIcon,
 };
 
-const pendingOpening = new Set(["cielo"]);
-
 const photoFocus: Record<string, string> = {
   "doble-corredizo": "center 40%",
   bacalar: "center 40%",
@@ -284,22 +282,11 @@ export function CancelesTypesSection({
                 )}
               </span>
               <span className={styles.badge}>
-                {pendingOpening.has(item.id) ? (
-                  <span hidden dangerouslySetInnerHTML={{ __html: "<!-- PENDIENTE: tipo de apertura -->" }} />
-                ) : null}
-                {item.id === "cozumel" ? (
-                  <span hidden dangerouslySetInnerHTML={{ __html: "<!-- PENDIENTE: diferencia real con Bacalar -->" }} />
-                ) : null}
                 <TypeMark id={item.id} />
               </span>
             </span>
             <span className={styles.body}>
               <h3>{item.label}</h3>
-              {item.pendingNote ? (
-                <span hidden dangerouslySetInnerHTML={{ __html: `<!-- ${item.pendingNote} -->` }} />
-              ) : item.detail ? null : (
-                <span hidden dangerouslySetInnerHTML={{ __html: "<!-- PENDIENTE: texto real -->" }} />
-              )}
               {item.ideal ? <p className={styles.ideal}>{item.ideal}</p> : null}
               {item.detail ? <p className={styles.detail}>{item.detail}</p> : null}
               <span className={styles.price}>

@@ -1,10 +1,10 @@
 import { HomeEmpathy } from "./home-empathy";
-import { HomeContact } from "./home-contact";
-import { HomeFloatingQuote } from "./home-floating-quote";
+import { SiteContact } from "@/components/site/contact";
+import { SiteFloatingQuote } from "@/components/site/floating-quote";
 import { HomeHero } from "./home-hero";
 import { HomeMaterials } from "./home-materials";
-import { HomeNav } from "./home-nav";
-import { HomeProjects } from "./home-projects";
+import { SiteNav } from "@/components/site/nav";
+import { SiteProjects } from "@/components/site/projects";
 import { HomeServices } from "./home-services";
 import styles from "../home-page.module.css";
 
@@ -12,14 +12,14 @@ export function HomePage() {
   return (
     <main className={styles.page}>
       <div className={styles.layout}>
-        <HomeNav />
+        <SiteNav />
         <HomeHero />
         <HomeEmpathy />
         <HomeServices />
-        <HomeProjects />
+        <SiteProjects />
         <HomeMaterials />
-        <HomeContact />
-        <HomeFloatingQuote />
+        <SiteContact />
+        <SiteFloatingQuote />
       </div>
     </main>
   );

@@ -30,8 +30,7 @@ export default function AvisoDePrivacidadPage() {
       </p>
       <h1>Aviso de privacidad</h1>
       <p>
-        {businessInfo.name} ({/* PENDIENTE: dato real */}
-        <strong>PENDIENTE: razón social</strong>), con domicilio en {businessInfo.address.street},{" "}
+        {businessInfo.name}, con domicilio en {businessInfo.address.street},{" "}
         {businessInfo.address.neighborhood}, {businessInfo.address.postalCode} {businessInfo.address.city},{" "}
         {businessInfo.address.region}, es responsable del tratamiento de sus datos personales.
       </p>
@@ -59,10 +58,6 @@ export default function AvisoDePrivacidadPage() {
       <p>
         Puede solicitar acceso, rectificación, cancelación u oposición al uso de sus datos, y limitar su uso o
         revocar el consentimiento. Para ejercer estos derechos, llame o escriba por WhatsApp al {businessInfo.phoneDisplay}.
-        {/* PENDIENTE: dato real */}
-      </p>
-      <p>
-        Correo para solicitudes ARCO: <strong>PENDIENTE: correo del responsable</strong>.
       </p>
       <h2>Cambios</h2>
       <p>

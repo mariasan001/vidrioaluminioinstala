@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { NavItem } from "./home-nav.data";
+import type { NavItem } from "./site-nav.data";
 
 export function useActiveSection(
   links: readonly NavItem[],

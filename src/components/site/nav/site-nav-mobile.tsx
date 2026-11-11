@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { FaFacebookF } from "react-icons/fa6";
 import { HiOutlineBars3, HiOutlineMinusSmall, HiOutlinePlusSmall, HiOutlineXMark } from "react-icons/hi2";
-import { phoneHref } from "@/features/conversion/contact-info";
+import { phoneDisplay, phoneHref } from "@/content/site";
 import { PhoneIcon, WhatsAppIcon } from "@/features/conversion/contact-icons";
-import type { NavItem } from "./home-nav.data";
-import type { NavRenderState } from "./home-nav.types";
-import { getNavItemKey } from "./home-nav.utils";
-import styles from "./home-nav.module.css";
+import type { NavItem } from "./site-nav.data";
+import type { NavRenderState } from "./site-nav.types";
+import { getNavItemKey } from "./site-nav.utils";
+import styles from "./site-nav.module.css";
 
-type HomeNavMobileProps = NavRenderState & {
+type SiteNavMobileProps = NavRenderState & {
   isOpen: boolean;
   links: readonly NavItem[];
   onClose: () => void;
@@ -17,7 +17,7 @@ type HomeNavMobileProps = NavRenderState & {
   whatsappHref?: string;
 };
 
-export function HomeNavMobile({
+export function SiteNavMobile({
   currentActiveHref,
   isOpen,
   links,
@@ -28,7 +28,7 @@ export function HomeNavMobile({
   onToggle,
   compact = false,
   whatsappHref,
-}: HomeNavMobileProps) {
+}: SiteNavMobileProps) {
   return (
     <>
       <div className={styles.mobileBar}>
@@ -176,11 +176,11 @@ export function HomeNavMobile({
             <div className={styles.mobileInfoBlock}>
               <a
                 className={styles.mobileInfoLink}
-                href="tel:7293813723"
-                aria-label="Llamar al 729 381 3723"
+                href={phoneHref}
+                aria-label={`Llamar al ${phoneDisplay}`}
                 data-ubicacion="seccion"
               >
-                729 381 3723
+                {phoneDisplay}
               </a>
               <p>Contacto directo</p>
             </div>

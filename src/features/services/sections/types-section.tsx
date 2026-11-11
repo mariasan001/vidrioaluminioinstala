@@ -16,10 +16,9 @@ import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { SectionHeading } from "@/features/conversion/section-heading";
 import { LiveProductCards } from "@/features/catalog/live-product-cards";
 import { useLiveProducts } from "@/features/catalog/use-live-products";
-import { openQuoteDialog } from "@/features/home/components/home-floating-quote/quote-dialog";
-import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
-import { barandalesPageContent } from "./barandales-page.data";
-import styles from "./barandales-page.module.css";
+import { openQuoteDialog } from "@/components/site/floating-quote/quote-dialog";
+import { useSectionReveal } from "@/hooks/use-section-reveal";
+import styles from "./service-page.module.css";
 
 const typeIcons = {
   button: HiOutlineCog6Tooth,
@@ -61,11 +60,11 @@ type TypesContent = {
   };
 };
 
-type BarandalesTypesSectionProps = {
-  content?: TypesContent;
+type TypesSectionProps = {
+  content: TypesContent;
   ctaMode?: "dialog" | "whatsapp";
-  quoteService?: string;
-  quoteWhatsappHref?: string;
+  quoteService: string;
+  quoteWhatsappHref: string;
   railLabel?: string;
   unifiedHeadings?: boolean;
   ctaLabel?: string;
@@ -91,17 +90,17 @@ function renderRating(value: number) {
   return `${value}/5`;
 }
 
-export function BarandalesTypesSection({
-  content = barandalesPageContent,
+export function TypesSection({
+  content,
   ctaMode = "dialog",
-  quoteService = "Barandales",
-  quoteWhatsappHref = barandalesPageContent.cta.href,
-  railLabel = "Tipos de barandal",
+  quoteService,
+  quoteWhatsappHref,
+  railLabel = "Tipos",
   unifiedHeadings = false,
   ctaLabel = "Cotizar por WhatsApp",
   quoteMessageTemplate,
   quoteUbicacion = "seccion",
-}: BarandalesTypesSectionProps = {}) {
+}: TypesSectionProps) {
   const live = useLiveProducts();
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
   const [activeTypeId, setActiveTypeId] = useState(
@@ -131,8 +130,8 @@ export function BarandalesTypesSection({
 
   if (live && live.length) {
     return (
-      <section id="tipos" data-section="tipos" className={styles.typesSection} aria-labelledby="barandales-types-title">
-        <h2 id="barandales-types-title">{content.types.title}</h2>
+      <section id="tipos" data-section="tipos" className={styles.typesSection} aria-labelledby="service-types-title">
+        <h2 id="service-types-title">{content.types.title}</h2>
         <LiveProductCards products={live} />
       </section>
     );
@@ -146,7 +145,7 @@ export function BarandalesTypesSection({
       className={styles.typesSection}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
-      aria-labelledby="barandales-types-title"
+      aria-labelledby="service-types-title"
     >
       {unifiedHeadings ? null : (
         <p className={styles.eyebrow}>
@@ -161,11 +160,11 @@ export function BarandalesTypesSection({
             accent={content.types.accentTitle}
             description={content.types.description}
             title={content.types.title}
-            titleId="barandales-types-title"
+            titleId="service-types-title"
           />
         ) : (
           <>
-            <h2 id="barandales-types-title">
+            <h2 id="service-types-title">
               {content.types.title}
               <span className={styles.sectionAccent}>{content.types.accentTitle}</span>
             </h2>

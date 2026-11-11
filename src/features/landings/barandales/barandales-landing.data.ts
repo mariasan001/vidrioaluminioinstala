@@ -1,5 +1,4 @@
-import { businessInfo } from "@/features/home/home-seo";
-import { whatsappPhoneNumber } from "@/features/home/components/home-floating-quote/home-floating-quote.data";
+import { phoneDisplay, phoneHref, site, whatsappPhoneNumber } from "@/content/site";
 
 function whatsappUrl(message: string) {
   return `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`;
@@ -7,9 +6,9 @@ function whatsappUrl(message: string) {
 
 export const barandalesServiceName = "Barandales";
 export const barandalesQuoteLabel = "Cotizar mi barandal";
-export const barandalesPhoneDisplay = businessInfo.phoneDisplay;
-export const barandalesPhoneHref = "tel:7293813723";
-export const barandalesFacebook = businessInfo.facebook;
+export const barandalesPhoneDisplay = phoneDisplay;
+export const barandalesPhoneHref = phoneHref;
+export const barandalesFacebook = site.facebook;
 
 export const barandalesWhatsapp = {
   quote: whatsappUrl(
@@ -51,71 +50,6 @@ export const barandalesHero = {
   },
 } as const;
 
-export const barandalesTypes = {
-  eyebrow: "Barandales a medida · Toluca",
-  title: "El barandal ideal para tu espacio empieza aquí.",
-  description:
-    "Conoce opciones para escaleras, balcones y terrazas. Cuéntanos qué necesitas y encontremos la solución adecuada para tu proyecto.",
-  closeTitle: "¿Tienes un espacio en mente?",
-  closeText:
-    "Compártenos qué quieres instalar y dónde. Te ayudaremos a identificar la información necesaria para cotizar.",
-  cta: "Cotizar mi barandal",
-  items: [
-    {
-      id: "vidrio",
-      index: "01",
-      title: "Barandales de vidrio",
-      description:
-        "Una apariencia ligera y contemporánea que deja pasar la luz y mantiene la continuidad visual del espacio.",
-      image: {
-        src: "/img/barandales/botones.webp",
-        alt: "Barandal de vidrio con sujeciones tipo botón",
-        width: 1448,
-        height: 1086,
-      },
-    },
-    {
-      id: "metalicos",
-      index: "02",
-      title: "Barandales metálicos",
-      description:
-        "Líneas definidas y diseños que pueden complementar distintos estilos arquitectónicos.",
-      image: {
-        src: "/img/barandales/acero.webp",
-        alt: "Barandal de acero inoxidable",
-        width: 1254,
-        height: 1254,
-      },
-    },
-    {
-      id: "balcones",
-      index: "03",
-      title: "Barandales para balcones",
-      description:
-        "Integra tu balcón con el diseño de tu fachada sin perder de vista las necesidades del espacio.",
-      image: {
-        src: "/img/trabajos/balcon-barandal-vidrio.webp",
-        alt: "Balcón con barandal de vidrio instalado en una fachada residencial",
-        width: 1086,
-        height: 1448,
-      },
-    },
-    {
-      id: "postes",
-      index: "04",
-      title: "Postes y herrajes",
-      description:
-        "Conoce los componentes disponibles para el sistema de barandal que requiere tu proyecto.",
-      image: {
-        src: "/img/barandales/poste.webp",
-        alt: "Barandal de vidrio con postes",
-        width: 1254,
-        height: 1254,
-      },
-    },
-  ],
-} as const;
-
 export const barandalesWork = {
   eyebrow: "Cómo trabajamos",
   title: "Tu proyecto merece atención desde el primer paso.",
@@ -136,40 +70,6 @@ export const barandalesWork = {
       title: "Opciones para cada proyecto",
       description:
         "Revisamos materiales, medidas y acabados según las alternativas que tengamos disponibles.",
-    },
-  ],
-} as const;
-
-export const barandalesFaq = {
-  eyebrow: "Preguntas frecuentes",
-  title: "Resolvemos tus dudas",
-  description: "¿No encuentras tu respuesta? Escríbenos por WhatsApp.",
-  cta: "Preguntar por WhatsApp",
-  items: [
-    {
-      question: "¿Cuánto cuesta instalar un barandal?",
-      answer:
-        "El precio depende del tipo de barandal, las medidas y el material: vidrio, metálico o herrería. Mándanos fotos por WhatsApp y te cotizamos sin costo.",
-    },
-    {
-      question: "¿Cuánto tarda la instalación?",
-      answer:
-        "El tiempo depende del tipo de barandal y de que el espacio ya esté listo. Al cotizar te decimos el plazo de fabricación e instalación.",
-    },
-    {
-      question: "¿Tienen que medir en mi casa?",
-      answer:
-        "Sí. Medimos en el domicilio para fabricar el barandal a la medida. Puedes empezar con fotos y medidas aproximadas.",
-    },
-    {
-      question: "¿Trabajan en Toluca y sus alrededores?",
-      answer:
-        "Instalamos en Toluca, Metepec y alrededores. Dinos tu colonia para confirmar la visita.",
-    },
-    {
-      question: "¿Puedo enviar fotos del espacio?",
-      answer:
-        "Sí. Por WhatsApp puedes mandar fotos de la escalera, el balcón o la terraza y una referencia del barandal que te gusta.",
     },
   ],
 } as const;

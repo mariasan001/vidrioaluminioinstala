@@ -1,12 +1,12 @@
-import { HomeNav } from "@/features/home/components/home-nav";
-import { HomeProjects } from "@/features/home/components/home-projects";
-import { projectsContent } from "@/features/home/components/home-projects/home-projects.data";
-import type { NavItem } from "@/features/home/components/home-nav/home-nav.data";
-import { BarandalesQualitySection } from "@/features/services/barandales/barandales-quality-section";
-import { BarandalesTypesSection } from "@/features/services/barandales/barandales-types-section";
+import { SiteNav } from "@/components/site/nav";
+import { SiteProjects } from "@/components/site/projects";
+import { projectsContent } from "@/components/site/projects/site-projects.data";
+import type { NavItem } from "@/components/site/nav/site-nav.data";
+import { QualitySection } from "@/features/services/sections/quality-section";
+import { TypesSection } from "@/features/services/sections/types-section";
 import { CancelesTypesSection } from "@/features/services/canceles/canceles-types-section";
-import { BarandalesUseCasesSection } from "@/features/services/barandales/barandales-use-cases-section";
-import styles from "@/features/services/barandales/barandales-page.module.css";
+import { UseCasesSection } from "@/features/services/sections/use-cases-section";
+import styles from "@/features/services/sections/service-page.module.css";
 import { ContactBar } from "./contact-bar";
 import conversionStyles from "./conversion.module.css";
 import { ConversionHero } from "./conversion-hero";
@@ -145,7 +145,7 @@ export function ServiceConversionPage({
       data-tone={qualityColumns ? "conversion" : undefined}
       data-servicio={servicio}
     >
-      <HomeNav
+      <SiteNav
         compact={compactNav}
         defaultActiveHref="/#servicios"
         logoHref="/"
@@ -170,13 +170,13 @@ export function ServiceConversionPage({
         titleMain={hero.titleMain}
         whatsappHref={whatsappHref}
       />
-      <BarandalesUseCasesSection
+      <UseCasesSection
         content={content}
         heading={useCasesHeading}
         unifiedHeadings={qualityColumns}
         whatsappHref={useCasesLink ? whatsappHref : undefined}
       />
-      <BarandalesQualitySection
+      <QualitySection
         content={content}
         layout={qualityColumns ? "columns" : "orbit"}
         unifiedHeadings={qualityColumns}
@@ -193,7 +193,7 @@ export function ServiceConversionPage({
           whatsappHref={whatsappHref}
         />
       ) : (
-        <BarandalesTypesSection
+        <TypesSection
           content={content}
           ctaMode="whatsapp"
           quoteService={quoteService}
@@ -203,7 +203,7 @@ export function ServiceConversionPage({
       )}
       <TrustBlock servicio={servicio} unifiedHeadings={qualityColumns} />
       {qualityColumns ? (
-        <HomeProjects
+        <SiteProjects
           moreHref="/#proyectos"
           prioridad={servicio}
           sectionId="proyectos"

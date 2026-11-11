@@ -1,21 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { openQuoteDialog } from "../home-floating-quote/quote-dialog";
-import { useLockBodyScroll } from "../../hooks/use-lock-body-scroll";
+import { openQuoteDialog } from "@/components/site/floating-quote/quote-dialog";
+import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
 import {
   desktopPrimaryLinks,
   desktopSecondaryLinks,
   mobileLinks,
   scrollSpyLinks,
-} from "./home-nav.data";
-import { HomeNavDesktop } from "./home-nav-desktop";
-import { HomeNavMobile } from "./home-nav-mobile";
-import styles from "./home-nav.module.css";
-import type { HomeNavProps } from "./home-nav.types";
+} from "./site-nav.data";
+import { SiteNavDesktop } from "./site-nav-desktop";
+import { SiteNavMobile } from "./site-nav-mobile";
+import styles from "./site-nav.module.css";
+import type { SiteNavProps } from "./site-nav.types";
 import { useActiveSection } from "./use-active-section";
 
-export function HomeNav({
+export function SiteNav({
   activeHrefOverride,
   defaultActiveHref,
   logoHref = "#inicio",
@@ -29,7 +29,7 @@ export function HomeNav({
   scrollLinks = scrollSpyLinks,
   wide = false,
   compact = false,
-}: HomeNavProps) {
+}: SiteNavProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { activeHref, setActiveSection } = useActiveSection(
@@ -91,7 +91,7 @@ export function HomeNav({
       } ${compact && isScrolled ? styles.navScrolled : ""}`}
     >
       <nav className={styles.navbar} aria-label="Principal">
-        <HomeNavDesktop
+        <SiteNavDesktop
           currentActiveHref={currentActiveHref}
           logoHref={logoHref}
           onNavClick={handleNavClick}
@@ -102,7 +102,7 @@ export function HomeNav({
           secondaryLinks={secondaryLinks}
         />
 
-        <HomeNavMobile
+        <SiteNavMobile
           currentActiveHref={currentActiveHref}
           isOpen={isMobileMenuOpen}
           links={mobileMenuLinks}

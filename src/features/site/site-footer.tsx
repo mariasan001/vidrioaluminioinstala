@@ -3,7 +3,7 @@ import { FaFacebookF } from "react-icons/fa6";
 import { PhoneIcon, WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { addressLabel, mapsHref, phoneDisplay, phoneHref } from "@/features/conversion/contact-info";
 import { businessInfo } from "@/features/home/home-seo";
-import { whatsappDirectUrl } from "@/features/home/components/home-floating-quote/home-floating-quote.data";
+import { whatsappDirectUrl } from "@/components/site/floating-quote/site-floating-quote.data";
 import styles from "./site-footer.module.css";
 
 const services = [

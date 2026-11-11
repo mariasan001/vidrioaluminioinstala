@@ -8,30 +8,30 @@ import {
   HiMiniArrowsPointingOut,
   HiOutlineSparkles,
 } from "react-icons/hi2";
-import styles from "./home-projects.module.css";
+import styles from "./site-projects.module.css";
 import {
   orderProjectsByPriority,
   projectsContent,
   type ProjectPriority,
   type ProjectsSectionContent,
-} from "./home-projects.data";
+} from "./site-projects.data";
 import { useProjectViewer } from "./use-project-viewer";
 import { useProjectsCarousel } from "./use-projects-carousel";
 import { useProjectsReveal } from "./use-projects-reveal";
 
-type HomeProjectsProps = {
+type SiteProjectsProps = {
   content?: ProjectsSectionContent;
   sectionId?: string;
   prioridad?: ProjectPriority;
   moreHref?: string;
 };
 
-export function HomeProjects({
+export function SiteProjects({
   content = projectsContent,
   sectionId = "proyectos",
   prioridad,
   moreHref,
-}: HomeProjectsProps) {
+}: SiteProjectsProps) {
   const {
     isVisible,
     scrollDirection,
@@ -80,7 +80,7 @@ export function HomeProjects({
       data-scroll-direction={scrollDirection}
       id={sectionId}
       data-section="trabajos"
-      aria-labelledby="home-projects-title"
+      aria-labelledby="site-projects-title"
     >
       <div className={styles.header}>
         {content.eyebrow ? (
@@ -91,7 +91,7 @@ export function HomeProjects({
         ) : null}
 
         <div className={styles.heading}>
-          <h2 id="home-projects-title" className={styles.title}>
+          <h2 id="site-projects-title" className={styles.title}>
             {content.title}
             <span className={styles.accent}>{content.accentTitle}</span>
           </h2>

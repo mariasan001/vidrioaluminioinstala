@@ -1,6 +1,6 @@
 "use client";
 
-import { openQuoteDialog } from "@/features/home/components/home-floating-quote/quote-dialog";
+import { openQuoteDialog } from "@/components/site/floating-quote/quote-dialog";
 import styles from "./service-hero.module.css";
 
 type ServiceHeroQuoteButtonProps = {

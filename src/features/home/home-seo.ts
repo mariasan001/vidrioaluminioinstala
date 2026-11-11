@@ -1,4 +1,4 @@
-const canonicalOrigin = "https://aluminioyvidrioinstala.mx";
+import { site, siteUrlCanonical } from "@/content/site";
 
 function normalizeSiteUrl(raw: string) {
   try {
@@ -6,7 +6,7 @@ function normalizeSiteUrl(raw: string) {
     const host = url.hostname.replace(/^www\./i, "");
 
     if (host === "aluminioyvidrioinstala.com" || host === "aluminioyvidrioinstala.mx") {
-      return canonicalOrigin;
+      return siteUrlCanonical;
     }
 
     url.hostname = host;
@@ -15,35 +15,20 @@ function normalizeSiteUrl(raw: string) {
     url.hash = "";
     return url.origin;
   } catch {
-    return canonicalOrigin;
+    return siteUrlCanonical;
   }
 }
 
-export const siteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL || canonicalOrigin);
+export const siteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL || siteUrlCanonical);
 
 export const businessInfo = {
-  name: "Aluminio y Vidrio Instala",
-  description:
-    "Dise\u00f1o, suministro e instalaci\u00f3n de ventanas, puertas, canceles, fachadas, barandales y p\u00e9rgolas en aluminio y vidrio para hogares y negocios en Toluca.",
-  phoneDisplay: "729 381 3723",
-  phoneInternational: "+527293813723",
-  address: {
-    street: "Lago Winnipeg 101",
-    neighborhood: "El Seminario Primera Secc",
-    postalCode: "50170",
-    city: "Toluca de Lerdo",
-    region: "Estado de M\u00e9xico",
-    country: "MX",
-  },
-  facebook: "https://www.facebook.com/VentanasdeAluminioOmega/",
-  services: [
-    "Ventanas de aluminio",
-    "Puertas de aluminio y vidrio",
-    "Canceles de ba\u00f1o",
-    "Fachadas de vidrio",
-    "Barandales",
-    "P\u00e9rgolas",
-  ],
+  name: site.name,
+  description: site.description,
+  phoneDisplay: site.phoneDisplay,
+  phoneInternational: site.phoneInternational,
+  address: site.address,
+  facebook: site.facebook,
+  services: site.services,
 } as const;
 
 export const homeMetadata = {

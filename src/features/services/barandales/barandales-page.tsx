@@ -1,8 +1,4 @@
-import { HomeContact } from "@/features/home/components/home-contact";
-import { HomeFloatingQuote } from "@/features/home/components/home-floating-quote";
-import { HomeNav } from "@/features/home/components/home-nav";
-import { HomeProjects } from "@/features/home/components/home-projects";
-import { ServiceHero } from "@/features/services/components/service-hero";
+import { ServiceCatalogPage } from "@/features/services/service-catalog-page";
 import {
   barandalesMobileNavLinks,
   barandalesNavLinks,
@@ -10,61 +6,23 @@ import {
   barandalesScrollSpyLinks,
   barandalesSecondaryNavLinks,
 } from "./barandales-page.data";
-import { BarandalesQualitySection } from "./barandales-quality-section";
-import { BarandalesTypesSection } from "./barandales-types-section";
-import { BarandalesUseCasesSection } from "./barandales-use-cases-section";
-import styles from "./barandales-page.module.css";
 
 export function BarandalesPage() {
   return (
-    <main className={styles.page}>
-      <HomeNav
-        defaultActiveHref="/#servicios"
-        logoHref="/"
-        mobileMenuLinks={barandalesMobileNavLinks}
-        primaryLinks={barandalesNavLinks}
-        quoteService="Barandales"
-        quoteWhatsappHref={barandalesPageContent.cta.href}
-        secondaryLinks={barandalesSecondaryNavLinks}
-        scrollLinks={barandalesScrollSpyLinks}
-      />
-
-      <ServiceHero
-        actions={[
-          {
-            label: barandalesPageContent.cta.label,
-            service: "Barandales",
-            whatsappHref: barandalesPageContent.cta.href,
-            type: "quote",
-          },
-          {
-            href: "#tipos",
-            label: "Ver sistemas",
-            type: "link",
-          },
-        ]}
-        accentTitle={barandalesPageContent.accentTitle}
-        description={barandalesPageContent.description}
-        eyebrow={barandalesPageContent.eyebrow}
-        image={barandalesPageContent.image}
-        stats={barandalesPageContent.heroUseCases}
-        title={barandalesPageContent.title}
-      />
-
-      <BarandalesUseCasesSection />
-      <BarandalesQualitySection />
-
-      <BarandalesTypesSection
-        quoteService="Barandales"
-        quoteWhatsappHref={barandalesPageContent.cta.href}
-      />
-
-      <HomeProjects />
-      <HomeContact />
-      <HomeFloatingQuote
-        defaultService="Barandales"
-        whatsappHref={barandalesPageContent.cta.href}
-      />
-    </main>
+    <ServiceCatalogPage
+      content={barandalesPageContent}
+      quoteService="Barandales"
+      useCasesHeading={{
+        title: "Dónde queda mejor un",
+        accent: "barandal",
+        description:
+          "Pensamos cada solución según el recorrido, la altura, la vista y el uso real del espacio.",
+      }}
+      typesRailLabel="Tipos de barandal"
+      navLinks={barandalesNavLinks}
+      secondaryNavLinks={barandalesSecondaryNavLinks}
+      mobileNavLinks={barandalesMobileNavLinks}
+      scrollSpyLinks={barandalesScrollSpyLinks}
+    />
   );
 }

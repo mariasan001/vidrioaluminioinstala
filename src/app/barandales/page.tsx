@@ -1,7 +1,7 @@
 import { absoluteUrl, localBusinessJsonLd, stringifyJsonLd } from "@/features/home/home-seo";
 import { buildServiceMetadata } from "@/features/conversion/service-seo";
 import { BarandalesLandingPage } from "@/features/landings/barandales/barandales-landing-page";
-import { barandalesConversionFaq } from "@/features/landings/barandales/barandales-conversion-page";
+import { barandalesFaq } from "@/content/services/barandales";
 import {
   barandalesHero,
   barandalesSeo,
@@ -60,7 +60,7 @@ export default function Page() {
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: barandalesConversionFaq.items
+    mainEntity: barandalesFaq.items
       .filter((item) => item.answer)
       .map((item) => ({
         "@type": "Question",

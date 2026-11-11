@@ -7,9 +7,8 @@ import {
 } from "react-icons/hi2";
 import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { SectionHeading } from "@/features/conversion/section-heading";
-import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
-import { barandalesPageContent } from "./barandales-page.data";
-import styles from "./barandales-page.module.css";
+import { useSectionReveal } from "@/hooks/use-section-reveal";
+import styles from "./service-page.module.css";
 
 function ShowerIcon() {
   return (
@@ -59,9 +58,9 @@ type UseCasesContent = {
   }[];
 };
 
-type BarandalesUseCasesSectionProps = {
-  content?: UseCasesContent;
-  heading?: {
+type UseCasesSectionProps = {
+  content: UseCasesContent;
+  heading: {
     title: string;
     accent: string;
     description: string;
@@ -70,17 +69,12 @@ type BarandalesUseCasesSectionProps = {
   unifiedHeadings?: boolean;
 };
 
-export function BarandalesUseCasesSection({
-  content = barandalesPageContent,
-  heading = {
-    title: "Dónde queda mejor un",
-    accent: "barandal",
-    description:
-      "Pensamos cada solución según el recorrido, la altura, la vista y el uso real del espacio.",
-  },
+export function UseCasesSection({
+  content,
+  heading,
   whatsappHref,
   unifiedHeadings = false,
-}: BarandalesUseCasesSectionProps = {}) {
+}: UseCasesSectionProps) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
 
   return (
@@ -91,7 +85,7 @@ export function BarandalesUseCasesSection({
       className={`${styles.useCasesSection} ${whatsappHref ? styles.useCasesPlain : ""}`}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
-      aria-labelledby="barandales-use-cases-title"
+      aria-labelledby="service-use-cases-title"
     >
       <div className={styles.sectionHeader}>
         {unifiedHeadings ? (
@@ -100,7 +94,7 @@ export function BarandalesUseCasesSection({
             align="start"
             description={heading.description}
             title={heading.title}
-            titleId="barandales-use-cases-title"
+            titleId="service-use-cases-title"
           />
         ) : (
           <>
@@ -108,7 +102,7 @@ export function BarandalesUseCasesSection({
               <span aria-hidden="true" />
               Usos principales
             </p>
-            <h2 id="barandales-use-cases-title">
+            <h2 id="service-use-cases-title">
               {heading.title} <span className={styles.sectionAccent}>{heading.accent}</span>
             </h2>
             <p>{heading.description}</p>

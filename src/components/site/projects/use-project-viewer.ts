@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import type { ProjectHighlight } from "./home-projects.data";
+import type { ProjectHighlight } from "./site-projects.data";
 
 type UseProjectViewerOptions = {
   projects: readonly ProjectHighlight[];

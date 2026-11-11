@@ -11,9 +11,8 @@ import {
   HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
 import { SectionHeading } from "@/features/conversion/section-heading";
-import { useSectionReveal } from "@/features/home/hooks/use-section-reveal";
-import { barandalesPageContent } from "./barandales-page.data";
-import styles from "./barandales-page.module.css";
+import { useSectionReveal } from "@/hooks/use-section-reveal";
+import styles from "./service-page.module.css";
 
 const qualityIcons = {
   check: HiOutlineCheckBadge,
@@ -43,8 +42,8 @@ type QualityContent = {
   };
 };
 
-type BarandalesQualitySectionProps = {
-  content?: QualityContent;
+type QualitySectionProps = {
+  content: QualityContent;
   layout?: "orbit" | "columns";
   unifiedHeadings?: boolean;
 };
@@ -72,11 +71,11 @@ function QualityPoint({
   );
 }
 
-export function BarandalesQualitySection({
-  content = barandalesPageContent,
+export function QualitySection({
+  content,
   layout = "orbit",
   unifiedHeadings = false,
-}: BarandalesQualitySectionProps = {}) {
+}: QualitySectionProps) {
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
   const [activePointIndex, setActivePointIndex] = useState(0);
   const activePoint = content.quality.points[activePointIndex] ?? content.quality.points[0];
@@ -93,7 +92,7 @@ export function BarandalesQualitySection({
       className={`${styles.qualitySection} ${columns ? styles.qualitySplit : ""}`}
       data-visible={isVisible}
       data-scroll-direction={scrollDirection}
-      aria-labelledby="barandales-quality-title"
+      aria-labelledby="service-quality-title"
     >
       {unifiedHeadings ? null : (
         <p className={styles.eyebrow}>
@@ -108,11 +107,11 @@ export function BarandalesQualitySection({
             accent={content.quality.accentTitle}
             description={content.quality.description}
             title={content.quality.title}
-            titleId="barandales-quality-title"
+            titleId="service-quality-title"
           />
         ) : (
           <>
-            <h2 id="barandales-quality-title">
+            <h2 id="service-quality-title">
               {content.quality.title}
               <span className={styles.sectionAccent}>{content.quality.accentTitle}</span>
             </h2>
@@ -140,7 +139,7 @@ export function BarandalesQualitySection({
           />
 
           {columns ? null : (
-            <div className={styles.qualityMobileMap} aria-label="Puntos de calidad del barandal">
+            <div className={styles.qualityMobileMap} aria-label="Puntos de calidad">
               {content.quality.points.map((point, index) => {
                 const MarkerIcon = qualityIcons[point.icon];
 

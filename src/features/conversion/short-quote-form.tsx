@@ -2,11 +2,11 @@
 
 import { FormEvent, useRef, useState } from "react";
 import { trackFormSubmit } from "@/features/analytics";
-import { whatsappPhoneNumber } from "@/features/home/components/home-floating-quote/home-floating-quote.data";
+import { whatsappPhoneNumber } from "@/components/site/floating-quote/site-floating-quote.data";
 import {
   isValidQuotePhone,
   quotePhoneErrorMessage,
-} from "@/features/home/components/home-floating-quote/quote-phone";
+} from "@/components/site/floating-quote/quote-phone";
 import { isServicio, serviceLabels, servicios, type Servicio } from "./contact-info";
 import { WhatsAppIcon } from "./contact-icons";
 import styles from "./conversion.module.css";

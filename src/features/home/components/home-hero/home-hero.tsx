@@ -1,7 +1,7 @@
 "use client";
 
 import { FaLocationDot } from "react-icons/fa6";
-import { openQuoteDialog } from "../home-floating-quote/quote-dialog";
+import { openQuoteDialog } from "@/components/site/floating-quote/quote-dialog";
 import styles from "./home-hero.module.css";
 import { heroContent } from "./home-hero.data";
 import { useHeroReveal } from "./use-hero-reveal";

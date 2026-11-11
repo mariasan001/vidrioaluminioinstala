@@ -5,9 +5,7 @@ export {
   analyticsEventNames,
   pushAnalyticsEvent,
   trackFormSubmit,
-  trackPhoneClick,
   trackQuoteModalOpen,
   trackQuoteSubmit,
   trackServiceView,
-  trackWhatsappClick,
 } from "./tracking";
