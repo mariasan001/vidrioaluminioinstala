@@ -1,5 +1,13 @@
-const CACHE = "avi-panel-v5";
-const FILES = ["/panel/app.js", "/panel/gsap.min.js", "/panel/manifest.json", "/panel/favicon.png", "/panel/icon-192.png", "/panel/icon-512.png"];
+const CACHE = "avi-panel-v6";
+const FILES = [
+  "/panel/app/boot.js",
+  "/panel/app/stats.js",
+  "/panel/app/crm.js",
+  "/panel/app/account.js",
+  "/panel/app/referrals.js",
+  "/panel/app/catalog.js",
+  "/panel/vendor/gsap.min.js",
+  "/panel/manifest.json", "/panel/favicon.png", "/panel/icon-192.png", "/panel/icon-512.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(FILES)).then(() => self.skipWaiting()));

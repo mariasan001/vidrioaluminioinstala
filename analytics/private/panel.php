@@ -4863,10 +4863,15 @@ HTML;
         <div id="vista"><p class="muted">Cargando…</p></div>
       </div>
     </div>
-    <script src="/panel/gsap.min.js" defer></script>
-    <script src="/panel/html2canvas.min.js" defer></script>
-    <script src="/panel/jspdf.umd.min.js" defer></script>
-    <script src="/panel/app.js" defer></script>
+    <script src="/panel/vendor/gsap.min.js" defer></script>
+    <script src="/panel/vendor/html2canvas.min.js" defer></script>
+    <script src="/panel/vendor/jspdf.umd.min.js" defer></script>
+    <script src="/panel/app/boot.js" defer></script>
+    <script src="/panel/app/stats.js" defer></script>
+    <script src="/panel/app/crm.js" defer></script>
+    <script src="/panel/app/account.js" defer></script>
+    <script src="/panel/app/referrals.js" defer></script>
+    <script src="/panel/app/catalog.js" defer></script>
 HTML;
         avi_panel_document('Panel', $body, true, $head);
     } catch (Throwable $error) {
