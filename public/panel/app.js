@@ -91,7 +91,7 @@
 
   paintFilters();
   paintHello();
-  show();
+  hydrateRemoteData().finally(function () { show(); });
   window.matchMedia("(max-width: 980px)").addEventListener("change", moveNavPill);
 
   if ("serviceWorker" in navigator) {
@@ -152,7 +152,6 @@
     if (hash && hash !== "paginas" && hash !== "embudo" && hash !== "comparativa" && hash !== "contactos" && hash !== "clientes" && hash !== "campana" && hash !== "pagos" && hash !== "licencia" && hash !== "referidos" && !/^visita\/\d+$/.test(hash)) {
       history.replaceState(null, "", location.pathname + location.search);
     }
-    ensureDemoCrm();
     updateClientsNav();
     const route = readRoute();
     tabs.forEach((tab) => {
@@ -714,17 +713,10 @@
   }
 
   function readClientReferrals() {
+    if (Array.isArray(referralsCache)) return referralsCache.slice();
     try {
       const raw = sessionStorage.getItem(referralStoreKey());
-      if (!raw) {
-        const seed = [
-          { id: "r1", nombre: "Carlos Pérez", estado: "En proceso", telefono: "7221112233", cerrado: false },
-          { id: "r2", nombre: "Laura Méndez", estado: "Cerrado", telefono: "7224445566", cerrado: true },
-          { id: "r3", nombre: "Ana Ruiz", estado: "No se cerró", telefono: "7223334455", cerrado: false },
-        ];
-        sessionStorage.setItem(referralStoreKey(), JSON.stringify(seed));
-        return seed;
-      }
+      if (!raw) return [];
       const parsed = JSON.parse(raw);
       return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
@@ -733,9 +725,21 @@
   }
 
   function writeClientReferrals(rows) {
+    referralsCache = Array.isArray(rows) ? rows : [];
     try {
-      sessionStorage.setItem(referralStoreKey(), JSON.stringify(rows || []));
+      sessionStorage.setItem(referralStoreKey(), JSON.stringify(referralsCache));
     } catch (error) {}
+    fetch("/api/account.php", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ csrf: csrfToken(), section: "referidos", data: referralsCache }),
+    }).then(function (response) { return response.json(); }).then(function (data) {
+      if (data && data.ok && Array.isArray(data.referidos)) {
+        referralsCache = data.referidos;
+        try { sessionStorage.setItem(referralStoreKey(), JSON.stringify(referralsCache)); } catch (error) {}
+      }
+    }).catch(function () {});
   }
 
   function referralStatuses() {
@@ -1007,9 +1011,78 @@
 
 
   function panelRole() {
+    const box = document.querySelector(".account[data-role]");
+    const fromData = box ? String(box.getAttribute("data-role") || "").trim().toLowerCase() : "";
+    if (fromData === "dueno" || fromData === "admin") return fromData;
     const label = String((document.querySelector(".account em") || {}).textContent || "").trim().toLowerCase();
     if (label.indexOf("due") >= 0 || label === "owner") return "dueno";
     return "admin";
+  }
+
+  function csrfToken() {
+    const input = document.querySelector('input[name="csrf"]');
+    return input ? String(input.value || "") : "";
+  }
+
+  let accountCache = null;
+  let referralsCache = null;
+  let contactsCache = null;
+  let quotesCache = null;
+  let remoteReady = false;
+
+  function hydrateRemoteData() {
+    let accountOk = false;
+    const accountReq = fetch("/api/account.php", {
+      credentials: "same-origin",
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    }).then(function (response) {
+      if (response.status === 401) {
+        location.href = "/panel/login/";
+        throw new Error("auth");
+      }
+      return response.json();
+    }).then(function (data) {
+      if (!data || !data.ok) throw new Error("fail");
+      accountOk = true;
+      accountCache = data.account || defaultAccountData();
+      referralsCache = Array.isArray(data.referidos) ? data.referidos : [];
+      try {
+        sessionStorage.setItem(accountDataKey(), JSON.stringify(accountCache));
+        sessionStorage.setItem(referralStoreKey(), JSON.stringify(referralsCache));
+      } catch (error) {}
+      if (data.role === "dueno" || data.role === "admin") {
+        const box = document.querySelector(".account");
+        if (box) box.setAttribute("data-role", data.role);
+      }
+    }).catch(function () {});
+
+    const crmReq = fetch("/api/crm.php", {
+      credentials: "same-origin",
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    }).then(function (response) {
+      if (response.status === 401) {
+        location.href = "/panel/login/";
+        throw new Error("auth");
+      }
+      return response.json();
+    }).then(function (data) {
+      if (!data || !data.ok) throw new Error("fail");
+      contactsCache = Array.isArray(data.contacts) ? data.contacts : [];
+      quotesCache = Array.isArray(data.quotes) ? data.quotes : [];
+      try {
+        sessionStorage.setItem("avi_contactos_reales", JSON.stringify(contactsCache));
+        sessionStorage.setItem("avi_cotizaciones", JSON.stringify(quotesCache));
+      } catch (error) {}
+    }).catch(function () {});
+
+    return Promise.all([accountReq, crmReq]).then(function () {
+      remoteReady = accountOk;
+      if (!accountOk) {
+        location.href = "/panel/login/";
+      }
+    });
   }
 
   function isAdminRole() {
@@ -1072,33 +1145,59 @@
   }
 
   function readAccountData() {
+    const base = defaultAccountData();
+    if (accountCache) {
+      return {
+        campana: Object.assign({}, base.campana, accountCache.campana || {}),
+        pagos: {
+          proximo: Object.assign({}, base.pagos.proximo, (accountCache.pagos && accountCache.pagos.proximo) || {}),
+          historial: Array.isArray(accountCache.pagos && accountCache.pagos.historial) ? accountCache.pagos.historial : [],
+        },
+        licencia: Object.assign({}, base.licencia, accountCache.licencia || {}),
+        referidosConfig: Object.assign({}, base.referidosConfig, accountCache.referidosConfig || {}),
+      };
+    }
     try {
       const raw = sessionStorage.getItem(accountDataKey());
-      if (!raw) {
-        const seed = defaultAccountData();
-        sessionStorage.setItem(accountDataKey(), JSON.stringify(seed));
-        return seed;
-      }
+      if (!raw) return base;
       const parsed = JSON.parse(raw);
-      const base = defaultAccountData();
+      if (!parsed || typeof parsed !== "object") return base;
+      accountCache = parsed;
       return {
         campana: Object.assign({}, base.campana, parsed.campana || {}),
         pagos: {
           proximo: Object.assign({}, base.pagos.proximo, (parsed.pagos && parsed.pagos.proximo) || {}),
-          historial: Array.isArray(parsed.pagos && parsed.pagos.historial) ? parsed.pagos.historial : base.pagos.historial,
+          historial: Array.isArray(parsed.pagos && parsed.pagos.historial) ? parsed.pagos.historial : [],
         },
         licencia: Object.assign({}, base.licencia, parsed.licencia || {}),
         referidosConfig: Object.assign({}, base.referidosConfig, parsed.referidosConfig || {}),
       };
     } catch (error) {
-      return defaultAccountData();
+      return base;
     }
   }
 
-  function writeAccountData(data) {
+  function writeAccountData(data, section) {
+    accountCache = data;
     try {
       sessionStorage.setItem(accountDataKey(), JSON.stringify(data));
     } catch (error) {}
+    if (!section) return Promise.resolve({ ok: true });
+    const payload = section === "pagos"
+      ? data.pagos
+      : (section === "referidosConfig" ? data.referidosConfig : data[section]);
+    return fetch("/api/account.php", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ csrf: csrfToken(), section: section, data: payload }),
+    }).then(function (response) { return response.json(); }).then(function (res) {
+      if (res && res.ok && res.account) {
+        accountCache = res.account;
+        try { sessionStorage.setItem(accountDataKey(), JSON.stringify(res.account)); } catch (error) {}
+      }
+      return res || { ok: false };
+    }).catch(function () { return { ok: false }; });
   }
 
   function moneyText(value) {
@@ -1523,7 +1622,7 @@
         clics: parseMoneyInput(fd.get("clics")),
         llamadas: parseMoneyInput(fd.get("llamadas")),
       };
-      writeAccountData(next);
+      writeAccountData(next, "campana");
       const saveBtn = form.querySelector(".account-edit-save");
       if (saveBtn) {
         saveBtn.textContent = "Guardado";
@@ -1618,7 +1717,7 @@
         }));
       }
       next.pagos.proximo = row;
-      writeAccountData(next);
+      writeAccountData(next, "pagos");
       function finish() {
         modal.remove();
         loadAccountSection("pagos");
@@ -1722,7 +1821,7 @@
         del.addEventListener("click", () => {
           const next = readAccountData();
           next.pagos.historial.splice(index, 1);
-          writeAccountData(next);
+          writeAccountData(next, "pagos");
           loadAccountSection("pagos");
         });
         rowEl.querySelector(".pay-timeline-side").append(del);
@@ -1822,7 +1921,7 @@
         precioPro: moneyText(parseMoneyInput(fd.get("precioPro"))),
         precioEspecial: moneyText(parseMoneyInput(fd.get("precioEspecial"))),
       });
-      writeAccountData(next);
+      writeAccountData(next, "licencia");
       syncHero();
       const saveBtn = form.querySelector(".account-edit-save");
       if (saveBtn) {
@@ -1868,7 +1967,7 @@
         activoDesde: String(fd.get("activoDesde") || "").trim(),
         empleado: String(fd.get("empleado") || "").trim(),
       };
-      writeAccountData(next);
+      writeAccountData(next, "referidosConfig");
       const saveBtn = form.querySelector(".account-edit-save");
       if (saveBtn) {
         saveBtn.textContent = "Guardado";
@@ -2633,82 +2732,10 @@
     tab.hidden = false;
   }
 
-  function ensureDemoCrm() {
-    const today = iso(new Date());
-    const clientId = "c-demo-cliente";
-    const prospectId = "c-demo-prospecto";
-    const contacts = readContacts();
-    if (!contacts.length) {
-      saveContacts([
-        {
-          id: clientId,
-          nombre: "María López",
-          telefono: "7221234567",
-          canal: "whatsapp",
-          servicio: "Canceles",
-          fecha: today,
-          estatus: "Cerrado",
-          rol: "cliente",
-          nota: "Cliente demo para cotizaciones",
-          historial: [
-            {
-              id: "h-demo-1",
-              fecha: today,
-              hora: "10:30",
-              texto: "Pasó a cliente.",
-              tipo: "rol",
-            },
-          ],
-        },
-        {
-          id: prospectId,
-          nombre: "Juan Pérez",
-          telefono: "7229876543",
-          canal: "llamada",
-          servicio: "Ventanas",
-          fecha: today,
-          estatus: "En proceso",
-          rol: "prospecto",
-          nota: "Prospecto demo del periodo",
-          historial: [],
-        },
-      ]);
-    } else if (!contacts.some((item) => item.rol === "cliente")) {
-      saveContacts(contacts.concat([{
-        id: clientId,
-        nombre: "María López",
-        telefono: "7221234567",
-        canal: "whatsapp",
-        servicio: "Canceles",
-        fecha: today,
-        estatus: "Cerrado",
-        rol: "cliente",
-        nota: "Cliente demo para cotizaciones",
-        historial: [{
-          id: "h-demo-1",
-          fecha: today,
-          hora: "10:30",
-          texto: "Pasó a cliente.",
-          tipo: "rol",
-        }],
-      }]));
-    }
-    if (!readQuotes().some((item) => item && item.contactId === clientId)) {
-      saveQuotes(readQuotes().concat([{
-        id: "q-demo-1",
-        contactId: clientId,
-        servicio: "Canceles",
-        tipo: "Instalación nueva",
-        cuando: "Este mes",
-        ubicacion: "Toluca",
-        medidas: "1.50 × 2.00 m",
-        precio: "3000",
-        anticipo: "1000",
-        estado: "Enviada",
-        nota: "",
-        creado: today + "T10:35:00",
-      }]));
-    }
+  function isDemoCrmItem(item) {
+    const id = String((item && item.id) || "");
+    const contactId = String((item && item.contactId) || "");
+    return id.indexOf("c-demo-") === 0 || id.indexOf("q-demo-") === 0 || contactId.indexOf("c-demo-") === 0;
   }
 
   function openContactModal(defaultDate, preset) {
@@ -3061,23 +3088,34 @@
   }
 
   function readContacts() {
-    try {
-      const parsed = JSON.parse(sessionStorage.getItem("avi_contactos_reales") || "[]");
-      if (!Array.isArray(parsed)) return [];
-      return parsed
-        .filter((item) => item && typeof item === "object" && item.nombre && item.fecha && item.canal)
-        .map((item) => Object.assign({}, item, {
-          estatus: item.estatus || "Nuevo",
-          rol: item.rol === "cliente" ? "cliente" : "prospecto",
-          historial: Array.isArray(item.historial) ? item.historial : [],
-        }));
-    } catch (error) {
-      return [];
-    }
+    const source = Array.isArray(contactsCache)
+      ? contactsCache
+      : (function () {
+        try {
+          const parsed = JSON.parse(sessionStorage.getItem("avi_contactos_reales") || "[]");
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          return [];
+        }
+      }());
+    return source
+      .filter((item) => item && typeof item === "object" && item.nombre && item.fecha && item.canal && !isDemoCrmItem(item))
+      .map((item) => Object.assign({}, item, {
+        estatus: item.estatus || "Nuevo",
+        rol: item.rol === "cliente" ? "cliente" : "prospecto",
+        historial: Array.isArray(item.historial) ? item.historial : [],
+      }));
   }
 
   function saveContacts(list) {
-    sessionStorage.setItem("avi_contactos_reales", JSON.stringify(list.slice(0, 200)));
+    contactsCache = list.slice(0, 200);
+    sessionStorage.setItem("avi_contactos_reales", JSON.stringify(contactsCache));
+    fetch("/api/crm.php", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ csrf: csrfToken(), contacts: contactsCache, quotes: readQuotes() }),
+    }).catch(function () {});
   }
 
   function contactStatusKey(value) {
@@ -3093,16 +3131,28 @@
   }
 
   function readQuotes() {
-    try {
-      const parsed = JSON.parse(sessionStorage.getItem("avi_cotizaciones") || "[]");
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (error) {
-      return [];
-    }
+    const source = Array.isArray(quotesCache)
+      ? quotesCache.slice()
+      : (function () {
+        try {
+          const parsed = JSON.parse(sessionStorage.getItem("avi_cotizaciones") || "[]");
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          return [];
+        }
+      }());
+    return source.filter((item) => item && !isDemoCrmItem(item));
   }
 
   function saveQuotes(list) {
-    sessionStorage.setItem("avi_cotizaciones", JSON.stringify(list.slice(0, 300)));
+    quotesCache = list.slice(0, 300);
+    sessionStorage.setItem("avi_cotizaciones", JSON.stringify(quotesCache));
+    fetch("/api/crm.php", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ csrf: csrfToken(), contacts: readContacts(), quotes: quotesCache }),
+    }).catch(function () {});
   }
 
   function quotesForContact(contactId) {

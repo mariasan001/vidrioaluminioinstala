@@ -7,7 +7,7 @@ Options -Indexes
 
 <IfModule mod_authz_core.c>
   Require all denied
-  <FilesMatch "^(track|setup|login|logout)\.php$">
+  <FilesMatch "^(track|setup|login|logout|account|crm|catalogo)\.php$">
     Require all granted
   </FilesMatch>
 </IfModule>

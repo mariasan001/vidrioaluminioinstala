@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/bootstrap.php';
 
-const AVI_SESSION_SECONDS = 604800;
+/** Sesión larga: permanece hasta cerrar sesión (o ~1 año). */
+const AVI_SESSION_SECONDS = 31536000;
 const AVI_LOGIN_DUMMY_HASH = '$2y$10$usesomesillystringfore7hnbRJHxXVLeakoG8K30oukPsA.ztMG';
 
 function avi_session_start(): void

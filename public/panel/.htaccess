@@ -16,7 +16,7 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteRule ^login/?$ - [L]
-  RewriteRule ^setup(/|$) - [L]
+  RewriteRule ^setup(/|$) - [R=404,L,NC]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . index.php [END]
