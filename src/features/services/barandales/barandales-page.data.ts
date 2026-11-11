@@ -1,3 +1,4 @@
+import { whatsappUrl } from "@/content/site";
 import { barandalesSharedTypes } from "@/content/services/barandales";
 
 export const barandalesPageContent = {
@@ -261,7 +262,7 @@ export const barandalesPageContent = {
   },
   cta: {
     label: "Cotizar barandal",
-    href: "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20un%20barandal%20de%20aluminio%20y%20vidrio.",
+    href: whatsappUrl("Hola, quiero cotizar un barandal de aluminio y vidrio."),
   },
   heroUseCases: ["Escaleras", "Balcones", "Terrazas"],
 } as const;

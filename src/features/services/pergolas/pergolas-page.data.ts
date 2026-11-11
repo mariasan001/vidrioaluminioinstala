@@ -1,3 +1,5 @@
+import { whatsappUrl } from "@/content/site";
+
 export const pergolasPageContent = {
   slug: "pergolas",
   eyebrow: "Pérgolas de aluminio y cristal",
@@ -182,7 +184,7 @@ export const pergolasPageContent = {
   },
   cta: {
     label: "Cotizar pérgola",
-    href: "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20una%20p%C3%A9rgola%20o%20domo%20a%20medida.",
+    href: whatsappUrl("Hola, quiero cotizar una pérgola o domo a medida."),
   },
   heroUseCases: ["Terrazas", "Patios", "Accesos"],
 } as const;

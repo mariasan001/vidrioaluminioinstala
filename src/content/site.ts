@@ -46,3 +46,8 @@ export const addressLabel = site.addressLabel;
 export const mapsHref = site.mapsHref;
 export const whatsappPhoneNumber = site.whatsappNumber;
 export const whatsappDirectUrl = site.whatsappDirectUrl;
+
+/** Build a WhatsApp deep link from a plain message (single source of truth). */
+export function whatsappUrl(message: string): string {
+  return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}

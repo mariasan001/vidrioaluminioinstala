@@ -1,3 +1,5 @@
+import { whatsappUrl } from "@/content/site";
+
 export const cancelesPageContent = {
   slug: "canceles-de-bano",
   eyebrow: "Canceles de baño en cristal templado",
@@ -226,7 +228,7 @@ export const cancelesPageContent = {
   },
   cta: {
     label: "Cotizar cancel",
-    href: "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20un%20cancel%20de%20ba%C3%B1o%20a%20medida.",
+    href: whatsappUrl("Hola, quiero cotizar un cancel de baño a medida."),
   },
   heroUseCases: ["Regaderas", "Baños compactos", "Proyectos a medida"],
 } as const;

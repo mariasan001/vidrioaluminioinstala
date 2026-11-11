@@ -1,3 +1,4 @@
+import { whatsappUrl } from "@/content/site";
 import { ServiceConversionPage } from "@/features/conversion/service-conversion-page";
 import {
   ventanasFaq,
@@ -8,8 +9,7 @@ import {
   ventanasSecondaryNavLinks,
 } from "./ventanas-page.data";
 
-const whatsappHref =
-  "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20ventanas%20de%20aluminio%20a%20la%20medida%20en%20Toluca.";
+const whatsappHref = whatsappUrl("Hola, quiero cotizar ventanas de aluminio a la medida en Toluca.");
 
 export function VentanasPage() {
   return (

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { projectsContent } from "@/components/site/projects/site-projects.data";
 import type { Servicio } from "./contact-info";
 import { SectionHeading } from "./section-heading";
@@ -54,13 +55,13 @@ export function ServiceGallery({
 
           return (
             <article className={styles.project} key={project.image}>
-              <img
+              <Image
                 src={project.image}
                 alt={project.alt}
                 width={size.width}
                 height={size.height}
+                sizes="(max-width: 760px) 90vw, (max-width: 1180px) 40vw, 360px"
                 loading="lazy"
-                decoding="async"
               />
               <div>
                 <span>{project.category}</span>

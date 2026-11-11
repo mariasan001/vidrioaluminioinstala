@@ -1,3 +1,5 @@
+import { whatsappUrl } from "@/content/site";
+
 export const fachadasPageContent = {
   slug: "fachadas-de-cristal",
   eyebrow: "Fachadas de cristal templado",
@@ -113,7 +115,7 @@ export const fachadasPageContent = {
   },
   cta: {
     label: "Cotizar fachada",
-    href: "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20una%20fachada%20de%20cristal%20templado.",
+    href: whatsappUrl("Hola, quiero cotizar una fachada de cristal templado."),
   },
   heroUseCases: ["Residencial", "Comercial", "Cristal templado"],
 } as const;

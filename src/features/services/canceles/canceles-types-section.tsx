@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import Image from "next/image";
 import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { SectionHeading } from "@/features/conversion/section-heading";
-import { productAction, useLiveProducts } from "@/features/catalog/use-live-products";
 import styles from "./canceles-types.module.css";
 
 type CancelType = {
@@ -178,17 +177,7 @@ export function CancelesTypesSection({
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const live = useLiveProducts();
-  const shown: readonly CancelType[] = live && live.length
-    ? live.map((product): CancelType => ({
-        id: product.id,
-        label: product.titulo,
-        image: { src: product.imagen, alt: product.titulo },
-        ideal: product.descripcion,
-        detail: product.caracteristicas,
-        cta: productAction(product),
-      }))
-    : items;
+  const shown: readonly CancelType[] = items;
 
   useEffect(() => {
     const track = trackRef.current;

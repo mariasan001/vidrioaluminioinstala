@@ -226,6 +226,12 @@
   --radius-hero: var(--space-20);
   --radius-pill: 999px;
 
+  /* Breakpoint tokens (use in media queries as px values) */
+  --bp-sm: 540px;
+  --bp-md: 760px;
+  --bp-lg: 1023px;
+  --bp-xl: 1180px;
+
   --shadow-accent-sm: 0 var(--space-4) var(--space-9) var(--accent-alpha-18);
   --shadow-accent-md: 0 10px var(--space-12) var(--accent-alpha-18);
   --shadow-accent-lg: 0 var(--space-7) var(--space-14) var(--accent-alpha-24);

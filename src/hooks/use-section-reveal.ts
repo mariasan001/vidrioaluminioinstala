@@ -2,7 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export function useSectionReveal(threshold = 0.16) {
+type SectionRevealOptions = {
+  threshold?: number;
+  rootMargin?: string;
+};
+
+/** Shared section-in-view reveal for service/home blocks. */
+export function useSectionReveal(thresholdOrOptions: number | SectionRevealOptions = 0.16) {
+  const options =
+    typeof thresholdOrOptions === "number"
+      ? { threshold: thresholdOrOptions, rootMargin: "-8% 0px -8% 0px" }
+      : {
+          threshold: thresholdOrOptions.threshold ?? 0.16,
+          rootMargin: thresholdOrOptions.rootMargin ?? "-8% 0px -8% 0px",
+        };
   const sectionRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
@@ -32,8 +45,8 @@ export function useSectionReveal(threshold = 0.16) {
         setIsVisible(entry.isIntersecting);
       },
       {
-        rootMargin: "-8% 0px -8% 0px",
-        threshold,
+        rootMargin: options.rootMargin,
+        threshold: options.threshold,
       },
     );
 
@@ -51,7 +64,7 @@ export function useSectionReveal(threshold = 0.16) {
       window.removeEventListener("scroll", updateScrollDirection);
       window.removeEventListener("pageshow", revealOnRestore);
     };
-  }, [threshold]);
+  }, [options.rootMargin, options.threshold]);
 
   return { isVisible, scrollDirection, sectionRef };
 }

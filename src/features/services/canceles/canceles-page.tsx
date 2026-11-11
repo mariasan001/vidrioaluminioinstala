@@ -1,3 +1,4 @@
+import { whatsappUrl } from "@/content/site";
 import { ServiceConversionPage } from "@/features/conversion/service-conversion-page";
 import {
   cancelesFaq,
@@ -8,8 +9,7 @@ import {
   cancelesSecondaryNavLinks,
 } from "./canceles-page.data";
 
-const whatsappHref =
-  "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20un%20cancel%20de%20ba%C3%B1o%20a%20la%20medida%20en%20Toluca.";
+const whatsappHref = whatsappUrl("Hola, quiero cotizar un cancel de baño a la medida en Toluca.");
 
 export function CancelesPage() {
   return (

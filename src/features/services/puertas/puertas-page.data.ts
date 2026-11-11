@@ -1,3 +1,5 @@
+import { whatsappUrl } from "@/content/site";
+
 export const puertasPageContent = {
   slug: "puertas",
   eyebrow: "Puertas de aluminio, cristal y herrería",
@@ -182,7 +184,7 @@ export const puertasPageContent = {
   },
   cta: {
     label: "Cotizar puerta",
-    href: "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20una%20puerta%20a%20medida.",
+    href: whatsappUrl("Hola, quiero cotizar una puerta a medida."),
   },
   heroUseCases: ["Accesos", "Interiores", "Exteriores"],
 } as const;

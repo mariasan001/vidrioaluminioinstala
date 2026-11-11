@@ -1,3 +1,5 @@
+import { whatsappUrl } from "@/content/site";
+
 export const ventanasPageContent = {
   slug: "ventanas",
   eyebrow: "Ventanas de aluminio y cristal",
@@ -173,7 +175,7 @@ export const ventanasPageContent = {
   },
   cta: {
     label: "Cotizar ventana",
-    href: "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20ventanas%20a%20medida.",
+    href: whatsappUrl("Hola, quiero cotizar ventanas a medida."),
   },
   heroUseCases: ["Luz natural", "Ventilación", "Aislamiento"],
 } as const;

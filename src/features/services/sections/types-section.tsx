@@ -14,8 +14,6 @@ import {
 } from "react-icons/hi2";
 import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { SectionHeading } from "@/features/conversion/section-heading";
-import { LiveProductCards } from "@/features/catalog/live-product-cards";
-import { useLiveProducts } from "@/features/catalog/use-live-products";
 import { openQuoteDialog } from "@/components/site/floating-quote/quote-dialog";
 import { useSectionReveal } from "@/hooks/use-section-reveal";
 import styles from "./service-page.module.css";
@@ -101,7 +99,6 @@ export function TypesSection({
   quoteMessageTemplate,
   quoteUbicacion = "seccion",
 }: TypesSectionProps) {
-  const live = useLiveProducts();
   const { isVisible, scrollDirection, sectionRef } = useSectionReveal();
   const [activeTypeId, setActiveTypeId] = useState(
     content.types.items[0].id,
@@ -127,15 +124,6 @@ export function TypesSection({
       value: activeType.metrics.privacy,
     },
   ];
-
-  if (live && live.length) {
-    return (
-      <section id="tipos" data-section="tipos" className={styles.typesSection} aria-labelledby="service-types-title">
-        <h2 id="service-types-title">{content.types.title}</h2>
-        <LiveProductCards products={live} />
-      </section>
-    );
-  }
 
   return (
     <section

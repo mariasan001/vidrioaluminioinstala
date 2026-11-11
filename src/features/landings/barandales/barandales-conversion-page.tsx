@@ -1,9 +1,9 @@
+import { whatsappUrl } from "@/content/site";
 import { barandalesFaq, barandalesSharedTypes } from "@/content/services/barandales";
 import { ServiceConversionPage } from "@/features/conversion/service-conversion-page";
 import type { NavItem } from "@/components/site/nav/site-nav.data";
 
-const whatsappHref =
-  "https://wa.me/527293813723?text=Hola%2C%20quiero%20cotizar%20un%20barandal%20a%20la%20medida%20en%20Toluca.";
+const whatsappHref = whatsappUrl("Hola, quiero cotizar un barandal a la medida en Toluca.");
 
 const emptyMetrics = { openness: 0, structure: 0, privacy: 0 } as const;
 

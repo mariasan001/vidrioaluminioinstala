@@ -66,8 +66,11 @@
 }
 
 .primary {
+  border: 0;
   background: var(--accent);
   color: var(--accent-contrast);
+  cursor: pointer;
+  font: inherit;
 }
 
 .secondary {

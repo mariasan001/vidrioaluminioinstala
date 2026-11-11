@@ -2,11 +2,11 @@
 
 import { FormEvent, useRef, useState } from "react";
 import { trackFormSubmit } from "@/features/analytics";
-import { whatsappPhoneNumber } from "@/components/site/floating-quote/site-floating-quote.data";
 import {
   isValidQuotePhone,
   quotePhoneErrorMessage,
 } from "@/components/site/floating-quote/quote-phone";
+import { openWhatsapp } from "@/lib/open-whatsapp";
 import { isServicio, serviceLabels, servicios, type Servicio } from "./contact-info";
 import { WhatsAppIcon } from "./contact-icons";
 import styles from "./conversion.module.css";
@@ -87,17 +87,12 @@ export function ShortQuoteForm({
       }
     }
 
-    const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-    const whatsappWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    openWhatsapp(whatsappMessage);
 
     window.setTimeout(() => {
       submittingRef.current = false;
       setIsSubmitting(false);
     }, 1200);
-
-    if (!whatsappWindow) {
-      window.location.assign(whatsappUrl);
-    }
   };
 
   if (variant === "callback") {

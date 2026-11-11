@@ -13,10 +13,10 @@ import { WhatsAppIcon } from "@/features/conversion/contact-icons";
 import { trackQuoteSubmit } from "@/features/analytics";
 import { useLockBodyScroll } from "@/hooks/use-lock-body-scroll";
 import styles from "./site-floating-quote.module.css";
+import { openWhatsapp } from "@/lib/open-whatsapp";
 import {
   extractWhatsappTextFromHref,
   quoteFormOptions,
-  whatsappPhoneNumber,
   whatsappReturnStorageKey,
 } from "./site-floating-quote.data";
 import { isValidQuotePhone, quotePhoneErrorMessage } from "./quote-phone";
@@ -223,16 +223,7 @@ export function SiteFloatingQuote({
     });
 
     closeQuoteDialog();
-    const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`;
-    const whatsappWindow = window.open(whatsappUrl, "_blank");
-
-    if (whatsappWindow) {
-      whatsappWindow.opener = null;
-      return;
-    }
-
-    sessionStorage.setItem(whatsappReturnStorageKey, "true");
-    window.location.assign(whatsappUrl);
+    openWhatsapp(message, { returnKey: whatsappReturnStorageKey });
   };
 
   return (
