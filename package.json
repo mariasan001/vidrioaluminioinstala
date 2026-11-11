@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --experimental-strip-types --test src/content/site.test.mjs src/components/site/floating-quote/quote-phone.test.mjs",
+    "export:hostinger": "node scripts/export-hostinger.mjs",
+    "smoke": "node scripts/smoke-check.mjs deploy"
   },
   "dependencies": {
     "next": "16.2.4",

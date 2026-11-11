@@ -17,6 +17,7 @@
 /.next/
 /.next-static/
 /out/
+/deploy/
 
 # production / paquetes de subida (se regeneran)
 /build

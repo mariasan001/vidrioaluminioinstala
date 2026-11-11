@@ -196,9 +196,22 @@
       return current;
     }
 
+    function trackingEndpointAvailable() {
+      var host = window.location.hostname || "";
+      // En Next local no corre PHP: POST a track.php responde 405 y ensucia la consola.
+      if (host === "localhost" || host === "127.0.0.1" || host === "[::1]") {
+        return false;
+      }
+      return true;
+    }
+
     function post(payload) {
       var body = JSON.stringify(payload);
       log(payload);
+
+      if (!trackingEndpointAvailable()) {
+        return;
+      }
 
       try {
         if (navigator.sendBeacon) {
@@ -218,6 +231,8 @@
           body: body,
           headers: { "Content-Type": "application/json" },
           keepalive: true,
+        }).catch(function () {
+          // El seguimiento no debe afectar la página.
         });
       } catch (error) {
         // El seguimiento no debe afectar la página.

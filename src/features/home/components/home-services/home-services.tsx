@@ -65,7 +65,7 @@ export function HomeServices() {
                 src={servicesContent.sharedImage.src}
                 alt={servicesContent.sharedImage.alt}
                 fill
-                sizes="100vw"
+                sizes="(max-width: 760px) 92vw, (max-width: 1180px) 48vw, 560px"
                 className={styles.image}
                 style={{ objectPosition: servicesContent.sharedImage.position }}
               />

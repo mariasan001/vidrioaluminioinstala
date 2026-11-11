@@ -238,7 +238,7 @@ export function SiteProjects({
                 src={expandedProject.image}
                 alt={expandedProject.alt}
                 fill
-                sizes="100vw"
+                sizes="(max-width: 760px) 100vw, min(920px, 92vw)"
                 className={styles.viewerImage}
                 style={{ objectPosition: expandedProject.imagePosition }}
               />
