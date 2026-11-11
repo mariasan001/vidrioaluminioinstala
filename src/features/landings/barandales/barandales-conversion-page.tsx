@@ -11,7 +11,6 @@ function typeCard(input: {
   base: (typeof barandalesSharedTypes)[keyof typeof barandalesSharedTypes];
   text: string;
   ideal: string;
-  pendingNote?: string;
 }) {
   const { base } = input;
   return {
@@ -28,7 +27,6 @@ function typeCard(input: {
     useCase: "",
     recommendation: "",
     vibe: "",
-    pendingNote: input.pendingNote,
     message: `Hola, me interesa el barandal ${base.model} para mi escalera/balcón/terraza. Mide aprox. ___ metros lineales. ¿Me pueden dar precio?`,
     metrics: emptyMetrics,
   };
@@ -160,7 +158,6 @@ export function BarandalesConversionPage() {
               base: barandalesSharedTypes.poste,
                             text: "Cristal templado de 10 mm con postes de acero inoxidable de 1 m de alto y clips que sujetan el cristal.",
               ideal: "Buscas la opción más firme, o la quieres con pasamanos para apoyarte al subir.",
-              pendingNote: "confirmar con el cliente que incluye o permite pasamanos",
             }),
           ],
         },

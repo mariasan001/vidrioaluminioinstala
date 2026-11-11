@@ -52,7 +52,6 @@ type ServiceConversionPageProps = {
         title: string;
         icon: "shield" | "height" | "sparkles" | "wrench" | "swatch" | "check";
         description: string;
-        pending?: string;
       }[];
     };
     types: {
@@ -78,7 +77,6 @@ type ServiceConversionPageProps = {
         ideal?: string;
         detail?: string;
         message?: string;
-        pendingNote?: string;
         focus?: string;
         metrics: { openness: number; structure: number; privacy: number };
       }[];
@@ -95,7 +93,6 @@ type ServiceConversionPageProps = {
     accent?: string;
     description: string;
     items: readonly FaqItem[];
-    pending?: string;
   };
   contact: {
     title: string;
@@ -230,7 +227,6 @@ export function ServiceConversionPage({
         description={faq.description}
         eyebrow={faq.eyebrow}
         items={faq.items}
-        pending={faq.pending}
         servicio={servicio}
         title={faq.title}
         unifiedHeadings={qualityColumns}

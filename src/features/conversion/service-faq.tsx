@@ -5,7 +5,6 @@ import styles from "./conversion.module.css";
 export type FaqItem = {
   question: string;
   answer: string;
-  pending?: string;
 };
 
 type ServiceFaqProps = {
@@ -16,7 +15,6 @@ type ServiceFaqProps = {
   description: string;
   items: readonly FaqItem[];
   unifiedHeadings?: boolean;
-  pending?: string;
 };
 
 export function ServiceFaq({
@@ -27,7 +25,6 @@ export function ServiceFaq({
   description,
   items,
   unifiedHeadings = false,
-  pending,
 }: ServiceFaqProps) {
   return (
     <section
@@ -48,17 +45,11 @@ export function ServiceFaq({
           <p className={styles.faqLead}>{description}</p>
         </>
       )}
-      {pending ? <span hidden dangerouslySetInnerHTML={{ __html: `<!-- ${pending} -->` }} /> : null}
       <div className={styles.faqList}>
         {items.map((item, index) => (
           <details className={styles.faqItem} key={item.question} open={index === 0}>
             <summary>{item.question}</summary>
-            <p>
-              {item.answer}
-              {item.pending ? (
-                <span hidden dangerouslySetInnerHTML={{ __html: `<!-- ${item.pending} -->` }} />
-              ) : null}
-            </p>
+            <p>{item.answer}</p>
           </details>
         ))}
       </div>

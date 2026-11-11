@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aluminio y Vidrio Instala
 
-## Getting Started
+Sitio de marketing (Next.js, export estático) + panel/API PHP en Hostinger.
 
-First, run the development server:
+## Estructura
+
+| Ruta | Qué es |
+|------|--------|
+| `src/app` | Rutas y metadata |
+| `src/content` | Datos de negocio y copy compartido |
+| `src/components/site` | Nav, contacto, proyectos, cotización |
+| `src/features` | Home, servicios, landings, conversión, analytics GTM, catálogo |
+| `public/` | Assets + `api/` + `panel/` (entra a `public_html`) |
+| `analytics/private` | Lógica PHP (fuera de `public_html`) |
+| `analytics/sql` | Schema y migraciones |
+
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Export estático (Hostinger)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+STATIC_EXPORT=true npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+El export escribe HTML en `public/`. Conserva `public/api`, `public/panel`, `public/js`, `public/data`.
 
-## Learn More
+## Panel
 
-To learn more about Next.js, take a look at the following resources:
+- Login: `/panel/login` (sesión larga hasta cerrar sesión)
+- APIs: `/api/track.php`, `/api/stats/*`, `/api/account.php`, `/api/crm.php`, `/api/catalogo.php`
+- JS del panel: `public/panel/app/*.js` + vendors en `public/panel/vendor/`
+- Estilos del panel: `public/panel/panel.css`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy PHP y SQL: ver [`analytics/README.md`](analytics/README.md).

@@ -37,7 +37,6 @@ type QualityContent = {
       title: string;
       icon: keyof typeof qualityIcons;
       description: string;
-      pending?: string;
     }[];
   };
 };
@@ -62,9 +61,6 @@ function QualityPoint({
       </span>
       <div>
         <h3>{point.title}</h3>
-        {point.pending ? (
-          <span hidden dangerouslySetInnerHTML={{ __html: `<!-- ${point.pending} -->` }} />
-        ) : null}
         {point.description ? <p>{point.description}</p> : null}
       </div>
     </article>

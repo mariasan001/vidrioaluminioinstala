@@ -51,7 +51,6 @@ export const ventanasPageContent = {
         title: "Perfiles de aluminio",
         icon: "wrench" as const,
         description: "Línea española o nacional.",
-        pending: "PENDIENTE: diferencia real entre Serie 1400, 3500, 4600 y línea nacional",
       },
       {
         title: "Instalación completa",
@@ -80,7 +79,6 @@ export const ventanasPageContent = {
           alt: "Ventana Línea Española Serie 1400 de aluminio y cristal",
         },
         ideal: "Línea española de aluminio, a la medida del claro.",
-        pendingNote: 'PENDIENTE: descripción real e "ideal si..." de la Serie 1400',
         message:
           "Hola, me interesa la Serie 1400 para mi recámara/sala/área de trabajo. El claro mide aprox. ___ de ancho por ___ de alto. ¿Me pueden dar precio?",
         description: "Línea española de aluminio, a la medida del claro.",
@@ -106,7 +104,6 @@ export const ventanasPageContent = {
           alt: "Ventana Línea Española Serie 3500 para proyecto moderno",
         },
         ideal: "Línea española de aluminio, a la medida del claro.",
-        pendingNote: 'PENDIENTE: descripción real e "ideal si..." de la Serie 3500',
         message:
           "Hola, me interesa la Serie 3500 para mi recámara/sala/área de trabajo. El claro mide aprox. ___ de ancho por ___ de alto. ¿Me pueden dar precio?",
         description: "Línea española de aluminio, a la medida del claro.",
@@ -132,7 +129,6 @@ export const ventanasPageContent = {
           alt: "Ventana Línea Española Serie 4600 para claro amplio",
         },
         ideal: "Línea española de aluminio, a la medida del claro.",
-        pendingNote: 'PENDIENTE: descripción real e "ideal si..." de la Serie 4600',
         message:
           "Hola, me interesa la Serie 4600 para mi recámara/sala/área de trabajo. El claro mide aprox. ___ de ancho por ___ de alto. ¿Me pueden dar precio?",
         description: "Línea española de aluminio, a la medida del claro.",
@@ -158,7 +154,6 @@ export const ventanasPageContent = {
           alt: "Ventana Línea Nacional de aluminio y cristal",
         },
         ideal: "Línea nacional de aluminio, en perfiles de 2 y 3 pulgadas.",
-        pendingNote: 'PENDIENTE: descripción real e "ideal si..." de la línea nacional',
         message:
           "Hola, me interesa la Línea Nacional para mi recámara/sala/área de trabajo. El claro mide aprox. ___ de ancho por ___ de alto. ¿Me pueden dar precio?",
         description: "Línea nacional de aluminio, en perfiles de 2 y 3 pulgadas.",
