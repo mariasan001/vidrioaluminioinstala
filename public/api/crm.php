@@ -13,6 +13,6 @@ if (!is_file($bootstrap)) {
 }
 
 require $bootstrap;
-require dirname($bootstrap) . '/account.php';
+require dirname($bootstrap) . '/crm.php';
 
 avi_crm_dispatch();

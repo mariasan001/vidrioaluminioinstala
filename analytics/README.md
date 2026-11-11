@@ -9,9 +9,11 @@ domains/aluminioyvidrioinstala.mx/
     bootstrap.php
     auth.php
     track.php
-    stats.php
-    account.php
-    catalog.php
+    stats.php              ← delgado → Domain/Stats
+    account.php            ← delgado → Domain/Account
+    crm.php                ← delgado → Domain/Crm
+    Domain/                ← Avi\Domain\ (Shared, Account, Crm, Catalog, Stats)
+    catalog.php            ← delgado → Domain/Catalog
     panel.php
     panel/panel.css        ← fuente; el deploy usa también public_html/panel/panel.css
     setup.php
