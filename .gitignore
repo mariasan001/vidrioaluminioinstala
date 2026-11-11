@@ -15,10 +15,16 @@
 
 # next.js
 /.next/
+/.next-static/
 /out/
 
-# production
+# production / paquetes de subida (se regeneran)
 /build
+/export-build/
+/Temp/
+
+# preview local
+.preview-*.json
 
 # misc
 .DS_Store
