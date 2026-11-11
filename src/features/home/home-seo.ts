@@ -38,8 +38,21 @@ export const homeMetadata = {
   image: "/img/og-home.jpg",
 } as const;
 
+/** Absolute URL; with STATIC_EXPORT, page paths get a trailing slash to match Hostinger. */
 export function absoluteUrl(path = "/") {
-  return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+  const raw = path.startsWith("/") ? path : `/${path}`;
+  const hashIndex = raw.indexOf("#");
+  const pathname = hashIndex === -1 ? raw : raw.slice(0, hashIndex);
+  const hash = hashIndex === -1 ? "" : raw.slice(hashIndex);
+  const isFile = /\.[a-zA-Z0-9]{2,8}$/.test(pathname);
+  const useTrailingSlash = process.env.STATIC_EXPORT === "true";
+  let normalized = pathname || "/";
+
+  if (useTrailingSlash && !isFile && normalized !== "/" && !normalized.endsWith("/")) {
+    normalized = `${normalized}/`;
+  }
+
+  return `${siteUrl}${normalized}${hash}`;
 }
 
 export const localBusinessJsonLd = {

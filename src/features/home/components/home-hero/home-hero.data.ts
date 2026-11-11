@@ -1,8 +1,12 @@
 export const heroContent = {
   image: {
-    src: "/img/hero_img.webp",
-    mobileSrc: "/img/hero_movil.webp",
+    src: "/img/hero_img_lcp.webp",
+    mobileSrc: "/img/hero_movil_lcp.webp",
     alt: "Proyecto destacado de aluminio y vidrio",
+    width: 1400,
+    height: 933,
+    mobileWidth: 720,
+    mobileHeight: 1556,
   },
   eyebrow: "Diseño e instalación a medida en Toluca y alrededores",
   title: "Haz que tu espacio",

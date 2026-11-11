@@ -3,47 +3,41 @@ import { absoluteUrl } from "@/features/home/home-seo";
 
 export const dynamic = "force-static";
 
-const LAST_MODIFIED = new Date("2026-05-11");
+const LAST_MODIFIED = new Date("2026-11-11");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: absoluteUrl(),
+      url: absoluteUrl("/"),
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
       priority: 1,
       images: [
-        absoluteUrl("/img/hero_img.webp"),
+        absoluteUrl("/img/hero_img_lcp.webp"),
         absoluteUrl("/img/img_servios_3.webp"),
         absoluteUrl("/img/img_ventana.webp"),
       ],
     },
     {
-      url: absoluteUrl("/aviso-de-privacidad"),
-      lastModified: new Date("2026-11-06"),
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
       url: absoluteUrl("/barandales"),
-      lastModified: new Date("2026-10-08"),
-      changeFrequency: "monthly",
-      priority: 0.9,
-      images: [absoluteUrl("/img/img_hero_barandales_lcp.webp")],
-    },
-    {
-      url: absoluteUrl("/servicios/barandales"),
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
-      priority: 0.86,
-      images: [absoluteUrl("/img/img_barandal.webp")],
+      priority: 0.95,
+      images: [absoluteUrl("/img/img_hero_barandales_lcp.webp")],
     },
     {
       url: absoluteUrl("/servicios/canceles-de-bano"),
       lastModified: LAST_MODIFIED,
       changeFrequency: "monthly",
-      priority: 0.86,
+      priority: 0.9,
       images: [absoluteUrl("/img/cancel_bano/hero_web_lcp.webp")],
+    },
+    {
+      url: absoluteUrl("/servicios/ventanas"),
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.9,
+      images: [absoluteUrl("/img/ventanas/hero_web_lcp.webp")],
     },
     {
       url: absoluteUrl("/servicios/fachadas-de-cristal"),
@@ -65,13 +59,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.86,
       images: [absoluteUrl("/img/puertas/hero_web.webp")],
-    },
-    {
-      url: absoluteUrl("/servicios/ventanas"),
-      lastModified: LAST_MODIFIED,
-      changeFrequency: "monthly",
-      priority: 0.86,
-      images: [absoluteUrl("/img/ventanas/hero_web_lcp.webp")],
     },
   ];
 }

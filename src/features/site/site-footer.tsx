@@ -9,7 +9,7 @@ import styles from "./site-footer.module.css";
 const services = [
   { href: "/servicios/canceles-de-bano", label: "Canceles de baño" },
   { href: "/servicios/ventanas", label: "Ventanas de aluminio" },
-  { href: "/servicios/barandales", label: "Barandales" },
+  { href: "/barandales", label: "Barandales" },
   { href: "/servicios/fachadas-de-cristal", label: "Fachadas de cristal" },
   { href: "/servicios/pergolas", label: "Pérgolas" },
   { href: "/servicios/puertas", label: "Puertas" },

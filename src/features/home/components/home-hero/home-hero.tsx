@@ -16,12 +16,28 @@ export function HomeHero() {
       id="inicio"
       data-section="hero"
     >
+      <link
+        rel="preload"
+        as="image"
+        href={heroContent.image.mobileSrc}
+        media="(max-width: 720px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href={heroContent.image.src}
+        media="(min-width: 721px)"
+        fetchPriority="high"
+      />
       <picture>
         <source media="(max-width: 720px)" srcSet={heroContent.image.mobileSrc} />
         <img
           src={heroContent.image.src}
           alt={heroContent.image.alt}
           className={styles.backgroundImage}
+          width={heroContent.image.width}
+          height={heroContent.image.height}
           decoding="async"
           fetchPriority="high"
         />

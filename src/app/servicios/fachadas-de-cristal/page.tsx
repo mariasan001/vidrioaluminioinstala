@@ -1,145 +1,46 @@
-import type { Metadata } from "next";
-import { absoluteUrl, businessInfo, stringifyJsonLd } from "@/features/home/home-seo";
+import { buildServiceMetadata, ServiceJsonLdScripts, serviceSchemaMarkup } from "@/features/conversion/service-seo";
 import { FachadasPage } from "@/features/services/fachadas/fachadas-page";
 import { fachadasPageContent } from "@/features/services/fachadas/fachadas-page.data";
 
-const serviceTitle = "Fachadas de cristal en Toluca";
-const serviceDescription =
+const path = "/servicios/fachadas-de-cristal";
+const title = "Fachadas de cristal en Toluca";
+const description =
   "Diseño e instalación de fachadas de cristal en Toluca con vidrio templado y aluminio para proyectos residenciales y comerciales a medida.";
 
-export const metadata: Metadata = {
-  title: serviceTitle,
-  description: serviceDescription,
-  alternates: {
-    canonical: "/servicios/fachadas-de-cristal",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-  openGraph: {
-    title: serviceTitle,
-    description: serviceDescription,
-    url: absoluteUrl("/servicios/fachadas-de-cristal"),
-    siteName: businessInfo.name,
-    type: "website",
-    locale: "es_MX",
-    images: [
-      {
-        url: fachadasPageContent.image.src,
-        width: 1717,
-        height: 916,
-        alt: fachadasPageContent.image.alt,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: serviceTitle,
-    description: serviceDescription,
-    images: [fachadasPageContent.image.src],
-  },
+export const metadata = buildServiceMetadata({
+  title,
+  description,
+  path,
   category: "fachadas de cristal",
-};
+  image: {
+    src: fachadasPageContent.image.src,
+    alt: fachadasPageContent.image.alt,
+    width: 1717,
+    height: 916,
+  },
+});
 
 export default function Page() {
-  const serviceJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": absoluteUrl("/servicios/fachadas-de-cristal#servicio"),
+  const schema = serviceSchemaMarkup({
+    path,
     name: "Fachadas de cristal",
     serviceType: "Diseño e instalación de fachadas de cristal",
-    description: serviceDescription,
-    inLanguage: "es-MX",
-    url: absoluteUrl("/servicios/fachadas-de-cristal"),
-    mainEntityOfPage: absoluteUrl("/servicios/fachadas-de-cristal"),
-    image: absoluteUrl(fachadasPageContent.image.src),
-    provider: {
-      "@id": absoluteUrl("/#negocio"),
-      "@type": "HomeAndConstructionBusiness",
-      name: businessInfo.name,
-      url: absoluteUrl(),
-      telephone: businessInfo.phoneInternational,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: businessInfo.address.street,
-        addressLocality: businessInfo.address.city,
-        addressRegion: businessInfo.address.region,
-        postalCode: businessInfo.address.postalCode,
-        addressCountry: businessInfo.address.country,
-      },
-      sameAs: [businessInfo.facebook],
-    },
-    areaServed: [
-      {
-        "@type": "City",
-        name: "Toluca de Lerdo",
-      },
-      {
-        "@type": "AdministrativeArea",
-        name: "Estado de México",
-      },
+    description,
+    image: fachadasPageContent.image.src,
+    faqs: [],
+    breadcrumb: [
+      { name: "Inicio", path: "/" },
+      { name: "Fachadas de cristal", path },
     ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Tipos de fachadas de cristal",
-      itemListElement: fachadasPageContent.types.items.map((item) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: item.title,
-          description: item.description,
-        },
-      })),
-    },
-  };
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Inicio",
-        item: absoluteUrl("/"),
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Servicios",
-        item: absoluteUrl("/#servicios"),
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Fachadas de cristal",
-        item: absoluteUrl("/servicios/fachadas-de-cristal"),
-      },
-    ],
-  };
+    offers: fachadasPageContent.types.items.map((item) => ({
+      name: item.title,
+      description: item.description,
+    })),
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: stringifyJsonLd(serviceJsonLd),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: stringifyJsonLd(breadcrumbJsonLd),
-        }}
-      />
+      <ServiceJsonLdScripts schema={schema} />
       <FachadasPage />
     </>
   );

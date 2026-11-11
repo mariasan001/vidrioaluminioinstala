@@ -30,7 +30,6 @@ export default function Page() {
     faqs: cancelesFaq.items,
     breadcrumb: [
       { name: "Inicio", path: "/" },
-      { name: "Servicios", path: "/#servicios" },
       { name: "Canceles de baño", path },
     ],
     offers: cancelesPageContent.types.items.map((item) => ({

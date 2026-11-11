@@ -15,7 +15,7 @@ export const servicesContent = {
       description:
         "Protecci\u00f3n ligera y resistente para escaleras, balcones y terrazas con una lectura visual limpia.",
       ctaLabel: "Explorar opciones de barandales",
-      href: "/servicios/barandales",
+      href: "/barandales",
       image: "/img/img_barandal.webp",
       imagePosition: "center center",
     },

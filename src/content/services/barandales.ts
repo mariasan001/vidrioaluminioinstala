@@ -1,6 +1,6 @@
 /**
- * Contenido de barandales compartido entre la landing de conversión (`/barandales`)
- * y el catálogo (`/servicios/barandales`).
+ * Contenido de barandales compartido entre la landing canónica (`/barandales`)
+ * y el catálogo (`/servicios/barandales`, canonical → `/barandales`).
  */
 
 /** Tipos de barandal que aparecen en ambas páginas (identidad + imagen). */

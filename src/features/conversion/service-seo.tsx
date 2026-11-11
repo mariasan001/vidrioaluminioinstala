@@ -114,18 +114,22 @@ export function serviceSchemaMarkup({
       })),
     },
   };
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
+  const faqItems = faqs.filter((item) => item.question && item.answer);
+  const faqJsonLd =
+    faqItems.length === 0
+      ? null
+      : {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        };
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -155,10 +159,12 @@ export function ServiceJsonLdScripts({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: stringifyJsonLd(schema.serviceJsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: stringifyJsonLd(schema.faqJsonLd) }}
-      />
+      {schema.faqJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: stringifyJsonLd(schema.faqJsonLd) }}
+        />
+      ) : null}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: stringifyJsonLd(schema.breadcrumbJsonLd) }}

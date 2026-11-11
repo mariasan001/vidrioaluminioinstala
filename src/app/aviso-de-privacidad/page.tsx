@@ -8,10 +8,10 @@ const description =
 const path = "/aviso-de-privacidad";
 
 export const metadata: Metadata = {
-  title: { absolute: "Aviso de privacidad | Instala Toluca" },
+  title: { absolute: title },
   description,
   alternates: { canonical: absoluteUrl(path) },
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: true },
   openGraph: {
     title,
     description,

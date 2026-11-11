@@ -30,7 +30,6 @@ export default function Page() {
     faqs: ventanasFaq.items,
     breadcrumb: [
       { name: "Inicio", path: "/" },
-      { name: "Servicios", path: "/#servicios" },
       { name: "Ventanas", path },
     ],
     offers: ventanasPageContent.types.items.map((item) => ({

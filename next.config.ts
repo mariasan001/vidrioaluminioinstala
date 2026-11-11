@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
         unoptimized: true,
       }
     : undefined,
+  experimental: {
+    optimizePackageImports: ["react-icons"],
+  },
   ...(isStaticExport
     ? {}
     : {
@@ -59,6 +62,24 @@ const nextConfig: NextConfig = {
                 {
                   key: "Strict-Transport-Security",
                   value: "max-age=63072000; includeSubDomains; preload",
+                },
+              ],
+            },
+            {
+              source: "/_next/static/:path*",
+              headers: [
+                {
+                  key: "Cache-Control",
+                  value: "public, max-age=31536000, immutable",
+                },
+              ],
+            },
+            {
+              source: "/img/:path*",
+              headers: [
+                {
+                  key: "Cache-Control",
+                  value: "public, max-age=604800",
                 },
               ],
             },

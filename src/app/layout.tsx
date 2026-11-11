@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import {
   ContactClickTracker,
   GoogleTagManagerScript,
@@ -20,12 +21,23 @@ export const metadata: Metadata = {
   creator: "Aurenna",
   publisher: "Aurenna",
   alternates: {
-    canonical: "/",
+    canonical: absoluteUrl("/"),
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
     title: homeMetadata.title,
     description: homeMetadata.description,
-    url: absoluteUrl(),
+    url: absoluteUrl("/"),
     siteName: "Aluminio y Vidrio Instala",
     type: "website",
     locale: "es_MX",
@@ -56,7 +68,7 @@ export default function RootLayout({
     <html lang="es" data-scroll-behavior="smooth">
       <body>
         <GoogleTagManagerScript />
-        <script src="/js/avi-track.js" defer />
+        <Script src="/js/avi-track.js" strategy="lazyOnload" />
         {children}
         <SiteFooter />
         <ServiceViewTracker />

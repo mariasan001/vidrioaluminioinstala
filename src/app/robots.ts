@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/panel/"],
+      disallow: ["/panel/", "/aviso-de-privacidad"],
     },
     sitemap: absoluteUrl("/sitemap.xml"),
     host: siteUrl,

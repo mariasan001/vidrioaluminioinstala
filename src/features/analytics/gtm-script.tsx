@@ -18,10 +18,10 @@ export function GoogleTagManagerScript() {
         />
       </noscript>
 
-      <Script id="gtm-data-layer" strategy="afterInteractive">
+      <Script id="gtm-data-layer" strategy="lazyOnload">
         {`window.dataLayer = window.dataLayer || []; window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js", gtm_id: "${gtmId}" });`}
       </Script>
-      <Script id="gtm-loader" src={getGtmScriptUrl()} strategy="afterInteractive" />
+      <Script id="gtm-loader" src={getGtmScriptUrl()} strategy="lazyOnload" />
     </>
   );
 }

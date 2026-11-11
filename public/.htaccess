@@ -3,6 +3,12 @@ DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # Canonical host + HTTPS (www / .com → https://aluminioyvidrioinstala.mx)
+  RewriteCond %{HTTP_HOST} ^(www\.)?aluminioyvidrioinstala\.(mx|com)$ [NC]
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^aluminioyvidrioinstala\.mx$ [NC]
+  RewriteRule ^ https://aluminioyvidrioinstala.mx%{REQUEST_URI} [R=301,L]
+
   RewriteRule ^servicios/canceles/?$ /servicios/canceles-de-bano/ [R=301,L]
   RewriteRule ^servicios/fachadas/?$ /servicios/fachadas-de-cristal/ [R=301,L]
 </IfModule>
@@ -14,4 +20,32 @@ DirectoryIndex index.html
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set X-DNS-Prefetch-Control "on"
   Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+  # Hashed Next assets: long immutable cache
+  <IfModule mod_setenvif.c>
+    SetEnvIf Request_URI "^/_next/static/" NEXT_STATIC
+  </IfModule>
+  Header set Cache-Control "public, max-age=31536000, immutable" env=NEXT_STATIC
+</IfModule>
+
+# Images / fonts / icons: week-long cache (names are stable; bump file name to invalidate)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 7 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType font/woff2 "access plus 30 days"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:js|css)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.(?:webp|jpe?g|png|gif|svg|ico|woff2)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
 </IfModule>
